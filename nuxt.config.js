@@ -6,8 +6,8 @@ export default {
 
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: '%s - nuxt2vuetify',
-    title: 'nuxt2vuetify',
+    titleTemplate: '%s',
+    title: 'Landing Page MIS',
     htmlAttrs: {
       lang: 'en'
     },
