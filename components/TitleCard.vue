@@ -1,14 +1,15 @@
 <template>
   <v-card elevation="4">
     <v-card-title>
-      <v-icon>{{ title.icon }}</v-icon>
-      {{ title.title }}
+      <v-icon>{{ title_info.icon }}</v-icon>
+      {{ title_info.title }}
     </v-card-title>
     <v-card-text>
       <NuxtLink to="/" class="text-decoration-none">Dashboard</NuxtLink> >>
-      <NuxtLink :to="title.url" class="text-decoration-none">{{
-        title.title
-      }}</NuxtLink></v-card-text
+      <NuxtLink :to="title_info.url" class="text-decoration-none">
+        <v-icon small>{{ title_info.icon }}</v-icon>
+        {{ title_info.title }}</NuxtLink
+      ></v-card-text
     >
   </v-card>
 </template>
@@ -16,7 +17,7 @@
 <script>
 export default {
   name: "BreadCrumb",
-  props: ["title"],
+  props: ["title_info"],
   data() {
     return {
       title: {},

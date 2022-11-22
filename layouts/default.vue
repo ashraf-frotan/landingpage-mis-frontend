@@ -6,12 +6,17 @@
       :clipped="clipped"
       fixed
       app
-      color="primary"
+      class="primary darken-1"
       dark
     >
       <v-list>
         <v-list-item class="pa-3 pr-2">
-          <img src="@/assets/images/logo.png" alt="" width="80px" class="logo">
+          <img
+            src="@/assets/images/logo.png"
+            alt=""
+            width="80px"
+            class="logo"
+          />
         </v-list-item>
         <v-list-item
           v-for="(item, i) in items"
@@ -29,23 +34,13 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
-    <v-app-bar
-      :clipped-left="clipped"
-      fixed
-      app
-    >
+    <v-app-bar :clipped-left="clipped" fixed app>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-      <v-btn
-        icon
-        @click.stop="miniVariant = !miniVariant"
-      >
-        <v-icon>mdi-{{ `chevron-${miniVariant ? 'right' : 'left'}` }}</v-icon>
+      <v-btn icon @click.stop="miniVariant = !miniVariant">
+        <v-icon>mdi-{{ `chevron-${miniVariant ? "right" : "left"}` }}</v-icon>
       </v-btn>
       <v-spacer />
-      <v-btn
-        icon
-        @click.stop="rightDrawer = !rightDrawer"
-      >
+      <v-btn icon @click.stop="rightDrawer = !rightDrawer">
         <v-icon>mdi-menu</v-icon>
       </v-btn>
     </v-app-bar>
@@ -59,32 +54,31 @@
 
 <script>
 export default {
-  name: 'DefaultLayout',
-  data () {
+  name: "DefaultLayout",
+  data() {
     return {
       clipped: false,
       drawer: true,
       fixed: false,
       items: [
         {
-          icon: 'mdi-apps',
-          title: 'Dashboard',
-          to: '/'
+          icon: "mdi-apps",
+          title: "Dashboard",
+          to: "/",
         },
         {
-          icon: 'mdi-flag',
-          title: 'Countries',
-          to: '/countries'
-        }
+          icon: "mdi-flag",
+          title: "Countries",
+          to: "/countries",
+        },
       ],
       miniVariant: false,
       right: true,
       rightDrawer: false,
-    }
-  }
-}
+    };
+  },
+};
 </script>
 
 <style scoped>
-
 </style>

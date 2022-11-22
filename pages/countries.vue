@@ -1,8 +1,9 @@
 <template>
   <v-row>
     <v-col cols="12">
-      <TitleCard :title="title_info" />
-      <v-card elevation="4" class="mt-5">
+      <TitleCard :title_info="title_info" />
+      <ActionsCard />
+      <v-card elevation="4">
         <v-card-text>
           <v-data-table
             :headers="headers"
@@ -24,10 +25,12 @@
 </template>
 <script>
 import TitleCard from "~/components/TitleCard.vue";
+import ActionsCard from "~/components/ActionsCard.vue";
 export default {
   name: "countries",
   components: {
     TitleCard,
+    ActionsCard,
   },
   data() {
     return {
