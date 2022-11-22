@@ -3,6 +3,15 @@
         <v-col cols="12">
             <v-card elevation="4">
                 <v-card-title>
+                    <v-icon>mdi-flag</v-icon>
+                    Countries
+                </v-card-title>
+                <v-card-text>
+                    dashboar
+                </v-card-text>
+            </v-card>
+            <v-card elevation="4" class="mt-5">
+                <v-card-title>
                     Countries
                 </v-card-title>
                 <v-card-text>
@@ -36,7 +45,7 @@ export default{
     },
     methods:{
         getCountries(){
-            
+
         }
     },
     created(){
