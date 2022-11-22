@@ -6,7 +6,11 @@
                     Countries
                 </v-card-title>
                 <v-card-text>
-
+                    <v-data-table :headers="headers" :items="countries" dense item-key="id" v-model="selected" show-select :single-select="singleSelect">
+                        <template v-slot:top>
+                            <v-switch label="Single Select" v-model="singleSelect"></v-switch>
+                        </template>
+                    </v-data-table>
                 </v-card-text>
             </v-card>
         </v-col>
@@ -14,6 +18,29 @@
 </template>
 <script>
 export default{
-    name:'countries'
+    name:'countries',
+    data(){
+        return {
+            selected:[],
+            singleSelect:false,
+            countries:[
+                {id:1,code:'AFG',name:'Afghanistan',phonecode:'+93'}
+            ],
+            headers:[
+                {text:'ID',value:'id'},
+                {text:'Country Code',value:'code'},
+                {text:'Name',value:'name'},
+                {text:'Phone Code',value:'phonecode'},
+            ]
+        }
+    },
+    methods:{
+        getCountries(){
+            
+        }
+    },
+    created(){
+        console.log('created');
+    }
 }
 </script>

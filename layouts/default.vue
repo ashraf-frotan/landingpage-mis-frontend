@@ -50,7 +50,7 @@
       </v-btn>
     </v-app-bar>
     <v-main>
-      <v-container>
+      <v-container fluid>
         <Nuxt />
       </v-container>
     </v-main>
@@ -72,9 +72,9 @@ export default {
           to: '/'
         },
         {
-          icon: 'mdi-chart-bubble',
-          title: 'Inspire',
-          to: '/inspire'
+          icon: 'mdi-flag',
+          title: 'Countries',
+          to: '/countries'
         }
       ],
       miniVariant: false,
