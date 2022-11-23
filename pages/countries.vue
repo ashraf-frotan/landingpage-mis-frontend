@@ -121,7 +121,6 @@ export default {
   methods: {
     index() {},
     store() {
-      console.log(this.form_data);
       if (this.$refs.add_form.validate()) {
         this.form_data.id = 12;
         console.log(this.form_data);
