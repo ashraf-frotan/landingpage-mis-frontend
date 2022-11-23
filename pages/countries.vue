@@ -21,6 +21,54 @@
         </v-card-text>
       </v-card>
     </v-col>
+    <v-dialog v-model="add_dialog" max-width="400">
+      <v-card>
+        <v-card-title>Create Country</v-card-title>
+        <v-form @submit.prevent="saveCountry" ref="add_form">
+          <v-card-text class="px-9">
+            <v-divider></v-divider>
+            <v-text-field
+              label="Country name"
+              placeholder="Enter country name here .."
+              :rules="nameRules"
+              dense
+              rounded
+              outlined
+              required
+              class="mt-4"
+              v-model="form_data.name"
+            >
+            </v-text-field>
+            <v-text-field
+              label="Country code"
+              placeholder="Enter country code here .."
+              dense
+              rounded
+              outlined
+              required
+              v-model="form_data.code"
+              :rules="nameRules"
+            >
+            </v-text-field>
+            <v-text-field
+              label="Phone code"
+              placeholder="Enter phone code here .."
+              dense
+              rounded
+              outlined
+              required
+              v-model="form_data.phonecode"
+              :rules="nameRules"
+            >
+            </v-text-field>
+          </v-card-text>
+          <v-card-actions class="d-flex justify-end">
+            <v-btn small @click="add_dialog = false">Close</v-btn>
+            <v-btn color="primary" small type="submit">Save</v-btn>
+          </v-card-actions>
+        </v-form>
+      </v-card>
+    </v-dialog>
   </v-row>
 </template>
 <script>
@@ -34,6 +82,7 @@ export default {
   },
   data() {
     return {
+      add_dialog: true,
       title_info: { title: "Countries", icon: "mdi-flag", url: "countries" },
       selected: [],
       singleSelect: false,
@@ -46,10 +95,24 @@ export default {
         { text: "Name", value: "name" },
         { text: "Phone Code", value: "phonecode" },
       ],
+      form_data: {
+        name: "",
+        code: "",
+        phonecode: "",
+      },
+      nameRules: [
+        (v) => !!v || "This field is required",
+        (v) =>
+          (v && v.length > 3) || "This field must be at least 3 characters",
+      ],
     };
   },
   methods: {
     getCountries() {},
+    saveCountry() {
+      this.add_dialog = false;
+      this.$refs.add_form.reset();
+    },
   },
   created() {
     console.log("created");
