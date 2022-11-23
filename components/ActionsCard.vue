@@ -25,7 +25,11 @@
           ></v-text-field>
         </v-col>
         <v-col md="6" xs="12" class="d-flex justify-end">
-          <v-btn small class="primary text-capitalize mr-1">
+          <v-btn
+            small
+            class="primary text-capitalize mr-1 font-weight-bold"
+            @click="$emit('openAddModal')"
+          >
             <v-icon small>mdi-plus</v-icon> Create</v-btn
           >
           <v-btn small class="success text-capitalize mr-1">

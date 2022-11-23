@@ -2,7 +2,7 @@
   <v-row>
     <v-col cols="12">
       <TitleCard :title_info="title_info" />
-      <ActionsCard />
+      <ActionsCard @openAddModal="add_dialog = true" />
       <v-card elevation="4">
         <v-card-text>
           <v-data-table
@@ -24,7 +24,7 @@
     <v-dialog v-model="add_dialog" max-width="400">
       <v-card>
         <v-card-title>Create Country</v-card-title>
-        <v-form @submit.prevent="saveCountry" ref="add_form">
+        <v-form @submit.prevent="saveCountry" ref="add_form" lazy-validation>
           <v-card-text class="px-9">
             <v-divider></v-divider>
             <v-text-field
@@ -103,15 +103,17 @@ export default {
       nameRules: [
         (v) => !!v || "This field is required",
         (v) =>
-          (v && v.length > 3) || "This field must be at least 3 characters",
+          (v && v.length > 2) || "This field must be at least 3 characters",
       ],
     };
   },
   methods: {
     getCountries() {},
     saveCountry() {
-      this.add_dialog = false;
-      this.$refs.add_form.reset();
+      if (this.$refs.add_form.validate()) {
+        this.add_dialog = false;
+        this.$refs.add_form.reset();
+      }
     },
   },
   created() {
