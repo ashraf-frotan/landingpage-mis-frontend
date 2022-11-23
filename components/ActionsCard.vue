@@ -32,10 +32,14 @@
           >
             <v-icon small>mdi-plus</v-icon> Create</v-btn
           >
-          <v-btn small class="success text-capitalize mr-1">
+          <v-btn
+            small
+            class="success text-capitalize mr-1"
+            @click="$emit('openEditModal')"
+          >
             <v-icon small>mdi-pencil</v-icon> Edit</v-btn
           >
-          <v-btn small class="error text-capitalize mr-1">
+          <v-btn small class="error text-capitalize mr-1" @click="deleteRecord">
             <v-icon small>mdi-delete</v-icon> Delete</v-btn
           >
           <v-btn small class="orange text-capitalize white--text">
@@ -54,6 +58,11 @@ export default {
     return {
       search_type: "id",
     };
+  },
+  methods: {
+    deleteRecord() {
+      this.$emit("deleteRecord");
+    },
   },
 };
 </script>

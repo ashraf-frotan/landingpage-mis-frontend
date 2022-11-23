@@ -2,7 +2,11 @@
   <v-row>
     <v-col cols="12">
       <TitleCard :title_info="title_info" />
-      <ActionsCard @openAddModal="add_dialog = true" />
+      <ActionsCard
+        @openAddModal="add_dialog = true"
+        @openEditModal="edit"
+        @deleteRecord="destroy"
+      />
       <v-card elevation="4">
         <v-card-text>
           <v-data-table
@@ -24,7 +28,7 @@
     <v-dialog v-model="add_dialog" max-width="400">
       <v-card>
         <v-card-title>Create Country</v-card-title>
-        <v-form @submit.prevent="saveCountry" ref="add_form" lazy-validation>
+        <v-form @submit.prevent="store" ref="add_form" v-model="valid">
           <v-card-text class="px-9">
             <v-divider></v-divider>
             <v-text-field
@@ -72,6 +76,7 @@
   </v-row>
 </template>
 <script>
+import axios from "@nuxtjs/axios";
 import TitleCard from "~/components/TitleCard.vue";
 import ActionsCard from "~/components/ActionsCard.vue";
 export default {
@@ -82,12 +87,17 @@ export default {
   },
   data() {
     return {
-      add_dialog: true,
+      valid: false,
+      add_dialog: false,
       title_info: { title: "Countries", icon: "mdi-flag", url: "countries" },
       selected: [],
       singleSelect: false,
       countries: [
         { id: 1, code: "AFG", name: "Afghanistan", phonecode: "+93" },
+        { id: 2, code: "AFG", name: "Afghanistan", phonecode: "+93" },
+        { id: 3, code: "AFG", name: "Afghanistan", phonecode: "+93" },
+        { id: 4, code: "AFG", name: "Afghanistan", phonecode: "+93" },
+        { id: 5, code: "AFG", name: "Afghanistan", phonecode: "+93" },
       ],
       headers: [
         { text: "ID", value: "id" },
@@ -96,6 +106,7 @@ export default {
         { text: "Phone Code", value: "phonecode" },
       ],
       form_data: {
+        id: "",
         name: "",
         code: "",
         phonecode: "",
@@ -108,12 +119,23 @@ export default {
     };
   },
   methods: {
-    getCountries() {},
-    saveCountry() {
+    index() {},
+    store() {
+      console.log(this.form_data);
       if (this.$refs.add_form.validate()) {
+        this.form_data.id = 12;
+        console.log(this.form_data);
+        this.countries.push(this.form_data);
         this.add_dialog = false;
-        this.$refs.add_form.reset();
       }
+    },
+    edit() {
+      if (this.selected.length > 1) {
+        console.log("please select one");
+      }
+    },
+    destroy() {
+      console.log("delete dd");
     },
   },
   created() {
