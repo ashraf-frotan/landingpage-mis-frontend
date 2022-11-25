@@ -77,9 +77,7 @@ export default {
       rightDrawer: false,
     };
   },
-  created(){
-    this.$toast.show('Logging in...')
-  }
+  created() {},
 };
 </script>
 
