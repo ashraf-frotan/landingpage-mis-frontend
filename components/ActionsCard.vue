@@ -3,18 +3,7 @@
     <v-card-title> Actions </v-card-title>
     <v-card-text>
       <v-row>
-        <v-col md="6" xs="12" class="d-flex justify-start">
-          <v-radio-group
-            v-model="search_type"
-            dense
-            hide-details=""
-            column
-            label="Search Type"
-            class="radio-group"
-          >
-            <v-radio value="id" label="ID" class="f" />
-            <v-radio value="content" label="Content" />
-          </v-radio-group>
+        <v-col md="4" xs="12" class="d-flex justify-start">
           <v-text-field
             dense
             outlined
@@ -22,9 +11,10 @@
             placeholder="Search.."
             append-icon="mdi-search"
             hide-details=""
+            v-model="search"
           ></v-text-field>
         </v-col>
-        <v-col md="6" xs="12" class="d-flex justify-end">
+        <v-col md="8" xs="12" class="d-flex justify-end">
           <v-btn
             small
             class="primary text-capitalize mr-1 font-weight-bold"
@@ -42,7 +32,11 @@
           <v-btn small class="error text-capitalize mr-1" @click="deleteRecord">
             <v-icon small>mdi-delete</v-icon> Delete</v-btn
           >
-          <v-btn small class="orange text-capitalize white--text">
+          <v-btn
+            small
+            class="orange text-capitalize white--text"
+            @click="$emit('openSearchModal')"
+          >
             <v-icon small>mdi-filter</v-icon> Filter</v-btn
           >
         </v-col>
@@ -56,12 +50,17 @@ export default {
   name: "ActionsCard",
   data() {
     return {
-      search_type: "id",
+      search: "",
     };
   },
   methods: {
     deleteRecord() {
       this.$emit("deleteRecord");
+    },
+  },
+  watch: {
+    search() {
+      this.$emit("searchContent", this.search);
     },
   },
 };

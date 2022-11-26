@@ -6,6 +6,8 @@
         @openAddModal="openModal"
         @openEditModal="edit"
         @deleteRecord="destroy"
+        @searchContent="singleSearch($event)"
+        @openSearchModal="search_dialog = true"
       />
       <v-card elevation="4">
         <v-card-text>
@@ -17,6 +19,7 @@
             v-model="selected"
             show-select
             :single-select="singleSelect"
+            :search="single_search"
           >
             <template v-slot:top>
               <v-switch label="Single Select" v-model="singleSelect"></v-switch>
@@ -28,7 +31,8 @@
     <v-dialog v-model="dialog" max-width="400">
       <v-card>
         <v-card-title>
-          {{ modal_title }}
+          <div v-if="form_action == 'add'">Create New Country</div>
+          <div v-else>Edit Country</div>
         </v-card-title>
         <v-form @submit.prevent="store" ref="form" v-model="valid">
           <v-card-text class="px-9">
@@ -70,7 +74,66 @@
           </v-card-text>
           <v-card-actions class="d-flex justify-end">
             <v-btn small @click="dialog = false">Close</v-btn>
-            <v-btn color="primary" small type="submit">Save</v-btn>
+            <v-btn color="primary" small type="submit">
+              <span v-if="form_action == 'add'">Save</span>
+              <span v-else>Update</span>
+            </v-btn>
+          </v-card-actions>
+        </v-form>
+      </v-card>
+    </v-dialog>
+    <v-dialog v-model="search_dialog" max-width="400">
+      <v-card>
+        <v-card-title>
+          <div>Search</div>
+        </v-card-title>
+        <v-form @submit.prevent="submitSearch">
+          <v-card-text class="px-9">
+            <v-divider></v-divider>
+            <v-text-field
+              label="Country ID"
+              placeholder="Enter country id .."
+              dense
+              rounded
+              outlined
+              required
+              class="mt-4"
+              v-model="country.id"
+            ></v-text-field>
+            <v-text-field
+              label="Country name"
+              placeholder="Enter country name here .."
+              dense
+              rounded
+              outlined
+              required
+              v-model="country.name"
+            >
+            </v-text-field>
+            <v-text-field
+              label="Country code"
+              placeholder="Enter country code here .."
+              dense
+              rounded
+              outlined
+              required
+              v-model="country.code"
+            >
+            </v-text-field>
+            <v-text-field
+              label="Phone code"
+              placeholder="Enter phone code here .."
+              dense
+              rounded
+              outlined
+              required
+              v-model="country.phonecode"
+            >
+            </v-text-field>
+          </v-card-text>
+          <v-card-actions class="d-flex justify-end">
+            <v-btn small @click="search_dialog = false">Close</v-btn>
+            <v-btn color="primary" small type="submit"> Search </v-btn>
           </v-card-actions>
         </v-form>
       </v-card>
@@ -88,7 +151,13 @@ export default {
   },
   data() {
     return {
-      modal_title: "Create Country",
+      single_search: "",
+      search: {
+        id: "",
+        code: "",
+        name: "",
+        phonecode: "",
+      },
       valid: false,
       dialog: false,
       title_info: { title: "Countries", icon: "mdi-flag", url: "countries" },
@@ -96,6 +165,8 @@ export default {
       singleSelect: false,
       countries: [],
       country: null,
+      form_action: "add",
+      search_dialog: false,
       headers: [
         { text: "ID", value: "id" },
         { text: "Country Code", value: "code" },
@@ -128,38 +199,74 @@ export default {
     },
     store() {
       if (this.$refs.form.validate()) {
-        this.$axios
-          .post("country", this.country)
-          .then((response) => {
-            this.countries.push(response.data);
-          })
-          .catch((e) => {
-            console.log(e);
-          });
+        if (this.form_action == "add") {
+          this.$axios
+            .post("country", this.country)
+            .then((response) => {
+              this.countries.push(response.data);
+            })
+            .catch((e) => {
+              console.log(e);
+            });
+        } else {
+          this.$axios
+            .put(`country/${this.country.id}`, this.country)
+            .then((response) => {
+              console.log("updated");
+            })
+            .catch((e) => {
+              console.log(e);
+            });
+        }
         this.dialog = false;
       }
     },
     edit() {
-      this.modal_title = "Edit Country";
-      if (this.selected.length > 1) {
-      } else {
+      this.form_action = "edit";
+      if (this.selected.length == 1) {
         this.country = this.countries.filter(
           (country) => country.id == this.selected[0].id
         );
         this.country = this.country[0];
         this.dialog = true;
+      } else {
+        console.log("Please select one row");
       }
     },
     destroy() {
-      console.log("delete dd");
+      if (this.selected.length == 1) {
+        this.$axios
+          .delete(`country/${this.selected[0].id}`)
+          .then((response) => {
+            console.log("deleted");
+            this.index();
+          })
+          .catch((e) => {
+            console.log("error");
+          });
+      } else {
+        console.log("Please select one row");
+      }
+    },
+    singleSearch(data) {
+      this.single_search = data;
+    },
+    searchContent() {
+      this.$axios
+        .get("search_country", this.country)
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
     openModal() {
       this.dialog = true;
-      this.modal_title = "Create Country";
+      this.form_action = "add";
     },
   },
   created() {
-    console.log(this.modal_title);
     this.index();
   },
 };
