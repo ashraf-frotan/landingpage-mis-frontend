@@ -40,9 +40,25 @@
         <v-icon>mdi-{{ `chevron-${miniVariant ? "right" : "left"}` }}</v-icon>
       </v-btn>
       <v-spacer />
-      <v-btn icon @click.stop="rightDrawer = !rightDrawer">
-        <v-icon>mdi-menu</v-icon>
-      </v-btn>
+      <v-menu offset-y>
+        <template v-slot:activator="{ on, attrs }">
+          <v-btn icon class="mr-2" v-bind="attrs" v-on="on" elevation="2">
+            <v-avatar>
+              <img src="~/assets/images/profile.jpg" alt="" srcset="" />
+            </v-avatar>
+          </v-btn>
+        </template>
+        <v-list>
+          <v-list-item link>
+            <v-icon>mdi-domain</v-icon> &nbsp;
+            <v-list-item-title>Profile</v-list-item-title>
+          </v-list-item>
+          <v-list-item link>
+            <v-icon>mdi-logout</v-icon>
+            <v-list-item-title>Logout</v-list-item-title>
+          </v-list-item>
+        </v-list>
+      </v-menu>
     </v-app-bar>
     <v-main>
       <v-container fluid>
@@ -70,20 +86,18 @@ export default {
           icon: "mdi-flag",
           title: "Countries",
           to: "/countries",
-        },{
-          icon:"mdi-domain",
-          title:'Companies',
-          to:'/companies'
-        }
+        },
+        {
+          icon: "mdi-domain",
+          title: "Companies",
+          to: "/companies",
+        },
       ],
       miniVariant: false,
       right: true,
-      rightDrawer: false,
     };
   },
-  created() {
-
-  },
+  created() {},
 };
 </script>
 

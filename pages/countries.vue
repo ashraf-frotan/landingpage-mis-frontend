@@ -224,56 +224,71 @@ export default {
     edit() {
       this.form_action = "edit";
       if (this.selected.length == 1) {
-        var arr= this.countries.filter(
-          (country) =>{ return country.id == this.selected[0].id}
-        );
+        var arr = this.countries.filter((country) => {
+          return country.id == this.selected[0].id;
+        });
         this.country = JSON.parse(JSON.stringify(arr[0]));
         this.dialog = true;
       } else {
-        this.$toastr.e( { 
+        this.$toastr.e({
           title: "Error!",
           msg: "Please select one record.",
           timeout: 3000,
-          progressbar: true}
-        );
+          progressbar: true,
+        });
       }
     },
     destroy() {
-      let arr_delete=this.selected.map((e)=>e.id)
-      if(!this.selected.length<1){
-        this.$axios
-        .delete(`country/1`,{params:arr_delete})
-        .then((response) => {
-          console.log(response);
-          this.index();
-        })
-        .catch((e) => {
-          console.log("error");
+      let arr_delete = this.selected.map((e) => e.id);
+      if (!this.selected.length < 1) {
+        this.$swal({
+          icon: "info",
+          title: "Are you sure to delete?",
+          confirmButtonText: "Yes",
+          showCancelButton: true,
+          confirmButtonColor: "#1976d2",
+          cancelButtonColor: "red",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.$axios
+              .delete(`country/1`, { params: arr_delete })
+              .then((response) => {
+                this.$toastr.s({
+                  title: "Success!",
+                  msg: "Records deleted successfully!.",
+                  timeout: 2000,
+                  progressbar: true,
+                });
+                this.index();
+              })
+              .catch((e) => {
+                console.log("error");
+              });
+          }
         });
-      }else{
-        this.$toastr.e( { 
+      } else {
+        this.$toastr.e({
           title: "Error!",
           msg: "Please select one record.",
           timeout: 3000,
-          progressbar: true}
-        );
+          progressbar: true,
+        });
       }
-    
     },
     singleSearch(data) {
       this.single_search = data;
     },
     submitSearch() {
       this.$axios
-        .get("search_country", { params:this.country })
+        .get("search_country", { params: this.country })
         .then((response) => {
-          this.countries=response.data;
+          this.countries = response.data;
         })
         .catch((error) => {
           console.log(error);
         });
-        this.search_dialog=false;
-        this.country={};
+      this.search_dialog = false;
+      this.country = {};
     },
     openModal() {
       this.dialog = true;
@@ -281,20 +296,6 @@ export default {
     },
   },
   created() {
-    this.$swal({
-      icon: 'success',
-      title: 'Do you want to save the changes?',
-      showCancelButton: true,
-      confirmButtonText: 'Save',
-      cancelButtonColor: "#DD6B55",
-      confirmButtonColor: "#DD6B55",
-    }).then((result) => {
-      if (result.isConfirmed) {
-       this.$swal('Saved!', '', 'success')
-      } else if (result.isDenied) {
-        this.$swal('Changes are not saved', '', 'info')
-      }
-    });
     this.index();
   },
 };
