@@ -230,7 +230,12 @@ export default {
         this.country = JSON.parse(JSON.stringify(arr[0]));
         this.dialog = true;
       } else {
-        console.log("Please select one row");
+        this.$toastr.e( { 
+          title: "Error!",
+          msg: "Please select one record.",
+          timeout: 3000,
+          progressbar: true}
+        );
       }
     },
     destroy() {
@@ -246,7 +251,12 @@ export default {
           console.log("error");
         });
       }else{
-        console.log('Please select row');
+        this.$toastr.e( { 
+          title: "Error!",
+          msg: "Please select one record.",
+          timeout: 3000,
+          progressbar: true}
+        );
       }
     
     },
@@ -271,18 +281,6 @@ export default {
     },
   },
   created() {
-    this.$toastr.s(
-      { 
-        name: "Toast Name",
-        title: "Toast Title",
-        msg: "Toast Message",
-        position: "toast-bottom-left",
-        type: "error",
-        timeout: 5000,
-        progressbar: true,
-      }
-      
-    );
     this.$swal({
       icon: 'success',
       title: 'Do you want to save the changes?',
@@ -291,11 +289,10 @@ export default {
       cancelButtonColor: "#DD6B55",
       confirmButtonColor: "#DD6B55",
     }).then((result) => {
-      /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
-        Swal.fire('Saved!', '', 'success')
+       this.$swal('Saved!', '', 'success')
       } else if (result.isDenied) {
-        Swal.fire('Changes are not saved', '', 'info')
+        this.$swal('Changes are not saved', '', 'info')
       }
     });
     this.index();
