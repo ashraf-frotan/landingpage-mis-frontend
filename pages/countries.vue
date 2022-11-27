@@ -19,11 +19,14 @@
             item-key="id"
             v-model="selected"
             show-select
-            :single-select="singleSelect"
+            :single-select="single_select"
             :search="single_search"
           >
             <template v-slot:top>
-              <v-switch label="Single Select" v-model="singleSelect"></v-switch>
+              <v-switch
+                label="Single Select"
+                v-model="single_select"
+              ></v-switch>
             </template>
           </v-data-table>
         </v-card-text>
@@ -163,7 +166,7 @@ export default {
       dialog: false,
       title_info: { title: "Countries", icon: "mdi-flag", url: "countries" },
       selected: [],
-      singleSelect: false,
+      single_select: false,
       countries: [],
       form_action: "add",
       search_dialog: false,

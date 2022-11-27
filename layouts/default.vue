@@ -44,7 +44,7 @@
         <template v-slot:activator="{ on, attrs }">
           <v-btn icon class="mr-2" v-bind="attrs" v-on="on" elevation="2">
             <v-avatar>
-              <img src="~/assets/images/profile.jpg" alt="" srcset="" />
+              <img src="~/assets/images/profile.jpg" alt="" />
             </v-avatar>
           </v-btn>
         </template>
