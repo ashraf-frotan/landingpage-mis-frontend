@@ -270,7 +270,15 @@ export default {
   },
   created() {
     this.$toastr.s(
-      "Hello world"
+      { 
+        name: "Toast Name",
+        title: "Toast Title",
+        msg: "Toast Message",
+        position: "toast-bottom-left",
+        type: "error",
+        timeout: 5000,
+        progressbar: true,
+      }
     );
     this.index();
   },
