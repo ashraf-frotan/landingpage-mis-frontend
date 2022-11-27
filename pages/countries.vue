@@ -279,7 +279,23 @@ export default {
         timeout: 5000,
         progressbar: true,
       }
+      
     );
+    this.$swal({
+      icon: 'success',
+      title: 'Do you want to save the changes?',
+      showCancelButton: true,
+      confirmButtonText: 'Save',
+      cancelButtonColor: "#DD6B55",
+      confirmButtonColor: "#DD6B55",
+    }).then((result) => {
+      /* Read more about isConfirmed, isDenied below */
+      if (result.isConfirmed) {
+        Swal.fire('Saved!', '', 'success')
+      } else if (result.isDenied) {
+        Swal.fire('Changes are not saved', '', 'info')
+      }
+    });
     this.index();
   },
 };
