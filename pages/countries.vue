@@ -224,10 +224,10 @@ export default {
     edit() {
       this.form_action = "edit";
       if (this.selected.length == 1) {
-        var arr = this.countries.filter(
+        var arr= this.countries.filter(
           (country) =>{ return country.id == this.selected[0].id}
         );
-        this.country = arr[0];
+        this.country = JSON.parse(JSON.stringify(arr[0]));
         this.dialog = true;
       } else {
         console.log("Please select one row");
@@ -269,6 +269,9 @@ export default {
     },
   },
   created() {
+    this.$toastr.s(
+      "Hello world"
+    );
     this.index();
   },
 };

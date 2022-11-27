@@ -70,14 +70,20 @@ export default {
           icon: "mdi-flag",
           title: "Countries",
           to: "/countries",
-        },
+        },{
+          icon:"mdi-domain",
+          title:'Companies',
+          to:'/companies'
+        }
       ],
       miniVariant: false,
       right: true,
       rightDrawer: false,
     };
   },
-  created() {},
+  created() {
+
+  },
 };
 </script>
 

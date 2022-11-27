@@ -1,4 +1,5 @@
 import Vue from 'vue'
-import Toastr from '@nuxtjs/toast'
+import VueToastr from 'vue-toastr'
 
-Vue.use(Toastr)
+Vue.use(VueToastr)
+
