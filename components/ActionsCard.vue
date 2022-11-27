@@ -34,10 +34,17 @@
           >
           <v-btn
             small
-            class="orange text-capitalize white--text"
+            class="orange text-capitalize white--text mr-1"
             @click="$emit('openSearchModal')"
           >
             <v-icon small>mdi-filter</v-icon> Filter</v-btn
+          >
+          <v-btn
+            small
+            class="text-capitalize"
+            @click="$emit('resetDatatable')"
+          >
+            <v-icon small>mdi-refresh</v-icon> Reset</v-btn
           >
         </v-col>
       </v-row>
