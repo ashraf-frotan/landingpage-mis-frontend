@@ -164,7 +164,6 @@ export default {
       selected: [],
       singleSelect: false,
       countries: [],
-      country: null,
       form_action: "add",
       search_dialog: false,
       headers: [
@@ -224,10 +223,10 @@ export default {
     edit() {
       this.form_action = "edit";
       if (this.selected.length == 1) {
-        this.country = this.countries.filter(
-          (country) => country.id == this.selected[0].id
+        var arr = this.countries.filter(
+          (country) =>{ return country.id == this.selected[0].id}
         );
-        this.country = this.country[0];
+        this.country = arr[0];
         this.dialog = true;
       } else {
         console.log("Please select one row");
@@ -251,15 +250,17 @@ export default {
     singleSearch(data) {
       this.single_search = data;
     },
-    searchContent() {
+    submitSearch() {
       this.$axios
-        .get("search_country", this.country)
+        .get("search_country", { params:this.country })
         .then((response) => {
-          console.log(response);
+          this.countries=response.data;
         })
         .catch((error) => {
           console.log(error);
         });
+        this.search_dialog=false;
+        this.country={};
     },
     openModal() {
       this.dialog = true;
