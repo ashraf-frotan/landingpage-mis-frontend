@@ -234,19 +234,21 @@ export default {
       }
     },
     destroy() {
-      if (this.selected.length == 1) {
+      let arr_delete=this.selected.map((e)=>e.id)
+      if(!this.selected.length<1){
         this.$axios
-          .delete(`country/${this.selected[0].id}`)
-          .then((response) => {
-            console.log("deleted");
-            this.index();
-          })
-          .catch((e) => {
-            console.log("error");
-          });
-      } else {
-        console.log("Please select one row");
+        .delete(`country/1`,{params:arr_delete})
+        .then((response) => {
+          console.log(response);
+          this.index();
+        })
+        .catch((e) => {
+          console.log("error");
+        });
+      }else{
+        console.log('Please select row');
       }
+    
     },
     singleSearch(data) {
       this.single_search = data;
