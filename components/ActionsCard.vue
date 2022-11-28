@@ -3,7 +3,7 @@
     <v-card-title> Actions </v-card-title>
     <v-card-text>
       <v-row>
-        <v-col md="4" xs="12" sm="12" class="d-flex justify-start">
+        <v-col cols="12" md="4" xs="12" sm="12">
           <v-text-field
             dense
             outlined
@@ -14,8 +14,9 @@
             v-model="search"
           ></v-text-field>
         </v-col>
-        <v-col md="8" xs="12" sm="12" class="d-flex justify-end">
-          <v-btn
+        <v-col cols="12" md="8" xs="12" sm="12">
+          <div class="d-flex flex-wrap justify-center justify-md-end">
+            <v-btn
             small
             class="primary text-capitalize mr-1 font-weight-bold"
             @click="$emit('openAddModal')"
@@ -39,9 +40,10 @@
           >
             <v-icon small>mdi-filter</v-icon> Filter</v-btn
           >
-          <v-btn small class="text-capitalize" @click="$emit('resetDatatable')">
+          <v-btn small class="text-capitalize mt-2 mt-md-0" @click="$emit('resetDatatable')">
             <v-icon small>mdi-refresh</v-icon> Reset</v-btn
           >
+          </div>
         </v-col>
       </v-row>
     </v-card-text>

@@ -223,6 +223,7 @@ export default {
         }
         this.dialog = false;
       }
+      this.country={};
     },
     edit() {
       this.form_action = "edit";

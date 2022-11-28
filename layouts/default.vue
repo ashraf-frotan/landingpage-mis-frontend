@@ -50,7 +50,7 @@
         </template>
         <v-list>
           <v-list-item link>
-            <v-icon>mdi-domain</v-icon> &nbsp;
+            <v-icon>mdi-account</v-icon> &nbsp;
             <v-list-item-title>Profile</v-list-item-title>
           </v-list-item>
           <v-list-item link>
