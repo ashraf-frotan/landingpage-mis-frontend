@@ -17,32 +17,40 @@
         <v-col cols="12" md="8" xs="12" sm="12">
           <div class="d-flex flex-wrap justify-center justify-md-end">
             <v-btn
-            small
-            class="primary text-capitalize mr-1 font-weight-bold"
-            @click="$emit('openAddModal')"
-          >
-            <v-icon small>mdi-plus</v-icon> Create</v-btn
-          >
-          <v-btn
-            small
-            class="success text-capitalize mr-1"
-            @click="$emit('openEditModal')"
-          >
-            <v-icon small>mdi-pencil</v-icon> Edit</v-btn
-          >
-          <v-btn small class="error text-capitalize mr-1" @click="deleteRecord">
-            <v-icon small>mdi-delete</v-icon> Delete</v-btn
-          >
-          <v-btn
-            small
-            class="orange text-capitalize white--text mr-1"
-            @click="$emit('openSearchModal')"
-          >
-            <v-icon small>mdi-filter</v-icon> Filter</v-btn
-          >
-          <v-btn small class="text-capitalize mt-2 mt-md-0" @click="$emit('resetDatatable')">
-            <v-icon small>mdi-refresh</v-icon> Reset</v-btn
-          >
+              small
+              class="primary text-capitalize mr-1 font-weight-bold"
+              @click="$emit('openAddModal')"
+            >
+              <v-icon small>mdi-plus</v-icon> Create</v-btn
+            >
+            <v-btn
+              small
+              class="success text-capitalize mr-1"
+              @click="$emit('openEditModal')"
+            >
+              <v-icon small>mdi-pencil</v-icon> Edit</v-btn
+            >
+            <v-btn
+              small
+              class="error text-capitalize mr-1"
+              @click="deleteRecord"
+            >
+              <v-icon small>mdi-delete</v-icon> Delete</v-btn
+            >
+            <v-btn
+              small
+              class="orange text-capitalize white--text mr-1"
+              @click="$emit('openSearchModal')"
+            >
+              <v-icon small>mdi-filter</v-icon> Filter</v-btn
+            >
+            <v-btn
+              small
+              class="text-capitalize mt-2 mt-md-0"
+              @click="$emit('resetDatatable')"
+            >
+              <v-icon small>mdi-refresh</v-icon> Reset</v-btn
+            >
           </div>
         </v-col>
       </v-row>
