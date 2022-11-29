@@ -68,7 +68,7 @@
             </v-file-input>
           </v-card-text>
           <v-card-actions class="d-flex justify-end">
-            <v-btn class="text-capitalize" small>Cancel</v-btn>
+            <v-btn class="text-capitalize" small @click="add_dialog=false">Cancel</v-btn>
             <v-btn color="primary" class="text-capitalize" small type="submit"
               >Save</v-btn
             >
@@ -93,10 +93,10 @@ export default {
       selected: [],
       single_select: false,
       single_search: "",
-      countries: ["af", "js"],
+      countries: [],
       title_info: { title: "Companies", icon: "mdi-domain", url: "companies" },
       companies: [],
-      company: { name: "tst", country_id: "test", logo: "test" },
+      company: { name: "", country_id: "", logo: "" },
       headers: [
         { text: "ID", value: "id" },
         { text: "Name", value: "name" },
