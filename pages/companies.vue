@@ -111,11 +111,12 @@ export default {
     },
     store() {
       let data=new FormData();
-      data.append('data',this.company);
-      console.log(data);
+      data.append('name',this.company.name);
+      data.append('logo',this.company.logo);
+      data.append('country_id',this.company.country_id);
       this.$axios
-        .post("company", this.company, {
-          headers: {
+        .post("company", data, {
+          header: {
             "Content-Type": "multipart/form-data",
           },
         })
@@ -139,7 +140,6 @@ export default {
         .get("country")
         .then((response) => {
           this.countries=response.data;
-          // this.countries = response.data.map((e) => e.name);
         })
         .catch((error) => {
           console.log(error);
