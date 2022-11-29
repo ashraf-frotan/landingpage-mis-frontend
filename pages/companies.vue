@@ -56,7 +56,7 @@
               dense
               show-size=""
               small-chips
-              ref="logo"
+              @change="uploadFile"
             >
             </v-file-input>
           </v-card-text>
@@ -110,8 +110,9 @@ export default {
         });
     },
     store() {
-      // this.company.logo = this.$refs.logo.files[0];
-      console.log(this.company);
+      let data=new FormData();
+      data.append('data',this.company);
+      console.log(data);
       this.$axios
         .post("company", this.company, {
           headers: {
@@ -144,6 +145,9 @@ export default {
           console.log(error);
         });
     },
+    uploadFile(file){
+      this.company.logo=file;
+    }
   },
   created() {
     this.index();
