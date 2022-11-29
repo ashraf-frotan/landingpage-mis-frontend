@@ -79,7 +79,7 @@
     <v-dialog v-model="edit_dialog" max-width="400">
       <v-card class="pa-4">
         <v-form class="mt-4" @submit.prevent="store">
-          <v-card-title> <h3>Create New Company</h3> </v-card-title>
+          <v-card-title> <h3>Edit Company</h3> </v-card-title>
           <v-card-text>
             <v-text-field
               label="Name"
@@ -112,9 +112,9 @@
             </v-file-input>
           </v-card-text>
           <v-card-actions class="d-flex justify-end">
-            <v-btn class="text-capitalize" small @click="add_dialog=false">Cancel</v-btn>
+            <v-btn class="text-capitalize" small @click="edit_dialog=false">Cancel</v-btn>
             <v-btn color="primary" class="text-capitalize" small type="submit"
-              >Save</v-btn
+              >Update</v-btn
             >
           </v-card-actions>
         </v-form>
