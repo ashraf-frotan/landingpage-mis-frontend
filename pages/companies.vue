@@ -40,6 +40,8 @@
             ></v-text-field>
             <v-select
               :items="countries"
+              item-text="name"
+              item-value="id"
               label="Select country"
               rounded
               dense
@@ -108,8 +110,8 @@ export default {
         });
     },
     store() {
-      this.company.logo = this.$refs.logo.files[0];
-      console.log(this.company.logo);
+      // this.company.logo = this.$refs.logo.files[0];
+      console.log(this.company);
       this.$axios
         .post("company", this.company, {
           headers: {
@@ -128,14 +130,15 @@ export default {
     },
     openAddModal() {
       this.add_dialog = true;
-      // this.getCountries();
+      this.getCountries();
     },
 
     getCountries() {
       this.$axios
         .get("country")
         .then((response) => {
-          this.countries = response.data.map((e) => e.name);
+          this.countries=response.data;
+          // this.countries = response.data.map((e) => e.name);
         })
         .catch((error) => {
           console.log(error);
