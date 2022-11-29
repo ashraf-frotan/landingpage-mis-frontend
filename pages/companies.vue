@@ -21,6 +21,10 @@
             <template v-slot:top>
               <v-switch label="Single Select"></v-switch>
             </template>
+            <template v-slot:item.logo="{ item }">
+          <!-- You can uncomment the line below to see the actual item data. Also you can use 'v-for' or 'v-if' or other vue capabilities, if your item data is more complex.  -->
+          <v-img width="60" :src="item.logo" />
+        </template>
           </v-data-table>
         </v-card-text>
       </v-card>
