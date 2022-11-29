@@ -22,9 +22,12 @@
               <v-switch label="Single Select"></v-switch>
             </template>
             <template v-slot:item.logo="{ item }">
-          <!-- You can uncomment the line below to see the actual item data. Also you can use 'v-for' or 'v-if' or other vue capabilities, if your item data is more complex.  -->
-          <v-img width="60" :src="item.logo" />
-        </template>
+              <v-img width="60" :src="item.logo" />
+            </template>
+            <template v-slot:item.country_id="{ item }">
+              <span>{{item.country.name}}</span>
+            </template>
+
           </v-data-table>
         </v-card-text>
       </v-card>
@@ -108,6 +111,7 @@ export default {
         .get("company")
         .then((response) => {
           this.companies = response.data;
+          console.log(this.companies);
         })
         .catch((error) => {
           console.log(error);
