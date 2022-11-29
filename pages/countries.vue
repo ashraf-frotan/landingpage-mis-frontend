@@ -200,10 +200,10 @@ export default {
           console.log(e);
         });
     },
-    store() {
+    async store() {
       if (this.$refs.form.validate()) {
         if (this.form_action == "add") {
-          this.$axios
+           await this.$axios
             .post("country", this.country)
             .then((response) => {
               this.countries.push(response.data);
@@ -212,7 +212,7 @@ export default {
               console.log(e);
             });
         } else {
-          this.$axios
+          await this.$axios
             .put(`country/${this.country.id}`, this.country)
             .then((response) => {
               console.log("updated");
@@ -224,6 +224,7 @@ export default {
         this.dialog = false;
       }
       this.country={};
+
     },
     edit() {
       this.form_action = "edit";

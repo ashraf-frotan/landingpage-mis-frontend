@@ -111,7 +111,6 @@ export default {
         .get("company")
         .then((response) => {
           this.companies = response.data;
-          console.log(this.companies);
         })
         .catch((error) => {
           console.log(error);
