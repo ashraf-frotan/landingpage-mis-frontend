@@ -136,6 +136,9 @@
               @change="uploadFile"
             >
             </v-file-input>
+            <div class="">
+              <v-img :src="company.logo" width="100"></v-img>
+            </div>
           </v-card-text>
           <v-card-actions class="d-flex justify-end">
             <v-btn class="text-capitalize" small @click="edit_dialog = false"
@@ -225,11 +228,12 @@ export default {
     },
     edit() {
       if (this.selected.length == 1) {
+        this.getCountries();
         this.edit_dialog = true;
         var arr = this.companies.filter((c) => {
           return c.id == this.selected[0].id;
         });
-        this.company = arr[0];
+        this.company = JSON.parse(JSON.stringify(arr[0]));
       } else {
         this.$toastr.e({
           title: "Error!",
