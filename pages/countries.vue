@@ -1,7 +1,9 @@
 <template>
   <v-row>
     <v-col cols="12">
-      <TitleCard :title_info="title_info" />
+      <TitleCard
+        :title_info="{ title: 'Countries', icon: 'mdi-flag', url: 'countries' }"
+      />
       <ActionsCard
         @openAddModal="openModal"
         @openEditModal="edit"
@@ -38,7 +40,12 @@
           <div v-if="form_action == 'add'">Create New Country</div>
           <div v-else>Edit Country</div>
         </v-card-title>
-        <v-form @submit.prevent="store" ref="form" v-model="valid">
+        <v-form
+          @submit.prevent="store"
+          ref="form"
+          v-model.lazy="valid"
+          lazy-validation
+        >
           <v-card-text class="px-9">
             <v-divider></v-divider>
             <v-text-field
@@ -86,6 +93,7 @@
         </v-form>
       </v-card>
     </v-dialog>
+    <!-- Search dialog -->
     <v-dialog v-model="search_dialog" max-width="400">
       <v-card>
         <v-card-title>
@@ -162,9 +170,8 @@ export default {
         name: "",
         phonecode: "",
       },
-      valid: false,
+      valid: true,
       dialog: false,
-      title_info: { title: "Countries", icon: "mdi-flag", url: "countries" },
       selected: [],
       single_select: false,
       countries: [],
@@ -203,7 +210,7 @@ export default {
     async store() {
       if (this.$refs.form.validate()) {
         if (this.form_action == "add") {
-           await this.$axios
+          await this.$axios
             .post("country", this.country)
             .then((response) => {
               this.countries.push(response.data);
@@ -223,9 +230,8 @@ export default {
             });
         }
         this.closeModal();
+        this.$refs.form.resetValidation();
       }
-      
-
     },
     edit() {
       this.form_action = "edit";
@@ -299,12 +305,11 @@ export default {
     openModal() {
       this.dialog = true;
       this.form_action = "add";
-      this.country={}
     },
-    closeModal(){
-      this.dialog=false;
-      this.country={};
-    }
+    closeModal() {
+      this.dialog = false;
+      this.country = {};
+    },
   },
   created() {
     this.index();

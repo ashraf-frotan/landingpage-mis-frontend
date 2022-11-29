@@ -1,7 +1,13 @@
 <template>
   <v-row>
     <v-col cols="12">
-      <TitleCard :title_info="title_info" />
+      <TitleCard
+        :title_info="{
+          title: 'Companies',
+          icon: 'mdi-domain',
+          url: 'companies',
+        }"
+      />
       <ActionsCard
         @searchContent="singleSearch($event)"
         @openAddModal="openAddModal()"
@@ -20,22 +26,30 @@
             :search="single_search"
           >
             <template v-slot:top>
-              <v-switch label="Single Select"></v-switch>
+              <v-switch
+                label="Single Select"
+                v-model="single_select"
+              ></v-switch>
             </template>
             <template v-slot:item.logo="{ item }">
-              <v-img width="60" :src="item.logo" />
+              <v-img width="60" class="rounded" :src="item.logo" />
             </template>
             <template v-slot:item.country_id="{ item }">
-              <span>{{item.country.name}}</span>
+              <span>{{ item.country.name }}</span>
             </template>
-
           </v-data-table>
         </v-card-text>
       </v-card>
     </v-col>
     <v-dialog v-model="add_dialog" max-width="400">
       <v-card class="pa-4">
-        <v-form class="mt-4" @submit.prevent="store">
+        <v-form
+          class="mt-4"
+          @submit.prevent="store"
+          lazy-validation
+          v-model="valid"
+          ref="add_form"
+        >
           <v-card-title> <h3>Create New Company</h3> </v-card-title>
           <v-card-text>
             <v-text-field
@@ -45,6 +59,7 @@
               outlined
               dense
               v-model="company.name"
+              :rules="nameRules"
             ></v-text-field>
             <v-select
               :items="countries"
@@ -54,22 +69,28 @@
               rounded
               dense
               outlined
+              :rules="[(v) => !!v || 'Item is required']"
               v-model="company.country_id"
             >
             </v-select>
             <v-file-input
-              label="Please select logo"
+              label="Logo"
+              placeholder="Please select logo"
               rounded
               outlined
               dense
               show-size=""
               small-chips
               @change="uploadFile"
+              accept="image/*"
+              required
             >
             </v-file-input>
           </v-card-text>
           <v-card-actions class="d-flex justify-end">
-            <v-btn class="text-capitalize" small @click="add_dialog=false">Cancel</v-btn>
+            <v-btn class="text-capitalize" small @click="add_dialog = false"
+              >Cancel</v-btn
+            >
             <v-btn color="primary" class="text-capitalize" small type="submit"
               >Save</v-btn
             >
@@ -89,6 +110,7 @@
               outlined
               dense
               v-model="company.name"
+              :rules="nameRules"
             ></v-text-field>
             <v-select
               :items="countries"
@@ -102,18 +124,23 @@
             >
             </v-select>
             <v-file-input
-              label="Please select logo"
+              label="Logo"
+              placeholder="Please select logo"
+              accept="image/*"
               rounded
               outlined
               dense
               show-size=""
               small-chips
+              required
               @change="uploadFile"
             >
             </v-file-input>
           </v-card-text>
           <v-card-actions class="d-flex justify-end">
-            <v-btn class="text-capitalize" small @click="edit_dialog=false">Cancel</v-btn>
+            <v-btn class="text-capitalize" small @click="edit_dialog = false"
+              >Cancel</v-btn
+            >
             <v-btn color="primary" class="text-capitalize" small type="submit"
               >Update</v-btn
             >
@@ -135,20 +162,25 @@ export default {
   data() {
     return {
       add_dialog: false,
-      edit_dialog: true,
+      edit_dialog: false,
       selected: [],
+      valid: false,
       single_select: false,
       single_search: "",
       countries: [],
-      title_info: { title: "Companies", icon: "mdi-domain", url: "companies" },
       companies: [],
-      company: { name: "", country_id: "3", logo: "" },
-      edit_company:{ name: "", country_id: null, logo: "" },
+      company: { name: "", country_id: null, logo: "" },
+      edit_company: { name: "", country_id: null, logo: "" },
       headers: [
         { text: "ID", value: "id" },
         { text: "Name", value: "name" },
         { text: "Logo", value: "logo" },
         { text: "Country", value: "country_id" },
+      ],
+      nameRules: [
+        (v) => !!v || "This field is required",
+        (v) =>
+          (v && v.length > 2) || "This field must be at least 3 characters",
       ],
     };
   },
@@ -164,10 +196,11 @@ export default {
         });
     },
     store() {
-      let data=new FormData();
-      data.append('name',this.company.name);
-      data.append('logo',this.company.logo);
-      data.append('country_id',this.company.country_id);
+      this.$refs.add_form.validate();
+      let data = new FormData();
+      data.append("name", this.company.name);
+      data.append("logo", this.company.logo);
+      data.append("country_id", this.company.country_id);
       this.$axios
         .post("company", data, {
           header: {
@@ -175,7 +208,9 @@ export default {
           },
         })
         .then((response) => {
-          console.log(response);
+          this.companies.push(response.data);
+          this.add_dialog = false;
+          this.$refs.add_form.resetValidation();
         })
         .catch((error) => {
           console.log(error);
@@ -189,24 +224,35 @@ export default {
       this.getCountries();
     },
     edit() {
-      this.edit_dialog = true;
-      var x=this.companies.filter((e)=>e.id=this.selected[0]);
-      console.log(x);
+      if (this.selected.length == 1) {
+        this.edit_dialog = true;
+        var arr = this.companies.filter((c) => {
+          return c.id == this.selected[0].id;
+        });
+        this.company = arr[0];
+      } else {
+        this.$toastr.e({
+          title: "Error!",
+          msg: "Please select one record.",
+          timeout: 3000,
+          progressbar: true,
+        });
+      }
     },
 
     getCountries() {
       this.$axios
         .get("country")
         .then((response) => {
-          this.countries=response.data;
+          this.countries = response.data;
         })
         .catch((error) => {
           console.log(error);
         });
     },
-    uploadFile(file){
-      this.company.logo=file;
-    }
+    uploadFile(file) {
+      this.company.logo = file;
+    },
   },
   created() {
     this.index();
