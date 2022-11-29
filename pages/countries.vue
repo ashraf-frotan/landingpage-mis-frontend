@@ -77,7 +77,7 @@
             </v-text-field>
           </v-card-text>
           <v-card-actions class="d-flex justify-end">
-            <v-btn small @click="dialog = false">Close</v-btn>
+            <v-btn small @click="closeModal">Close</v-btn>
             <v-btn color="primary" small type="submit">
               <span v-if="form_action == 'add'">Save</span>
               <span v-else>Update</span>
@@ -216,14 +216,15 @@ export default {
             .put(`country/${this.country.id}`, this.country)
             .then((response) => {
               console.log("updated");
+              this.index();
             })
             .catch((e) => {
               console.log(e);
             });
         }
-        this.dialog = false;
+        this.closeModal();
       }
-      this.country={};
+      
 
     },
     edit() {
@@ -298,7 +299,12 @@ export default {
     openModal() {
       this.dialog = true;
       this.form_action = "add";
+      this.country={}
     },
+    closeModal(){
+      this.dialog=false;
+      this.country={};
+    }
   },
   created() {
     this.index();
