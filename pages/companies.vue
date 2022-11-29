@@ -5,6 +5,7 @@
       <ActionsCard
         @searchContent="singleSearch($event)"
         @openAddModal="openAddModal()"
+        @openEditModal="edit()"
       />
       <v-card>
         <v-card-text>
@@ -141,7 +142,8 @@ export default {
       countries: [],
       title_info: { title: "Companies", icon: "mdi-domain", url: "companies" },
       companies: [],
-      company: { name: "", country_id: "", logo: "" },
+      company: { name: "", country_id: "3", logo: "" },
+      edit_company:{ name: "", country_id: null, logo: "" },
       headers: [
         { text: "ID", value: "id" },
         { text: "Name", value: "name" },
@@ -185,6 +187,11 @@ export default {
     openAddModal() {
       this.add_dialog = true;
       this.getCountries();
+    },
+    edit() {
+      this.edit_dialog = true;
+      var x=this.companies.filter((e)=>e.id=this.selected[0]);
+      console.log(x);
     },
 
     getCountries() {
