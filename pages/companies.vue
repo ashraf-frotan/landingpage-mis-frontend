@@ -227,7 +227,11 @@ export default {
       data.append('country_id',this.company.country_id);
       data.append('logo',this.company.logo);
       data.append('_method','put');
-      await this.$axios.post(`company/${this.company.id}`,data
+      await this.$axios.post(`company/${this.company.id}`,data,{
+        header:{
+          'Content-type':'multipart/form-data'
+        }
+      }
       ).then((response)=>{
         console.log(response);
       }).catch((error)=>{
