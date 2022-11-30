@@ -41,6 +41,7 @@
         </v-card-text>
       </v-card>
     </v-col>
+    <!-- START ADD DIALOG -->
     <v-dialog v-model="add_dialog" max-width="400">
       <v-card class="pa-4">
         <v-form
@@ -98,9 +99,12 @@
         </v-form>
       </v-card>
     </v-dialog>
+    <!-- END ADD DIALOG -->
+
+    <!-- START EDIT DIALOG -->
     <v-dialog v-model="edit_dialog" max-width="400">
       <v-card class="pa-4">
-        <v-form class="mt-4" @submit.prevent="store">
+        <v-form class="mt-4" @submit.prevent="update" lazy-validation ref="edit_form" v-model="valid">
           <v-card-title> <h3>Edit Company</h3> </v-card-title>
           <v-card-text>
             <v-text-field
@@ -136,9 +140,6 @@
               @change="uploadFile"
             >
             </v-file-input>
-            <div class="">
-              <v-img :src="company.logo" width="100"></v-img>
-            </div>
           </v-card-text>
           <v-card-actions class="d-flex justify-end">
             <v-btn class="text-capitalize" small @click="edit_dialog = false"
@@ -151,6 +152,7 @@
         </v-form>
       </v-card>
     </v-dialog>
+    <!-- END EDIT DIALOG -->
   </v-row>
 </template>
 
@@ -218,6 +220,19 @@ export default {
         .catch((error) => {
           console.log(error);
         });
+    },
+   async update(){
+      let data=new FormData();
+      data.append('name',this.company.name);
+      data.append('country_id',this.company.country_id);
+      data.append('logo',this.company.logo);
+      data.append('_method','put');
+      await this.$axios.post(`company/${this.company.id}`,data
+      ).then((response)=>{
+        console.log(response);
+      }).catch((error)=>{
+        console.log(error);
+      });
     },
     singleSearch(data) {
       this.single_search = data;
