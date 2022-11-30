@@ -90,7 +90,7 @@
             </v-file-input>
           </v-card-text>
           <v-card-actions class="d-flex justify-end">
-            <v-btn class="text-capitalize" small @click="add_dialog = false"
+            <v-btn class="text-capitalize" small @click="closeModal"
               >Cancel</v-btn
             >
             <v-btn color="primary" class="text-capitalize" small type="submit"
@@ -143,7 +143,7 @@
             </v-file-input>
           </v-card-text>
           <v-card-actions class="d-flex justify-end">
-            <v-btn class="text-capitalize" small @click="edit_dialog = false"
+            <v-btn class="text-capitalize" small @click="closeModal"
               >Cancel</v-btn
             >
             <v-btn color="primary" class="text-capitalize" small type="submit"
@@ -216,13 +216,20 @@ export default {
         .then((response) => {
           this.companies.push(response.data);
           this.add_dialog = false;
-          this.$refs.add_form.resetValidation();
+          this.closeModal();
+          this.$toastr.s({
+          title: "Success!",
+          msg: "Record inserted successfully.",
+          timeout: 3000,
+          progressbar: true,
+        });
         })
         .catch((error) => {
           console.log(error);
         });
     },
    async update(){
+      this.$refs.edit_form.validate();
       let data=new FormData();
       data.append('name',this.company.name);
       data.append('country_id',this.company.country_id);
@@ -235,7 +242,7 @@ export default {
       }
       ).then((response)=>{
         this.index();
-        this.edit_dialog=false;
+        this.closeModal();
         this.$toastr.s({
           title: "Success!",
           msg: "Record updated successfully.",
@@ -284,7 +291,6 @@ export default {
           if (result.isConfirmed) {
             this.$axios.delete('company/1',{params: arr_delete}).then((response)=>{
               this.index();
-              this.$refs.add_form.reset();
               this.$toastr.s({
                 title: "Success!",
                 msg:'Record deleted successfully.',
@@ -319,6 +325,14 @@ export default {
     uploadFile(file) {
       this.company.logo = file;
     },
+    closeModal(){
+      // this.$refs.add_form.resetValidation();
+      // this.$refs.edit_form.resetValidation();
+      // this.$refs.add_form.reset();
+      // this.$refs.edit_form.reset();
+      this.edit_dialog= false;
+      this.add_dialog=false;
+    }
   },
   created() {
     this.index();
