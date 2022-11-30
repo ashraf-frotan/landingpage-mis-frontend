@@ -235,6 +235,12 @@ export default {
       ).then((response)=>{
         this.index();
         this.edit_dialog=false;
+        this.$toastr.s({
+          title: "Success!",
+          msg: "Record updated successfully.",
+          timeout: 3000,
+          progressbar: true,
+        });
       }).catch((error)=>{
         console.log(error);
       });
