@@ -12,6 +12,7 @@
         @searchContent="singleSearch($event)"
         @openAddModal="openAddModal()"
         @openEditModal="edit()"
+        @deleteRecord="destroy"
       />
       <v-card>
         <v-card-text>
@@ -269,7 +270,9 @@ export default {
         });
       }
     },
-
+    destroy(){
+      console.log(this.selected);
+    },
     getCountries() {
       this.$axios
         .get("country")
