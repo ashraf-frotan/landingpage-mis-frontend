@@ -12,7 +12,8 @@
         @searchContent="singleSearch($event)"
         @openAddModal="openAddModal()"
         @openEditModal="edit()"
-        @deleteRecord="destroy"
+        @resetDatatable="resetDatatable()"
+        @deleteRecord="destroy()"
       />
       <v-card>
         <v-card-text>
@@ -105,7 +106,13 @@
     <!-- START EDIT DIALOG -->
     <v-dialog v-model="edit_dialog" max-width="400">
       <v-card class="pa-4">
-        <v-form class="mt-4" @submit.prevent="update" lazy-validation ref="edit_form" v-model="valid">
+        <v-form
+          class="mt-4"
+          @submit.prevent="update"
+          lazy-validation
+          ref="edit_form"
+          v-model="valid"
+        >
           <v-card-title> <h3>Edit Company</h3> </v-card-title>
           <v-card-text>
             <v-text-field
@@ -218,40 +225,42 @@ export default {
           this.add_dialog = false;
           this.closeModal();
           this.$toastr.s({
-          title: "Success!",
-          msg: "Record inserted successfully.",
-          timeout: 3000,
-          progressbar: true,
-        });
+            title: "Success!",
+            msg: "Record inserted successfully.",
+            timeout: 3000,
+            progressbar: true,
+          });
         })
         .catch((error) => {
           console.log(error);
         });
     },
-   async update(){
+    async update() {
       this.$refs.edit_form.validate();
-      let data=new FormData();
-      data.append('name',this.company.name);
-      data.append('country_id',this.company.country_id);
-      data.append('logo',this.company.logo);
-      data.append('_method','put');
-      await this.$axios.post(`company/${this.company.id}`,data,{
-        header:{
-          'Content-type':'multipart/form-data'
-        }
-      }
-      ).then((response)=>{
-        this.index();
-        this.closeModal();
-        this.$toastr.s({
-          title: "Success!",
-          msg: "Record updated successfully.",
-          timeout: 3000,
-          progressbar: true,
+      let data = new FormData();
+      data.append("name", this.company.name);
+      data.append("country_id", this.company.country_id);
+      data.append("logo", this.company.logo);
+      data.append("_method", "put");
+      await this.$axios
+        .post(`company/${this.company.id}`, data, {
+          header: {
+            "Content-type": "multipart/form-data",
+          },
+        })
+        .then((response) => {
+          this.index();
+          this.closeModal();
+          this.$toastr.s({
+            title: "Success!",
+            msg: "Record updated successfully.",
+            timeout: 3000,
+            progressbar: true,
+          });
+        })
+        .catch((error) => {
+          console.log(error);
         });
-      }).catch((error)=>{
-        console.log(error);
-      });
     },
     singleSearch(data) {
       this.single_search = data;
@@ -277,9 +286,9 @@ export default {
         });
       }
     },
-    destroy(){
-      let arr_delete=this.selected.map((e)=>e.id);
-      if(!this.selected.length<1){
+    destroy() {
+      let arr_delete = this.selected.map((e) => e.id);
+      if (!this.selected.length < 1) {
         this.$swal({
           icon: "info",
           title: "Are you sure to delete?",
@@ -289,26 +298,28 @@ export default {
           cancelButtonColor: "red",
         }).then((result) => {
           if (result.isConfirmed) {
-            this.$axios.delete('company/1',{params: arr_delete}).then((response)=>{
-              this.index();
-              this.$toastr.s({
-                title: "Success!",
-                msg:'Record deleted successfully.',
-                timeout: 3000,
-                progressbar: true
+            this.$axios
+              .delete("company/1", { params: arr_delete })
+              .then((response) => {
+                this.index();
+                this.$toastr.s({
+                  title: "Success!",
+                  msg: "Record deleted successfully.",
+                  timeout: 3000,
+                  progressbar: true,
+                });
+              })
+              .catch((error) => {
+                console.log(error);
               });
-            }).catch((error)=>{
-              console.log(error);
-            })
           }
         });
-        
-      }else{
+      } else {
         this.$toastr.e({
-          title:'Error!',
-          msg:'Please select at least one record.',
-          timeout:3000,
-          progressbar:true
+          title: "Error!",
+          msg: "Please select at least one record.",
+          timeout: 3000,
+          progressbar: true,
         });
       }
     },
@@ -325,14 +336,17 @@ export default {
     uploadFile(file) {
       this.company.logo = file;
     },
-    closeModal(){
+    closeModal() {
       // this.$refs.add_form.resetValidation();
       // this.$refs.edit_form.resetValidation();
       // this.$refs.add_form.reset();
       // this.$refs.edit_form.reset();
-      this.edit_dialog= false;
-      this.add_dialog=false;
-    }
+      this.edit_dialog = false;
+      this.add_dialog = false;
+    },
+    resetDatatable() {
+      this.index();
+    },
   },
   created() {
     this.index();

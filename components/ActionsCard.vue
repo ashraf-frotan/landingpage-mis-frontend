@@ -46,7 +46,7 @@
             >
             <v-btn
               small
-              class="text-capitalize mt-2 mt-md-0"
+              class="text-capitalize mt-2 mt-md-0 mt-sm-0"
               @click="$emit('resetDatatable')"
             >
               <v-icon small>mdi-refresh</v-icon> Reset</v-btn
