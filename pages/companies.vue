@@ -271,7 +271,16 @@ export default {
       }
     },
     destroy(){
-      console.log(this.selected);
+      if(!this.selected.length<1){
+
+      }else{
+        this.$toastr.e({
+          title:'Error!',
+          msg:'Please select at least one record.',
+          timeout:3000,
+          progressbar:true
+        });
+      }
     },
     getCountries() {
       this.$axios
