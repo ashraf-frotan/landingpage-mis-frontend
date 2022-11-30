@@ -14,6 +14,7 @@
         @openEditModal="edit()"
         @resetDatatable="resetDatatable()"
         @deleteRecord="destroy()"
+        @openSearchModal="openSearchModal()"
       />
       <v-card>
         <v-card-text>
@@ -161,6 +162,53 @@
       </v-card>
     </v-dialog>
     <!-- END EDIT DIALOG -->
+    <!-- START SEARCH DIALOG -->
+    <v-dialog v-model="search_dialog" max-width="400">
+      <v-card class="pa-4">
+        <v-card-title> <h3>Search Company</h3> </v-card-title>
+        <v-card-text>
+          <v-text-field
+            label="ID"
+            placeholder="Enter company id here"
+            rounded
+            outlined
+            dense
+            v-model="company.id"
+          ></v-text-field>
+          <v-text-field
+            label="Name"
+            placeholder="Enter company name here"
+            rounded
+            outlined
+            dense
+            v-model="company.name"
+          ></v-text-field>
+          <v-select
+            :items="countries"
+            item-text="name"
+            item-value="id"
+            label="Select country"
+            rounded
+            dense
+            outlined
+          >
+          </v-select>
+        </v-card-text>
+        <v-card-actions class="d-flex justify-end">
+          <v-btn class="text-capitalize" small @click="closeModal"
+            >Cancel</v-btn
+          >
+          <v-btn
+            color="primary"
+            class="text-capitalize"
+            small
+            @click="submitSearch()"
+            >Search</v-btn
+          >
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+    <!-- END SEARCH DIALOG -->
   </v-row>
 </template>
 
@@ -176,6 +224,7 @@ export default {
     return {
       add_dialog: false,
       edit_dialog: false,
+      search_dialog: false,
       selected: [],
       valid: false,
       single_select: false,
@@ -346,6 +395,22 @@ export default {
     },
     resetDatatable() {
       this.index();
+    },
+    submitSearch() {
+      this.$axios
+        .get("search_company", { params: this.company })
+        .then((response) => {
+          console.log(response.data);
+          // this.companies = response.data;
+          this.search_dialog = false;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+    openSearchModal() {
+      this.search_dialog = true;
+      this.getCountries();
     },
   },
   created() {
