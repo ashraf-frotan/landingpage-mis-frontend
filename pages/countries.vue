@@ -222,7 +222,6 @@ export default {
           await this.$axios
             .put(`country/${this.country.id}`, this.country)
             .then((response) => {
-              console.log("updated");
               this.index();
             })
             .catch((e) => {

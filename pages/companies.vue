@@ -233,7 +233,8 @@ export default {
         }
       }
       ).then((response)=>{
-        console.log(response);
+        this.index();
+        this.edit_dialog=false;
       }).catch((error)=>{
         console.log(error);
       });
