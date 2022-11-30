@@ -271,8 +271,32 @@ export default {
       }
     },
     destroy(){
+      let arr_delete=this.selected.map((e)=>e.id);
       if(!this.selected.length<1){
-
+        this.$swal({
+          icon: "info",
+          title: "Are you sure to delete?",
+          confirmButtonText: "Yes",
+          showCancelButton: true,
+          confirmButtonColor: "#1976d2",
+          cancelButtonColor: "red",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.$axios.delete('company/1',{params: arr_delete}).then((response)=>{
+              this.index();
+              this.$refs.add_form.reset();
+              this.$toastr.s({
+                title: "Success!",
+                msg:'Record deleted successfully.',
+                timeout: 3000,
+                progressbar: true
+              });
+            }).catch((error)=>{
+              console.log(error);
+            })
+          }
+        });
+        
       }else{
         this.$toastr.e({
           title:'Error!',
