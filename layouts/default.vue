@@ -92,6 +92,11 @@ export default {
           title: "Companies",
           to: "/companies",
         },
+        { 
+          icon:'mdi-image-album',
+          title:"Page Types",
+          to:'/page_type'
+        }
       ],
       miniVariant: false,
       right: true,
