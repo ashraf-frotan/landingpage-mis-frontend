@@ -26,8 +26,8 @@
                         <v-select v-model="page_type.company_id" :items="companies" item-text="name" item-value="id" rounded outlined dense label="Company" placeholder="Please select company" class="mt-2" :rules="[v => !!v || 'Company is required']"></v-select>
                     </v-card-text>
                     <v-card-actions class="d-flex justify-end">
-                        <v-btn small>Cancel</v-btn>
-                        <v-btn small color="primary" type="submit">Save</v-btn>
+                        <v-btn small class="text-capitalize" @click="closeAddModal()">Cancel</v-btn>
+                        <v-btn small color="primary" type="submit" class="text-capitalize">Save</v-btn>
                     </v-card-actions>
                 </v-form>
             </v-card>
@@ -36,15 +36,15 @@
         <!-- START EDIT DIALOG -->
         <v-dialog v-model="edit_dialog" width="400">
             <v-card>
-                <v-form class="pa-4" @submit.prevent="update()" ref="edit _form">
+                <v-form class="pa-4" @submit.prevent="update()" ref="edit_form">
                     <v-card-title>Edit page type</v-card-title>
                     <v-card-text>
                         <v-text-field :rules="nameRules" lable="Name" placeholder="Enter name here" v-model="page_type.name" dense outlined rounded></v-text-field>
                         <v-select v-model="page_type.company_id" :items="companies" item-text="name" item-value="id" rounded outlined dense label="Company" placeholder="Please select company" class="mt-2" :rules="[v => !!v || 'Company is required']"></v-select>
                     </v-card-text>
                     <v-card-actions class="d-flex justify-end">
-                        <v-btn small>Cancel</v-btn>
-                        <v-btn small color="primary" type="submit">Update</v-btn>
+                        <v-btn small class="text-capitalize" @click="edit_dialog=false;">Cancel</v-btn>
+                        <v-btn small color="primary" type="submit" class="text-capitalize">Update</v-btn>
                     </v-card-actions>
                 </v-form>
             </v-card>
@@ -103,13 +103,32 @@ export default {
         },
         edit() {
             if(this.selected.length==1){
-                
+                let arr=this.page_types.filter(e=>e.id==this.selected[0].id);
+                this.getCompanies();
+                this.page_type=JSON.parse(JSON.stringify(arr[0]));
+                this.edit_dialog=true;
             }else{
                 this.$toastr.e({
                     title:'Error!',
                     msg:'Please select a record.',
                     timeout:3000,
                     progressbar: true
+                });
+            }
+        },
+        update(){
+            if(this.$refs.edit_form.validate()){
+                this.$axios.put(`page_type/${this.page_type.id}`,this.page_type).then(response=>{
+                    this.index();
+                    this.edit_dialog=false;
+                    this.$toastr.s({
+                        title:'Success!',
+                        msg:'Record updated successfully.',
+                        timeout: 3000,
+                        progressbar: true
+                    })
+                }).catch(error=>{
+                    console.log(error);
                 });
             }
         },
@@ -122,12 +141,13 @@ export default {
         },
         openAddModal() {
             this.add_dialog=true;
+            this.page_type={};
             this.getCompanies();
         },
         closeAddModal(){
             this.add_dialog=false;
             this.$refs.add_form.reset();
-        }
+        },
     },
     created() {this.index();}
 }
