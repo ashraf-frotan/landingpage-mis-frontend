@@ -153,14 +153,7 @@
   </v-row>
 </template>
 <script>
-import TitleCard from "~/components/TitleCard.vue";
-import ActionsCard from "~/components/ActionsCard.vue";
 export default {
-  name: "countries",
-  components: {
-    TitleCard,
-    ActionsCard,
-  },
   data() {
     return {
       single_search: "",

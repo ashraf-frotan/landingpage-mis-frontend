@@ -95,7 +95,7 @@ export default {
         { 
           icon:'mdi-image-album',
           title:"Page Types",
-          to:'/page_type'
+          to:'/page_types'
         }
       ],
       miniVariant: false,

@@ -213,13 +213,7 @@
 </template>
 
 <script>
-import TitleCard from "~/components/TitleCard.vue";
-import ActionsCard from "~/components/ActionsCard.vue";
 export default {
-  components: {
-    TitleCard,
-    ActionsCard,
-  },
   data() {
     return {
       add_dialog: false,
