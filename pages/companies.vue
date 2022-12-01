@@ -191,6 +191,7 @@
             rounded
             dense
             outlined
+            :rules="[v => !!v || 'Country is required']"
           >
           </v-select>
         </v-card-text>

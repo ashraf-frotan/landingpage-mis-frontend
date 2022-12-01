@@ -16,21 +16,23 @@
                 </v-card-text>
             </v-card>
         </v-col>
+        <!-- START ADD DIALOG -->
         <v-dialog v-model="add_dialog" width="400">
             <v-card>
-                <v-form class="pa-4">
+                <v-form class="pa-4" @submit.prevent="store()" ref="add_form">
                     <v-card-title>Create new page type</v-card-title>
                     <v-card-text>
-                        <v-text-field lable="Name" placeholder="Enter name here" v-model="page_type.name" dense outlined rounded></v-text-field>
-                        <v-select v-model="page_type.company_id" :items="companies" item-text="name" item-value="id" rounded outlined dense></v-select>
+                        <v-text-field :rules="nameRules" lable="Name" placeholder="Enter name here" v-model="page_type.name" dense outlined rounded></v-text-field>
+                        <v-select v-model="page_type.company_id" :items="companies" item-text="name" item-value="id" rounded outlined dense label="Company" placeholder="Please select company" class="mt-2" :rules="[v => !!v || 'Company is required']"></v-select>
                     </v-card-text>
                     <v-card-actions class="d-flex justify-end">
                         <v-btn small>Cancel</v-btn>
-                        <v-btn small color="primary">Save</v-btn>
+                        <v-btn small color="primary" type="submit">Save</v-btn>
                     </v-card-actions>
                 </v-form>
             </v-card>
         </v-dialog>
+        <!-- END ADD DIALOG -->
     </v-row>
 </template>
 <script>
@@ -48,7 +50,12 @@ export default {
                 {text:"Name", value: "name"},
                 {text:"Company", value: "company_id"},
             ],
-            page_types:[]
+            page_types:[],
+            nameRules: [
+            (v) => !!v || "This field is required",
+            (v) =>
+            (v && v.length > 2) || "This field must be at least 3 characters",
+            ],
         }
     },
     methods:{
@@ -58,6 +65,16 @@ export default {
             }).catch(error=>{
                 console.log(error);
             })
+        },
+        store(){
+            if(this.$refs.add_form.validate()){
+                this.$axios.post('page_type',this.page_type).then(response=>{
+                    this.page_types.push(response.data);
+                }).catch(error=>{
+                    console.log(error);
+                })
+            }
+            
         },
         getCompanies(){
             this.$axios.get('company').then(response=>{
