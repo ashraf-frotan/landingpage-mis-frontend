@@ -9,7 +9,7 @@
             outlined
             rounded
             placeholder="Search.."
-            append-icon="mdi-search"
+            append-icon="mdi-magnify"
             hide-details=""
             v-model="search"
           ></v-text-field>
