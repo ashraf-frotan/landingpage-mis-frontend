@@ -70,6 +70,13 @@ export default {
             if(this.$refs.add_form.validate()){
                 this.$axios.post('page_type',this.page_type).then(response=>{
                     this.page_types.push(response.data);
+                    this.closeAddModal();
+                    this.$toastr.s({
+                        title:'Success!',
+                        msg:'Record inserted successfully.',
+                        timeout: 3000,
+                        progressbar:true
+                    })
                 }).catch(error=>{
                     console.log(error);
                 })
@@ -86,6 +93,10 @@ export default {
         openAddModal() {
             this.add_dialog=true;
             this.getCompanies();
+        },
+        closeAddModal(){
+            this.add_dialog=false;
+            this.$refs.add_form.reset();
         }
     },
     created() {this.index();}
