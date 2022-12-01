@@ -2,7 +2,7 @@
     <v-row>
         <v-col cols="12">
             <TitleCard :title_info="{title:'Page types', icon:'mdi-image-album',url:'page_types'}" />
-            <ActionsCard @openAddModal="openAddModal" @openEditModal="edit()"/>
+            <ActionsCard @openAddModal="openAddModal" @openEditModal="edit" @deleteRecord="destroy" />
             <v-card>
                 <v-card-text>
                     <v-data-table :headers="headers" :items="page_types" show-select v-model="selected" :single-select="single_select" item-key="id" dense :search="single_search">
@@ -108,8 +108,8 @@ export default {
                 this.page_type=JSON.parse(JSON.stringify(arr[0]));
                 this.edit_dialog=true;
             }else{
-                this.$toastr.e({
-                    title:'Error!',
+                this.$toastr.i({
+                    title:'Info!',
                     msg:'Please select a record.',
                     timeout:3000,
                     progressbar: true
@@ -130,6 +130,39 @@ export default {
                 }).catch(error=>{
                     console.log(error);
                 });
+            }
+        },
+        destroy() {
+            if(!this.selected.length < 1){
+                this.$swal({
+                    icon: "info",
+                    title: "Are you sure to delete?",
+                    confirmButtonText: "Yes",
+                    showCancelButton: true,
+                    confirmButtonColor: "#1976d2",
+                    cancelButtonColor: "red",
+                    }).then((result) => {
+                    if (result.isConfirmed) {
+                        this.$axios.delete('page_type/1',{params: arr_delete}).then(response=>{
+                            this.index();
+                            this.$toastr.s({
+                                title: "Success!",
+                                msg: "Record deleted successfully.",
+                                timeout: 3000,
+                                progressbar: true,
+                            });
+                        }).catch(error=>{
+                            console.log(error);
+                        })
+                    }
+                    });
+            }else{
+                this.$toastr.i({
+                    title:'Info!',
+                    msg:'Please select at least one record.',
+                    timeout: 3000,
+                    progressbar: true
+                })
             }
         },
         getCompanies(){

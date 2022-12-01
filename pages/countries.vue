@@ -234,8 +234,8 @@ export default {
         this.country = JSON.parse(JSON.stringify(arr[0]));
         this.dialog = true;
       } else {
-        this.$toastr.e({
-          title: "Error!",
+        this.$toastr.i({
+          title: "Info!",
           msg: "Please select one record.",
           timeout: 3000,
           progressbar: true,
@@ -271,8 +271,8 @@ export default {
           }
         });
       } else {
-        this.$toastr.e({
-          title: "Error!",
+        this.$toastr.i({
+          title: "Info!",
           msg: "Please select one record.",
           timeout: 3000,
           progressbar: true,
