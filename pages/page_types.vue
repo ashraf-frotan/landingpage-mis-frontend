@@ -134,6 +134,7 @@ export default {
         },
         destroy() {
             if(!this.selected.length < 1){
+                let arr_delete= this.selected.map(e=>e.id);
                 this.$swal({
                     icon: "info",
                     title: "Are you sure to delete?",
