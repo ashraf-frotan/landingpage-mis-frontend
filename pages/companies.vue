@@ -192,6 +192,7 @@
             dense
             outlined
             :rules="[v => !!v || 'Country is required']"
+            v-model="company.country_id"
           >
           </v-select>
         </v-card-text>
@@ -392,11 +393,11 @@ export default {
       this.index();
     },
     submitSearch() {
+      console.log(this.company);
       this.$axios
         .get("filter_company", { params: this.company })
         .then((response) => {
-          console.log(response.data);
-          // this.companies = response.data;
+          this.companies = response.data;
           this.search_dialog = false;
         })
         .catch((error) => {
