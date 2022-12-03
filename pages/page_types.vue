@@ -2,7 +2,7 @@
     <v-row>
         <v-col cols="12">
             <TitleCard :title_info="{title:'Page types', icon:'mdi-image-album',url:'page_types'}" />
-            <ActionsCard @openAddDialog="openAddDialog" @openEditDialog="edit" @deleteRecord="destroy" @openFilterDialog="openFilterDialog" />
+            <ActionsCard @openAddDialog="openAddDialog" @openEditDialog="edit" @deleteRecord="destroy" @openFilterDialog="openFilterDialog" @resetDatatable="resetDatatable" />
             <v-card>
                 <v-card-text>
                     <v-data-table :headers="headers" :items="page_types" show-select v-model="selected" :single-select="single_select" item-key="id" dense :search="single_search">
@@ -204,6 +204,9 @@ export default {
         openFilterDialog() {
             this.getCompanies();
             this.filter_dialog=true;
+        },
+        resetDatatable(){
+            this.index();
         }
     },
     created() {this.index();}
