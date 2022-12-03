@@ -2,7 +2,7 @@
     <v-row>
         <v-col cols="12">
             <TitleCard :title_info="{title:'Page types', icon:'mdi-image-album',url:'page_types'}" />
-            <ActionsCard @openAddModal="openAddModal" @openEditModal="edit" @deleteRecord="destroy" />
+            <ActionsCard @openAddModal="openAddModal" @openEditModal="edit" @deleteRecord="destroy" @openFilterModal="openFilterModal" />
             <v-card>
                 <v-card-text>
                     <v-data-table :headers="headers" :items="page_types" show-select v-model="selected" :single-select="single_select" item-key="id" dense :search="single_search">
@@ -50,6 +50,24 @@
             </v-card>
         </v-dialog>
         <!-- END EDIT DIALOG -->
+        <!-- START FILTER DIALOG -->
+        <v-dialog v-model="filter_dialog" width="400">
+            <v-card>
+                <v-form class="pa-4" @submit.prevent="filter()" ref="filter_form">
+                    <v-card-title>Filter page type</v-card-title>
+                    <v-card-text>
+                        <v-text-field lable="ID" placeholder="Enter id here" v-model="page_type.id" dense outlined rounded></v-text-field>
+                        <v-text-field lable="Name" placeholder="Enter name here" v-model="page_type.name" dense outlined rounded></v-text-field>
+                        <v-select v-model="page_type.company_id" :items="companies" item-text="name" item-value="id" rounded outlined dense label="Company" placeholder="Please select company" class="mt-2" :rules="[v => !!v || 'Company is required']"></v-select>
+                    </v-card-text>
+                    <v-card-actions class="d-flex justify-end">
+                        <v-btn small class="text-capitalize" @click="filter_dialog=false">Cancel</v-btn>
+                        <v-btn small color="primary" type="submit" class="text-capitalize">Filter</v-btn>
+                    </v-card-actions>
+                </v-form>
+            </v-card>
+        </v-dialog>
+        <!-- END FILTER DIALOG -->
     </v-row>
 </template>
 <script>
@@ -60,6 +78,7 @@ export default {
             single_search: "",
             add_dialog:false,
             edit_dialog:false,
+            filter_dialog:false,
             selected:[],
             companies:[],
             page_type:{id:null,name:'',company_id:null},
@@ -182,6 +201,10 @@ export default {
             this.add_dialog=false;
             this.$refs.add_form.reset();
         },
+        openFilterModal() {
+            this.getCompanies();
+            this.filter_dialog=true;
+        }
     },
     created() {this.index();}
 }

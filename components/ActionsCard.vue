@@ -40,7 +40,7 @@
             <v-btn
               small
               class="orange text-capitalize white--text mr-1"
-              @click="$emit('openSearchModal')"
+              @click="$emit('openFilterModal')"
             >
               <v-icon small>mdi-filter</v-icon> Filter</v-btn
             >

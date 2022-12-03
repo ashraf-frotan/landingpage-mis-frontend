@@ -9,7 +9,7 @@
         @openEditModal="edit"
         @deleteRecord="destroy"
         @searchContent="singleSearch($event)"
-        @openSearchModal="search_dialog = true"
+        @openFilterModal="search_dialog = true"
         @resetDatatable="index"
       />
       <v-card elevation="4">

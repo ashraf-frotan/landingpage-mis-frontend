@@ -14,7 +14,7 @@
         @openEditModal="edit()"
         @resetDatatable="resetDatatable()"
         @deleteRecord="destroy()"
-        @openSearchModal="openSearchModal()"
+        @openFilterModal="openFilterModal()"
       />
       <v-card>
         <v-card-text>
@@ -403,7 +403,7 @@ export default {
           console.log(error);
         });
     },
-    openSearchModal() {
+    openFilterModal() {
       this.search_dialog = true;
       this.getCountries();
     },
