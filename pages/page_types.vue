@@ -2,7 +2,7 @@
     <v-row>
         <v-col cols="12">
             <TitleCard :title_info="{title:'Page types', icon:'mdi-image-album',url:'page_types'}" />
-            <ActionsCard @openAddModal="openAddModal" @openEditModal="edit" @deleteRecord="destroy" @openFilterModal="openFilterModal" />
+            <ActionsCard @openAddDialog="openAddDialog" @openEditDialog="edit" @deleteRecord="destroy" @openFilterDialog="openFilterDialog" />
             <v-card>
                 <v-card-text>
                     <v-data-table :headers="headers" :items="page_types" show-select v-model="selected" :single-select="single_select" item-key="id" dense :search="single_search">
@@ -26,7 +26,7 @@
                         <v-select v-model="page_type.company_id" :items="companies" item-text="name" item-value="id" rounded outlined dense label="Company" placeholder="Please select company" class="mt-2" :rules="[v => !!v || 'Company is required']"></v-select>
                     </v-card-text>
                     <v-card-actions class="d-flex justify-end">
-                        <v-btn small class="text-capitalize" @click="closeAddModal()">Cancel</v-btn>
+                        <v-btn small class="text-capitalize" @click="closeAddDialog()">Cancel</v-btn>
                         <v-btn small color="primary" type="submit" class="text-capitalize">Save</v-btn>
                     </v-card-actions>
                 </v-form>
@@ -107,7 +107,7 @@ export default {
             if(this.$refs.add_form.validate()){
                 this.$axios.post('page_type',this.page_type).then(response=>{
                     this.page_types.push(response.data);
-                    this.closeAddModal();
+                    this.closeAddDialog();
                     this.$toastr.s({
                         title:'Success!',
                         msg:'Record inserted successfully.',
@@ -192,16 +192,16 @@ export default {
                 console.log(error);
             })
         },
-        openAddModal() {
+        openAddDialog() {
             this.add_dialog=true;
             this.page_type={};
             this.getCompanies();
         },
-        closeAddModal(){
+        closeAddDialog(){
             this.add_dialog=false;
             this.$refs.add_form.reset();
         },
-        openFilterModal() {
+        openFilterDialog() {
             this.getCompanies();
             this.filter_dialog=true;
         }

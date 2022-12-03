@@ -5,11 +5,11 @@
         :title_info="{ title: 'Countries', icon: 'mdi-flag', url: 'countries' }"
       />
       <ActionsCard
-        @openAddModal="openModal"
-        @openEditModal="edit"
+        @openAddDialog="openDialog"
+        @openEditDialog="edit"
         @deleteRecord="destroy"
         @searchContent="singleSearch($event)"
-        @openFilterModal="search_dialog = true"
+        @openFilterDialog="search_dialog = true"
         @resetDatatable="index"
       />
       <v-card elevation="4">
@@ -84,7 +84,7 @@
             </v-text-field>
           </v-card-text>
           <v-card-actions class="d-flex justify-end">
-            <v-btn small @click="closeModal">Close</v-btn>
+            <v-btn small @click="closeDialog">Close</v-btn>
             <v-btn color="primary" small type="submit">
               <span v-if="form_action == 'add'">Save</span>
               <span v-else>Update</span>
@@ -221,7 +221,7 @@ export default {
               console.log(e);
             });
         }
-        this.closeModal();
+        this.closeDialog();
         this.$refs.form.resetValidation();
       }
     },
@@ -294,11 +294,11 @@ export default {
       this.search_dialog = false;
       this.country = {};
     },
-    openModal() {
+    openDialog() {
       this.dialog = true;
       this.form_action = "add";
     },
-    closeModal() {
+    closeDialog() {
       this.dialog = false;
       this.country = {};
     },

@@ -10,11 +10,11 @@
       />
       <ActionsCard
         @searchContent="singleSearch($event)"
-        @openAddModal="openAddModal()"
-        @openEditModal="edit()"
+        @openAddDialog="openAddDialog()"
+        @openEditDialog="edit()"
         @resetDatatable="resetDatatable()"
         @deleteRecord="destroy()"
-        @openFilterModal="openFilterModal()"
+        @openFilterDialog="openFilterDialog()"
       />
       <v-card>
         <v-card-text>
@@ -92,7 +92,7 @@
             </v-file-input>
           </v-card-text>
           <v-card-actions class="d-flex justify-end">
-            <v-btn class="text-capitalize" small @click="closeModal"
+            <v-btn class="text-capitalize" small @click="closeDialog"
               >Cancel</v-btn
             >
             <v-btn color="primary" class="text-capitalize" small type="submit"
@@ -151,7 +151,7 @@
             </v-file-input>
           </v-card-text>
           <v-card-actions class="d-flex justify-end">
-            <v-btn class="text-capitalize" small @click="closeModal"
+            <v-btn class="text-capitalize" small @click="closeDialog"
               >Cancel</v-btn
             >
             <v-btn color="primary" class="text-capitalize" small type="submit"
@@ -196,7 +196,7 @@
           </v-select>
         </v-card-text>
         <v-card-actions class="d-flex justify-end">
-          <v-btn class="text-capitalize" small @click="closeModal"
+          <v-btn class="text-capitalize" small @click="closeDialog"
             >Cancel</v-btn
           >
           <v-btn
@@ -267,7 +267,7 @@ export default {
         .then((response) => {
           this.companies.push(response.data);
           this.add_dialog = false;
-          this.closeModal();
+          this.closeDialog();
           this.$toastr.s({
             title: "Success!",
             msg: "Record inserted successfully.",
@@ -294,7 +294,7 @@ export default {
         })
         .then((response) => {
           this.index();
-          this.closeModal();
+          this.closeDialog();
           this.$toastr.s({
             title: "Success!",
             msg: "Record updated successfully.",
@@ -309,7 +309,7 @@ export default {
     singleSearch(data) {
       this.single_search = data;
     },
-    openAddModal() {
+    openAddDialog() {
       this.add_dialog = true;
       this.getCountries();
     },
@@ -380,7 +380,7 @@ export default {
     uploadFile(file) {
       this.company.logo = file;
     },
-    closeModal() {
+    closeDialog() {
       // this.$refs.add_form.resetValidation();
       // this.$refs.edit_form.resetValidation();
       // this.$refs.add_form.reset();
@@ -403,7 +403,7 @@ export default {
           console.log(error);
         });
     },
-    openFilterModal() {
+    openFilterDialog() {
       this.search_dialog = true;
       this.getCountries();
     },

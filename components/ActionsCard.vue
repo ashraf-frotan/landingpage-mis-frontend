@@ -19,14 +19,14 @@
             <v-btn
               small
               class="primary text-capitalize mr-1 font-weight-bold"
-              @click="$emit('openAddModal')"
+              @click="$emit('openAddDialog')"
             >
               <v-icon small>mdi-plus</v-icon> Create</v-btn
             >
             <v-btn
               small
               class="success text-capitalize mr-1"
-              @click="$emit('openEditModal')"
+              @click="$emit('openEditDialog')"
             >
               <v-icon small>mdi-pencil</v-icon> Edit</v-btn
             >
@@ -40,7 +40,7 @@
             <v-btn
               small
               class="orange text-capitalize white--text mr-1"
-              @click="$emit('openFilterModal')"
+              @click="$emit('openFilterDialog')"
             >
               <v-icon small>mdi-filter</v-icon> Filter</v-btn
             >
