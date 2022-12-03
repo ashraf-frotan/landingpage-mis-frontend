@@ -185,6 +185,9 @@ export default {
                 })
             }
         },
+        filter(){
+            console.log(this.page_type);
+        },
         getCompanies(){
             this.$axios.get('company').then(response=>{
                 this.companies=response.data;

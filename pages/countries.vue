@@ -284,7 +284,7 @@ export default {
     },
     submitSearch() {
       this.$axios
-        .get("search_country", { params: this.country })
+        .get("filter_country", { params: this.country })
         .then((response) => {
           this.countries = response.data;
         })

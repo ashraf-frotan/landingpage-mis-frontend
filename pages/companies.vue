@@ -393,7 +393,7 @@ export default {
     },
     submitSearch() {
       this.$axios
-        .get("search_company", { params: this.company })
+        .get("filter_company", { params: this.company })
         .then((response) => {
           console.log(response.data);
           // this.companies = response.data;
