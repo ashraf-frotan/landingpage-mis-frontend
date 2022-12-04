@@ -23,14 +23,14 @@
                <v-form @submit.prevent="store" lazy-validation ref="add_form">
                     <v-card-title>Create new template</v-card-title>
                     <v-card-text>
-                        <v-text-field dense rounded outlined label="Name" placeholder="Enter name here" v-model="template.name"></v-text-field>
-                        <v-text-field dense rounded outlined label="Phone" placeholder="Enter phone here" v-model="template.phone"></v-text-field>
-                        <v-select :items="page_types" v-model="template.page_type_id" item-text="name" item-value="id" rounded dense outlined label="Page Tpye" placeholder="Please select page type"></v-select>
-                        <v-file-input label="Image" placeholder="Please select image" rounded outlined dense></v-file-input>
+                        <v-text-field dense rounded outlined label="Name" placeholder="Enter name here" v-model="template.name" :rules="nameRules"></v-text-field>
+                        <v-text-field dense rounded outlined label="Phone" placeholder="Enter phone here" v-model="template.phone" :rules="phoneRules"></v-text-field>
+                        <v-select :items="page_types" v-model="template.page_type_id" item-text="name" item-value="id" rounded dense outlined label="Page Type" placeholder="Please select page type" :rules="[(v) => !!v || 'Image is required']"></v-select>
+                        <v-file-input label="Image" :rules="fileRules" placeholder="Please select image" rounded outlined dense @change="uploadFile" accept="image/png, image/jpeg, image/jpg"></v-file-input>
                     </v-card-text>
                     <v-card-actions class="d-flex justify-end">
                         <v-btn small class="text-capitalize">Cancel</v-btn>
-                        <v-btn small color="primary" class="text-capitalize">Save</v-btn>
+                        <v-btn small color="primary" type="submit" class="text-capitalize">Save</v-btn>
                     </v-card-actions>
                </v-form>
             </v-card>
@@ -49,17 +49,38 @@ export default {
             single_search: "",
             add_dialog:false,
             template:{id:null,name:'',phone:'',page_type_id:null,image:''},
-            page_types:[]
-        }
+            page_types:[],
+            nameRules: [
+                (v) => !!v || "This field is required",
+                (v) =>
+                (v && v.length > 2) || "This field must be at least 3 characters",
+            ],
+            phoneRules: [
+                (v) => !!v || "This field is required",
+                (v) =>
+                (v && v.length > 8) || "Please enter a valid phone number",
+            ],
+            fileRules: [
+                v => !!v || 'File is required',
+                v => (v && v.size > 0) || 'File is required',
+                ]
+            }
     },
     methods: {
         index() {
             this.$axios.get('template').then(response=>{
                 this.templates=response.data;
-                console.log(this.templates);
             }).catch(error=>{
                 console.log(error);
             });
+        },
+        store(){
+            console.log('log');
+            if(this.$refs.add_form.validate()){
+
+            }else{
+
+            }
         },
         openAddDialog() {
             this.getPageTypes();
@@ -71,6 +92,9 @@ export default {
             }).catch(error=>{
                 console.log(error);
             });
+        },
+        uploadFile(file) {
+            this.template.image= file
         }
     },
     created() {
