@@ -88,6 +88,8 @@
               @change="uploadFile"
               accept="image/*"
               required
+             :rules="fileRules"
+
             >
             </v-file-input>
           </v-card-text>
@@ -143,9 +145,6 @@
               rounded
               outlined
               dense
-              show-size=""
-              small-chips
-              required
               @change="uploadFile"
             >
             </v-file-input>
@@ -240,6 +239,10 @@ export default {
         (v) =>
           (v && v.length > 2) || "This field must be at least 3 characters",
       ],
+      fileRules: [
+          v => !!v || 'File is required',
+          v => (v && v.size > 0) || 'File is required',
+      ]
     };
   },
   methods: {
@@ -254,31 +257,33 @@ export default {
         });
     },
     store() {
-      this.$refs.add_form.validate();
-      let data = new FormData();
-      data.append("name", this.company.name);
-      data.append("logo", this.company.logo);
-      data.append("country_id", this.company.country_id);
-      this.$axios
-        .post("company", data, {
-          header: {
-            "Content-Type": "multipart/form-data",
-          },
-        })
-        .then((response) => {
-          this.companies.push(response.data);
-          this.add_dialog = false;
-          this.closeDialog();
-          this.$toastr.s({
-            title: "Success!",
-            msg: "Record inserted successfully.",
-            timeout: 3000,
-            progressbar: true,
+      if(this.$refs.add_form.validate()){
+        let data = new FormData();
+        data.append("name", this.company.name);
+        data.append("logo", this.company.logo);
+        data.append("country_id", this.company.country_id);
+        this.$axios
+          .post("company", data, {
+            header: {
+              "Content-Type": "multipart/form-data",
+            },
+          })
+          .then((response) => {
+            this.companies.push(response.data);
+            this.add_dialog = false;
+            this.closeDialog();
+            this.$toastr.s({
+              title: "Success!",
+              msg: "Record inserted successfully.",
+              timeout: 3000,
+              progressbar: true,
+            });
+          })
+          .catch((error) => {
+            console.log(error);
           });
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      }
+      
     },
     async update() {
       this.$refs.edit_form.validate();
