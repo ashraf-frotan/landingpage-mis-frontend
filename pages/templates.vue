@@ -17,6 +17,22 @@
                 </v-card-text>
             </v-card>
         </v-col>
+        <!-- START ADD DIALOG -->
+        <v-dialog v-model="add_dialog" width="400">
+            <v-card>
+               <v-form>
+                    <v-card-title>Create new template</v-card-title>
+                    <v-card-text>
+
+                    </v-card-text>
+                    <v-card-actions class="d-flex justify-end">
+                        <v-btn small class="text-capitalize">Cancel</v-btn>
+                        <v-btn small color="primary" class="text-capitalize">Save</v-btn>
+                    </v-card-actions>
+               </v-form>
+            </v-card>
+        </v-dialog>
+        <!-- END ADD DIALOG -->
     </v-row>
 </template>
 <script>
@@ -28,6 +44,7 @@ export default {
             single_select: false,
             selected:[],
             single_search: "",
+            add_dialog:true
         }
     },
     methods: {
