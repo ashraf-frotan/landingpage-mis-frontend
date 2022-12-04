@@ -2,7 +2,7 @@
     <v-row>
         <v-col cols="12">
             <TitleCard :title_info="{title:'Templates',icon:'mdi-credit-card-chip-outline',url:'templates'}"/>
-            <ActionsCard/>
+            <ActionsCard @openAddDialog="openAddDialog" />
             <v-card>
                 <v-card-text>
                     <v-data-table :items="templates" :headers="headers" show-select :single-select="single_select" v-model="selected" :search="single_search" dense>
@@ -19,11 +19,14 @@
         </v-col>
         <!-- START ADD DIALOG -->
         <v-dialog v-model="add_dialog" width="400">
-            <v-card>
-               <v-form>
+            <v-card class="pa-3">
+               <v-form @submit.prevent="store" lazy-validation ref="add_form">
                     <v-card-title>Create new template</v-card-title>
                     <v-card-text>
-
+                        <v-text-field dense rounded outlined label="Name" placeholder="Enter name here" v-model="template.name"></v-text-field>
+                        <v-text-field dense rounded outlined label="Phone" placeholder="Enter phone here" v-model="template.phone"></v-text-field>
+                        <v-select :items="page_types" v-model="template.page_type_id" item-text="name" item-value="id" rounded dense outlined label="Page Tpye" placeholder="Please select page type"></v-select>
+                        <v-file-input label="Image" placeholder="Please select image" rounded outlined dense></v-file-input>
                     </v-card-text>
                     <v-card-actions class="d-flex justify-end">
                         <v-btn small class="text-capitalize">Cancel</v-btn>
@@ -44,7 +47,9 @@ export default {
             single_select: false,
             selected:[],
             single_search: "",
-            add_dialog:true
+            add_dialog:false,
+            template:{id:null,name:'',phone:'',page_type_id:null,image:''},
+            page_types:[]
         }
     },
     methods: {
@@ -52,6 +57,17 @@ export default {
             this.$axios.get('template').then(response=>{
                 this.templates=response.data;
                 console.log(this.templates);
+            }).catch(error=>{
+                console.log(error);
+            });
+        },
+        openAddDialog() {
+            this.getPageTypes();
+            this.add_dialog=true;
+        },
+        getPageTypes(){
+            this.$axios.get('page_type').then(response=>{
+                this.page_types=response.data;
             }).catch(error=>{
                 console.log(error);
             });
