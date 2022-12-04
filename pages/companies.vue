@@ -162,10 +162,10 @@
       </v-card>
     </v-dialog>
     <!-- END EDIT DIALOG -->
-    <!-- START SEARCH DIALOG -->
-    <v-dialog v-model="search_dialog" max-width="400">
+    <!-- START FILTER DIALOG -->
+    <v-dialog v-model="filter_dialog" max-width="400">
       <v-card class="pa-4">
-        <v-card-title> <h3>Search Company</h3> </v-card-title>
+        <v-card-title> <h3>Filter Company</h3> </v-card-title>
         <v-card-text>
           <v-text-field
             label="ID"
@@ -197,7 +197,7 @@
           </v-select>
         </v-card-text>
         <v-card-actions class="d-flex justify-end">
-          <v-btn class="text-capitalize" small @click="closeDialog"
+          <v-btn class="text-capitalize" small @click="filter_dialog=false"
             >Cancel</v-btn
           >
           <v-btn
@@ -205,12 +205,12 @@
             class="text-capitalize"
             small
             @click="submitSearch()"
-            >Search</v-btn
+            >Filter</v-btn
           >
         </v-card-actions>
       </v-card>
     </v-dialog>
-    <!-- END SEARCH DIALOG -->
+    <!-- END FILTER DIALOG -->
   </v-row>
 </template>
 
@@ -220,7 +220,7 @@ export default {
     return {
       add_dialog: false,
       edit_dialog: false,
-      search_dialog: false,
+      filter_dialog: false,
       selected: [],
       valid: false,
       single_select: false,
@@ -398,14 +398,14 @@ export default {
         .get("filter_company", { params: this.company })
         .then((response) => {
           this.companies = response.data;
-          this.search_dialog = false;
+          this.filter_dialog = false;
         })
         .catch((error) => {
           console.log(error);
         });
     },
     openFilterDialog() {
-      this.search_dialog = true;
+      this.filter_dialog = true;
       this.getCountries();
     },
   },
