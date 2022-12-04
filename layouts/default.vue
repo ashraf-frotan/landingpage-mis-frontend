@@ -96,6 +96,11 @@ export default {
           icon:'mdi-image-album',
           title:"Page Types",
           to:'/page_types'
+        },
+        {
+          icon:'mdi-credit-card-chip-outline',
+          title:'Templates',
+          to:'templates'
         }
       ],
       miniVariant: false,
