@@ -186,7 +186,12 @@ export default {
             }
         },
         filter(){
-            console.log(this.page_type);
+            this.$axios.get('filter_page_type',{params:this.page_type}).then(response=>{
+                this.page_types=response.data;
+                this.filter_dialog=false;
+            }).catch(error=>{
+                console.log(error);
+            })
         },
         getCompanies(){
             this.$axios.get('company').then(response=>{
@@ -206,6 +211,7 @@ export default {
         },
         openFilterDialog() {
             this.getCompanies();
+            this.page_type={}
             this.filter_dialog=true;
         },
         resetDatatable(){
