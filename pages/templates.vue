@@ -8,7 +8,7 @@
           url: 'templates',
         }"
       />
-      <ActionsCard @openAddDialog="openAddDialog" />
+      <ActionsCard @openAddDialog="openAddDialog" @deleteRecord="destroy" />
       <v-card>
         <v-card-text>
           <v-data-table
@@ -170,6 +170,43 @@ export default {
             console.log(error);
           });
       } else {
+      }
+    },
+    destroy() {
+      if (!this.selected.length < 1) {
+        let arr_delete = this.selected.map((e) => e.id);
+        this.$swal({
+          icon: "info",
+          title: "Are you sure to delete?",
+          confirmButtonText: "Yes",
+          showCancelButton: true,
+          confirmButtonColor: "#1976d2",
+          cancelButtonColor: "red",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.$axios
+              .delete("template/1", { params: arr_delete })
+              .then((response) => {
+                this.index();
+                this.$toastr.s({
+                  title: "Success!",
+                  msg: "Record deleted successfully.",
+                  timeout: 3000,
+                  progressbar: true,
+                });
+              })
+              .catch((error) => {
+                console.log(error);
+              });
+          }
+        });
+      } else {
+        this.$toastr.i({
+          title: "Info!",
+          msg: "Please select at least one record.",
+          timeout: 3000,
+          progressbar: true,
+        });
       }
     },
     openAddDialog() {

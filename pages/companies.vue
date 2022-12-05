@@ -88,8 +88,7 @@
               @change="uploadFile"
               accept="image/*"
               required
-             :rules="fileRules"
-
+              :rules="fileRules"
             >
             </v-file-input>
           </v-card-text>
@@ -190,13 +189,13 @@
             rounded
             dense
             outlined
-            :rules="[v => !!v || 'Country is required']"
+            :rules="[(v) => !!v || 'Country is required']"
             v-model="company.country_id"
           >
           </v-select>
         </v-card-text>
         <v-card-actions class="d-flex justify-end">
-          <v-btn class="text-capitalize" small @click="filter_dialog=false"
+          <v-btn class="text-capitalize" small @click="filter_dialog = false"
             >Cancel</v-btn
           >
           <v-btn
@@ -240,9 +239,9 @@ export default {
           (v && v.length > 2) || "This field must be at least 3 characters",
       ],
       fileRules: [
-          v => !!v || 'File is required',
-          v => (v && v.size > 0) || 'File is required',
-      ]
+        (v) => !!v || "File is required",
+        (v) => (v && v.size > 0) || "File is required",
+      ],
     };
   },
   methods: {
@@ -257,7 +256,7 @@ export default {
         });
     },
     store() {
-      if(this.$refs.add_form.validate()){
+      if (this.$refs.add_form.validate()) {
         let data = new FormData();
         data.append("name", this.company.name);
         data.append("logo", this.company.logo);
@@ -283,7 +282,6 @@ export default {
             console.log(error);
           });
       }
-      
     },
     async update() {
       this.$refs.edit_form.validate();
