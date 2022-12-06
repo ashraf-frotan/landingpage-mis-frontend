@@ -92,6 +92,65 @@
       </v-card>
     </v-dialog>
     <!-- END ADD DIALOG -->
+    <!-- START EDIT DIALOG -->
+    <v-dialog v-model="add_dialog" width="400">
+      <v-card class="pa-3">
+        <v-form @submit.prevent="update" lazy-validation ref="edit_form">
+          <v-card-title>Edit template</v-card-title>
+          <v-card-text>
+            <v-text-field
+              dense
+              rounded
+              outlined
+              label="Name"
+              placeholder="Enter name here"
+              v-model="template.name"
+              :rules="nameRules"
+            ></v-text-field>
+            <v-text-field
+              dense
+              rounded
+              outlined
+              label="Phone"
+              placeholder="Enter phone here"
+              v-model="template.phone"
+              :rules="phoneRules"
+            ></v-text-field>
+            <v-select
+              :items="page_types"
+              v-model="template.page_type_id"
+              item-text="name"
+              item-value="id"
+              rounded
+              dense
+              outlined
+              label="Page Type"
+              placeholder="Please select page type"
+              :rules="[(v) => !!v || 'Image is required']"
+            ></v-select>
+            <v-file-input
+              label="Image"
+              :rules="fileRules"
+              placeholder="Please select image"
+              rounded
+              outlined
+              dense
+              @change="uploadFile"
+              accept="image/png, image/jpeg, image/jpg"
+            ></v-file-input>
+          </v-card-text>
+          <v-card-actions class="d-flex justify-end">
+            <v-btn small class="text-capitalize" @click="edit_dialog = false"
+              >Cancel</v-btn
+            >
+            <v-btn small color="primary" type="submit" class="text-capitalize"
+              >Update</v-btn
+            >
+          </v-card-actions>
+        </v-form>
+      </v-card>
+    </v-dialog>
+    <!-- END EDIT DIALOG -->
   </v-row>
 </template>
 <script>
