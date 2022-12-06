@@ -8,7 +8,7 @@
           url: 'templates',
         }"
       />
-      <ActionsCard @openAddDialog="openAddDialog" @deleteRecord="destroy" @openEditDialog="edit" />
+      <ActionsCard @openAddDialog="openAddDialog" @deleteRecord="destroy" @openEditDialog="edit" @resetDatatable="resetDatatable" />
       <v-card>
         <v-card-text>
           <v-data-table
@@ -306,6 +306,9 @@ export default {
           progressbar: true,
         });
       }
+    },
+    resetDatatable(){
+      this.index();
     },
     openAddDialog() {
       this.getPageTypes();
