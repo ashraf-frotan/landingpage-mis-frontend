@@ -246,29 +246,31 @@ export default {
       }
     },
     update(){
-      let data = new FormData();
-      data.append("name", this.template.name);
-      data.append("phone",this.template.phone);
-      data.append("page_type_id",this.template.page_type_id);
-      data.append("image", this.template.image);
-      data.append('_method','put');
-      this.$axios.post(`template/${this.template.id}`,data,{
-        header: {
-          "Content-Type": "multipart/form-data"
-        }
-      }).then((response)=>{
-        this.index();
-        this.edit_dialog=false;
-        this.template={}
-        this.$toastr.s({
-          title: "Success!",
-          msg: "Record updated successfully.",
-          timeout: 3000,
-          progressbar: true,
+      if(this.$refs.edit_dialog.validate()){
+        let data = new FormData();
+        data.append("name", this.template.name);
+        data.append("phone",this.template.phone);
+        data.append("page_type_id",this.template.page_type_id);
+        data.append("image", this.template.image);
+        data.append('_method','put');
+        this.$axios.post(`template/${this.template.id}`,data,{
+          header: {
+            "Content-Type": "multipart/form-data"
+          }
+        }).then((response)=>{
+          this.index();
+          this.edit_dialog=false;
+          this.template={}
+          this.$toastr.s({
+            title: "Success!",
+            msg: "Record updated successfully.",
+            timeout: 3000,
+            progressbar: true,
+          })
+        }).catch(error=>{
+          console.log(error);
         })
-      }).catch(error=>{
-        console.log(error);
-      })
+      }
     },  
     destroy() {
       if (!this.selected.length < 1) {
