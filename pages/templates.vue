@@ -8,7 +8,7 @@
           url: 'templates',
         }"
       />
-      <ActionsCard @openAddDialog="openAddDialog" @deleteRecord="destroy" />
+      <ActionsCard @openAddDialog="openAddDialog" @deleteRecord="destroy" @openEditDialog="edit" />
       <v-card>
         <v-card-text>
           <v-data-table
@@ -93,7 +93,7 @@
     </v-dialog>
     <!-- END ADD DIALOG -->
     <!-- START EDIT DIALOG -->
-    <v-dialog v-model="add_dialog" width="400">
+    <v-dialog v-model="edit_dialog" width="400">
       <v-card class="pa-3">
         <v-form @submit.prevent="update" lazy-validation ref="edit_form">
           <v-card-title>Edit template</v-card-title>
@@ -167,6 +167,7 @@ export default {
       selected: [],
       single_search: "",
       add_dialog: false,
+      edit_dialog: false,
       template: {
         id: null,
         name: "",
@@ -227,7 +228,18 @@ export default {
           .catch((error) => {
             console.log(error);
           });
-      } else {
+      }
+    },
+    edit(){
+      if(this.selected.length == 1){
+          this.edit_dialog=true;
+      }else{
+        this.$toastr.i({
+          title:'Info!',
+          msg:'Please select a record.',
+          timeout: 3000,
+          progressbar: true
+        });
       }
     },
     destroy() {
