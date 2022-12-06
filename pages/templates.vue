@@ -160,6 +160,7 @@ export default {
       headers: [
         { text: "ID", value: "id" },
         { text: "Name", value: "name" },
+        { text: "Phone", value: "phone" },
         { text: "Image", value: "image" },
         { text: "Page Type", value: "page_type_id" },
       ],
@@ -232,7 +233,9 @@ export default {
     },
     edit(){
       if(this.selected.length == 1){
-          this.edit_dialog=true;
+        this.getPageTypes();
+        this.template= JSON.parse(JSON.stringify(this.selected[0]));
+        this.edit_dialog=true;
       }else{
         this.$toastr.i({
           title:'Info!',
