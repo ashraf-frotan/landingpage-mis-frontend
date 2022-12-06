@@ -130,7 +130,6 @@
             ></v-select>
             <v-file-input
               label="Image"
-              :rules="fileRules"
               placeholder="Please select image"
               rounded
               outlined
