@@ -228,10 +228,7 @@ export default {
     edit() {
       this.form_action = "edit";
       if (this.selected.length == 1) {
-        var arr = this.countries.filter((country) => {
-          return country.id == this.selected[0].id;
-        });
-        this.country = JSON.parse(JSON.stringify(arr[0]));
+        this.country = JSON.parse(JSON.stringify(this.selected[0]));
         this.dialog = true;
       } else {
         this.$toastr.i({

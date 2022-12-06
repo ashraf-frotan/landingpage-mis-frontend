@@ -321,10 +321,7 @@ export default {
       if (this.selected.length == 1) {
         this.getCountries();
         this.edit_dialog = true;
-        var arr = this.companies.filter((c) => {
-          return c.id == this.selected[0].id;
-        });
-        this.company = JSON.parse(JSON.stringify(arr[0]));
+        this.company = JSON.parse(JSON.stringify(this.selected[0]));
       } else {
         this.$toastr.i({
           title: "Info!",

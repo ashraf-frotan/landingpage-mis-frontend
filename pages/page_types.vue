@@ -122,9 +122,8 @@ export default {
         },
         edit() {
             if(this.selected.length==1){
-                let arr=this.page_types.filter(e=>e.id==this.selected[0].id);
                 this.getCompanies();
-                this.page_type=JSON.parse(JSON.stringify(arr[0]));
+                this.page_type=JSON.parse(JSON.stringify(this.selected[0]));
                 this.edit_dialog=true;
             }else{
                 this.$toastr.i({
