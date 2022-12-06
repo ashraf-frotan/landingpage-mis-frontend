@@ -8,7 +8,7 @@
           url: 'templates',
         }"
       />
-      <ActionsCard @openAddDialog="openAddDialog" @deleteRecord="destroy" @openEditDialog="edit" @resetDatatable="resetDatatable" />
+      <ActionsCard @openAddDialog="openAddDialog" @deleteRecord="destroy" @openEditDialog="edit" @resetDatatable="resetDatatable" @openFilterDialog="openFilterDialog"/>
       <v-card>
         <v-card-text>
           <v-data-table
@@ -150,6 +150,60 @@
       </v-card>
     </v-dialog>
     <!-- END EDIT DIALOG -->
+    <!-- START FILTER DIALOG -->
+    <v-dialog v-model="filter_dialog" width="400">
+      <v-card class="pa-3">
+        <v-form @submit.prevent="filter" lazy-validation ref="filter_form">
+          <v-card-title>Filter template</v-card-title>
+          <v-card-text>
+            <v-text-field
+              dense
+              rounded
+              outlined
+              label="ID"
+              placeholder="Enter id here"
+              v-model="template.id"
+            ></v-text-field>
+            <v-text-field
+              dense
+              rounded
+              outlined
+              label="Name"
+              placeholder="Enter name here"
+              v-model="template.name"
+            ></v-text-field>
+            <v-text-field
+              dense
+              rounded
+              outlined
+              label="Phone"
+              placeholder="Enter phone here"
+              v-model="template.phone"
+            ></v-text-field>
+            <v-select
+              :items="page_types"
+              v-model="template.page_type_id"
+              item-text="name"
+              item-value="id"
+              rounded
+              dense
+              outlined
+              label="Page Type"
+              placeholder="Please select page type"
+            ></v-select>
+          </v-card-text>
+          <v-card-actions class="d-flex justify-end">
+            <v-btn small class="text-capitalize" @click="filter_dialog = false"
+              >Cancel</v-btn
+            >
+            <v-btn small color="primary" type="submit" class="text-capitalize"
+              >Filter</v-btn
+            >
+          </v-card-actions>
+        </v-form>
+      </v-card>
+    </v-dialog>
+    <!-- END FILTER DIALOG -->
   </v-row>
 </template>
 <script>
@@ -169,6 +223,7 @@ export default {
       single_search: "",
       add_dialog: false,
       edit_dialog: false,
+      filter_dialog: false,
       template: {
         id: null,
         name: "",
@@ -309,6 +364,16 @@ export default {
         });
       }
     },
+    filter(){
+      this.$axios.get('filter_template',{params:this.template}).then(response=>{
+        this.templates= response.data;
+        this.filter_dialog=false;
+      }).catch(error=>{console.log(error);})
+    },
+    openFilterDialog(){
+      this.getPageTypes();
+      this.filter_dialog=true;
+    },  
     resetDatatable(){
       this.index();
     },
