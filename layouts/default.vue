@@ -92,16 +92,21 @@ export default {
           title: "Companies",
           to: "/companies",
         },
-        { 
-          icon:'mdi-image-album',
-          title:"Page Types",
-          to:'/page_types'
+        {
+          icon: "mdi-image-album",
+          title: "Page Types",
+          to: "/page_types",
         },
         {
-          icon:'mdi-credit-card-chip-outline',
-          title:'Templates',
-          to:'templates'
-        }
+          icon: "mdi-credit-card-chip-outline",
+          title: "Templates",
+          to: "templates",
+        },
+        {
+          icon: "mdi-credit-card-chip-outline",
+          title: "Landing Pages",
+          to: "landing_pages",
+        },
       ],
       miniVariant: false,
       right: true,
