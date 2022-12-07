@@ -8,7 +8,7 @@
           url: 'landing_pages',
         }"
       />
-      <ActionsCard />
+      <ActionsCard @openAddDialog="openAddDialog" />
       <v-card>
         <v-card-text>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae,
@@ -76,7 +76,7 @@
                   </v-col>
                   <v-col cols="12" md="6" sm="12" xs="12">
                     <v-select
-                      :items="landing_pages"
+                      :items="page_types"
                       item-text="name"
                       item-value="id"
                       rounded
@@ -142,6 +142,7 @@ export default {
       templates: [],
       country_id: [],
       e1: 1,
+      data: {},
     };
   },
   methods: {
@@ -149,17 +150,16 @@ export default {
       this.$axios
         .get("get_info")
         .then((response) => {
-          this.countries = response.data.countries;
-          this.companies = response.data.companies;
-          this.page_types = response.data.page_types;
-          this.templates = response.data.page_types;
-          console.log(response.data);
+          this.data = response.data;
         })
         .catch((error) => {
           console.log(error);
         });
     },
-    openAddDialog() {},
+    openAddDialog() {
+      this.countries = this.data.countries;
+      this.add_dialog = true;
+    },
   },
   created() {
     this.getInfo();
