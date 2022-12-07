@@ -57,6 +57,30 @@
 
               <v-btn text> Cancel </v-btn>
             </v-stepper-content>
+            <v-stepper-content step="2">
+              <v-card class="mb-12" color="grey lighten-1">
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eos
+                ipsam amet nesciunt. Dicta neque libero excepturi, rem,
+                suscipit, minima voluptatibus aliquam ad quam sint alias et esse
+                error aliquid nisi?
+              </v-card>
+
+              <v-btn color="primary" @click="e1 = 3"> Continue </v-btn>
+
+              <v-btn text> Cancel </v-btn>
+            </v-stepper-content>
+            <v-stepper-content step="3">
+              <v-card class="mb-12" color="grey lighten-1">
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eos
+                ipsam amet nesciunt. Dicta neque libero excepturi, rem,
+                suscipit, minima voluptatibus aliquam ad quam sint alias et esse
+                error aliquid nisi?
+              </v-card>
+
+              <v-btn color="primary" @click="e1 = 1"> Continue </v-btn>
+
+              <v-btn text> Cancel </v-btn>
+            </v-stepper-content>
           </v-stepper-items>
         </v-stepper>
       </v-card>
@@ -68,11 +92,32 @@ export default {
   data() {
     return {
       add_dialog: true,
-      el: 1,
+      countries: [],
+      companies: [],
+      page_types: [],
+      templates: [],
+      e1: 1,
     };
   },
   methods: {
+    getInfo() {
+      this.$axios
+        .get("get_info")
+        .then((response) => {
+          this.countries = response.data.countries;
+          this.companies = response.data.companies;
+          this.page_types = response.data.page_types;
+          this.templates = response.data.page_types;
+          console.log(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
     openAddDialog() {},
+  },
+  created() {
+    this.getInfo();
   },
 };
 </script>
