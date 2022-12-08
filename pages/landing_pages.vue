@@ -130,14 +130,16 @@
           <v-stepper-content step="2">
             <v-card
               elevation="0"
+              class="ma-2"
             >
+              <v-card>
                 <v-card-text>
                   <v-row>
                     <v-col cols="12" md="3" sm="12" xs="12">
                       <h3>Landing page language</h3>
                     </v-col>
-                    <v-col cols="12" md="9" sm="12" xs="12" class="d-flex justify-end">
-                      <v-btn color="primary" outlined class="text-capitalize">
+                    <v-col cols="12" md="9" sm="12" xs="12" class="d-flex justify-end text-center">
+                      <v-btn outlined color="primary" class="text-capitalize">
                         <img src="~/assets/images/us.png" width="25" class="mr-2" alt=""> English
                       </v-btn>
                       <v-btn color="primary" outlined class="text-capitalize mx-2">
@@ -149,6 +151,25 @@
                     </v-col>
                   </v-row>
                 </v-card-text>
+              </v-card>
+              <v-card class="mt-3">
+                <v-card-text>
+                  <v-row>
+                    <v-col cols="12" md="3" sm="12" xs="12">
+                      <h3>Product Type</h3>
+                    </v-col>
+                    <v-col cols="12" md="9" sm="12" xs="12" class="d-flex justify-end">
+                      <v-btn color="primary" outlined class="text-capitalize mr-1">
+                        Piece
+                      </v-btn>
+                      <v-btn color="primary" outlined class="text-capitalize">
+                        Collection
+                      </v-btn>
+                    </v-col>
+                  </v-row>
+                </v-card-text>
+              </v-card>
+                
             </v-card>
             <v-btn
               color="primary"
