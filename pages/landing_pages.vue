@@ -18,7 +18,7 @@
         </v-card-text>
       </v-card>
     </v-col>
-    <v-dialog v-model="add_dialog" width="800">
+    <v-dialog v-model="add_dialog" width="600">
       <v-card>
         <v-toolbar dark color="primary">
           <v-btn icon dark @click="add_dialog = false">
@@ -46,7 +46,7 @@
 
           <v-stepper-content step="1">
             <v-card
-              class="mb-1"
+              class="mb-5"
               elevation="0"
             >
               <v-row>
@@ -60,7 +60,7 @@
                       dense
                       label="Country"
                       placeholder="Please select country"
-                      class="styled-input"
+                      hide-details
                     >
                     </v-select>
                   </v-col>
@@ -74,6 +74,7 @@
                       dense
                       label="Company"
                       placeholder="Please select company"
+                      hide-details
                     >
                     </v-select>
                   </v-col>
@@ -87,6 +88,7 @@
                       dense
                       label="Landing Pages"
                       placeholder="Please select landing page"
+                      hide-details
                     >
                     </v-select>
                   </v-col>
@@ -100,6 +102,7 @@
                       dense
                       label="Templates"
                       placeholder="Please select templates"
+                      hide-details
                     >
                     </v-select>
                   </v-col>
