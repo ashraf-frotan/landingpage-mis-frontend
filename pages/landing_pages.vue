@@ -18,214 +18,311 @@
         </v-card-text>
       </v-card>
     </v-col>
-    <v-dialog v-model="add_dialog" width="1000">
+    <v-dialog
+      v-model="add_dialog"
+      fullscreen
+      hide-overlay
+      transition="dialog-bottom-transition"
+    >
       <v-card>
-        <v-toolbar dark color="primary">
-          <v-btn icon dark @click="add_dialog = false">
-            <v-icon>mdi-close</v-icon>
-          </v-btn>
-          <v-toolbar-title>Create New Landing Page</v-toolbar-title>
-          <v-spacer></v-spacer>
-          <v-toolbar-items>
-            <v-btn dark text @click="add_dialog = false"> Save </v-btn>
-          </v-toolbar-items>
-        </v-toolbar>
-      </v-card>
-      <v-card>
-        <v-stepper
-          v-model="e1"
-          vertical
-        >
-          <v-stepper-step
-            :complete="e1 > 1"
-            step="1"
-          >
-            Select an app
-            <small>Summarize if needed</small>
-          </v-stepper-step>
-
-          <v-stepper-content step="1">
-            <v-card
-              class="mb-5"
-              elevation="0"
-            >
-              <v-row>
-                  <v-col cols="12" md="6" sm="12" xs="12">
-                    <v-select
-                      :items="countries"
-                      item-text="name"
-                      item-value="id"
-                      rounded
-                      outlined
-                      dense
-                      label="Country"
-                      placeholder="Please select country"
-                      hide-details
-                    >
-                    </v-select>
+        <v-card>
+          <v-toolbar dark color="primary">
+            <v-btn icon dark @click="add_dialog = false">
+              <v-icon>mdi-close</v-icon>
+            </v-btn>
+            <v-toolbar-title>Create New Landing Page</v-toolbar-title>
+            <v-spacer></v-spacer>
+            <v-toolbar-items>
+              <v-btn dark text @click="add_dialog = false"> Save </v-btn>
+            </v-toolbar-items>
+          </v-toolbar>
+        </v-card>
+        <v-card>
+          <v-stepper v-model="e1" vertical>
+            <v-stepper-step :complete="e1 > 1" step="1">
+              Genral Information
+              <small>Please select the general info about product</small>
+            </v-stepper-step>
+            <v-stepper-content step="1">
+              <v-card class="ma-2 mb-4" elevation="0">
+                <v-card elevation="1" class="mt-5">
+                  <v-card-text>
+                    <v-row>
+                      <v-col cols="12"><h3>Selections</h3></v-col>
+                    </v-row>
+                    <v-row>
+                      <v-col cols="12" md="3" sm="6" xs="12">
+                        <v-select
+                          :items="countries"
+                          item-text="name"
+                          item-value="id"
+                          rounded
+                          outlined
+                          dense
+                          label="Country"
+                          placeholder="Please select country"
+                          hide-details
+                        >
+                        </v-select>
+                      </v-col>
+                      <v-col cols="12" md="3" sm="6" xs="12">
+                        <v-select
+                          :items="companies"
+                          item-text="name"
+                          item-value="id"
+                          rounded
+                          outlined
+                          dense
+                          label="Company"
+                          placeholder="Please select company"
+                          hide-details
+                        >
+                        </v-select>
+                      </v-col>
+                      <v-col cols="12" md="3" sm="6" xs="12">
+                        <v-select
+                          :items="page_types"
+                          item-text="name"
+                          item-value="id"
+                          rounded
+                          outlined
+                          dense
+                          label="Landing Pages"
+                          placeholder="Please select landing page"
+                          hide-details
+                        >
+                        </v-select>
+                      </v-col>
+                      <v-col cols="12" md="3" sm="6" xs="12">
+                        <v-select
+                          :items="templates"
+                          item-text="name"
+                          item-value="id"
+                          rounded
+                          outlined
+                          dense
+                          label="Templates"
+                          placeholder="Please select templates"
+                          hide-details
+                        >
+                        </v-select>
+                      </v-col>
+                    </v-row>
+                  </v-card-text>
+                </v-card>
+                <v-row class="mb-4">
+                  <v-col cols="12" md="6" sm="6" xs="12">
+                    <v-card elevation="1" class="mt-3">
+                      <v-card-text>
+                        <v-row align="center">
+                          <v-col cols="12" md="3" sm="12" xs="12">
+                            <h3>Language</h3>
+                          </v-col>
+                          <v-col
+                            cols="12"
+                            md="9"
+                            sm="12"
+                            xs="12"
+                            class="d-flex justify-end text-center"
+                          >
+                            <v-btn
+                              outlined
+                              color="primary"
+                              class="text-capitalize"
+                            >
+                              <img
+                                src="~/assets/images/us.png"
+                                width="25"
+                                class="mr-2"
+                                alt=""
+                              />
+                              English
+                            </v-btn>
+                            <v-btn
+                              color="primary"
+                              outlined
+                              class="text-capitalize mx-1"
+                            >
+                              <img
+                                src="~/assets/images/uae.png"
+                                width="25"
+                                class="mr-2"
+                                alt=""
+                              />
+                              Arabic
+                            </v-btn>
+                            <v-btn
+                              color="primary"
+                              outlined
+                              class="text-capitalize"
+                            >
+                              <img
+                                src="~/assets/images/both-lang.png"
+                                width="25"
+                                class="mr-2"
+                                alt=""
+                              />
+                              Both
+                            </v-btn>
+                          </v-col>
+                        </v-row>
+                      </v-card-text>
+                    </v-card>
                   </v-col>
-                  <v-col cols="12" md="6" sm="12" xs="12">
-                    <v-select
-                      :items="companies"
-                      item-text="name"
-                      item-value="id"
-                      rounded
-                      outlined
-                      dense
-                      label="Company"
-                      placeholder="Please select company"
-                      hide-details
-                    >
-                    </v-select>
-                  </v-col>
-                  <v-col cols="12" md="6" sm="12" xs="12">
-                    <v-select
-                      :items="page_types"
-                      item-text="name"
-                      item-value="id"
-                      rounded
-                      outlined
-                      dense
-                      label="Landing Pages"
-                      placeholder="Please select landing page"
-                      hide-details
-                    >
-                    </v-select>
-                  </v-col>
-                  <v-col cols="12" md="6" sm="12" xs="12">
-                    <v-select
-                      :items="templates"
-                      item-text="name"
-                      item-value="id"
-                      rounded
-                      outlined
-                      dense
-                      label="Templates"
-                      placeholder="Please select templates"
-                      hide-details
-                    >
-                    </v-select>
+                  <v-col cols="12" md="6" sm="6" xs="12">
+                    <v-card class="mt-3" elevation="1">
+                      <v-card-text>
+                        <v-row align="center">
+                          <v-col cols="12" md="3" sm="12" xs="12">
+                            <h3>Product Type</h3>
+                          </v-col>
+                          <v-col
+                            cols="12"
+                            md="9"
+                            sm="12"
+                            xs="12"
+                            class="d-flex justify-end"
+                          >
+                            <v-btn
+                              color="primary"
+                              outlined
+                              class="text-capitalize mr-1"
+                            >
+                              Piece
+                            </v-btn>
+                            <v-btn
+                              color="primary"
+                              outlined
+                              class="text-capitalize"
+                            >
+                              Collection
+                            </v-btn>
+                          </v-col>
+                        </v-row>
+                      </v-card-text>
+                    </v-card>
                   </v-col>
                 </v-row>
-            </v-card>
-            <v-btn
-              color="primary"
-              @click="e1 = 2"
-              small
-            >
-              Continue
-            </v-btn>
-            <v-btn small>
-              Cancel
-            </v-btn>
-          </v-stepper-content>
-
-          <v-stepper-step
-            :complete="e1 > 2"
-            step="2"
-          >
-            Configure analytics for this app
-          </v-stepper-step>
-
-          <v-stepper-content step="2">
-            <v-card
-              elevation="0"
-              class="ma-2"
-            >
-              <v-card>
-                <v-card-text>
-                  <v-row>
-                    <v-col cols="12" md="3" sm="12" xs="12">
-                      <h3>Landing page language</h3>
-                    </v-col>
-                    <v-col cols="12" md="9" sm="12" xs="12" class="d-flex justify-end text-center">
-                      <v-btn outlined color="primary" class="text-capitalize">
-                        <img src="~/assets/images/us.png" width="25" class="mr-2" alt=""> English
-                      </v-btn>
-                      <v-btn color="primary" outlined class="text-capitalize mx-2">
-                        <img src="~/assets/images/uae.png" width="25" class="mr-2" alt=""> Arabic
-                      </v-btn>
-                      <v-btn color="primary" outlined class="text-capitalize">
-                        <img src="~/assets/images/both-lang.png" width="25" class="mr-2" alt=""> Both
-                      </v-btn>
-                    </v-col>
-                  </v-row>
-                </v-card-text>
+                <v-btn color="primary" @click="e1 = 2" small> Continue </v-btn>
+                <v-btn small> Cancel </v-btn>
               </v-card>
-              <v-card class="mt-3">
-                <v-card-text>
-                  <v-row>
-                    <v-col cols="12" md="3" sm="12" xs="12">
-                      <h3>Product Type</h3>
-                    </v-col>
-                    <v-col cols="12" md="9" sm="12" xs="12" class="d-flex justify-end">
-                      <v-btn color="primary" outlined class="text-capitalize mr-1">
-                        Piece
-                      </v-btn>
-                      <v-btn color="primary" outlined class="text-capitalize">
-                        Collection
-                      </v-btn>
-                    </v-col>
-                  </v-row>
-                </v-card-text>
+            </v-stepper-content>
+            <v-stepper-step :complete="e1 > 2" step="2">
+              Product Details
+              <small>Fill all the required informations about product</small>
+            </v-stepper-step>
+            <v-stepper-content step="2">
+              <v-card elevation="0" class="ma-2">
+                <v-card elevation="1">
+                  <v-card-text>
+                    <div class="mb-1 subtitle-1">Product Code</div>
+                    <v-select
+                      :items="products"
+                      dense
+                      hide-details=""
+                      rounded
+                      outlined
+                      label="Product"
+                      placeholder="Please select product"
+                    ></v-select>
+                  </v-card-text>
+                </v-card>
+                <v-row class="mt-3">
+                  <v-col cols="12" md="6" sm="6" xs="12">
+                    <v-card elevation="1">
+                      <v-card-text>
+                        <div class="mb-1 subtitle-1">Product Title (AR)</div>
+                        <v-text-field
+                          rounded
+                          outlined
+                          dense
+                          hide-details=""
+                          placeholder="Product name in Arabic"
+                        ></v-text-field>
+                      </v-card-text>
+                    </v-card>
+                  </v-col>
+                  <v-col cols="12" md="6" sm="6" xs="12">
+                    <v-card elevation="1">
+                      <v-card-text>
+                        <div class="mb-1 subtitle-1">Product Title (EN)</div>
+                        <v-text-field
+                          rounded
+                          outlined
+                          dense
+                          hide-details=""
+                          placeholder="Product name in English"
+                        ></v-text-field>
+                      </v-card-text>
+                    </v-card>
+                  </v-col>
+                </v-row>
+                <v-card elevation="1" class="mt-3">
+                  <v-card-text>
+                    <div class="mb-1 subtitle-1">Product Note(AR)</div>
+                    <v-textarea
+                      outlined
+                      dense
+                      hide-details=""
+                      placeholder="Note here.."
+                      rows="3"
+                    ></v-textarea>
+                  </v-card-text>
+                </v-card>
+                <v-card elevation="1" class="mt-3">
+                  <v-card-text>
+                    <div class="mb-1 subtitle-1">Product Note(EN)</div>
+                    <v-textarea
+                      outlined
+                      dense
+                      hide-details=""
+                      placeholder="Note here.."
+                      rows="3"
+                    ></v-textarea>
+                  </v-card-text>
+                </v-card>
+                <v-btn color="primary" @click="e1 = 3" small> Continue </v-btn>
+                <v-btn @click="e1 = 1" small> Back </v-btn>
               </v-card>
-                
-            </v-card>
-            <v-btn
-              color="primary"
-              @click="e1 = 3"
-            >
-              Continue
-            </v-btn>
-            <v-btn text>
-              Cancel
-            </v-btn>
-          </v-stepper-content>
+            </v-stepper-content>
 
-          <v-stepper-step
-            :complete="e1 > 3"
-            step="3"
-          >
-            Select an ad format and name ad unit
-          </v-stepper-step>
+            <v-stepper-step :complete="e1 > 3" step="3">
+              Select an ad format and name ad unit
+            </v-stepper-step>
 
-          <v-stepper-content step="3">
-            <v-card
-              color="grey lighten-1"
-              class="mb-12"
-              height="200px"
-            ></v-card>
-            <v-btn
-              color="primary"
-              @click="e1 = 4"
-            >
-              Continue
-            </v-btn>
-            <v-btn text>
-              Cancel
-            </v-btn>
-          </v-stepper-content>
+            <v-stepper-content step="3">
+              <v-card class="ma-2">
+                <v-card elevation="1" class="mt-3">
+                  <v-card-text>
+                    <div class="mb-1 subtitle-1">Product Colletion Items</div>
+                    <v-text-field
+                      outlined
+                      dense
+                      rounded
+                      hide-details=""
+                      placeholder="Items here.."
+                      append-icon="mdi-plus"
+                      rows="3"
+                    ></v-text-field>
+                  </v-card-text>
+                </v-card>
+              </v-card>
+              <v-btn color="primary" @click="e1 = 4"> Continue </v-btn>
+              <v-btn text> Cancel </v-btn>
+            </v-stepper-content>
 
-          <v-stepper-step step="4">
-            View setup instructions
-          </v-stepper-step>
-          <v-stepper-content step="4">
-            <v-card
-              color="grey lighten-1"
-              class="mb-12"
-              height="200px"
-            ></v-card>
-            <v-btn
-              color="primary"
-              @click="e1 = 1"
-            >
-              Continue
-            </v-btn>
-            <v-btn text>
-              Cancel
-            </v-btn>
-          </v-stepper-content>
-        </v-stepper>
+            <v-stepper-step step="4"> View setup instructions </v-stepper-step>
+            <v-stepper-content step="4">
+              <v-card
+                color="grey lighten-1"
+                class="mb-12"
+                height="200px"
+              ></v-card>
+              <v-btn color="primary" @click="e1 = 1"> Continue </v-btn>
+              <v-btn text> Cancel </v-btn>
+            </v-stepper-content>
+          </v-stepper>
+        </v-card>
       </v-card>
     </v-dialog>
   </v-row>
@@ -242,6 +339,7 @@ export default {
       country_id: [],
       e1: 1,
       data: {},
+      products: ["TM1", "TK58"],
     };
   },
   methods: {
