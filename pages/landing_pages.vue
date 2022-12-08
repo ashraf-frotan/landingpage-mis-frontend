@@ -46,17 +46,73 @@
 
           <v-stepper-content step="1">
             <v-card
-              color="grey lighten-1"
-              class="mb-12"
-              height="200px"
-            ></v-card>
+              class="mb-1"
+              elevation="0"
+            >
+              <v-row>
+                  <v-col cols="12" md="6" sm="12" xs="12">
+                    <v-select
+                      :items="countries"
+                      item-text="name"
+                      item-value="id"
+                      rounded
+                      outlined
+                      dense
+                      label="Country"
+                      placeholder="Please select country"
+                      class="styled-input"
+                    >
+                    </v-select>
+                  </v-col>
+                  <v-col cols="12" md="6" sm="12" xs="12">
+                    <v-select
+                      :items="companies"
+                      item-text="name"
+                      item-value="id"
+                      rounded
+                      outlined
+                      dense
+                      label="Company"
+                      placeholder="Please select company"
+                    >
+                    </v-select>
+                  </v-col>
+                  <v-col cols="12" md="6" sm="12" xs="12">
+                    <v-select
+                      :items="page_types"
+                      item-text="name"
+                      item-value="id"
+                      rounded
+                      outlined
+                      dense
+                      label="Landing Pages"
+                      placeholder="Please select landing page"
+                    >
+                    </v-select>
+                  </v-col>
+                  <v-col cols="12" md="6" sm="12" xs="12">
+                    <v-select
+                      :items="templates"
+                      item-text="name"
+                      item-value="id"
+                      rounded
+                      outlined
+                      dense
+                      label="Templates"
+                      placeholder="Please select templates"
+                    >
+                    </v-select>
+                  </v-col>
+                </v-row>
+            </v-card>
             <v-btn
               color="primary"
               @click="e1 = 2"
+              small
             >
               Continue
             </v-btn>
-            <v-btn text>
+            <v-btn small>
               Cancel
             </v-btn>
           </v-stepper-content>
