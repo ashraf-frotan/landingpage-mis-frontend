@@ -133,8 +133,14 @@
             >
                 <v-card-text>
                   Landing page language
-                  <v-btn color="primary" outlined height="60">
-                    <img src="~/assets/images/logo.png" width="60" alt=""> EN
+                  <v-btn color="primary" outlined class="text-capitalize">
+                    <img src="~/assets/images/us.png" width="25" class="mr-2" alt=""> English
+                  </v-btn>
+                  <v-btn color="primary" outlined class="text-capitalize">
+                    <img src="~/assets/images/uae.png" width="25" class="mr-2" alt=""> Arabic
+                  </v-btn>
+                  <v-btn color="primary" outlined class="text-capitalize">
+                    <img src="~/assets/images/both-lang.png" width="25" class="mr-2" alt=""> Both
                   </v-btn>
                 </v-card-text>
             </v-card>
