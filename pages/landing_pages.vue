@@ -129,10 +129,15 @@
 
           <v-stepper-content step="2">
             <v-card
-              color="grey lighten-1"
-              class="mb-12"
-              height="200px"
-            ></v-card>
+              elevation="0"
+            >
+                <v-card-text>
+                  Landing page language
+                  <v-btn color="primary" outlined height="60">
+                    <img src="~/assets/images/logo.png" width="60" alt=""> EN
+                  </v-btn>
+                </v-card-text>
+            </v-card>
             <v-btn
               color="primary"
               @click="e1 = 3"
