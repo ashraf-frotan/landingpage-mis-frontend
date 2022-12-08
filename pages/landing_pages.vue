@@ -18,7 +18,7 @@
         </v-card-text>
       </v-card>
     </v-col>
-    <v-dialog v-model="add_dialog" width="600">
+    <v-dialog v-model="add_dialog" width="1000">
       <v-card>
         <v-toolbar dark color="primary">
           <v-btn icon dark @click="add_dialog = false">
@@ -132,16 +132,22 @@
               elevation="0"
             >
                 <v-card-text>
-                  Landing page language
-                  <v-btn color="primary" outlined class="text-capitalize">
-                    <img src="~/assets/images/us.png" width="25" class="mr-2" alt=""> English
-                  </v-btn>
-                  <v-btn color="primary" outlined class="text-capitalize">
-                    <img src="~/assets/images/uae.png" width="25" class="mr-2" alt=""> Arabic
-                  </v-btn>
-                  <v-btn color="primary" outlined class="text-capitalize">
-                    <img src="~/assets/images/both-lang.png" width="25" class="mr-2" alt=""> Both
-                  </v-btn>
+                  <v-row>
+                    <v-col cols="12" md="3" sm="12" xs="12">
+                      <h3>Landing page language</h3>
+                    </v-col>
+                    <v-col cols="12" md="9" sm="12" xs="12" class="d-flex justify-end">
+                      <v-btn color="primary" outlined class="text-capitalize">
+                        <img src="~/assets/images/us.png" width="25" class="mr-2" alt=""> English
+                      </v-btn>
+                      <v-btn color="primary" outlined class="text-capitalize mx-2">
+                        <img src="~/assets/images/uae.png" width="25" class="mr-2" alt=""> Arabic
+                      </v-btn>
+                      <v-btn color="primary" outlined class="text-capitalize">
+                        <img src="~/assets/images/both-lang.png" width="25" class="mr-2" alt=""> Both
+                      </v-btn>
+                    </v-col>
+                  </v-row>
                 </v-card-text>
             </v-card>
             <v-btn
