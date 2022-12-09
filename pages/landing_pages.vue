@@ -45,71 +45,116 @@
             </v-stepper-step>
             <v-stepper-content step="1">
               <v-card class="ma-2 mb-4" elevation="0">
-                <v-card elevation="1" class="mt-5">
+                <!-- START COUNTRY SECTION -->
+                <v-card>
                   <v-card-text>
+                    <v-row
+                      ><v-col cols="12"><h3>Country</h3></v-col></v-row
+                    >
                     <v-row>
-                      <v-col cols="12"><h3>Selections</h3></v-col>
-                    </v-row>
-                    <v-row>
-                      <v-col cols="12" md="3" sm="6" xs="12">
-                        <v-select
-                          :items="countries"
-                          item-text="name"
-                          item-value="id"
-                          rounded
-                          outlined
-                          dense
-                          label="Country"
-                          placeholder="Please select country"
-                          hide-details
+                      <v-col cols="12" class="d-flex">
+                        <v-card
+                          elevation="1"
+                          class="px-5 py-3 ml-2"
+                          max-width="80"
+                          link
                         >
-                        </v-select>
-                      </v-col>
-                      <v-col cols="12" md="3" sm="6" xs="12">
-                        <v-select
-                          :items="companies"
-                          item-text="name"
-                          item-value="id"
-                          rounded
-                          outlined
-                          dense
-                          label="Company"
-                          placeholder="Please select company"
-                          hide-details
-                        >
-                        </v-select>
-                      </v-col>
-                      <v-col cols="12" md="3" sm="6" xs="12">
-                        <v-select
-                          :items="page_types"
-                          item-text="name"
-                          item-value="id"
-                          rounded
-                          outlined
-                          dense
-                          label="Landing Pages"
-                          placeholder="Please select landing page"
-                          hide-details
-                        >
-                        </v-select>
-                      </v-col>
-                      <v-col cols="12" md="3" sm="6" xs="12">
-                        <v-select
-                          :items="templates"
-                          item-text="name"
-                          item-value="id"
-                          rounded
-                          outlined
-                          dense
-                          label="Templates"
-                          placeholder="Please select templates"
-                          hide-details
-                        >
-                        </v-select>
+                          <img
+                            src="~/assets/images/uae.png"
+                            width="40"
+                            alt=""
+                          />
+                          <p class="ma-0 text-center" style="font-size: 10px">
+                            UAE
+                          </p>
+                        </v-card>
                       </v-col>
                     </v-row>
                   </v-card-text>
                 </v-card>
+                <!-- END COUNTRY SECTION -->
+                <!-- START COMPANY SECTION -->
+                <v-card class="mt-4">
+                  <v-card-text>
+                    <v-row
+                      ><v-col cols="12"><h3>Company</h3></v-col></v-row
+                    >
+                    <v-row justify="center">
+                      <v-col cols="12" class="d-flex">
+                        <v-card elevation="1" class="d-flex ml-2 pa-3" link>
+                          <v-row align="center" class="py-2 px-4">
+                            <img
+                              src="~/assets/images/uae.png"
+                              width="30"
+                              alt=""
+                            />
+                            <span class="ml-2">Teebalhoor</span>
+                          </v-row>
+                        </v-card>
+                      </v-col>
+                    </v-row>
+                  </v-card-text>
+                </v-card>
+                <!-- END TEMPLATE SECTION -->
+                <!-- START LANDING PAGE TYPE-->
+                <v-card class="mt-3" elevation="1">
+                  <v-card-text>
+                    <v-row align="center">
+                      <v-col cols="12" md="3" sm="12" xs="12">
+                        <h3>Landing page type</h3>
+                      </v-col>
+                      <v-col
+                        cols="12"
+                        md="9"
+                        sm="12"
+                        xs="12"
+                        class="d-flex justify-end"
+                      >
+                        <v-btn
+                          color="primary"
+                          outlined
+                          class="text-capitalize mr-1"
+                        >
+                          Lead
+                        </v-btn>
+                        <v-btn color="primary" outlined class="text-capitalize">
+                          Quick Buy
+                        </v-btn>
+                        <v-btn
+                          color="primary"
+                          outlined
+                          class="text-capitalize ml-1"
+                        >
+                          Whatsapp
+                        </v-btn>
+                      </v-col>
+                    </v-row>
+                  </v-card-text>
+                </v-card>
+                <!-- END LANDING PAGE TYPE -->
+                <!-- START TEMPLATE SECTION -->
+                <v-card class="mt-3">
+                  <v-card-text>
+                    <v-row
+                      ><v-col cols="12"><h3>Template</h3></v-col></v-row
+                    >
+                    <v-row>
+                      <v-col cols="12" class="d-flex">
+                        <v-card elevation="1" class="ml-2" width="200" link>
+                          <img
+                            src="~/assets/images/profile.jpg"
+                            width="200"
+                            alt=""
+                          />
+                          <p class="text-center my-3" style="font-size: 10px">
+                            UAE
+                          </p>
+                        </v-card>
+                      </v-col>
+                    </v-row>
+                  </v-card-text>
+                </v-card>
+                <!-- END TEMPLATE SECTION -->
                 <v-row class="mb-4">
                   <v-col cols="12" md="6" sm="6" xs="12">
                     <v-card elevation="1" class="mt-3">
@@ -291,7 +336,7 @@
             </v-stepper-step>
 
             <v-stepper-content step="3">
-              <v-card class="ma-2">
+              <v-card class="ma-2" elevation="0">
                 <v-card elevation="1" class="mt-3">
                   <v-card-text>
                     <div class="mb-1 subtitle-1">Product Colletion Items</div>
@@ -304,6 +349,74 @@
                       append-icon="mdi-plus"
                       rows="3"
                     ></v-text-field>
+                    <v-card elevation="0">
+                      <v-card-text>
+                        <v-sheet
+                          class="d-inline-flex py-1 px-2 rounded"
+                          elevation="1"
+                        >
+                          TK58
+                          <v-btn icon x-small>
+                            <v-icon small class="ml-1" color="primary"
+                              >mdi-close</v-icon
+                            >
+                          </v-btn>
+                        </v-sheet>
+                        <v-sheet
+                          class="d-inline-flex py-1 px-2 rounded"
+                          elevation="1"
+                        >
+                          BM16
+                          <v-btn icon x-small>
+                            <v-icon small class="ml-1" color="primary"
+                              >mdi-close</v-icon
+                            >
+                          </v-btn>
+                        </v-sheet>
+                      </v-card-text>
+                    </v-card>
+                  </v-card-text>
+                </v-card>
+                <v-card elevation="1" class="mt-3">
+                  <v-card-text>
+                    <div class="mb-1 subtitle-1">Product Colletion Items</div>
+                    <v-row align="center">
+                      <v-col cols="12" md="3">
+                        <v-text-field
+                          dense
+                          rounded
+                          outlined
+                          hide-details=""
+                          placeholder="No"
+                          label="Quantity"
+                        ></v-text-field>
+                      </v-col>
+                      <v-col cols="12" md="3">
+                        <v-text-field
+                          dense
+                          rounded
+                          outlined
+                          hide-details=""
+                          placeholder="price"
+                          label="Price"
+                        ></v-text-field>
+                      </v-col>
+                      <v-col cols="12" md="3">
+                        <v-text-field
+                          dense
+                          rounded
+                          outlined
+                          hide-details=""
+                          placeholder="Old price"
+                          label="Old Price"
+                        ></v-text-field>
+                      </v-col>
+                      <v-col cols="12" md="2">
+                        <v-btn icon small color="primary" outlined>
+                          <v-icon color="primary">mdi-plus</v-icon>
+                        </v-btn>
+                      </v-col>
+                    </v-row>
                   </v-card-text>
                 </v-card>
               </v-card>
