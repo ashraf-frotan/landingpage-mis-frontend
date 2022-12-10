@@ -249,7 +249,6 @@
                   </v-col>
                 </v-row>
                 <v-btn color="primary" @click="e1 = 2" small> Continue </v-btn>
-                <v-btn small> Cancel </v-btn>
               </v-card>
             </v-stepper-content>
             <v-stepper-step :complete="e1 > 2" step="2">
@@ -261,15 +260,14 @@
                 <v-card elevation="1">
                   <v-card-text>
                     <div class="mb-1 subtitle-1">Product Code</div>
-                    <v-select
-                      :items="products"
+                    <v-text-field
                       dense
                       hide-details=""
                       rounded
                       outlined
                       label="Product"
-                      placeholder="Please select product"
-                    ></v-select>
+                      placeholder="Please enter product name here"
+                    ></v-text-field>
                   </v-card-text>
                 </v-card>
                 <v-row class="mt-3">
@@ -314,7 +312,7 @@
                     ></v-textarea>
                   </v-card-text>
                 </v-card>
-                <v-card elevation="1" class="mt-3">
+                <v-card elevation="1" class="my-3">
                   <v-card-text>
                     <div class="mb-1 subtitle-1">Product Note(EN)</div>
                     <v-textarea
@@ -332,7 +330,8 @@
             </v-stepper-content>
 
             <v-stepper-step :complete="e1 > 3" step="3">
-              Select an ad format and name ad unit
+              Insert product name and sub products
+              <small>Product details with its sub collection</small>
             </v-stepper-step>
 
             <v-stepper-content step="3">
@@ -378,7 +377,7 @@
                     </v-card>
                   </v-card-text>
                 </v-card>
-                <v-card elevation="1" class="mt-3">
+                <v-card elevation="1" class="my-3">
                   <v-card-text>
                     <div class="mb-1 subtitle-1">Product Colletion Items</div>
                     <v-row align="center">
@@ -420,20 +419,59 @@
                     </v-row>
                   </v-card-text>
                 </v-card>
+                <v-btn color="primary" @click="e1 = 4" small> Continue </v-btn>
+                <v-btn small @click="e1 = 2"> Back </v-btn>
               </v-card>
-              <v-btn color="primary" @click="e1 = 4"> Continue </v-btn>
-              <v-btn text> Cancel </v-btn>
             </v-stepper-content>
 
-            <v-stepper-step step="4"> View setup instructions </v-stepper-step>
+            <v-stepper-step step="4">
+              Images
+              <small>Long, slider, slider1 and slider2</small>
+            </v-stepper-step>
             <v-stepper-content step="4">
-              <v-card
-                color="grey lighten-1"
-                class="mb-12"
-                height="200px"
-              ></v-card>
-              <v-btn color="primary" @click="e1 = 1"> Continue </v-btn>
-              <v-btn text> Cancel </v-btn>
+              <v-row>
+                <v-col cols="12">
+                  <v-card class="my-3">
+                    <v-card-text>
+                      <v-row>
+                        <v-col cols="12">
+                          <h3>Images</h3>
+                        </v-col>
+                      </v-row>
+                      <v-row>
+                        <v-col cols="12" md="6">
+                          <v-file-input
+                            label="Slider Images"
+                            placeholder="Please select slider images"
+                            rounded
+                            outlined
+                            multiple
+                            dense
+                            hide-details=""
+                          >
+                          </v-file-input>
+                        </v-col>
+                        <v-col cols="12" md="6">
+                          <v-file-input
+                            label="Long Images"
+                            rounded
+                            outlined
+                            multiple
+                            dense
+                            hide-details=""
+                            placeholder="Please select long images"
+                          >
+                          </v-file-input>
+                        </v-col>
+                      </v-row>
+                    </v-card-text>
+                  </v-card>
+                  <v-btn color="primary" small @click="add_dialog = false">
+                    Save
+                  </v-btn>
+                  <v-btn small @click="e1 = 3"> Back </v-btn>
+                </v-col>
+              </v-row>
             </v-stepper-content>
           </v-stepper>
         </v-card>

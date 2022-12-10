@@ -8,7 +8,13 @@
           url: 'templates',
         }"
       />
-      <ActionsCard @openAddDialog="openAddDialog" @deleteRecord="destroy" @openEditDialog="edit" @resetDatatable="resetDatatable" @openFilterDialog="openFilterDialog"/>
+      <ActionsCard
+        @openAddDialog="openAddDialog"
+        @deleteRecord="destroy"
+        @openEditDialog="edit"
+        @resetDatatable="resetDatatable"
+        @openFilterDialog="openFilterDialog"
+      />
       <v-card>
         <v-card-text>
           <v-data-table
@@ -286,47 +292,50 @@ export default {
           });
       }
     },
-    edit(){
-      if(this.selected.length == 1){
+    edit() {
+      if (this.selected.length == 1) {
         this.getCompanies();
-        this.template= JSON.parse(JSON.stringify(this.selected[0]));
-        this.edit_dialog=true;
-      }else{
+        this.template = JSON.parse(JSON.stringify(this.selected[0]));
+        this.edit_dialog = true;
+      } else {
         this.$toastr.i({
-          title:'Info!',
-          msg:'Please select a record.',
+          title: "Info!",
+          msg: "Please select a record.",
           timeout: 3000,
-          progressbar: true
+          progressbar: true,
         });
       }
     },
-    update(){
-      if(this.$refs.edit_dialog.validate()){
+    update() {
+      if (this.$refs.edit_dialog.validate()) {
         let data = new FormData();
         data.append("name", this.template.name);
-        data.append("phone",this.template.phone);
-        data.append("company_id",this.template.company_id);
+        data.append("phone", this.template.phone);
+        data.append("company_id", this.template.company_id);
         data.append("image", this.template.image);
-        data.append('_method','put');
-        this.$axios.post(`template/${this.template.id}`,data,{
-          header: {
-            "Content-Type": "multipart/form-data"
-          }
-        }).then((response)=>{
-          this.index();
-          this.edit_dialog=false;
-          this.template={}
-          this.$toastr.s({
-            title: "Success!",
-            msg: "Record updated successfully.",
-            timeout: 3000,
-            progressbar: true,
+        data.append("_method", "put");
+        this.$axios
+          .post(`template/${this.template.id}`, data, {
+            header: {
+              "Content-Type": "multipart/form-data",
+            },
           })
-        }).catch(error=>{
-          console.log(error);
-        })
+          .then((response) => {
+            this.index();
+            this.edit_dialog = false;
+            this.template = {};
+            this.$toastr.s({
+              title: "Success!",
+              msg: "Record updated successfully.",
+              timeout: 3000,
+              progressbar: true,
+            });
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       }
-    },  
+    },
     destroy() {
       if (!this.selected.length < 1) {
         let arr_delete = this.selected.map((e) => e.id);
@@ -364,17 +373,22 @@ export default {
         });
       }
     },
-    filter(){
-      this.$axios.get('filter_template',{params:this.template}).then(response=>{
-        this.templates= response.data;
-        this.filter_dialog=false;
-      }).catch(error=>{console.log(error);})
+    filter() {
+      this.$axios
+        .get("filter_template", { params: this.template })
+        .then((response) => {
+          this.templates = response.data;
+          this.filter_dialog = false;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
-    openFilterDialog(){
+    openFilterDialog() {
       this.getCompanies();
-      this.filter_dialog=true;
-    },  
-    resetDatatable(){
+      this.filter_dialog = true;
+    },
+    resetDatatable() {
       this.index();
     },
     openAddDialog() {
