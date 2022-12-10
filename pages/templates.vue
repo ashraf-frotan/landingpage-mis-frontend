@@ -311,6 +311,7 @@ export default {
         data.append("name", this.template.name);
         data.append("phone", this.template.phone);
         data.append("company_id", this.template.company_id);
+        data.append("type", this.template.type);
         data.append("image", this.template.image);
         this.$axios
           .post("template", data, {
@@ -348,11 +349,12 @@ export default {
       }
     },
     update() {
-      if (this.$refs.edit_dialog.validate()) {
+      if (this.$refs.edit_form.validate()) {
         let data = new FormData();
         data.append("name", this.template.name);
         data.append("phone", this.template.phone);
         data.append("company_id", this.template.company_id);
+        data.append("type", this.template.type);
         data.append("image", this.template.image);
         data.append("_method", "put");
         this.$axios
