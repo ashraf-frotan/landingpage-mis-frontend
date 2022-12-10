@@ -23,8 +23,8 @@
             <template v-slot:top label="Single Select">
               <v-switch v-model="single_select"></v-switch>
             </template>
-            <template v-slot:item.page_type_id="{ item }">
-              {{ item.page_type.name }}
+            <template v-slot:item.company_id="{ item }">
+              {{ item.company.name }}
             </template>
             <template v-slot:item.image="{ item }"
               ><v-img :src="item.image" width="60" rounded></v-img
@@ -58,15 +58,15 @@
               :rules="phoneRules"
             ></v-text-field>
             <v-select
-              :items="page_types"
-              v-model="template.page_type_id"
+              :items="companies"
+              v-model="template.company_id"
               item-text="name"
               item-value="id"
               rounded
               dense
               outlined
-              label="Page Type"
-              placeholder="Please select page type"
+              label="Company"
+              placeholder="Please select company"
               :rules="[(v) => !!v || 'Image is required']"
             ></v-select>
             <v-file-input
@@ -117,15 +117,15 @@
               :rules="phoneRules"
             ></v-text-field>
             <v-select
-              :items="page_types"
-              v-model="template.page_type_id"
+              :items="companies"
+              v-model="template.company_id"
               item-text="name"
               item-value="id"
               rounded
               dense
               outlined
-              label="Page Type"
-              placeholder="Please select page type"
+              label="Company"
+              placeholder="Please select company"
               :rules="[(v) => !!v || 'Image is required']"
             ></v-select>
             <v-file-input
@@ -181,15 +181,15 @@
               v-model="template.phone"
             ></v-text-field>
             <v-select
-              :items="page_types"
-              v-model="template.page_type_id"
+              :items="companies"
+              v-model="template.company_id"
               item-text="name"
               item-value="id"
               rounded
               dense
               outlined
-              label="Page Type"
-              placeholder="Please select page type"
+              label="Company"
+              placeholder="Please select company"
             ></v-select>
           </v-card-text>
           <v-card-actions class="d-flex justify-end">
@@ -216,7 +216,7 @@ export default {
         { text: "Name", value: "name" },
         { text: "Phone", value: "phone" },
         { text: "Image", value: "image" },
-        { text: "Page Type", value: "page_type_id" },
+        { text: "Company", value: "company_id" },
       ],
       single_select: false,
       selected: [],
@@ -228,10 +228,10 @@ export default {
         id: null,
         name: "",
         phone: "",
-        page_type_id: null,
+        company_id: null,
         image: "",
       },
-      page_types: [],
+      companies: [],
       nameRules: [
         (v) => !!v || "This field is required",
         (v) =>
@@ -263,7 +263,7 @@ export default {
         let data = new FormData();
         data.append("name", this.template.name);
         data.append("phone", this.template.phone);
-        data.append("page_type_id", this.template.page_type_id);
+        data.append("company_id", this.template.company_id);
         data.append("image", this.template.image);
         this.$axios
           .post("template", data, {
@@ -288,7 +288,7 @@ export default {
     },
     edit(){
       if(this.selected.length == 1){
-        this.getPageTypes();
+        this.getCompanies();
         this.template= JSON.parse(JSON.stringify(this.selected[0]));
         this.edit_dialog=true;
       }else{
@@ -305,7 +305,7 @@ export default {
         let data = new FormData();
         data.append("name", this.template.name);
         data.append("phone",this.template.phone);
-        data.append("page_type_id",this.template.page_type_id);
+        data.append("company_id",this.template.company_id);
         data.append("image", this.template.image);
         data.append('_method','put');
         this.$axios.post(`template/${this.template.id}`,data,{
@@ -371,14 +371,14 @@ export default {
       }).catch(error=>{console.log(error);})
     },
     openFilterDialog(){
-      this.getPageTypes();
+      this.getCompanies();
       this.filter_dialog=true;
     },  
     resetDatatable(){
       this.index();
     },
     openAddDialog() {
-      this.getPageTypes();
+      this.getCompanies();
       this.add_dialog = true;
     },
     closeAddDialog() {
@@ -386,11 +386,11 @@ export default {
       this.$refs.add_form.resetValidation();
       this.add_dialog = false;
     },
-    getPageTypes() {
+    getCompanies() {
       this.$axios
-        .get("page_type")
+        .get("company")
         .then((response) => {
-          this.page_types = response.data;
+          this.companies = response.data;
         })
         .catch((error) => {
           console.log(error);
