@@ -75,6 +75,18 @@
               placeholder="Please select company"
               :rules="[(v) => !!v || 'Image is required']"
             ></v-select>
+            <v-select
+              :items="types"
+              v-model="template.type"
+              item-text="name"
+              item-value="id"
+              rounded
+              dense
+              outlined
+              label="Page type"
+              placeholder="Please select page type"
+              :rules="[(v) => !!v || 'page type is required']"
+            ></v-select>
             <v-file-input
               label="Image"
               :rules="fileRules"
@@ -132,7 +144,19 @@
               outlined
               label="Company"
               placeholder="Please select company"
-              :rules="[(v) => !!v || 'Image is required']"
+              :rules="[(v) => !!v || 'company is required']"
+            ></v-select>
+            <v-select
+              :items="types"
+              v-model="template.type"
+              item-text="name"
+              item-value="id"
+              rounded
+              dense
+              outlined
+              label="Page type"
+              placeholder="Please select page type"
+              :rules="[(v) => !!v || 'page type is required']"
             ></v-select>
             <v-file-input
               label="Image"
@@ -197,6 +221,17 @@
               label="Company"
               placeholder="Please select company"
             ></v-select>
+            <v-select
+              :items="types"
+              v-model="template.type"
+              item-text="name"
+              item-value="id"
+              rounded
+              dense
+              outlined
+              label="Page type"
+              placeholder="Please select page type"
+            ></v-select>
           </v-card-text>
           <v-card-actions class="d-flex justify-end">
             <v-btn small class="text-capitalize" @click="filter_dialog = false"
@@ -226,6 +261,11 @@ export default {
       ],
       single_select: false,
       selected: [],
+      types: [
+        { id: 0, name: "Long" },
+        { id: 1, name: "Short" },
+        { id: 2, name: "Whatsapp" },
+      ],
       single_search: "",
       add_dialog: false,
       edit_dialog: false,
@@ -235,6 +275,7 @@ export default {
         name: "",
         phone: "",
         company_id: null,
+        type: null,
         image: "",
       },
       companies: [],
