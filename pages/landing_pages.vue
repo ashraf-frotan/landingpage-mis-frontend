@@ -347,6 +347,7 @@
                       hide-details=""
                       placeholder="Items here.."
                       append-icon="mdi-plus"
+                      @click:append="alert('hi')"
                       rows="3"
                     ></v-text-field>
                     <v-card elevation="0">
