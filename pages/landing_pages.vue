@@ -49,7 +49,9 @@
                 <v-card>
                   <v-card-text>
                     <v-row
-                      ><v-col cols="12"><h3>Country</h3></v-col></v-row
+                      ><v-col cols="12"
+                        ><h4 class="ma-0 black--text">Country</h4></v-col
+                      ></v-row
                     >
                     <v-row>
                       <v-col cols="12" class="d-flex">
@@ -77,7 +79,9 @@
                 <v-card class="mt-4">
                   <v-card-text>
                     <v-row
-                      ><v-col cols="12"><h3>Company</h3></v-col></v-row
+                      ><v-col cols="12"
+                        ><h4 class="ma-0 black--text">Company</h4></v-col
+                      ></v-row
                     >
                     <v-row justify="center">
                       <v-col cols="12" class="d-flex">
@@ -101,7 +105,7 @@
                   <v-card-text>
                     <v-row align="center">
                       <v-col cols="12" md="3" sm="12" xs="12">
-                        <h3>Landing page type</h3>
+                        <h4 class="ma-0 black--text">Landing page type</h4>
                       </v-col>
                       <v-col
                         cols="12"
@@ -136,7 +140,9 @@
                 <v-card class="mt-3">
                   <v-card-text>
                     <v-row
-                      ><v-col cols="12"><h3>Template</h3></v-col></v-row
+                      ><v-col cols="12"
+                        ><h4 class="ma-0 black--text">Template</h4></v-col
+                      ></v-row
                     >
                     <v-row>
                       <v-col cols="12" class="d-flex">
@@ -161,7 +167,7 @@
                       <v-card-text>
                         <v-row align="center">
                           <v-col cols="12" md="3" sm="12" xs="12">
-                            <h3>Language</h3>
+                            <h4 class="ma-0 black--text">Language</h4>
                           </v-col>
                           <v-col
                             cols="12"
@@ -219,7 +225,7 @@
                       <v-card-text>
                         <v-row align="center">
                           <v-col cols="12" md="3" sm="12" xs="12">
-                            <h3>Product Type</h3>
+                            <h4 class="ma-0 black--text">Product Type</h4>
                           </v-col>
                           <v-col
                             cols="12"
@@ -259,7 +265,7 @@
               <v-card elevation="0" class="ma-2">
                 <v-card elevation="1">
                   <v-card-text>
-                    <div class="mb-1 subtitle-1">Product Code</div>
+                    <h4 class="mb-3 black--text">Product Code</h4>
                     <v-text-field
                       dense
                       hide-details=""
@@ -274,7 +280,7 @@
                   <v-col cols="12" md="6" sm="6" xs="12">
                     <v-card elevation="1">
                       <v-card-text>
-                        <div class="mb-1 subtitle-1">Product Title (AR)</div>
+                        <h4 class="mb-1 black--text">Product Title (AR)</h4>
                         <v-text-field
                           rounded
                           outlined
@@ -288,7 +294,7 @@
                   <v-col cols="12" md="6" sm="6" xs="12">
                     <v-card elevation="1">
                       <v-card-text>
-                        <div class="mb-1 subtitle-1">Product Title (EN)</div>
+                        <h4 class="mb-1 black--text">Product Title (EN)</h4>
                         <v-text-field
                           rounded
                           outlined
@@ -302,7 +308,7 @@
                 </v-row>
                 <v-card elevation="1" class="mt-3">
                   <v-card-text>
-                    <div class="mb-1 subtitle-1">Product Note(AR)</div>
+                    <h4 class="mb-1 black--text">Product Note(AR)</h4>
                     <v-textarea
                       outlined
                       dense
@@ -314,7 +320,7 @@
                 </v-card>
                 <v-card elevation="1" class="my-3">
                   <v-card-text>
-                    <div class="mb-1 subtitle-1">Product Note(EN)</div>
+                    <h4 class="mb-1 black--text">Product Note(EN)</h4>
                     <v-textarea
                       outlined
                       dense
@@ -338,7 +344,7 @@
               <v-card class="ma-2" elevation="0">
                 <v-card elevation="1" class="mt-3">
                   <v-card-text>
-                    <div class="mb-1 subtitle-1">Product Colletion Items</div>
+                    <h4 class="mb-1 black--text">Product Colletion Items</h4>
                     <v-text-field
                       outlined
                       dense
@@ -379,7 +385,7 @@
                 </v-card>
                 <v-card elevation="1" class="my-3">
                   <v-card-text>
-                    <div class="mb-1 subtitle-1">Product Colletion Items</div>
+                    <h4 class="mb-1 black--text">Product Info</h4>
                     <v-row align="center">
                       <v-col cols="12" md="3">
                         <v-text-field
@@ -429,15 +435,12 @@
               <small>Long, slider, slider1 and slider2</small>
             </v-stepper-step>
             <v-stepper-content step="4">
-              <v-row>
+              <v-row class="mx-2 mb-8">
                 <v-col cols="12">
                   <v-card class="my-3">
                     <v-card-text>
-                      <v-row>
-                        <v-col cols="12">
-                          <h3>Images</h3>
-                        </v-col>
-                      </v-row>
+                      <h4 class="mb-1 black--text">Images</h4>
+
                       <v-row>
                         <v-col cols="12" md="6">
                           <v-file-input
@@ -483,7 +486,7 @@
 export default {
   data() {
     return {
-      add_dialog: true,
+      add_dialog: false,
       countries: [],
       companies: [],
       page_types: [],

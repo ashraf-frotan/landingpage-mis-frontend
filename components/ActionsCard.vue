@@ -1,6 +1,8 @@
 <template>
-  <v-card class="my-5" elevation="4">
-    <v-card-title> Actions </v-card-title>
+  <v-card class="my-3" elevation="4">
+    <v-card-title class="pb-1">
+      <v-icon>mdi-pencil</v-icon> Actions
+    </v-card-title>
     <v-card-text>
       <v-row>
         <v-col cols="12" md="4" xs="12" sm="12">
@@ -83,5 +85,8 @@ export default {
 .radio-group {
   margin: 0;
   padding: 0;
+}
+.v-card__title {
+  font-size: 16px;
 }
 </style>

@@ -1,6 +1,6 @@
 <template>
   <v-card elevation="4">
-    <v-card-title>
+    <v-card-title class="pb-1">
       <v-icon>{{ title_info.icon }}</v-icon>
       {{ title_info.title }}
     </v-card-title>

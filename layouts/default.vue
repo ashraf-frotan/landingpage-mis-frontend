@@ -9,7 +9,7 @@
       class="primary darken-1"
       dark
     >
-      <v-list>
+      <v-list dense>
         <v-list-item class="pa-3 pr-2">
           <img
             src="@/assets/images/logo.png"
@@ -101,6 +101,11 @@ export default {
           icon: "mdi-credit-card-chip-outline",
           title: "Landing Pages",
           to: "landing_pages",
+        },
+        {
+          icon: "mdi-logout",
+          title: "Logout",
+          to: "logout",
         },
       ],
       miniVariant: false,
