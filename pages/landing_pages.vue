@@ -58,17 +58,29 @@
                         <v-card
                           elevation="1"
                           class="px-5 py-3 ml-2"
-                          max-width="80"
+                          width="100"
                           link
+                          v-for="country in countries"
+                          :key="country.id"
+                          @click="getCompanies(country.id)"
                         >
-                          <img
-                            src="~/assets/images/uae.png"
-                            width="40"
-                            alt=""
-                          />
-                          <p class="ma-0 text-center" style="font-size: 10px">
-                            UAE
-                          </p>
+                          <v-row>
+                            <v-col>
+                              <div class="d-flex justify-center mb-3">
+                                <img
+                                  src="~/assets/images/uae.png"
+                                  width="40"
+                                  alt=""
+                                />
+                              </div>
+                              <p
+                                class="ma-0 text-center"
+                                style="font-size: 10px"
+                              >
+                                {{ country.name }}
+                              </p>
+                            </v-col>
+                          </v-row>
                         </v-card>
                       </v-col>
                     </v-row>
@@ -76,7 +88,7 @@
                 </v-card>
                 <!-- END COUNTRY SECTION -->
                 <!-- START COMPANY SECTION -->
-                <v-card class="mt-4">
+                <v-card class="mt-4" min-height="125px">
                   <v-card-text>
                     <v-row
                       ><v-col cols="12"
@@ -85,14 +97,17 @@
                     >
                     <v-row justify="center">
                       <v-col cols="12" class="d-flex">
-                        <v-card elevation="1" class="d-flex ml-2 pa-3" link>
+                        <v-card
+                          elevation="1"
+                          class="d-flex ml-2 pa-3"
+                          link
+                          v-for="company in companies"
+                          :key="company.id"
+                          @click="getTemplates(company.id)"
+                        >
                           <v-row align="center" class="py-2 px-4">
-                            <img
-                              src="~/assets/images/uae.png"
-                              width="30"
-                              alt=""
-                            />
-                            <span class="ml-2">Teebalhoor</span>
+                            <v-img :src="company.logo" width="30" alt="" />
+                            <span class="ml-2">{{ company.name }}</span>
                           </v-row>
                         </v-card>
                       </v-col>
@@ -146,14 +161,17 @@
                     >
                     <v-row>
                       <v-col cols="12" class="d-flex">
-                        <v-card elevation="1" class="ml-2" width="200" link>
-                          <img
-                            src="~/assets/images/profile.jpg"
-                            width="200"
-                            alt=""
-                          />
-                          <p class="text-center my-3" style="font-size: 10px">
-                            UAE
+                        <v-card
+                          elevation="1"
+                          class="ml-2"
+                          width="200"
+                          link
+                          v-for="template in templates"
+                          :key="template.id"
+                        >
+                          <v-img :src="template.image" width="200" alt="" />
+                          <p class="text-center my-3">
+                            {{ template.name }}
                           </p>
                         </v-card>
                       </v-col>
@@ -489,7 +507,6 @@ export default {
       add_dialog: false,
       countries: [],
       companies: [],
-      page_types: [],
       templates: [],
       country_id: [],
       e1: 1,
@@ -503,10 +520,22 @@ export default {
         .get("get_info")
         .then((response) => {
           this.data = response.data;
+          this.countries = this.data.countries;
         })
         .catch((error) => {
           console.log(error);
         });
+    },
+    getCompanies(id) {
+      this.companies = this.data.companies.filter((el) => {
+        return el.country_id == id;
+      });
+      this.templates = [];
+    },
+    getTemplates(id) {
+      this.templates = this.data.templates.filter((el) => {
+        return el.id == id;
+      });
     },
     openAddDialog() {
       this.countries = this.data.countries;
