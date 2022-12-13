@@ -30,10 +30,14 @@
                 v-model="single_select"
               ></v-switch>
             </template>
+            <template v-slot:item.flag="{ item }">
+              <v-img :src="item.flag" width="25" />
+            </template>
           </v-data-table>
         </v-card-text>
       </v-card>
     </v-col>
+    <!-- Dialog -->
     <v-dialog v-model="dialog" max-width="400">
       <v-card>
         <v-card-title>
@@ -82,6 +86,16 @@
               :rules="nameRules"
             >
             </v-text-field>
+            <v-file-input
+              label="Flag"
+              placeholder="Select flag"
+              dense
+              rounded
+              outlined
+              required
+              @change="uploadFile"
+            >
+            </v-file-input>
           </v-card-text>
           <v-card-actions class="d-flex justify-end">
             <v-btn small @click="closeDialog">Close</v-btn>
@@ -175,12 +189,14 @@ export default {
         { text: "Country Code", value: "code" },
         { text: "Name", value: "name" },
         { text: "Phone Code", value: "phonecode" },
+        { text: "Flag", value: "flag" },
       ],
       country: {
         id: "",
         name: "",
         code: "",
         phonecode: "",
+        flag: "",
       },
       nameRules: [
         (v) => !!v || "This field is required",
@@ -202,9 +218,18 @@ export default {
     },
     async store() {
       if (this.$refs.form.validate()) {
+        let data = new FormData();
+        data.append("name", this.country.name);
+        data.append("code", this.country.code);
+        data.append("phonecode", this.country.phonecode);
+        data.append("flag", this.country.flag);
         if (this.form_action == "add") {
           await this.$axios
-            .post("country", this.country)
+            .post("country", data, {
+              header: {
+                "Content-Type": "multipart/form-data",
+              },
+            })
             .then((response) => {
               this.countries.push(response.data);
             })
@@ -212,8 +237,13 @@ export default {
               console.log(e);
             });
         } else {
+          data.append("_method", "put");
           await this.$axios
-            .put(`country/${this.country.id}`, this.country)
+            .post(`country/${this.country.id}`, data, {
+              header: {
+                "Content-type": "multipart/form-data",
+              },
+            })
             .then((response) => {
               this.index();
             })
@@ -221,6 +251,12 @@ export default {
               console.log(e);
             });
         }
+        this.$toastr.s({
+          title: "Success!",
+          msg: "Operation done successfully!",
+          timeout: 3000,
+          progressbar: true,
+        });
         this.closeDialog();
         this.$refs.form.resetValidation();
       }
@@ -278,6 +314,9 @@ export default {
     },
     singleSearch(data) {
       this.single_search = data;
+    },
+    uploadFile(file) {
+      this.country.flag = file;
     },
     submitSearch() {
       this.$axios
