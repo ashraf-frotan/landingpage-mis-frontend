@@ -329,7 +329,7 @@
                         hide-details=""
                         placeholder="Items here.."
                         append-icon="mdi-plus"
-                        @click:append="alert('hi')"
+                        @click:append="addToCollection"
                         rows="3"
                         v-model="collection_code"
                       ></v-text-field>
@@ -628,7 +628,8 @@ export default {
             progressbar: true,
           });
         } else {
-          this.landig_info.collection_items.push(this.collection_code);
+          this.landing_info.collection_items.push(this.collection_code);
+          this.collection_code = "";
         }
       } else {
         this.$toastr.i({
