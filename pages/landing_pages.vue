@@ -560,7 +560,7 @@ export default {
         title_en: "",
         desc_ar: "",
         desc_en: "",
-        collection_items: ["TK1", "TK3", "TK56"],
+        collection_items: [],
         info: [],
         images1: null,
         images2: null,
