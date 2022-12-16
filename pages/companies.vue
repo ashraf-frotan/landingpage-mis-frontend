@@ -262,7 +262,7 @@ export default {
         data.append("logo", this.company.logo);
         data.append("country_id", this.company.country_id);
         this.$axios
-          .post("company", data, {
+          .post("company", `${data}`, {
             header: {
               "Content-Type": "multipart/form-data",
             },

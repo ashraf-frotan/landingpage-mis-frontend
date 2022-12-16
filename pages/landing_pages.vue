@@ -58,7 +58,7 @@
                         <v-col cols="12" class="d-flex">
                           <v-card
                             elevation="1"
-                            class="px-5 py-3 ml-2"
+                            class="px-5 py-3 ml-2 country-card"
                             width="100"
                             link
                             v-for="country in countries"
@@ -116,49 +116,6 @@
                     </v-card-text>
                   </v-card>
                   <!-- END TEMPLATE SECTION -->
-                  <!-- START LANDING PAGE TYPE-->
-                  <v-card class="mt-3" elevation="1">
-                    <v-card-text>
-                      <v-row align="center">
-                        <v-col cols="12" md="3" sm="12" xs="12">
-                          <h4 class="ma-0 black--text">Landing page type</h4>
-                        </v-col>
-                        <v-col
-                          cols="12"
-                          md="9"
-                          sm="12"
-                          xs="12"
-                          class="d-flex justify-end"
-                        >
-                          <v-btn
-                            color="primary"
-                            outlined
-                            class="text-capitalize mr-1"
-                            @click="landing_info.page_type = 0"
-                          >
-                            Lead
-                          </v-btn>
-                          <v-btn
-                            color="primary"
-                            outlined
-                            class="text-capitalize"
-                            @click="landing_info.page_type = 1"
-                          >
-                            Quick Buy
-                          </v-btn>
-                          <v-btn
-                            color="primary"
-                            outlined
-                            class="text-capitalize ml-1"
-                            @click="landing_info.page_type = 2"
-                          >
-                            Whatsapp
-                          </v-btn>
-                        </v-col>
-                      </v-row>
-                    </v-card-text>
-                  </v-card>
-                  <!-- END LANDING PAGE TYPE -->
                   <!-- START TEMPLATE SECTION -->
                   <v-card class="mt-3">
                     <v-card-text>
@@ -176,7 +133,7 @@
                             link
                             v-for="template in templates"
                             :key="template.id"
-                            @click="landing_info.template_id = template.id"
+                            @click="selectTemplate(template.id, template.type)"
                           >
                             <v-img :src="template.image" width="200" alt="" />
                             <p class="text-center my-3">
@@ -272,7 +229,7 @@
                                 color="primary"
                                 outlined
                                 class="text-capitalize mr-1"
-                                @click="collectionType(false)"
+                                @click="collectionType($event, false)"
                               >
                                 Piece
                               </v-btn>
@@ -280,7 +237,7 @@
                                 color="primary"
                                 outlined
                                 class="text-capitalize"
-                                @click="collectionType(true)"
+                                @click="collectionType($event, true)"
                               >
                                 Collection
                               </v-btn>
@@ -335,23 +292,17 @@
                       ></v-text-field>
                       <v-card elevation="0">
                         <v-card-text>
-                          <v-sheet
-                            class="d-inline-flex py-1 px-2 rounded mr-2"
-                            elevation="1"
+                          <v-chip
                             v-for="item in landing_info.collection_items"
                             :key="item"
+                            class="ma-2"
+                            close
+                            color="primary"
+                            outlined
+                            @click:close="removeFromCollection(item)"
                           >
                             {{ item }}
-                            <v-btn
-                              icon
-                              x-small
-                              @click="removeFromCollection(item)"
-                            >
-                              <v-icon small class="ml-1" color="primary"
-                                >mdi-close</v-icon
-                              >
-                            </v-btn>
-                          </v-sheet>
+                          </v-chip>
                         </v-card-text>
                       </v-card>
                     </v-card-text>
@@ -360,38 +311,42 @@
                     <v-card-text>
                       <h4 class="mb-1 black--text">Product Info</h4>
                       <v-row align="center">
-                        <v-col cols="12" md="3">
-                          <v-text-field
-                            dense
-                            rounded
-                            outlined
-                            hide-details=""
-                            placeholder="No"
-                            label="Quantity"
-                            v-model="product_info.quantity"
-                          ></v-text-field>
-                        </v-col>
-                        <v-col cols="12" md="3">
-                          <v-text-field
-                            dense
-                            rounded
-                            outlined
-                            hide-details=""
-                            placeholder="price"
-                            label="Price"
-                            v-model="product_info.price"
-                          ></v-text-field>
-                        </v-col>
-                        <v-col cols="12" md="3">
-                          <v-text-field
-                            dense
-                            rounded
-                            outlined
-                            hide-details=""
-                            placeholder="Old price"
-                            label="Old Price"
-                            v-model="product_info.old_price"
-                          ></v-text-field>
+                        <v-col cols="12" md="10">
+                          <v-row>
+                            <v-col cols="12" md="4">
+                              <v-text-field
+                                dense
+                                rounded
+                                outlined
+                                hide-details=""
+                                placeholder="No"
+                                label="Quantity"
+                                v-model="product_info.quantity"
+                              ></v-text-field>
+                            </v-col>
+                            <v-col cols="12" md="4">
+                              <v-text-field
+                                dense
+                                rounded
+                                outlined
+                                hide-details=""
+                                placeholder="price"
+                                label="Price"
+                                v-model="product_info.price"
+                              ></v-text-field>
+                            </v-col>
+                            <v-col cols="12" md="4">
+                              <v-text-field
+                                dense
+                                rounded
+                                outlined
+                                hide-details=""
+                                placeholder="Old price"
+                                label="Old Price"
+                                v-model="product_info.old_price"
+                              ></v-text-field>
+                            </v-col>
+                          </v-row>
                         </v-col>
                         <v-col cols="12" md="2">
                           <v-btn icon small color="primary" outlined>
@@ -586,7 +541,20 @@ export default {
         });
     },
     store() {
-      console.log(this.landing_info);
+      let data = new FormData();
+      data.append("landing_info", JSON.stringify(this.landing_info));
+      this.$axios
+        .post("product", data, {
+          header: {
+            "Content-Type": "multipart/form-data",
+          },
+        })
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
     getCompanies(id) {
       this.companies = this.data.companies.filter((el) => {
@@ -599,7 +567,8 @@ export default {
         return el.id == id;
       });
     },
-    collectionType(type) {
+    collectionType($event, type) {
+      console.log($event, type);
       this.landing_info.is_collection = type;
     },
     openAddDialog() {
@@ -644,6 +613,10 @@ export default {
       this.landing_info.collection_items =
         this.landing_info.collection_items.filter((el) => el != pcode);
     },
+    selectTemplate(id, type) {
+      this.landing_info.template_id = id;
+      this.landing_info.page_type = type;
+    },
   },
   watch: {
     landing_info: {
@@ -656,3 +629,8 @@ export default {
   },
 };
 </script>
+<style>
+.country-card {
+  border: 1.5px solid #1976d2 !important;
+}
+</style>
