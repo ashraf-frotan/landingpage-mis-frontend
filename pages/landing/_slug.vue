@@ -37,7 +37,9 @@
       </v-row>
       <v-row>
         <v-col cols="12" class="px-2">
-          <div class="mx-2 pa-2" style="background-color: #efeff4;">here is some text in here</div>
+          <div class="mx-2 pa-2" style="background-color: #efeff4;font-size:14px">
+           <v-icon>mdi-airplane</v-icon> Ships with 24 hours, delivered within 1-3 working days
+            </div>
         </v-col>
       </v-row>
     </template>
