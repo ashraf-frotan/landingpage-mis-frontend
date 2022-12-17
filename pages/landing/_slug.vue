@@ -4,9 +4,11 @@
     <Slider />
     <template>
       <v-row class="white--text primary" align="center">
-        <v-col cols="6"> <span class="text-body-2">test</span>
+        <v-col cols="6"> 
+          <div class="text-h6">299 AED <v-chip x-small color="white" class="primary--text pa-1"> <v-icon color="primary" x-small>mdi-flash</v-icon> <span style="font-weight: bolder;">9%</span></v-chip></div>
+          <div class="text-caption text-decoration-line-through" style="margin-top:-8px;">329 AED</div>
         </v-col>
-        <v-col cols="6" class="d-flex justify-end"> test </v-col>
+        <v-col cols="6" class="d-flex justify-end"> 1710 Sold </v-col>
       </v-row>
     </template>
     <template>
