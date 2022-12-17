@@ -4,7 +4,7 @@
     <Slider />
     <template>
       <v-row class="white--text theme" align="center">
-        <v-col cols="6"> 
+        <v-col cols="6" class="py-2"> 
           <div class="text-h6">299 AED <v-chip x-small color="white" class="primary--text pa-1"> <v-icon color="primary" x-small>mdi-flash</v-icon> <span style="font-weight: bolder;">9%</span></v-chip></div>
           <div class="text-caption text-decoration-line-through" style="margin-top:-8px;">329 AED</div>
         </v-col>
@@ -14,21 +14,22 @@
     <template>
       <v-row align="center" justify="center">
         <v-col cols="12" align="center" justify="center"
-          ><div>test</div>
+          ><h3>كاميرا المراقبة بالصوت والصورة 1080 </h3>
         </v-col>
       </v-row>
       <v-row align="center">
         <v-col cols="12" class="d-flex justify-center">
-          <div>
+          <div class="d-flex">
             <v-rating
               color="warning"
               readonly
               half-increments
               length="5"
-              :value="4.5"
+              :value="4.8"
             ></v-rating>
-
-            test
+            4.8
+            |
+            327 Reviews
           </div>
         </v-col>
       </v-row>
