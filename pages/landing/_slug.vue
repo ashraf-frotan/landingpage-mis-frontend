@@ -67,4 +67,12 @@ export default {
 .theme{
   background-color: #b5201e;
 }
+
+.v-rating .v-icon{
+  padding:0 !important;
+}
+
+.v-icon.v-icon {
+  font-size:18px;
+}
 </style>
