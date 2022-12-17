@@ -8,5 +8,7 @@
   </v-app>
 </template>
 <script>
-export default {};
+export default {
+  name:'landing'
+};
 </script>

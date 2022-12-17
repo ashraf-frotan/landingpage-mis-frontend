@@ -4,7 +4,8 @@
     <Slider />
     <template>
       <v-row class="white--text primary" align="center">
-        <v-col cols="6"> <span class="text-body-2">test</span> </v-col>
+        <v-col cols="6"> <span class="text-body-2">test</span>
+        </v-col>
         <v-col cols="6" class="d-flex justify-end"> test </v-col>
       </v-row>
     </template>
@@ -45,6 +46,17 @@ export default {
     Logo,
   },
   layout: "landing",
+  data(){
+    return { 
+    }
+  },
+  async asyncData({ params }) {
+      const slug = params.slug
+      return { slug }
+    },
+    created() {
+      console.log(this.slug);
+    }
 };
 </script>
 
