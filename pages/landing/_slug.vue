@@ -3,7 +3,7 @@
     <Logo />
     <Slider />
     <template>
-      <v-row class="white--text primary" align="center">
+      <v-row class="white--text theme" align="center">
         <v-col cols="6"> 
           <div class="text-h6">299 AED <v-chip x-small color="white" class="primary--text pa-1"> <v-icon color="primary" x-small>mdi-flash</v-icon> <span style="font-weight: bolder;">9%</span></v-chip></div>
           <div class="text-caption text-decoration-line-through" style="margin-top:-8px;">329 AED</div>
@@ -62,5 +62,8 @@ export default {
 <style>
 .row {
   margin: 0 !important;
+}
+.theme{
+  background-color: #b5201e;
 }
 </style>
