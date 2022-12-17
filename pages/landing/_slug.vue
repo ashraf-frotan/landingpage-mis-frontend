@@ -17,7 +17,7 @@
           ><h3 class="mt-3">كاميرا المراقبة بالصوت والصورة 1080 </h3>
         </v-col>
       </v-row>
-      <v-row align="center">
+      <v-row align="center"> 
         <v-col cols="12" class="d-flex justify-center">
           <div class="d-flex" style="font-size:12px;">
             <v-rating
@@ -40,6 +40,14 @@
           <div class="mx-2 pa-2" style="background-color: #efeff4;font-size:14px">
            <v-icon>mdi-airplane</v-icon> Ships with 24 hours, delivered within 1-3 working days
             </div>
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col cols="12" class="d-flex justify-space-between" >
+          <div>test</div>
+          <div>test</div>
+          <div>test</div>
+          <div>test</div>
         </v-col>
       </v-row>
     </template>
