@@ -1,7 +1,7 @@
 <template>
   <v-app
     ><v-main>
-      <v-container style="max-width: 760px">
+      <v-container style="max-width: 760px" class="pa-0">
         <Nuxt />
       </v-container>
     </v-main>

@@ -83,15 +83,15 @@
         </v-col>
       </v-row>
       <v-row>
-        <v-col cols="12" md="12" class="py-0">
+        <v-col cols="12" md="12" class="pa-0">
           <v-tabs fixed-tabs>
-            <v-tab> Content </v-tab>
-            <v-tab> Reviews </v-tab>
+            <v-tab class="text-capitalize"> Overview </v-tab>
+            <v-tab class="text-capitalize"> Reviews </v-tab>
           </v-tabs>
         </v-col>
       </v-row>
       <v-row>
-        <v-col cols="12" md="12" class="py-0">
+        <v-col cols="12" md="12" class="pa-0">
           <template v-for="(image, i) in images">
             <v-img :src="image" width="100%" :key="i" alt="" />
           </template>
