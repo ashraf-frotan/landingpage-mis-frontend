@@ -19,14 +19,11 @@
         <v-col cols="12" class="d-flex justify-center">
           <div>
             <v-rating
-              background-color="green lighten-2"
               color="warning"
-              hover
               readonly
               half-increments
               length="5"
-              size="15"
-              value="4.6"
+              :value="4.5"
             ></v-rating>
 
             test
