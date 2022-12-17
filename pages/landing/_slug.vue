@@ -12,25 +12,32 @@
       </v-row>
     </template>
     <template>
-      <v-row align="center" justify="center">
+      <v-row align="center">
         <v-col cols="12" align="center" justify="center"
-          ><h3>كاميرا المراقبة بالصوت والصورة 1080 </h3>
+          ><h3 class="mt-3">كاميرا المراقبة بالصوت والصورة 1080 </h3>
         </v-col>
       </v-row>
       <v-row align="center">
         <v-col cols="12" class="d-flex justify-center">
-          <div class="d-flex">
+          <div class="d-flex" style="font-size:12px;">
             <v-rating
               color="warning"
               readonly
               half-increments
               length="5"
               :value="4.8"
-            ></v-rating>
-            4.8
-            |
+            ></v-rating> &nbsp; &nbsp;
+            <span style="margin-top:3px" class="font-weight-bold">
+              4.8 &nbsp;  | &nbsp;
             327 Reviews
+            </span>
+            
           </div>
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col cols="12" class="px-2">
+          <div class="mx-2 pa-2" style="background-color: #efeff4;">here is some text in here</div>
         </v-col>
       </v-row>
     </template>
@@ -73,6 +80,6 @@ export default {
 }
 
 .v-icon.v-icon {
-  font-size:18px;
+  font-size:16px;
 }
 </style>
