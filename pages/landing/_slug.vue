@@ -25,7 +25,9 @@
     <template>
       <v-row align="center">
         <v-col cols="12" align="center" justify="center"
-          ><h3 class="mt-3 font-size-16 font-weight-500">كاميرا المراقبة بالصوت والصورة 1080</h3>
+          ><h3 class="mt-3 font-size-16 font-weight-500">
+            كاميرا المراقبة بالصوت والصورة 1080
+          </h3>
         </v-col>
       </v-row>
       <v-row align="center">
@@ -46,40 +48,37 @@
         </v-col>
       </v-row>
       <v-row>
-        <v-col cols="12" class="px-2">
-          <div
-            class="mx-2 pa-2"
-            style="background-color: #efeff4; font-size: 14px"
-          >
+        <v-col cols="12" class="px-2 font-size-14">
+          <div class="mx-2 pa-2" style="background-color: #efeff4">
             <v-icon>mdi-airplane</v-icon> Ships with 24 hours, delivered within
             1-3 working days
           </div>
         </v-col>
       </v-row>
-      <v-row style="">
+      <v-row>
         <v-col cols="3">
           <div class="d-flex justify-center">
             <img src="~/assets/images/money.png" width="40" alt="" />
           </div>
-          <div class="text-center font-size-16 mt-1">CASH ON DELIVERY</div>
+          <div class="text-center font-size-12 mt-1">CASH ON DELIVERY</div>
         </v-col>
         <v-col cols="3">
           <div class="d-flex justify-center">
             <img src="~/assets/images/shipping.png" width="40" alt="" />
           </div>
-          <div class="text-center font-size-16 mt-1">FREE SHIPPING</div>
+          <div class="text-center font-size-12 mt-1">FREE SHIPPING</div>
         </v-col>
         <v-col cols="3">
           <div class="d-flex justify-center">
             <img src="~/assets/images/change.png" width="40" alt="" />
           </div>
-          <div class="text-center font-size-16 mt-1">7 DAY FREE CHANGE</div>
+          <div class="text-center font-size-12 mt-1">7 DAY FREE CHANGE</div>
         </v-col>
         <v-col cols="3">
           <div class="d-flex justify-center">
             <img src="~/assets/images/service.png" width="40" alt="" />
           </div>
-          <div class="text-center font-size-16 mt-1">7X24 SERVICES</div>
+          <div class="text-center font-size-12 mt-1">7X24 SERVICES</div>
         </v-col>
       </v-row>
       <v-row>
@@ -99,7 +98,7 @@
       </v-row>
       <v-row>
         <v-col cols="12">
-          <div style="font-size:20px;" class="black--text font-weight-medium">
+          <div style="font-size: 20px" class="black--text font-weight-medium">
             327 Customer Reviews
           </div>
           <div class="d-flex" style="font-size: 12px">
@@ -111,16 +110,265 @@
               :value="4.8"
             ></v-rating>
             &nbsp; &nbsp;
-            <span style="margin-top: 3px">
-              4.8
-            </span>
+            <span style="margin-top: 3px"> 4.8 </span>
           </div>
         </v-col>
       </v-row>
       <v-row>
-        <v-col cols="12" md="6" sm="6" xs="6"></v-col>
-        <v-col cols="12" md="6" sm="6" xs="6"></v-col>
+        <v-col cols="6" md="6" sm="6" xs="6">
+          <v-sheet
+            color="white"
+            elevation="1"
+            class="px-4 py-3 font-size-12"
+            rounded
+            width="100%"
+          >
+            <div class="d-flex">
+              <v-rating
+                color="warning"
+                readonly
+                half-increments
+                length="5"
+                :value="4.8"
+              ></v-rating>
+              &nbsp; &nbsp;
+              <span style="margin-top: 2px"> 4.8 </span>
+            </div>
+            <div>I's perfect for me</div>
+          </v-sheet>
+        </v-col>
+        <v-col cols="6" md="6" sm="6" xs="6">
+          <v-sheet
+            color="white"
+            elevation="1"
+            class="px-4 py-3 font-size-12"
+            rounded
+            width="100%"
+          >
+            <div class="d-flex">
+              <v-rating
+                color="warning"
+                readonly
+                half-increments
+                length="5"
+                :value="4.8"
+              ></v-rating>
+              &nbsp; &nbsp;
+              <span style="margin-top: 2px"> 4.8 </span>
+            </div>
+            <div>safe and sound. Good</div>
+          </v-sheet>
+        </v-col>
       </v-row>
+      <v-row>
+        <v-col cols="6" md="6" sm="6" xs="6">
+          <v-sheet
+            color="white"
+            elevation="1"
+            class="px-4 py-3 font-size-12"
+            rounded
+            width="100%"
+          >
+            <div class="d-flex">
+              <v-rating
+                color="warning"
+                readonly
+                half-increments
+                length="5"
+                :value="4.8"
+              ></v-rating>
+              &nbsp; &nbsp;
+              <span style="margin-top: 2px"> 4.8 </span>
+            </div>
+            <div>Super seller. I highly recommend</div>
+          </v-sheet>
+        </v-col>
+        <v-col cols="6" md="6" sm="6" xs="6">
+          <v-sheet
+            color="white"
+            elevation="1"
+            class="px-4 py-3 font-size-12"
+            rounded
+            width="100%"
+          >
+            <div class="d-flex">
+              <v-rating
+                color="warning"
+                readonly
+                half-increments
+                length="5"
+                :value="4.8"
+              ></v-rating>
+              &nbsp; &nbsp;
+              <span style="margin-top: 2px"> 4.8 </span>
+            </div>
+            <div>حلووووه مررررههه</div>
+          </v-sheet>
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col cols="6" md="6" sm="6" xs="6">
+          <v-sheet
+            color="white"
+            elevation="1"
+            class="px-4 py-3 font-size-12"
+            rounded
+            width="100%"
+          >
+            <div class="d-flex">
+              <v-rating
+                color="warning"
+                readonly
+                half-increments
+                length="5"
+                :value="5"
+              ></v-rating>
+              &nbsp; &nbsp;
+              <span style="margin-top: 2px"> 5 </span>
+            </div>
+            <div>recommend to buy!</div>
+          </v-sheet>
+        </v-col>
+        <v-col cols="6" md="6" sm="6" xs="6">
+          <v-sheet
+            color="white"
+            elevation="1"
+            class="px-4 py-3 font-size-12"
+            rounded
+            width="100%"
+          >
+            <div class="d-flex">
+              <v-rating
+                color="warning"
+                readonly
+                half-increments
+                length="5"
+                :value="4.8"
+              ></v-rating>
+              &nbsp; &nbsp;
+              <span style="margin-top: 2px"> 4.8 </span>
+            </div>
+            <div>Good seller.</div>
+          </v-sheet>
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col cols="6" md="6" sm="6" xs="6">
+          <v-sheet
+            color="white"
+            elevation="1"
+            class="px-4 py-3 font-size-12"
+            rounded
+            width="100%"
+          >
+            <div class="d-flex">
+              <v-rating
+                color="warning"
+                readonly
+                half-increments
+                length="5"
+                :value="4.8"
+              ></v-rating>
+              &nbsp; &nbsp;
+              <span style="margin-top: 2px"> 4.8 </span>
+            </div>
+            <div>High quality made. satisfied order.</div>
+          </v-sheet>
+        </v-col>
+        <v-col cols="6" md="6" sm="6" xs="6">
+          <v-sheet
+            color="white"
+            elevation="1"
+            class="px-4 py-3 font-size-12"
+            rounded
+            width="100%"
+          >
+            <div class="d-flex">
+              <v-rating
+                color="warning"
+                readonly
+                half-increments
+                length="5"
+                :value="4.8"
+              ></v-rating>
+              &nbsp; &nbsp;
+              <span style="margin-top: 2px"> 4.8 </span>
+            </div>
+            <div>نفس الصوره</div>
+          </v-sheet>
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col cols="6" md="6" sm="6" xs="6">
+          <v-sheet
+            color="white"
+            elevation="1"
+            class="px-4 py-3 font-size-12"
+            rounded
+            width="100%"
+          >
+            <div class="d-flex">
+              <v-rating
+                color="warning"
+                readonly
+                half-increments
+                length="5"
+                :value="5"
+              ></v-rating>
+              &nbsp; &nbsp;
+              <span style="margin-top: 2px"> 5 </span>
+            </div>
+            <div>Everything allright! Fast delivery!</div>
+          </v-sheet>
+        </v-col>
+        <v-col cols="6" md="6" sm="6" xs="6">
+          <v-sheet
+            color="white"
+            elevation="1"
+            class="px-4 py-3 font-size-12"
+            rounded
+            width="100%"
+          >
+            <div class="d-flex">
+              <v-rating
+                color="warning"
+                readonly
+                half-increments
+                length="5"
+                :value="4.8"
+              ></v-rating>
+              &nbsp; &nbsp;
+              <span style="margin-top: 2px"> 4.8 </span>
+            </div>
+            <div>it is safe and sound.</div>
+          </v-sheet>
+        </v-col>
+      </v-row>
+      <v-bottom-navigation
+        fixed
+        color="white"
+        horizontal
+        style="margin: auto; right: 0; bottom: 0; left: 0"
+        max-width="760"
+      >
+        <v-row align="center">
+          <v-col cols="3" md="3" sm="3" xs="3" class="d-flex justify-center">
+            <v-icon large>mdi-headset</v-icon>
+          </v-col>
+          <v-col
+            cols="9"
+            md="9"
+            sm="9"
+            xs="9"
+            class="theme d-flex justify-center"
+          >
+            <div>
+              <v-icon large color="white">mdi-shopping</v-icon>
+              <span style="font-size: 20px">BUY NOW</span>
+            </div>
+          </v-col>
+        </v-row>
+      </v-bottom-navigation>
     </template>
   </div>
 </template>
@@ -159,7 +407,7 @@ export default {
   margin: 0 !important;
 }
 .theme {
-  background-color: #b5201e;
+  background-color: #b5201e !important;
 }
 
 .v-rating .v-icon {
@@ -173,12 +421,18 @@ export default {
 .font-size-16 {
   font-size: 16px !important;
 }
+.font-size-14 {
+  font-size: 14px !important;
+}
 
-.font-weight-500{
+.font-size-12 {
+  font-size: 12px !important;
+}
+.font-weight-500 {
   font-weight: 500;
 }
 
-*{
-  font-family:  Tahoma,Verdana,Segoe,sans-serif;;
+* {
+  font-family: Tahoma, Verdana, Segoe, sans-serif;
 }
 </style>
