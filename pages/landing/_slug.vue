@@ -348,7 +348,7 @@
         fixed
         color="white"
         horizontal
-        style="margin: auto; right: 0; bottom: 0; left: 0"
+        style="margin: auto; right: 0; bottom: 0; left: 0; cursor: pointer"
         max-width="760"
       >
         <v-row align="center">
@@ -370,6 +370,39 @@
         </v-row>
       </v-bottom-navigation>
     </template>
+    <!-- Start Dialog -->
+    <v-dialog
+      v-model="dialog"
+      max-width="760"
+      transition="dialog-bottom-transition"
+      class="rounded"
+    >
+      <v-card>
+        <v-card-title
+          class="theme d-flex justify-space-between font-size-16 white--text"
+        >
+          <div></div>
+          <div>Buy Now</div>
+          <div><v-icon color="white">mdi-close</v-icon></div>
+        </v-card-title>
+        <v-card-text>
+          <v-row>
+            <v-col cols="12">
+              <v-form>
+                <v-btn
+                  class="theme white--text"
+                  style="font-size: 24px"
+                  block
+                  height="60"
+                  >BUY NOW</v-btn
+                >
+              </v-form>
+            </v-col>
+          </v-row>
+        </v-card-text>
+      </v-card>
+    </v-dialog>
+    <!-- End Dialog -->
   </div>
 </template>
 
@@ -384,6 +417,7 @@ export default {
   layout: "landing",
   data() {
     return {
+      dialog: true,
       images: [
         require("~/assets/images/S1/1.jpg"),
         require("~/assets/images/S1/2.jpg"),
@@ -430,6 +464,13 @@ export default {
 }
 .font-weight-500 {
   font-weight: 500;
+}
+
+.v-dialog {
+  border-radius: 0 !important;
+}
+.v-card {
+  border-radius: 0 !important;
 }
 
 * {
