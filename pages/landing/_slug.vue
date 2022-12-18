@@ -25,7 +25,7 @@
     <template>
       <v-row align="center">
         <v-col cols="12" align="center" justify="center"
-          ><h3 class="mt-3">كاميرا المراقبة بالصوت والصورة 1080</h3>
+          ><h3 class="mt-3 font-size-16 font-weight-500">كاميرا المراقبة بالصوت والصورة 1080</h3>
         </v-col>
       </v-row>
       <v-row align="center">
@@ -39,7 +39,7 @@
               :value="4.8"
             ></v-rating>
             &nbsp; &nbsp;
-            <span style="margin-top: 3px" class="font-weight-bold">
+            <span style="margin-top: 3px">
               4.8 &nbsp; | &nbsp; 327 Reviews
             </span>
           </div>
@@ -59,27 +59,27 @@
       <v-row style="">
         <v-col cols="3">
           <div class="d-flex justify-center">
-            <img src="~/assets/images/us.png" width="40" alt="" />
+            <img src="~/assets/images/money.png" width="40" alt="" />
           </div>
-          <div class="text-center font-16 mt-1">CASH ON DELIVERY</div>
+          <div class="text-center font-size-16 mt-1">CASH ON DELIVERY</div>
         </v-col>
         <v-col cols="3">
           <div class="d-flex justify-center">
-            <img src="~/assets/images/us.png" width="40" alt="" />
+            <img src="~/assets/images/shipping.png" width="40" alt="" />
           </div>
-          <div class="text-center font-16 mt-1">FREE SHIPPING</div>
+          <div class="text-center font-size-16 mt-1">FREE SHIPPING</div>
         </v-col>
         <v-col cols="3">
           <div class="d-flex justify-center">
-            <img src="~/assets/images/us.png" width="40" alt="" />
+            <img src="~/assets/images/change.png" width="40" alt="" />
           </div>
-          <div class="text-center font-16 mt-1">7 DAY FREE CHANGE</div>
+          <div class="text-center font-size-16 mt-1">7 DAY FREE CHANGE</div>
         </v-col>
         <v-col cols="3">
           <div class="d-flex justify-center">
-            <img src="~/assets/images/us.png" width="40" alt="" />
+            <img src="~/assets/images/service.png" width="40" alt="" />
           </div>
-          <div class="text-center font-16 mt-1">7X24 SERVICES</div>
+          <div class="text-center font-size-16 mt-1">7X24 SERVICES</div>
         </v-col>
       </v-row>
       <v-row>
@@ -146,7 +146,15 @@ export default {
   font-size: 16px;
 }
 
-.font-16 {
-  font-size: 12px !important;
+.font-size-16 {
+  font-size: 16px !important;
+}
+
+.font-weight-500{
+  font-weight: 500;
+}
+
+*{
+  font-family:  Tahoma,Verdana,Segoe,sans-serif;;
 }
 </style>
