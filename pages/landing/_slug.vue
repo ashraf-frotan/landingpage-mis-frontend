@@ -97,6 +97,13 @@
           </template>
         </v-col>
       </v-row>
+      <v-row>
+        <v-col>
+          <div style="font-size:20px;" class="black--text font-weight-medium">
+            327 Customer Reviews
+          </div>
+        </v-col>
+      </v-row>
     </template>
   </div>
 </template>
