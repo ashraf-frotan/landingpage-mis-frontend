@@ -102,6 +102,19 @@
           <div style="font-size:20px;" class="black--text font-weight-medium">
             327 Customer Reviews
           </div>
+          <div class="d-flex" style="font-size: 12px">
+            <v-rating
+              color="warning"
+              readonly
+              half-increments
+              length="5"
+              :value="4.8"
+            ></v-rating>
+            &nbsp; &nbsp;
+            <span style="margin-top: 3px">
+              4.8
+            </span>
+          </div>
         </v-col>
       </v-row>
     </template>
