@@ -98,7 +98,7 @@
         </v-col>
       </v-row>
       <v-row>
-        <v-col>
+        <v-col cols="12">
           <div style="font-size:20px;" class="black--text font-weight-medium">
             327 Customer Reviews
           </div>
@@ -116,6 +116,10 @@
             </span>
           </div>
         </v-col>
+      </v-row>
+      <v-row>
+        <v-col cols="12" md="6" sm="6" xs="6"></v-col>
+        <v-col cols="12" md="6" sm="6" xs="6"></v-col>
       </v-row>
     </template>
   </div>
