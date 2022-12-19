@@ -387,6 +387,21 @@
         </v-card-title>
         <v-card-text>
           <v-row>
+            <v-col cols="8">
+              <div class="d-flex justify-end"><v-chip x-small class="theme white--text pa-1">
+                OFF 50%
+              </v-chip
+            ></div>
+            <div class="mt-5">
+              <span style="font-size:20px">298 AED</span>
+              <span style="font-size:2.5rem;"  class="black--text"> 149 AED</span>
+            </div>
+            </v-col>
+            <v-col cols="4">
+              <img src="~/assets/images/S1/1.jpg" width="120" alt="">
+            </v-col>
+          </v-row>
+          <v-row>
             <v-col cols="12">
               <v-form>
                 <v-text-field outlined dense prepend-inner-icon="mdi-account" placeholder="Name"></v-text-field>
