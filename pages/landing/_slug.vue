@@ -389,6 +389,8 @@
           <v-row>
             <v-col cols="12">
               <v-form>
+                <v-text-field outlined dense prepend-inner-icon="mdi-account" placeholder="Name"></v-text-field>
+                
                 <v-btn
                   class="theme white--text"
                   style="font-size: 24px"
@@ -424,6 +426,11 @@ export default {
         require("~/assets/images/S1/3.jpg"),
         require("~/assets/images/S1/4.jpg"),
       ],
+      prices:[
+        {value:149,text:'1 piece 149 dirhams'},
+        {value:259,text:'3 piece 259 dirhams'},
+        {value:369,text:'3 piece 369 dirhams'},
+      ]
     };
   },
   async asyncData({ params }) {
@@ -476,4 +483,10 @@ export default {
 * {
   font-family: Tahoma, Verdana, Segoe, sans-serif;
 }
+.v-input__icon--prepend-inner .v-icon{
+  font-size: 28px !important;
+}
+
+
+
 </style>
