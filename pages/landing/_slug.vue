@@ -390,7 +390,11 @@
             <v-col cols="12">
               <v-form>
                 <v-text-field outlined dense prepend-inner-icon="mdi-account" placeholder="Name"></v-text-field>
-                
+                <v-select :items="prices" item-text="text" item-value="value" prepend-inner-icon="mdi-scale-balance" outlined dense></v-select>
+                <v-text-field outlined dense prepend-inner-icon="mdi-phone" placeholder="Phone Number"></v-text-field>
+                <v-select :items="prices" item-text="text" item-value="value" prepend-inner-icon="mdi-map-marker-radius" outlined dense></v-select>
+                <v-select :items="prices" item-text="text" item-value="value" prepend-inner-icon="mdi-map-marker-radius" outlined dense></v-select>
+                <v-text-field outlined dense prepend-inner-icon="mdi-map-marker-radius" placeholder="Address"></v-text-field>
                 <v-btn
                   class="theme white--text"
                   style="font-size: 24px"
