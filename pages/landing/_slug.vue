@@ -373,7 +373,7 @@
     <!-- Start Dialog -->
     <v-dialog
       v-model="dialog"
-      max-width="760"
+      max-width="500"
       transition="dialog-bottom-transition"
       class="rounded"
     >
