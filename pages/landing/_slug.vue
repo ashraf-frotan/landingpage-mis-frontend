@@ -408,7 +408,21 @@
         </v-row>
       </v-bottom-navigation>
     </template>
-
+    <v-bottom-sheet v-model="sheet" inset width="760px">
+      <v-sheet class="text-center" height="200px">
+        <v-row>
+          <v-col cols="12" class="d-flex justify-space-between">
+            <div>Contact Us</div>
+            <v-icon>mdi-close</v-icon>
+          </v-col>
+        </v-row>
+        <v-row>
+          <v-col cols="12" class="d-felx justify-center">
+            asjraf<input type="text" />
+          </v-col>
+        </v-row>
+      </v-sheet>
+    </v-bottom-sheet>
     <!-- Start Dialog -->
     <v-dialog
       v-model="dialog"
