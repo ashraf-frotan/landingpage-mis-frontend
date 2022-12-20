@@ -344,6 +344,44 @@
           </v-sheet>
         </v-col>
       </v-row>
+      <v-row>
+        <v-col>
+          <div class="d-flex justify-center font-size-14">
+            SEE ALL 327 REVIEWS
+          </div>
+        </v-col>
+      </v-row>
+      <div class="mt-6">
+        <v-row>
+          <v-col cols="12" class="d-flex justify-center">
+            <div class="font-size-16">CONTACT US</div>
+          </v-col>
+        </v-row>
+        <v-row align="center">
+          <v-col cols="8" offset="2" class="py-0">
+            <div class="py-4"><v-icon>mdi-mail</v-icon> support@oredoh.net</div>
+            <v-divider></v-divider>
+          </v-col>
+        </v-row>
+        <v-row align="center">
+          <v-col cols="8" offset="2" class="py-0">
+            <div class="py-4"><v-icon>mdi-phone</v-icon> (971)600577711</div>
+            <v-divider></v-divider>
+          </v-col>
+        </v-row>
+        <v-row align="center">
+          <v-col cols="8" offset="2" class="py-0">
+            <div class="py-4"><v-icon>mdi-whatsapp</v-icon> WhatsApp</div>
+            <v-divider></v-divider>
+          </v-col>
+        </v-row>
+        <v-row align="center" class="mb-16">
+          <v-col cols="8" offset="2" class="py-0">
+            <div class="d-flex justify-center py-4">Privacy Policy</div>
+            <v-divider></v-divider>
+          </v-col>
+        </v-row>
+      </div>
       <v-bottom-navigation
         fixed
         color="white"
@@ -370,6 +408,7 @@
         </v-row>
       </v-bottom-navigation>
     </template>
+
     <!-- Start Dialog -->
     <v-dialog
       v-model="dialog"
@@ -388,28 +427,77 @@
         <v-card-text>
           <v-row>
             <v-col cols="8">
-              <div class="d-flex justify-end"><v-chip x-small class="theme white--text pa-1">
-                OFF 50%
-              </v-chip
-            ></div>
-            <div class="mt-5">
-              <span style="font-size:20px">298 AED</span>
-              <span style="font-size:2.5rem;"  class="black--text"> 149 AED</span>
-            </div>
+              <div class="d-flex justify-end">
+                <v-chip x-small class="theme white--text pa-1">
+                  OFF 50%
+                </v-chip>
+              </div>
+              <div class="mt-5">
+                <v-row>
+                  <v-col cols="6">
+                    <span
+                      style="font-size: 20px"
+                      class="text-decoration-line-through"
+                      >298 AED</span
+                    >
+                  </v-col>
+                  <v-col cols="6">
+                    <span style="font-size: 2rem" class="black--text">
+                      149 AED</span
+                    >
+                  </v-col>
+                </v-row>
+              </div>
             </v-col>
             <v-col cols="4">
-              <img src="~/assets/images/S1/1.jpg" width="120" alt="">
+              <img src="~/assets/images/S1/1.jpg" width="120" alt="" />
             </v-col>
           </v-row>
           <v-row>
             <v-col cols="12">
               <v-form>
-                <v-text-field outlined dense prepend-inner-icon="mdi-account" placeholder="Name"></v-text-field>
-                <v-select :items="prices" item-text="text" item-value="value" prepend-inner-icon="mdi-scale-balance" outlined dense></v-select>
-                <v-text-field outlined dense prepend-inner-icon="mdi-phone" placeholder="Phone Number"></v-text-field>
-                <v-select :items="prices" item-text="text" item-value="value" prepend-inner-icon="mdi-map-marker-radius" outlined dense></v-select>
-                <v-select :items="prices" item-text="text" item-value="value" prepend-inner-icon="mdi-map-marker-radius" outlined dense></v-select>
-                <v-text-field outlined dense prepend-inner-icon="mdi-map-marker-radius" placeholder="Address"></v-text-field>
+                <v-text-field
+                  outlined
+                  dense
+                  prepend-inner-icon="mdi-account"
+                  placeholder="Name"
+                ></v-text-field>
+                <v-select
+                  :items="prices"
+                  item-text="text"
+                  item-value="value"
+                  prepend-inner-icon="mdi-scale-balance"
+                  outlined
+                  dense
+                ></v-select>
+                <v-text-field
+                  outlined
+                  dense
+                  prepend-inner-icon="mdi-phone"
+                  placeholder="Phone Number"
+                ></v-text-field>
+                <v-select
+                  :items="prices"
+                  item-text="text"
+                  item-value="value"
+                  prepend-inner-icon="mdi-map-marker-radius"
+                  outlined
+                  dense
+                ></v-select>
+                <v-select
+                  :items="prices"
+                  item-text="text"
+                  item-value="value"
+                  prepend-inner-icon="mdi-map-marker-radius"
+                  outlined
+                  dense
+                ></v-select>
+                <v-text-field
+                  outlined
+                  dense
+                  prepend-inner-icon="mdi-map-marker-radius"
+                  placeholder="Address"
+                ></v-text-field>
                 <v-btn
                   class="theme white--text"
                   style="font-size: 24px"
@@ -438,18 +526,19 @@ export default {
   layout: "landing",
   data() {
     return {
-      dialog: true,
+      dialog: false,
+      sheet: true,
       images: [
         require("~/assets/images/S1/1.jpg"),
         require("~/assets/images/S1/2.jpg"),
         require("~/assets/images/S1/3.jpg"),
         require("~/assets/images/S1/4.jpg"),
       ],
-      prices:[
-        {value:149,text:'1 piece 149 dirhams'},
-        {value:259,text:'3 piece 259 dirhams'},
-        {value:369,text:'3 piece 369 dirhams'},
-      ]
+      prices: [
+        { value: 149, text: "1 piece 149 dirhams" },
+        { value: 259, text: "3 piece 259 dirhams" },
+        { value: 369, text: "3 piece 369 dirhams" },
+      ],
     };
   },
   async asyncData({ params }) {
@@ -494,6 +583,7 @@ export default {
 
 .v-dialog {
   border-radius: 0 !important;
+  margin: 12px !important;
 }
 .v-card {
   border-radius: 0 !important;
@@ -502,10 +592,10 @@ export default {
 * {
   font-family: Tahoma, Verdana, Segoe, sans-serif;
 }
-.v-input__icon--prepend-inner .v-icon{
+.v-input__icon--prepend-inner .v-icon {
   font-size: 28px !important;
 }
-
-
-
+.v-bottom-sheet {
+  margin: 0 !important;
+}
 </style>
