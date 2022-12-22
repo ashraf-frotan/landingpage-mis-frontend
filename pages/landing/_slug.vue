@@ -602,6 +602,7 @@ export default {
   },
   created() {
     console.log(this.slug);
+    console.log(city_data);
   },
 };
 </script>
