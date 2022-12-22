@@ -349,7 +349,7 @@
                           </v-row>
                         </v-col>
                         <v-col cols="12" md="2">
-                          <v-btn small color="primary" class="mt-3" fab>
+                          <v-btn small color="primary" class="mt-3" fab @click="addMorePrices">
                             <v-icon color="white">mdi-plus</v-icon>
                           </v-btn>
                         </v-col>
@@ -505,7 +505,7 @@ export default {
       country_id: [],
       e1: 1,
       data: {},
-      count_prices:[12,34,45],
+      count_prices:[1],
       landing_info: {
         page_type: 0,
         template_id: null,
@@ -618,6 +618,9 @@ export default {
       this.landing_info.template_id = id;
       this.landing_info.page_type = type;
     },
+    addMorePrices(){
+      this.count_prices.push(1);
+    }
   },
   watch: {
     landing_info: {
