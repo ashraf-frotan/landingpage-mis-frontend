@@ -538,6 +538,7 @@
                   prepend-inner-icon="mdi-map-marker-radius"
                   outlined
                   dense
+                  @change="getCities($event)"
                 ></v-select>
                 <v-select
                   :items="prices"
@@ -597,6 +598,11 @@ export default {
       ],
     };
   },
+  methods:{
+    getCities($event){
+      console.log($event);
+    },
+  },  
   async asyncData({ params }) {
     const slug = params.slug;
     return { slug };
