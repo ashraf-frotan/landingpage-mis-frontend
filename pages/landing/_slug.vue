@@ -534,7 +534,7 @@
                 <v-select
                   :items="emirates"
                   item-text="name"
-                  item-value="id"
+                  item-value="name"
                   prepend-inner-icon="mdi-map-marker-radius"
                   outlined
                   dense
@@ -543,7 +543,7 @@
                 <v-select
                   :items="cities"
                   item-text="name"
-                  item-value="id"
+                  item-value="name"
                   prepend-inner-icon="mdi-map-marker-radius"
                   outlined
                   dense
@@ -601,7 +601,7 @@ export default {
   },
   methods:{
     getCities($event){
-      let emirate=this.emirates.find(e=>e.id===$event);
+      let emirate=this.emirates.find(e=>e.name===$event);
       this.cities=emirate.subcities;
       console.log(this.cities);
     },
