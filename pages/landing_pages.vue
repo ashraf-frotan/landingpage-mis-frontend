@@ -309,10 +309,10 @@
                   </v-card>
                   <v-card elevation="1" class="my-3">
                     <v-card-text>
-                      <h4 class="mb-1 black--text">Product Info</h4>
-                      <v-row>
+                      <h4 class="mb-2 black--text">Product Info</h4>
+                      <v-row  v-for="(price,index) in count_prices" :key="index">
                         <v-col cols="12" md="10">
-                          <v-row v-for="price in count_prices" :key="price">
+                          <v-row>
                             <v-col cols="12" md="4">
                               <v-text-field
                                 dense
@@ -349,8 +349,11 @@
                           </v-row>
                         </v-col>
                         <v-col cols="12" md="2">
-                          <v-btn small color="primary" class="mt-3" fab @click="addMorePrices">
+                          <v-btn small color="primary" v-if="index==0" fab @click="addMorePrices">
                             <v-icon color="white">mdi-plus</v-icon>
+                          </v-btn>
+                          <v-btn small color="error" v-else fab @click="removeMorePrices(index)">
+                            <v-icon color="white">mdi-minus</v-icon>
                           </v-btn>
                         </v-col>
                       </v-row>
@@ -522,9 +525,9 @@ export default {
         images2: null,
       },
       product_info: {
-        quantity: null,
-        price: null,
-        old_price: null,
+        quantity: [],
+        price: [],
+        old_price: [],
       },
       collection_code: "",
     };
@@ -620,6 +623,11 @@ export default {
     },
     addMorePrices(){
       this.count_prices.push(1);
+    },
+    removeMorePrices(index){
+      let numArray = [1,4,9,16,25];
+      this.count_prices.splice(index,1);
+      console.log(this.count_prices);
     }
   },
   watch: {
