@@ -1,5 +1,11 @@
  <template>
-  <v-carousel cycle show-arrows-on-hover height="100%">
+  <v-carousel
+    cycle
+    show-arrows
+    hide-delimiter-background
+    height="100%"
+    :interval="6000"
+  >
     <v-carousel-item v-for="(slide, i) in slides" :key="i">
       <v-img :src="slide"></v-img>
     </v-carousel-item>
@@ -19,3 +25,9 @@ export default {
   },
 };
 </script>
+<style>
+.v-carousel__controls__item {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+</style>
