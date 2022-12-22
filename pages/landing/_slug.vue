@@ -92,7 +92,7 @@
           <p>Overview</p>
         </v-col>
         <v-col cols="6" md="6" class="pa-0 primary--text" id="tab2">
-          <p>Reviews</p>
+          <a href="#reviews" class="text-decoration-none"><p>Reviews</p></a>
         </v-col>
       </v-row>
       <v-row>
