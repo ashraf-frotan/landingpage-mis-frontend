@@ -541,9 +541,9 @@
                   @change="getCities($event)"
                 ></v-select>
                 <v-select
-                  :items="prices"
-                  item-text="text"
-                  item-value="value"
+                  :items="cities"
+                  item-text="name"
+                  item-value="id"
                   prepend-inner-icon="mdi-map-marker-radius"
                   outlined
                   dense
@@ -584,7 +584,8 @@ export default {
     return {
       dialog: false,
       sheet: false,
-      emirates:[],
+      cities:[],
+      emirate:null,
       images: [
         require("~/assets/images/S1/1.jpg"),
         require("~/assets/images/S1/2.jpg"),
@@ -600,7 +601,9 @@ export default {
   },
   methods:{
     getCities($event){
-      console.log($event);
+      let emirate=this.emirates.find(e=>e.id===$event);
+      this.cities=emirate.subcities;
+      console.log(this.cities);
     },
   },  
   async asyncData({ params }) {
