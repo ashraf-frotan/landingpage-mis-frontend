@@ -603,7 +603,6 @@ export default {
     getCities($event){
       let emirate=this.emirates.find(e=>e.name===$event);
       this.cities=emirate.subcities;
-      console.log(this.cities);
     },
   },  
   async asyncData({ params }) {
@@ -612,7 +611,6 @@ export default {
   },
   created() {
     this.emirates=city_data;
-    console.log(this.emirates);
   },
 };
 </script>
