@@ -532,9 +532,9 @@
                   placeholder="Phone Number"
                 ></v-text-field>
                 <v-select
-                  :items="prices"
-                  item-text="text"
-                  item-value="value"
+                  :items="emirates"
+                  item-text="name"
+                  item-value="id"
                   prepend-inner-icon="mdi-map-marker-radius"
                   outlined
                   dense
@@ -583,6 +583,7 @@ export default {
     return {
       dialog: false,
       sheet: false,
+      emirates:[],
       images: [
         require("~/assets/images/S1/1.jpg"),
         require("~/assets/images/S1/2.jpg"),
@@ -601,8 +602,8 @@ export default {
     return { slug };
   },
   created() {
-    console.log(this.slug);
-    console.log(city_data);
+    this.emirates=city_data;
+    console.log(this.emirates);
   },
 };
 </script>
