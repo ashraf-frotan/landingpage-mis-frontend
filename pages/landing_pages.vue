@@ -310,9 +310,9 @@
                   <v-card elevation="1" class="my-3">
                     <v-card-text>
                       <h4 class="mb-1 black--text">Product Info</h4>
-                      <v-row align="center">
+                      <v-row>
                         <v-col cols="12" md="10">
-                          <v-row>
+                          <v-row v-for="price in count_prices" :key="price">
                             <v-col cols="12" md="4">
                               <v-text-field
                                 dense
@@ -349,8 +349,8 @@
                           </v-row>
                         </v-col>
                         <v-col cols="12" md="2">
-                          <v-btn icon small color="primary" outlined>
-                            <v-icon color="primary">mdi-plus</v-icon>
+                          <v-btn small color="primary" class="mt-3" fab>
+                            <v-icon color="white">mdi-plus</v-icon>
                           </v-btn>
                         </v-col>
                       </v-row>
@@ -505,7 +505,7 @@ export default {
       country_id: [],
       e1: 1,
       data: {},
-      count_prices:[],
+      count_prices:[12,34,45],
       landing_info: {
         page_type: 0,
         template_id: null,
