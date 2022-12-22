@@ -48,7 +48,7 @@
         </v-col>
       </v-row>
       <v-row>
-        <v-col cols="12" class="px-2 font-size-14">
+        <v-col cols="12" class="px-2 font-size-12">
           <div class="mx-2 pa-2" style="background-color: #efeff4">
             <v-icon>mdi-airplane</v-icon> Ships with 24 hours, delivered within
             1-3 working days
@@ -81,12 +81,18 @@
           <div class="text-center font-size-12 mt-1">7X24 SERVICES</div>
         </v-col>
       </v-row>
-      <v-row>
-        <v-col cols="12" md="12" class="pa-0">
-          <v-tabs fixed-tabs>
-            <v-tab class="text-capitalize"> Overview </v-tab>
-            <v-tab class="text-capitalize"> Reviews </v-tab>
-          </v-tabs>
+      <v-row align="center" class="text-center mt-2">
+        <v-col
+          cols="6"
+          md="6"
+          class="pa-0"
+          style="border-bottom: 5px solid #b5201e"
+          id="tab1"
+        >
+          <p>Overview</p>
+        </v-col>
+        <v-col cols="6" md="6" class="pa-0 primary--text" id="tab2">
+          <p>Reviews</p>
         </v-col>
       </v-row>
       <v-row>
@@ -96,7 +102,7 @@
           </template>
         </v-col>
       </v-row>
-      <v-row>
+      <v-row id="reviews">
         <v-col cols="12">
           <div style="font-size: 20px" class="black--text font-weight-medium">
             327 Customer Reviews
@@ -180,7 +186,7 @@
               &nbsp; &nbsp;
               <span style="margin-top: 2px"> 4.8 </span>
             </div>
-            <div>Super seller. I highly recommend</div>
+            <div>Super seller.</div>
           </v-sheet>
         </v-col>
         <v-col cols="6" md="6" sm="6" xs="6">
@@ -272,7 +278,7 @@
               &nbsp; &nbsp;
               <span style="margin-top: 2px"> 4.8 </span>
             </div>
-            <div>High quality made. satisfied order.</div>
+            <div>High quality made.</div>
           </v-sheet>
         </v-col>
         <v-col cols="6" md="6" sm="6" xs="6">
@@ -298,60 +304,62 @@
           </v-sheet>
         </v-col>
       </v-row>
-      <v-row>
-        <v-col cols="6" md="6" sm="6" xs="6">
-          <v-sheet
-            color="white"
-            elevation="1"
-            class="px-4 py-3 font-size-12"
-            rounded
-            width="100%"
-          >
-            <div class="d-flex">
-              <v-rating
-                color="warning"
-                readonly
-                half-increments
-                length="5"
-                :value="5"
-              ></v-rating>
-              &nbsp; &nbsp;
-              <span style="margin-top: 2px"> 5 </span>
+      <div style="position: relative">
+        <v-row>
+          <v-col cols="6" md="6" sm="6" xs="6">
+            <v-sheet
+              color="white"
+              elevation="1"
+              class="px-4 py-3 font-size-12"
+              rounded
+              width="100%"
+            >
+              <div class="d-flex">
+                <v-rating
+                  color="warning"
+                  readonly
+                  half-increments
+                  length="5"
+                  :value="5"
+                ></v-rating>
+                &nbsp; &nbsp;
+                <span style="margin-top: 2px"> 5 </span>
+              </div>
+              <div>Everything allright!</div>
+            </v-sheet>
+          </v-col>
+          <v-col cols="6" md="6" sm="6" xs="6">
+            <v-sheet
+              color="white"
+              elevation="1"
+              class="px-4 py-3 font-size-12"
+              rounded
+              width="100%"
+            >
+              <div class="d-flex">
+                <v-rating
+                  color="warning"
+                  readonly
+                  half-increments
+                  length="5"
+                  :value="4.8"
+                ></v-rating>
+                &nbsp; &nbsp;
+                <span style="margin-top: 2px"> 4.8 </span>
+              </div>
+              <div>it is safe and sound.</div>
+            </v-sheet>
+          </v-col>
+        </v-row>
+        <v-row class="feedback-more">
+          <v-col>
+            <div class="d-flex justify-center font-size-14 pt-3">
+              SEE ALL 327 REVIEWS
             </div>
-            <div>Everything allright! Fast delivery!</div>
-          </v-sheet>
-        </v-col>
-        <v-col cols="6" md="6" sm="6" xs="6">
-          <v-sheet
-            color="white"
-            elevation="1"
-            class="px-4 py-3 font-size-12"
-            rounded
-            width="100%"
-          >
-            <div class="d-flex">
-              <v-rating
-                color="warning"
-                readonly
-                half-increments
-                length="5"
-                :value="4.8"
-              ></v-rating>
-              &nbsp; &nbsp;
-              <span style="margin-top: 2px"> 4.8 </span>
-            </div>
-            <div>it is safe and sound.</div>
-          </v-sheet>
-        </v-col>
-      </v-row>
-      <v-row>
-        <v-col>
-          <div class="d-flex justify-center font-size-14">
-            SEE ALL 327 REVIEWS
-          </div>
-        </v-col>
-      </v-row>
-      <div class="mt-6">
+          </v-col>
+        </v-row>
+      </div>
+      <div class="mt-10">
         <v-row>
           <v-col cols="12" class="d-flex justify-center">
             <div class="font-size-16">CONTACT US</div>
@@ -390,7 +398,14 @@
         max-width="760"
       >
         <v-row align="center">
-          <v-col cols="3" md="3" sm="3" xs="3" class="d-flex justify-center">
+          <v-col
+            cols="3"
+            md="3"
+            sm="3"
+            xs="3"
+            class="d-flex justify-center"
+            @click="sheet = true"
+          >
             <v-icon large>mdi-headset</v-icon>
           </v-col>
           <v-col
@@ -399,6 +414,7 @@
             sm="9"
             xs="9"
             class="theme d-flex justify-center"
+            @click="dialog = true"
           >
             <div>
               <v-icon large color="white">mdi-shopping</v-icon>
@@ -409,16 +425,38 @@
       </v-bottom-navigation>
     </template>
     <v-bottom-sheet v-model="sheet" inset width="760px">
-      <v-sheet class="text-center" height="200px">
+      <v-sheet class="text-center" height="300px" style="font-size: 12px">
         <v-row>
           <v-col cols="12" class="d-flex justify-space-between">
-            <div>Contact Us</div>
-            <v-icon>mdi-close</v-icon>
+            <div class="font-size-18 font-weight-700">Contact Us</div>
+            <v-icon @click="sheet = false">mdi-close</v-icon>
           </v-col>
         </v-row>
-        <v-row>
-          <v-col cols="12" class="d-felx justify-center">
-            asjraf<input type="text" />
+        <v-row align="center">
+          <v-col cols="12">
+            <div class="d-flex justify-center">
+              <div class="mt-3 font-weight-bold">00971 &nbsp;</div>
+              <input
+                type="text"
+                class="custom-input"
+                placeholder="Phone Number"
+              />
+            </div>
+            <div class="ma-2">
+              <input type="text" class="custom-input" placeholder="Email" />
+            </div>
+            <div class="ma-2">
+              <textarea
+                type="text"
+                class="custom-input"
+                placeholder="How can we help you?"
+              ></textarea>
+            </div>
+            <div class="pa-2">
+              <v-btn class="theme text-capitalize white--text py-6" block
+                >Send</v-btn
+              >
+            </div>
           </v-col>
         </v-row>
       </v-sheet>
@@ -429,6 +467,7 @@
       max-width="500"
       transition="dialog-bottom-transition"
       class="rounded"
+      overlay-color="blue"
     >
       <v-card>
         <v-card-title
@@ -436,7 +475,9 @@
         >
           <div></div>
           <div>Buy Now</div>
-          <div><v-icon color="white">mdi-close</v-icon></div>
+          <div>
+            <v-icon color="white" @click="dialog = false">mdi-close</v-icon>
+          </div>
         </v-card-title>
         <v-card-text>
           <v-row>
@@ -455,7 +496,7 @@
                       >298 AED</span
                     >
                   </v-col>
-                  <v-col cols="6">
+                  <v-col cols="6" class="pa-0">
                     <span style="font-size: 2rem" class="black--text">
                       149 AED</span
                     >
@@ -541,7 +582,7 @@ export default {
   data() {
     return {
       dialog: false,
-      sheet: true,
+      sheet: false,
       images: [
         require("~/assets/images/S1/1.jpg"),
         require("~/assets/images/S1/2.jpg"),
@@ -591,8 +632,16 @@ export default {
 .font-size-12 {
   font-size: 12px !important;
 }
+.font-size-18 {
+  font-size: 18px;
+}
+
 .font-weight-500 {
   font-weight: 500;
+}
+
+.font-weight-700 {
+  font-weight: 700;
 }
 
 .v-dialog {
@@ -611,5 +660,59 @@ export default {
 }
 .v-bottom-sheet {
   margin: 0 !important;
+}
+
+.custom-input {
+  background-color: #efefef;
+  padding: 10px 8px;
+  outline: 0;
+  width: 100%;
+}
+
+#tab2:hover {
+  border: 1px solid lightgray;
+}
+#tab1,
+#tab2 {
+  cursor: pointer;
+  padding-top: 8px !important;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+.feedback-more {
+  color: #000;
+  text-transform: uppercase;
+  text-align: center;
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  width: 100%;
+  height: 30px;
+  padding-top: 20px;
+  line-height: 50px;
+  background: -webkit-linear-gradientrgba(
+    0,
+    255,
+    255,
+    255,
+    1,
+    hsla(0, 0%, 100%, 0.9),
+    hsla(0, 0%, 100%, 0)
+  );
+  background: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    from(0),
+    color-stop(#fff),
+    color-stop(hsla(0, 0%, 100%, 0.9)),
+    to(hsla(0, 0%, 100%, 0))
+  );
+  background: linear-gradient(
+    0,
+    #fff,
+    hsla(0, 0%, 100%, 0.9),
+    hsla(0, 0%, 100%, 0)
+  );
 }
 </style>
