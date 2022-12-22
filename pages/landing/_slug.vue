@@ -524,6 +524,7 @@
                   prepend-inner-icon="mdi-scale-balance"
                   outlined
                   dense
+                  placeholder="Pieces"
                 ></v-select>
                 <v-text-field
                   outlined
@@ -539,6 +540,7 @@
                   outlined
                   dense
                   @change="getCities($event)"
+                  placeholder="Select Emirate"
                 ></v-select>
                 <v-select
                   :items="cities"
@@ -547,6 +549,8 @@
                   prepend-inner-icon="mdi-map-marker-radius"
                   outlined
                   dense
+                  v-if="show_city_select"
+                  placeholder="Select City"
                 ></v-select>
                 <v-text-field
                   outlined
@@ -586,6 +590,7 @@ export default {
       sheet: false,
       cities:[],
       emirate:null,
+      show_city_select:false,
       images: [
         require("~/assets/images/S1/1.jpg"),
         require("~/assets/images/S1/2.jpg"),
@@ -603,6 +608,7 @@ export default {
     getCities($event){
       let emirate=this.emirates.find(e=>e.name===$event);
       this.cities=emirate.subcities;
+      this.show_city_select=true;
     },
   },  
   async asyncData({ params }) {
