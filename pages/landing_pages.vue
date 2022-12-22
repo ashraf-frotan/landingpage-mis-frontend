@@ -525,9 +525,9 @@ export default {
         images2: null,
       },
       product_info: {
-        quantity: [],
-        price: [],
-        old_price: [],
+        quantity: null,
+        price: null,
+        old_price: null,
       },
       collection_code: "",
     };
@@ -625,9 +625,7 @@ export default {
       this.count_prices.push(1);
     },
     removeMorePrices(index){
-      let numArray = [1,4,9,16,25];
       this.count_prices.splice(index,1);
-      console.log(this.count_prices);
     }
   },
   watch: {
