@@ -505,6 +505,7 @@ export default {
       country_id: [],
       e1: 1,
       data: {},
+      count_prices:[],
       landing_info: {
         page_type: 0,
         template_id: null,
