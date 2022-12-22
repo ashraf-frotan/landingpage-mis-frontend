@@ -5,8 +5,8 @@
     <template>
       <v-row class="white--text theme" align="center">
         <v-col cols="6" class="py-2">
-          <div class="text-h6">
-            299 AED
+          <div>
+            <span style="font-size:22px;" class="font-weight-bold">299 AED</span>
             <v-chip x-small color="white" class="primary--text pa-1">
               <v-icon color="primary" x-small>mdi-flash</v-icon>
               <span style="font-weight: bolder">9%</span></v-chip
@@ -14,12 +14,12 @@
           </div>
           <div
             class="text-caption text-decoration-line-through"
-            style="margin-top: -8px"
+            style="margin-top: -6px"
           >
             329 AED
           </div>
         </v-col>
-        <v-col cols="6" class="d-flex justify-end"> 1710 Sold </v-col>
+        <v-col cols="6" class="d-flex justify-end font-size-12"> 1710 Sold </v-col>
       </v-row>
     </template>
     <template>
