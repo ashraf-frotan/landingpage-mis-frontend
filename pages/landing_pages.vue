@@ -374,7 +374,21 @@
                       </v-row>
                     </v-card-text>
                   </v-card>
-
+                  <v-card elevation="1" class="my-3">
+                    <v-card-text>
+                      <h4 class="black--text">Sale Type</h4>
+                      <v-row>
+                        <v-col cols="12">
+                          <v-checkbox
+                            v-model="landing_info.sale_type"
+                            label="Buy 1 Get 1 Free"
+                            color="success"
+                            hide-details
+                          ></v-checkbox>
+                        </v-col>
+                      </v-row>
+                    </v-card-text>
+                  </v-card>
                   <v-btn color="primary" @click="e1 = 3" small>
                     Continue
                   </v-btn>
@@ -388,7 +402,16 @@
               <v-stepper-content step="3">
                 <v-card class="ma-2" elevation="0">
                   <v-row class="mt-3">
-                    <v-col cols="12" md="6" sm="6" xs="12">
+                    <v-col
+                      cols="12"
+                      md="6"
+                      sm="6"
+                      xs="12"
+                      v-if="
+                        landing_info.page_language == 0 ||
+                        landing_info.page_language == 1
+                      "
+                    >
                       <v-card elevation="1">
                         <v-card-text>
                           <h4 class="mb-1 black--text">Product Title (AR)</h4>
@@ -403,7 +426,16 @@
                         </v-card-text>
                       </v-card>
                     </v-col>
-                    <v-col cols="12" md="6" sm="6" xs="12">
+                    <v-col
+                      cols="12"
+                      md="6"
+                      sm="6"
+                      xs="12"
+                      v-if="
+                        landing_info.page_language == 0 ||
+                        landing_info.page_language == 2
+                      "
+                    >
                       <v-card elevation="1">
                         <v-card-text>
                           <h4 class="mb-1 black--text">Product Title (EN)</h4>
@@ -419,7 +451,14 @@
                       </v-card>
                     </v-col>
                   </v-row>
-                  <v-card elevation="1" class="mt-3">
+                  <v-card
+                    elevation="1"
+                    class="mt-3"
+                    v-if="
+                      landing_info.page_language == 0 ||
+                      landing_info.page_language == 1
+                    "
+                  >
                     <v-card-text>
                       <h4 class="mb-1 black--text">Product Note(AR)</h4>
                       <v-textarea
@@ -432,7 +471,14 @@
                       ></v-textarea>
                     </v-card-text>
                   </v-card>
-                  <v-card elevation="1" class="my-3">
+                  <v-card
+                    elevation="1"
+                    class="my-3"
+                    v-if="
+                      landing_info.page_language == 0 ||
+                      landing_info.page_language == 2
+                    "
+                  >
                     <v-card-text>
                       <h4 class="mb-1 black--text">Product Note(EN)</h4>
                       <v-textarea
@@ -533,6 +579,7 @@ export default {
         title_en: "",
         desc_ar: "",
         desc_en: "",
+        sale_type: 0,
         collection_items: [],
         info: [],
         prices: [
