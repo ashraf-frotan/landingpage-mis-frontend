@@ -310,10 +310,13 @@
                   <v-card elevation="1" class="my-3">
                     <v-card-text>
                       <h4 class="mb-2 black--text">Product Info</h4>
-                      <v-row  v-for="(price,index) in count_prices" :key="index">
-                        <v-col cols="12" md="10">
+                      <v-row
+                        v-for="(price, index) in landing_info.prices"
+                        :key="index"
+                      >
+                        <v-col cols="12" md="10" sm="10" xs="10">
                           <v-row>
-                            <v-col cols="12" md="4">
+                            <v-col cols="12" md="4" sm="4" xs="4">
                               <v-text-field
                                 dense
                                 rounded
@@ -321,10 +324,10 @@
                                 hide-details=""
                                 placeholder="No"
                                 label="Quantity"
-                                v-model="product_info.quantity"
+                                v-model="landing_info.prices[index].quantity"
                               ></v-text-field>
                             </v-col>
-                            <v-col cols="12" md="4">
+                            <v-col cols="12" md="4" sm="4" xs="4">
                               <v-text-field
                                 dense
                                 rounded
@@ -332,10 +335,10 @@
                                 hide-details=""
                                 placeholder="price"
                                 label="Price"
-                                v-model="product_info.price"
+                                v-model="landing_info.prices[index].price"
                               ></v-text-field>
                             </v-col>
-                            <v-col cols="12" md="4">
+                            <v-col cols="12" md="4" sm="4" xs="4">
                               <v-text-field
                                 dense
                                 rounded
@@ -343,16 +346,28 @@
                                 hide-details=""
                                 placeholder="Old price"
                                 label="Old Price"
-                                v-model="product_info.old_price"
+                                v-model="landing_info.prices[index].old_price"
                               ></v-text-field>
                             </v-col>
                           </v-row>
                         </v-col>
-                        <v-col cols="12" md="2">
-                          <v-btn small color="primary" v-if="index==0" fab @click="addMorePrices">
+                        <v-col cols="12" md="2" sm="2" xs="2">
+                          <v-btn
+                            small
+                            color="primary"
+                            v-if="index == 0"
+                            fab
+                            @click="addMorePrices"
+                          >
                             <v-icon color="white">mdi-plus</v-icon>
                           </v-btn>
-                          <v-btn small color="error" v-else fab @click="removeMorePrices(index)">
+                          <v-btn
+                            small
+                            color="error"
+                            v-else
+                            fab
+                            @click="removeMorePrices(index)"
+                          >
                             <v-icon color="white">mdi-minus</v-icon>
                           </v-btn>
                         </v-col>
@@ -508,7 +523,6 @@ export default {
       country_id: [],
       e1: 1,
       data: {},
-      count_prices:[1],
       landing_info: {
         page_type: 0,
         template_id: null,
@@ -521,14 +535,17 @@ export default {
         desc_en: "",
         collection_items: [],
         info: [],
-        images1: null,
-        images2: null,
+        prices: [
+          {
+            quantity: "",
+            price: "",
+            old_price: "",
+          },
+        ],
       },
-      product_info: {
-        quantity: null,
-        price: null,
-        old_price: null,
-      },
+      s_images: "",
+      l_images: "",
+
       collection_code: "",
     };
   },
@@ -547,6 +564,18 @@ export default {
     store() {
       let data = new FormData();
       data.append("landing_info", JSON.stringify(this.landing_info));
+      data.append("prices", this.prices);
+      data.append("s_images", this.s_images);
+      for (let i = 0; i < this.s_images.length; i++) {
+        let file = this.s_images[i];
+        data.append("s_images[" + i + "]", file);
+      }
+
+      for (let i = 0; i < this.l_images.length; i++) {
+        let file = this.l_images[i];
+        data.append("l_images[" + i + "]", file);
+      }
+
       this.$axios
         .post("product", data, {
           header: {
@@ -580,11 +609,11 @@ export default {
       this.add_dialog = true;
     },
     uploadFile1(file) {
-      this.landing_info.images1 = file;
-      console.log(file);
+      this.s_images = file;
+      console.log(this.s_images.length);
     },
     uploadFile2(file) {
-      this.landing_info.images2 = file;
+      this.l_images = file;
       console.log(file);
     },
     addToCollection() {
@@ -621,12 +650,16 @@ export default {
       this.landing_info.template_id = id;
       this.landing_info.page_type = type;
     },
-    addMorePrices(){
-      this.count_prices.push(1);
+    addMorePrices() {
+      this.landing_info.prices.push({
+        quantity: "",
+        price: "",
+        old_price: "",
+      });
     },
-    removeMorePrices(index){
-      this.count_prices.splice(index,1);
-    }
+    removeMorePrices(index) {
+      this.landing_info.prices.splice(index, 1);
+    },
   },
   watch: {
     landing_info: {
