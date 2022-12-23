@@ -451,46 +451,98 @@
                       </v-card>
                     </v-col>
                   </v-row>
-                  <v-card
-                    elevation="1"
-                    class="mt-3"
-                    v-if="
-                      landing_info.page_language == 0 ||
-                      landing_info.page_language == 1
-                    "
-                  >
-                    <v-card-text>
-                      <h4 class="mb-1 black--text">Product Note(AR)</h4>
-                      <v-textarea
-                        outlined
-                        dense
-                        hide-details=""
-                        placeholder="Note here.."
-                        rows="3"
-                        v-model="landing_info.desc_ar"
-                      ></v-textarea>
-                    </v-card-text>
-                  </v-card>
-                  <v-card
-                    elevation="1"
-                    class="mt-3"
-                    v-if="
-                      landing_info.page_language == 0 ||
-                      landing_info.page_language == 2
-                    "
-                  >
-                    <v-card-text>
-                      <h4 class="mb-1 black--text">Product Note(EN)</h4>
-                      <v-textarea
-                        outlined
-                        dense
-                        hide-details=""
-                        placeholder="Note here.."
-                        rows="3"
-                        v-model="landing_info.desc_en"
-                      ></v-textarea>
-                    </v-card-text>
-                  </v-card>
+                  <v-row>
+                    <v-col cols="12">
+                      <v-card
+                        elevation="1"
+                        v-if="
+                          landing_info.page_language == 0 ||
+                          landing_info.page_language == 1
+                        "
+                      >
+                        <v-card-text>
+                          <h4 class="mb-1 black--text">Product Note(AR)</h4>
+                          <v-textarea
+                            outlined
+                            dense
+                            hide-details=""
+                            placeholder="Note here.."
+                            rows="3"
+                            v-model="landing_info.desc_ar"
+                          ></v-textarea>
+                        </v-card-text>
+                      </v-card>
+                    </v-col>
+                  </v-row>
+                  <v-row>
+                    <v-col cols="12">
+                      <v-card
+                        elevation="1"
+                        v-if="
+                          landing_info.page_language == 0 ||
+                          landing_info.page_language == 2
+                        "
+                      >
+                        <v-card-text>
+                          <h4 class="mb-1 black--text">Product Note(EN)</h4>
+                          <v-textarea
+                            outlined
+                            dense
+                            hide-details=""
+                            placeholder="Note here.."
+                            rows="3"
+                            v-model="landing_info.desc_en"
+                          ></v-textarea>
+                        </v-card-text>
+                      </v-card>
+                    </v-col>
+                  </v-row>
+                  <v-row>
+                    <v-col cols="12">
+                      <v-card
+                        elevation="1"
+                        v-if="
+                          landing_info.page_language == 0 ||
+                          landing_info.page_language == 1
+                        "
+                      >
+                        <v-card-text>
+                          <h4 class="mb-1 black--text">Message (AR)</h4>
+                          <v-textarea
+                            outlined
+                            dense
+                            hide-details=""
+                            placeholder="Message here.."
+                            rows="3"
+                            v-model="landing_info.message_ar"
+                          ></v-textarea>
+                        </v-card-text>
+                      </v-card>
+                    </v-col>
+                  </v-row>
+                  <v-row>
+                    <v-col cols="12">
+                      <v-card
+                        elevation="1"
+                        v-if="
+                          landing_info.page_language == 0 ||
+                          landing_info.page_language == 2
+                        "
+                      >
+                        <v-card-text>
+                          <h4 class="mb-1 black--text">Message (EN)</h4>
+                          <v-textarea
+                            outlined
+                            dense
+                            hide-details=""
+                            placeholder="Message here.."
+                            rows="3"
+                            v-model="landing_info.message_en"
+                          ></v-textarea>
+                        </v-card-text>
+                      </v-card>
+                    </v-col>
+                  </v-row>
                   <v-row class="mt-3">
                     <v-col cols="12">
                       <v-btn color="primary" @click="e1 = 4" small>
@@ -583,6 +635,8 @@ export default {
         title_en: "",
         desc_ar: "",
         desc_en: "",
+        message_ar: "",
+        message_en: "",
         sale_type: 0,
         collection_items: [],
         info: [],
