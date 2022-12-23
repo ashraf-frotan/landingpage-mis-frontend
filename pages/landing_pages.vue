@@ -473,7 +473,7 @@
                   </v-card>
                   <v-card
                     elevation="1"
-                    class="my-3"
+                    class="mt-3"
                     v-if="
                       landing_info.page_language == 0 ||
                       landing_info.page_language == 2
@@ -491,10 +491,14 @@
                       ></v-textarea>
                     </v-card-text>
                   </v-card>
-                  <v-btn color="primary" @click="e1 = 4" small>
-                    Continue
-                  </v-btn>
-                  <v-btn small @click="e1 = 2"> Back </v-btn>
+                  <v-row class="mt-3">
+                    <v-col cols="12">
+                      <v-btn color="primary" @click="e1 = 4" small>
+                        Continue
+                      </v-btn>
+                      <v-btn small @click="e1 = 2"> Back </v-btn>
+                    </v-col>
+                  </v-row>
                 </v-card>
               </v-stepper-content>
               <v-stepper-step step="4">
