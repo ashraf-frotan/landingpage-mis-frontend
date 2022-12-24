@@ -635,7 +635,6 @@ export default {
       e1: 1,
       data: {},
       landing_info: {
-        
         page_type: 0,
         template_id: null,
         is_collection: false,
