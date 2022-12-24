@@ -12,7 +12,17 @@
       <v-card>
         <v-card-text>
           <v-data-table :items="products" :headers="headers">
-            
+            <template v-slot:item.page_status="{item}">
+              <span v-if="item.page_status==0">
+                Registered
+              </span>
+              <span v-else-if="item.page_status==1">
+                Publish
+              </span>
+              <span v-else>
+                Unpublished
+              </span>
+            </template>
           </v-data-table>
         </v-card-text>
       </v-card>
