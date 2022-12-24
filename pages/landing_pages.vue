@@ -643,6 +643,7 @@ export default {
       headers:[
       {text:'ID',value:'id'},
       {text:'PCode',value:'pcode'},
+      {text:'Title',value:'title_en'},
       {text:'Status',value:'page_status'},
       {text:'Template',value:'template_id'},
       {text:'Link',value:'page_link'},
