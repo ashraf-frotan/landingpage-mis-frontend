@@ -11,7 +11,7 @@
       <ActionsCard @openAddDialog="openAddDialog" />
       <v-card>
         <v-card-text>
-          <v-data-table :items="products" :headers="headers">
+          <v-data-table :items="products" :headers="headers" dense>
             <template v-slot:item.page_status="{item}">
               <span v-if="item.page_status==0">
                 Registered
