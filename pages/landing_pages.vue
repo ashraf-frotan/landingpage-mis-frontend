@@ -626,6 +626,7 @@ export default {
       e1: 1,
       data: {},
       landing_info: {
+        products:[],
         page_type: 0,
         template_id: null,
         is_collection: false,
@@ -655,6 +656,14 @@ export default {
     };
   },
   methods: {
+    index(){
+      this.$axios.get('product').then(response=>{
+        this.products=response.data;
+        console.log(this.products);
+      }).catch(error=>{
+        console.log(error);
+      });
+    },
     getInfo() {
       this.$axios
         .get("get_info")
@@ -773,6 +782,7 @@ export default {
     },
   },
   created() {
+    this.index();
     this.getInfo();
   },
 };
