@@ -11,13 +11,13 @@
       <ActionsCard @openAddDialog="openAddDialog" />
       <v-card>
         <v-card-text>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae,
-          deserunt ratione? Incidunt, id, nemo nulla voluptas cupiditate omnis
-          maiores quam architecto minima, deserunt placeat possimus! Ipsa
-          deserunt id illo facilis?
+          <v-data-table>
+            
+          </v-data-table>
         </v-card-text>
       </v-card>
     </v-col>
+    <!-- start dialog -->
     <v-dialog
       v-model="add_dialog"
       fullscreen
@@ -612,12 +612,20 @@
         </v-card>
       </v-card>
     </v-dialog>
+    <!-- end dialog -->
   </v-row>
 </template>
 <script>
 export default {
   data() {
     return {
+      headers:[
+      {text:'ID',value:'id'},
+      {text:'PCode',value:'pcode'},
+      {text:'Status',value:'page_status'},
+      {text:'Template',value:'template_id'},
+      {text:'Link',value:'page_link'},
+      ],
       add_dialog: false,
       countries: [],
       companies: [],
