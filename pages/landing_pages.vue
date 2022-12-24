@@ -26,6 +26,14 @@
             <template v-slot:item.template_id="{item}">
                 {{ item.template.name }}
             </template>
+            <template v-slot:item.sale_type="{item}">
+              <span v-if="item.sale_type==0">
+                Simple
+              </span>
+              <span v-else>
+                Buy 1 get 1 free
+              </span>
+            </template>
           </v-data-table>
         </v-card-text>
       </v-card>
@@ -638,6 +646,7 @@ export default {
       {text:'Status',value:'page_status'},
       {text:'Template',value:'template_id'},
       {text:'Link',value:'page_link'},
+      {text:'Sale type',value:'sale_type'},
       ],
       add_dialog: false,
       countries: [],
