@@ -11,7 +11,7 @@
       <ActionsCard @openAddDialog="openAddDialog" />
       <v-card>
         <v-card-text>
-          <v-data-table>
+          <v-data-table :items="products" :headers="headers">
             
           </v-data-table>
         </v-card-text>
@@ -631,10 +631,11 @@ export default {
       companies: [],
       templates: [],
       country_id: [],
+      products:[],
       e1: 1,
       data: {},
       landing_info: {
-        products:[],
+        
         page_type: 0,
         template_id: null,
         is_collection: false,
