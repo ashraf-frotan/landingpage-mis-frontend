@@ -23,6 +23,9 @@
                 Unpublished
               </span>
             </template>
+            <template v-slot:item.template_id="{item}">
+                {{ item.template.name }}
+            </template>
           </v-data-table>
         </v-card-text>
       </v-card>
