@@ -223,7 +223,6 @@
             ></v-select>
             <v-select
               :items="types"
-              v-model="template.type"
               item-text="name"
               item-value="id"
               rounded

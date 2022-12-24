@@ -12,27 +12,31 @@
       <v-card>
         <v-card-text>
           <v-data-table :items="products" :headers="headers" dense>
-            <template v-slot:item.page_status="{item}">
-              <span v-if="item.page_status==0">
-                Registered
-              </span>
-              <span v-else-if="item.page_status==1">
-                Publish
-              </span>
-              <span v-else>
-                Unpublished
-              </span>
+            <template v-slot:item.page_status="{ item }">
+              <span v-if="item.page_status == 0"> Registered </span>
+              <span v-else-if="item.page_status == 1"> Publish </span>
+              <span v-else> Unpublished </span>
             </template>
-            <template v-slot:item.template_id="{item}">
-                {{ item.template.name }}
+            <template v-slot:item.template_id="{ item }">
+              {{ item.template.name }}
             </template>
-            <template v-slot:item.sale_type="{item}">
-              <span v-if="item.sale_type==0">
-                Simple
-              </span>
-              <span v-else>
-                Buy 1 get 1 free
-              </span>
+            <template v-slot:item.sale_type="{ item }">
+              <span v-if="item.sale_type == 0"> Simple </span>
+              <span v-else> Buy 1 get 1 free </span>
+            </template>
+            <template v-slot:item.page_link="{ item }">
+              <NuxtLink
+                :to="'landing/' + item.page_link"
+                class="text-decoration-none"
+                >open</NuxtLink
+              >
+            </template>
+            <template v-slot:item.is_collection="{ item }">
+              <span v-if="item.is_collection">Collection</span>
+              <span v-else>Piece</span>
+            </template>
+            <template v-slot:item.template.company_id="{ item }">
+              {{ item.template.company.name }}
             </template>
           </v-data-table>
         </v-card-text>
@@ -110,7 +114,11 @@
                   </v-card>
                   <!-- END COUNTRY SECTION -->
                   <!-- START COMPANY SECTION -->
-                  <v-card class="mt-4" min-height="125px">
+                  <v-card
+                    class="mt-4"
+                    min-height="125px"
+                    v-if="country_id != null"
+                  >
                     <v-card-text>
                       <v-row
                         ><v-col cols="12"
@@ -138,7 +146,7 @@
                   </v-card>
                   <!-- END TEMPLATE SECTION -->
                   <!-- START TEMPLATE SECTION -->
-                  <v-card class="mt-3">
+                  <v-card class="mt-3" v-if="company_id != null">
                     <v-card-text>
                       <v-row
                         ><v-col cols="12"
@@ -640,21 +648,24 @@
 export default {
   data() {
     return {
-      headers:[
-      {text:'ID',value:'id'},
-      {text:'PCode',value:'pcode'},
-      {text:'Title',value:'title_en'},
-      {text:'Status',value:'page_status'},
-      {text:'Template',value:'template_id'},
-      {text:'Link',value:'page_link'},
-      {text:'Sale type',value:'sale_type'},
+      headers: [
+        { text: "ID", value: "id" },
+        { text: "PCode", value: "pcode" },
+        { text: "Title", value: "title_en" },
+        { text: "Status", value: "page_status" },
+        { text: "Company", value: "template.company_id" },
+        { text: "Template", value: "template_id" },
+        { text: "Link", value: "page_link" },
+        { text: "Sale type", value: "sale_type" },
+        { text: "Product type", value: "is_collection" },
       ],
       add_dialog: false,
       countries: [],
       companies: [],
       templates: [],
-      country_id: [],
-      products:[],
+      country_id: null,
+      company_id: null,
+      products: [],
       e1: 1,
       data: {},
       landing_info: {
@@ -687,13 +698,16 @@ export default {
     };
   },
   methods: {
-    index(){
-      this.$axios.get('product').then(response=>{
-        this.products=response.data;
-        console.log(this.products);
-      }).catch(error=>{
-        console.log(error);
-      });
+    index() {
+      this.$axios
+        .get("product")
+        .then((response) => {
+          this.products = response.data;
+          console.log(this.products);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
     getInfo() {
       this.$axios
@@ -735,12 +749,14 @@ export default {
         });
     },
     getCompanies(id) {
+      this.country_id = id;
       this.companies = this.data.companies.filter((el) => {
         return el.country_id == id;
       });
       this.templates = [];
     },
     getTemplates(id) {
+      this.company_id = id;
       this.templates = this.data.templates.filter((el) => {
         return el.id == id;
       });
@@ -818,7 +834,7 @@ export default {
   },
 };
 </script>
-<style>
+<style scoped>
 .country-card {
   border: 1.5px solid #1976d2 !important;
 }

@@ -25,7 +25,7 @@ export default {
   },
 };
 </script>
-<style>
+<style  scoped>
 .v-carousel__controls__item {
   padding: 0 !important;
   margin: 0 !important;

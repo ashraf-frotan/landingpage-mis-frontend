@@ -1,13 +1,11 @@
 <template>
   <v-row>
-    <v-col>
-      lorem
-    </v-col>
+    <v-col> lorem </v-col>
   </v-row>
 </template>
 
 <script>
 export default {
-  name: 'InspirePage'
-}
+  name: "InspirePage",
+};
 </script>

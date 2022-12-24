@@ -6,27 +6,31 @@
       <v-row class="white--text theme" align="center">
         <v-col cols="6" class="py-2">
           <div>
-            <span style="font-size:22px;" class="font-weight-bold">299 AED</span>
+            <span style="font-size: 22px" class="font-weight-bold"
+              >{{ one_price }} AED</span
+            >
             <v-chip x-small color="white" class="primary--text pa-1">
               <v-icon color="primary" x-small>mdi-flash</v-icon>
-              <span style="font-weight: bolder">9%</span></v-chip
+              <span style="font-weight: bolder">50%</span></v-chip
             >
           </div>
           <div
             class="text-caption text-decoration-line-through"
             style="margin-top: -6px"
           >
-            329 AED
+            {{ old_price }} AED
           </div>
         </v-col>
-        <v-col cols="6" class="d-flex justify-end font-size-12"> 1710 Sold </v-col>
+        <v-col cols="6" class="d-flex justify-end font-size-12">
+          1710 Sold
+        </v-col>
       </v-row>
     </template>
     <template>
       <v-row align="center">
         <v-col cols="12" align="center" justify="center"
           ><h3 class="mt-3 font-size-16 font-weight-500">
-            كاميرا المراقبة بالصوت والصورة 1080
+            {{ product.title_en }}
           </h3>
         </v-col>
       </v-row>
@@ -493,12 +497,12 @@
                     <span
                       style="font-size: 20px"
                       class="text-decoration-line-through"
-                      >298 AED</span
+                      >{{ old_price }} AED</span
                     >
                   </v-col>
                   <v-col cols="6" class="pa-0">
                     <span style="font-size: 2rem" class="black--text">
-                      149 AED</span
+                      {{ one_price }} AED</span
                     >
                   </v-col>
                 </v-row>
@@ -588,35 +592,61 @@ export default {
     return {
       dialog: false,
       sheet: false,
-      cities:[],
-      emirate:null,
-      show_city_select:false,
+      cities: [],
+      emirate: null,
+      show_city_select: false,
+      product: {},
       images: [
         require("~/assets/images/S1/1.jpg"),
         require("~/assets/images/S1/2.jpg"),
         require("~/assets/images/S1/3.jpg"),
         require("~/assets/images/S1/4.jpg"),
       ],
-      prices: [
-        { value: 149, text: "1 piece 149 dirhams" },
-        { value: 259, text: "3 piece 259 dirhams" },
-        { value: 369, text: "3 piece 369 dirhams" },
-      ],
+      prices: [],
+      one_price: null,
+      old_price: null,
     };
   },
-  methods:{
-    getCities($event){
-      let emirate=this.emirates.find(e=>e.name===$event);
-      this.cities=emirate.subcities;
-      this.show_city_select=true;
+  methods: {
+    getCities($event) {
+      let emirate = this.emirates.find((e) => e.name === $event);
+      this.cities = emirate.subcities;
+      this.show_city_select = true;
     },
-  },  
+    async show() {
+      await this.$axios
+        .get(`product/${this.slug}`)
+        .then((response) => {
+          this.product = response.data;
+          this.one_price = response.data.selling_prices[0].price;
+          this.old_price = response.data.selling_prices[0].old_price;
+          let prices = response.data.selling_prices;
+          if (this.product.sale_type == 0) {
+            for (let i = 0; i < prices.length; i++) {
+              this.prices.push({
+                value: prices[i].price,
+                text: `${prices[i].quantity} piece ${prices[i].price} dirhams`,
+              });
+            }
+          } else {
+            this.prices.push({
+              value: prices[i].price,
+              text: `(${prices[i].quantity} + ${prices[i].quantity}) free  piece ${prices[i].price} dirhams`,
+            });
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+  },
   async asyncData({ params }) {
     const slug = params.slug;
     return { slug };
   },
-  created() {
-    this.emirates=city_data;
+  async created() {
+    this.show();
+    this.emirates = city_data;
   },
 };
 </script>
