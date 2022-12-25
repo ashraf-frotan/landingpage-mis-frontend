@@ -1,7 +1,7 @@
 <template>
   <div>
     <Logo />
-    <Slider />
+    <Slider :s_images="s_images" />
     <template>
       <v-row class="white--text theme" align="center">
         <v-col cols="6" class="py-2">
@@ -99,13 +99,7 @@
           <a href="#reviews" class="text-decoration-none"><p>Reviews</p></a>
         </v-col>
       </v-row>
-      <v-row>
-        <v-col cols="12" md="12" class="pa-0">
-          <template v-for="(image, i) in images">
-            <v-img :src="image" width="100%" :key="i" alt="" />
-          </template>
-        </v-col>
-      </v-row>
+      <LongImage :l_images="l_images" />
       <v-row id="reviews">
         <v-col cols="12">
           <div style="font-size: 20px" class="black--text font-weight-medium">
@@ -509,7 +503,7 @@
               </div>
             </v-col>
             <v-col cols="4">
-              <img src="~/assets/images/S1/1.jpg" width="120" alt="" />
+              <v-img :src="s_images[0].name" width="120" alt="" />
             </v-col>
           </v-row>
           <v-row>
@@ -581,10 +575,12 @@
 
 <script>
 import Slider from "~/components/landing_page/Slider.vue";
+import LongImage from "~/components/landing_page/LongImage.vue";
 import Logo from "~/components/landing_page/Logo.vue";
 export default {
   components: {
     Slider,
+    LongImage,
     Logo,
   },
   layout: "landing",
@@ -596,12 +592,8 @@ export default {
       emirate: null,
       show_city_select: false,
       product: {},
-      images: [
-        require("~/assets/images/S1/1.jpg"),
-        require("~/assets/images/S1/2.jpg"),
-        require("~/assets/images/S1/3.jpg"),
-        require("~/assets/images/S1/4.jpg"),
-      ],
+      l_images: [],
+      s_images: [],
       prices: [],
       one_price: null,
       old_price: null,
@@ -621,6 +613,9 @@ export default {
           this.one_price = response.data.selling_prices[0].price;
           this.old_price = response.data.selling_prices[0].old_price;
           let prices = response.data.selling_prices;
+          let images = response.data.product_images;
+          this.s_images = images.filter((el) => el.type == 0);
+          this.l_images = images.filter((el) => el.type == 1);
           if (this.product.sale_type == 0) {
             for (let i = 0; i < prices.length; i++) {
               this.prices.push({
