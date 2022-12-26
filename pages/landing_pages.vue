@@ -642,7 +642,7 @@
       </v-card>
     </v-dialog>
     <!-- end dialog -->
-    <Dialog/>
+    <Dialog />
   </v-row>
 </template>
 <script>

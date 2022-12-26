@@ -63,6 +63,15 @@
               v-model="template.phone"
               :rules="phoneRules"
             ></v-text-field>
+            <v-text-field
+              dense
+              rounded
+              outlined
+              label="Email"
+              placeholder="Enter email here"
+              v-model="template.email"
+              :rules="emailRules"
+            ></v-text-field>
             <v-select
               :items="companies"
               v-model="template.company_id"
@@ -133,6 +142,15 @@
               placeholder="Enter phone here"
               v-model="template.phone"
               :rules="phoneRules"
+            ></v-text-field>
+            <v-text-field
+              dense
+              rounded
+              outlined
+              label="Email"
+              placeholder="Enter email here"
+              v-model="template.email"
+              :rules="emailRules"
             ></v-text-field>
             <v-select
               :items="companies"
@@ -210,6 +228,15 @@
               placeholder="Enter phone here"
               v-model="template.phone"
             ></v-text-field>
+            <v-text-field
+              dense
+              rounded
+              outlined
+              label="Email"
+              placeholder="Enter email here"
+              v-model="template.email"
+              :rules="emailRules"
+            ></v-text-field>
             <v-select
               :items="companies"
               v-model="template.company_id"
@@ -255,6 +282,7 @@ export default {
         { text: "ID", value: "id" },
         { text: "Name", value: "name" },
         { text: "Phone", value: "phone" },
+        { text: "Email", value: "email" },
         { text: "Image", value: "image" },
         { text: "Company", value: "company_id" },
       ],
@@ -273,6 +301,7 @@ export default {
         id: null,
         name: "",
         phone: "",
+        email: "",
         company_id: null,
         type: null,
         image: "",
@@ -286,6 +315,10 @@ export default {
       phoneRules: [
         (v) => !!v || "This field is required",
         (v) => (v && v.length > 8) || "Please enter a valid phone number",
+      ],
+      emailRules: [
+        (v) => !!v || "E-mail is required",
+        (v) => /.+@.+\..+/.test(v) || "E-mail must be valid",
       ],
       fileRules: [
         (v) => !!v || "File is required",
@@ -309,6 +342,7 @@ export default {
         let data = new FormData();
         data.append("name", this.template.name);
         data.append("phone", this.template.phone);
+        data.append("email", this.template.email);
         data.append("company_id", this.template.company_id);
         data.append("type", this.template.type);
         data.append("image", this.template.image);
@@ -352,6 +386,7 @@ export default {
         let data = new FormData();
         data.append("name", this.template.name);
         data.append("phone", this.template.phone);
+        data.append("email", this.template.email);
         data.append("company_id", this.template.company_id);
         data.append("type", this.template.type);
         data.append("image", this.template.image);

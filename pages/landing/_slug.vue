@@ -45,7 +45,7 @@
               :value="4.8"
             ></v-rating>
             &nbsp; &nbsp;
-            <span style="margin-top: 3px">
+            <span style="margin-top: 2px">
               4.8 &nbsp; | &nbsp; 327 Reviews
             </span>
           </div>
@@ -365,13 +365,17 @@
         </v-row>
         <v-row align="center">
           <v-col cols="8" offset="2" class="py-0">
-            <div class="py-4"><v-icon>mdi-mail</v-icon> support@oredoh.net</div>
+            <div class="py-4">
+              <v-icon>mdi-mail</v-icon> {{ template.email }}
+            </div>
             <v-divider></v-divider>
           </v-col>
         </v-row>
         <v-row align="center">
           <v-col cols="8" offset="2" class="py-0">
-            <div class="py-4"><v-icon>mdi-phone</v-icon> (971)600577711</div>
+            <div class="py-4">
+              <v-icon>mdi-phone</v-icon> {{ template.phone }}
+            </div>
             <v-divider></v-divider>
           </v-col>
         </v-row>
@@ -503,7 +507,7 @@
               </div>
             </v-col>
             <v-col cols="4">
-              <v-img :src="s_images[0].name" width="120" alt="" />
+              <v-img :src="d_image" width="120" alt="" />
             </v-col>
           </v-row>
           <v-row>
@@ -595,8 +599,13 @@ export default {
       l_images: [],
       s_images: [],
       prices: [],
+      d_image: "",
       one_price: null,
       old_price: null,
+      template: {
+        phone: "",
+        email: "",
+      },
     };
   },
   methods: {
@@ -610,12 +619,14 @@ export default {
         .get(`product/${this.slug}`)
         .then((response) => {
           this.product = response.data;
+          this.template = this.product.template;
           this.one_price = response.data.selling_prices[0].price;
           this.old_price = response.data.selling_prices[0].old_price;
           let prices = response.data.selling_prices;
           let images = response.data.product_images;
           this.s_images = images.filter((el) => el.type == 0);
           this.l_images = images.filter((el) => el.type == 1);
+          this.d_image = this.s_images[0].name;
           if (this.product.sale_type == 0) {
             for (let i = 0; i < prices.length; i++) {
               this.prices.push({
@@ -654,13 +665,9 @@ export default {
   background-color: #b5201e !important;
 }
 
-.v-rating .v-icon {
-  padding: 0 !important;
-}
-
-.v-icon.v-icon {
-  font-size: 16px;
-}
+/* .v-icon.v-icon {
+  font-size: 16px !important;
+} */
 
 .font-size-16 {
   font-size: 16px !important;
@@ -754,5 +761,14 @@ export default {
     hsla(0, 0%, 100%, 0.9),
     hsla(0, 0%, 100%, 0)
   );
+}
+</style>
+<style>
+.v-rating .v-icon {
+  padding: 0 !important;
+}
+.mdi-star,
+.mdi-star-half-full {
+  font-size: 16px !important;
 }
 </style>
