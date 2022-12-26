@@ -4,6 +4,7 @@
         v-model="dialog"
         fullscreen
         transition="dialog-bottom-transition"
+        style="margin:0;padding:0;"
         >
         <v-card>
             <v-toolbar

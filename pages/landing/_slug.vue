@@ -646,7 +646,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .row {
   margin: 0 !important;
 }
