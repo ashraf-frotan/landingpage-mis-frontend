@@ -8,13 +8,18 @@
     >
       <v-card>
         <v-toolbar dark color="primary" elevation="0">
-          <v-btn icon dark @click="dialog = false">
+          <v-btn icon dark @click="$emit('closeShowDialog')">
             <v-icon>mdi-close</v-icon>
           </v-btn>
           <v-toolbar-title>Product Information</v-toolbar-title>
           <v-spacer></v-spacer>
           <v-toolbar-items>
-            <v-btn dark text @click="dialog = false" class="text-capitalize">
+            <v-btn
+              dark
+              text
+              @click="$emit('closeShowDialog')"
+              class="text-capitalize"
+            >
               Close
             </v-btn>
           </v-toolbar-items>

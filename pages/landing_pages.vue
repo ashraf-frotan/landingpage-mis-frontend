@@ -651,7 +651,7 @@
       </v-card>
     </v-dialog>
     <!-- end dialog -->
-    <Dialog :slug="slug" v-if="dialog" />
+    <Dialog :slug="slug" v-if="dialog" @closeShowDialog="dialog = false" />
   </v-row>
 </template>
 <script>
