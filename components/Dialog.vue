@@ -222,12 +222,11 @@
 </template>
 <script>
 export default {
+  props: ["slug"],
   data() {
     return {
       dialog: true,
-      notifications: false,
-      sound: true,
-      widgets: false,
+      product: null,
       prices: [
         {
           quantity: 1,
@@ -246,6 +245,21 @@ export default {
         },
       ],
     };
+  },
+  methods: {
+    show() {
+      this.$axios
+        .get(`product/${this.slug}`)
+        .then((response) => {
+          this.product = response.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+  },
+  created() {
+    this.show();
   },
 };
 </script>

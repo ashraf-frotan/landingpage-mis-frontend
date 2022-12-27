@@ -12,6 +12,15 @@
       <v-card>
         <v-card-text>
           <v-data-table :items="products" :headers="headers" dense>
+            <template v-slot:item.id="{ item }">
+              <div
+                class="blue--text"
+                style="cursor: pointer"
+                @click="show(item.page_link)"
+              >
+                {{ item.id }}
+              </div>
+            </template>
             <template v-slot:item.page_status="{ item }">
               <span v-if="item.page_status == 0"> Registered </span>
               <span v-else-if="item.page_status == 1"> Publish </span>
@@ -642,13 +651,14 @@
       </v-card>
     </v-dialog>
     <!-- end dialog -->
-    <Dialog />
+    <Dialog :slug="slug" v-if="dialog" />
   </v-row>
 </template>
 <script>
 export default {
   data() {
     return {
+      dialog: false,
       headers: [
         { text: "ID", value: "id" },
         { text: "PCode", value: "pcode" },
@@ -667,6 +677,7 @@ export default {
       country_id: null,
       company_id: null,
       products: [],
+      slug: null,
       e1: 1,
       data: {},
       landing_info: {
@@ -694,7 +705,6 @@ export default {
       },
       s_images: "",
       l_images: "",
-
       collection_code: "",
     };
   },
@@ -720,6 +730,10 @@ export default {
         .catch((error) => {
           console.log(error);
         });
+    },
+    show(slug) {
+      this.slug = slug;
+      this.dialog = true;
     },
     store() {
       let data = new FormData();
