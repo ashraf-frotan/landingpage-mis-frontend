@@ -730,7 +730,6 @@ export default {
         .get("product")
         .then((response) => {
           this.products = response.data;
-          console.log(this.products);
         })
         .catch((error) => {
           console.log(error);
@@ -793,7 +792,6 @@ export default {
       });
     },
     collectionType($event, type) {
-      console.log($event, type);
       this.landing_info.is_collection = type;
     },
     openAddDialog() {
@@ -802,11 +800,9 @@ export default {
     },
     uploadFile1(file) {
       this.s_images = file;
-      console.log(this.s_images.length);
     },
     uploadFile2(file) {
       this.l_images = file;
-      console.log(file);
     },
     addToCollection() {
       if (

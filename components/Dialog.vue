@@ -242,8 +242,6 @@ export default {
           let images = this.product.product_images;
           this.s_images = images.filter((e) => e.type == 0);
           this.l_images = images.filter((e) => e.type == 1);
-          console.log(this.s_images);
-          console.log(this.l_images);
         })
         .catch((error) => {
           console.log(error);
