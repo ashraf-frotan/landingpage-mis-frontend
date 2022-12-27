@@ -11,7 +11,15 @@
       <ActionsCard @openAddDialog="openAddDialog" />
       <v-card>
         <v-card-text>
-          <v-data-table :items="products" :headers="headers" dense>
+          <v-data-table
+            :items="products"
+            :headers="headers"
+            :single-select="single_select"
+            dense
+            show-select
+            v-model="selected"
+            item-key="id"
+          >
             <template v-slot:item.id="{ item }">
               <div
                 class="blue--text"
@@ -46,6 +54,12 @@
             </template>
             <template v-slot:item.template.company_id="{ item }">
               {{ item.template.company.name }}
+            </template>
+            <template v-slot:top>
+              <v-switch
+                label="Single Select"
+                v-model="single_select"
+              ></v-switch>
             </template>
           </v-data-table>
         </v-card-text>
@@ -659,6 +673,8 @@ export default {
   data() {
     return {
       dialog: false,
+      single_select: false,
+      selected: [],
       headers: [
         { text: "ID", value: "id" },
         { text: "PCode", value: "pcode" },
