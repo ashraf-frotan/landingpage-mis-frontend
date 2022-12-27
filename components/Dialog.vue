@@ -115,10 +115,10 @@
                             </div>
                             <v-divider></v-divider>
                             <div class="d-flex justify-center my-3">
-                              <img src="~/assets/images/uae.png" width="50" />
+                              <v-img :src="country.flag" width="50" />
                             </div>
                             <p class="ma-0 text-center" style="font-size: 10px">
-                              {{ "UAE" }}
+                              {{ country.name }}
                             </p>
                           </v-col>
                         </v-row>
@@ -135,10 +135,10 @@
                             </div>
                             <v-divider></v-divider>
                             <div class="d-flex justify-center my-3">
-                              <img src="~/assets/images/uae.png" width="50" />
+                              <v-img :src="company.logo" width="50" />
                             </div>
                             <p class="ma-0 text-center" style="font-size: 10px">
-                              {{ "Teebalhoor" }}
+                              {{ company.name }}
                             </p>
                           </v-col>
                         </v-row>
@@ -155,10 +155,10 @@
                             </div>
                             <v-divider></v-divider>
                             <div class="d-flex justify-center my-3">
-                              <img src="~/assets/images/uae.png" width="50" />
+                              <v-img :src="template.image" width="50" />
                             </div>
                             <p class="ma-0 text-center" style="font-size: 10px">
-                              {{ "Long" }}
+                              {{ template.name }}
                             </p>
                           </v-col>
                         </v-row>
@@ -235,6 +235,9 @@ export default {
       },
       prices: [],
       sub_products: [],
+      template: { name: "", image: "" },
+      company: { name: "", logo: "" },
+      country: { name: "", flag: "" },
     };
   },
   methods: {
@@ -245,6 +248,9 @@ export default {
           this.product = response.data;
           this.prices = this.product.selling_prices;
           this.sub_products = this.product.sub_products;
+          this.template = this.product.template;
+          this.company = this.template.company;
+          this.country = this.company.country;
         })
         .catch((error) => {
           console.log(error);
