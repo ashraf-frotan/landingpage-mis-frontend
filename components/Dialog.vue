@@ -170,44 +170,30 @@
               <v-row align="center">
                 <v-col cols="12">
                   <div class="black--text">Slider Images:</div>
-                  <div>
-                    <img
-                      src="~/assets/images/profile.jpg"
-                      width="200"
-                      class="ml-1"
-                    />
-                    <img
-                      src="~/assets/images/profile.jpg"
-                      width="200"
-                      class="ml-1"
-                    />
-                    <img
-                      src="~/assets/images/profile.jpg"
-                      width="200"
-                      class="ml-1"
-                    />
+                  <div class="d-flex">
+                    <div
+                      style="width: 160px"
+                      class="ml-2"
+                      v-for="image in s_images"
+                      :key="image.id"
+                    >
+                      <v-img :src="image.name" width="160" />
+                    </div>
                   </div>
                 </v-col>
               </v-row>
               <v-row align="center">
                 <v-col cols="12">
                   <div class="black--text">Long Images:</div>
-                  <div>
-                    <img
-                      src="~/assets/images/profile.jpg"
-                      width="200"
-                      class="ml-1"
-                    />
-                    <img
-                      src="~/assets/images/profile.jpg"
-                      width="200"
-                      class="ml-1"
-                    />
-                    <img
-                      src="~/assets/images/profile.jpg"
-                      width="200"
-                      class="ml-1"
-                    />
+                  <div class="d-flex">
+                    <div
+                      style="width: 160px"
+                      class="ml-2"
+                      v-for="image in l_images"
+                      :key="image.id"
+                    >
+                      <v-img :src="image.name" width="160" />
+                    </div>
                   </div>
                 </v-col>
               </v-row>
@@ -238,6 +224,8 @@ export default {
       template: { name: "", image: "" },
       company: { name: "", logo: "" },
       country: { name: "", flag: "" },
+      s_images: [],
+      l_images: [],
     };
   },
   methods: {
@@ -251,6 +239,11 @@ export default {
           this.template = this.product.template;
           this.company = this.template.company;
           this.country = this.company.country;
+          let images = this.product.product_images;
+          this.s_images = images.filter((e) => e.type == 0);
+          this.l_images = images.filter((e) => e.type == 1);
+          console.log(this.s_images);
+          console.log(this.l_images);
         })
         .catch((error) => {
           console.log(error);
