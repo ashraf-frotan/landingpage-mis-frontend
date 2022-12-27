@@ -66,12 +66,16 @@
                 </v-col>
                 <v-col cols="12" md="6" sm="12" xs="12">
                   <div class="pa-2">
-                    <span class="black--text">Collection Codes:</span> AK1, AK2,
-                    AK4, AK5
+                    <span class="black--text">Collection Codes:</span>
+                    <span v-for="product in sub_products" :key="product.id"
+                      >{{ product.pcode }},
+                    </span>
                   </div>
                   <v-divider></v-divider>
                   <div class="pa-2">
-                    <span class="black--text">Sale Type:</span> Simple
+                    <span class="black--text">Sale Type:</span>
+                    <span v-if="product.sale_type == 0"> Simple </span>
+                    <span v-else> Buy 1 get 1 free </span>
                   </div>
                   <v-divider></v-divider>
                   <div class="pa-2">
@@ -229,23 +233,8 @@ export default {
         message_ar: "",
         message_en: "",
       },
-      prices: [
-        {
-          quantity: 1,
-          price: 149,
-          old_price: 259,
-        },
-        {
-          quantity: 2,
-          price: 149,
-          old_price: 259,
-        },
-        {
-          quantity: 3,
-          price: 149,
-          old_price: 259,
-        },
-      ],
+      prices: [],
+      sub_products: [],
     };
   },
   methods: {
@@ -254,6 +243,8 @@ export default {
         .get(`product/${this.slug}`)
         .then((response) => {
           this.product = response.data;
+          this.prices = this.product.selling_prices;
+          this.sub_products = this.product.sub_products;
         })
         .catch((error) => {
           console.log(error);
