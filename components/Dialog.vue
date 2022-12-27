@@ -30,48 +30,37 @@
               <v-row>
                 <v-col cols="12" md="6" sm="12" xs="12" class="text--black">
                   <div class="pa-2">
-                    <span class="black--text">PCode:</span> TK55
+                    <span class="black--text">PCode:</span> {{ product.pcode }}
                   </div>
                   <v-divider></v-divider>
                   <div class="pa-2">
-                    <span class="black--text">Title Arabic:</span> ar title
+                    <span class="black--text">Title Arabic:</span>
+                    {{ product.title_ar }}
                   </div>
                   <v-divider></v-divider>
                   <div class="pa-2">
-                    <span class="black--text">Title Enlish:</span> en title
+                    <span class="black--text">Title Enlish:</span>
+                    {{ product.title_en }}
                   </div>
                   <v-divider></v-divider>
                   <div class="pa-2">
-                    <span class="black--text">Note Ar:</span> Lorem ipsum dolor
-                    sit amet consectetur adipisicing elit. Doloremque dicta
-                    voluptate officia nostrum accusantium! Incidunt, quod
-                    assumenda? Eveniet porro dolorem tenetur itaque, doloribus
-                    ex, recusandae voluptatum similique asperiores accusantium
-                    aliquam?
+                    <span class="black--text">Note Ar:</span>
+                    {{ product.desc_ar }}
                   </div>
                   <v-divider></v-divider>
                   <div class="pa-2">
-                    <span class="black--text">Note En:</span> Lorem ipsum dolor
-                    sit amet consectetur adipisicing elit. Harum totam alias
-                    fuga maiores nulla, incidunt in sed deleniti enim pariatur
-                    sit sapiente repudiandae consequuntur eum velit repellendus
-                    autem neque. Perspiciatis?
+                    <span class="black--text">Note En:</span>
+                    {{ product.desc_en }}
                   </div>
                   <v-divider></v-divider>
                   <div class="pa-2">
-                    <span class="black--text">Message Ar:</span> Lorem ipsum
-                    dolor sit amet consectetur adipisicing elit. Harum totam
-                    alias fuga maiores nulla, incidunt in sed deleniti enim
-                    pariatur sit sapiente repudiandae consequuntur eum velit
-                    repellendus autem neque. Perspiciatis?
+                    <span class="black--text">Message Ar:</span>
+                    {{ product.message_ar }}
                   </div>
                   <v-divider></v-divider>
                   <div class="pa-2">
-                    <span class="black--text">Message En:</span> Lorem ipsum
-                    dolor sit amet consectetur adipisicing elit. Harum totam
-                    alias fuga maiores nulla, incidunt in sed deleniti enim
-                    pariatur sit sapiente repudiandae consequuntur eum velit
-                    repellendus autem neque. Perspiciatis?
+                    <span class="black--text">Message En:</span>
+                    {{ product.message_en }}
                   </div>
                   <v-divider></v-divider>
                 </v-col>
@@ -231,7 +220,15 @@ export default {
   data() {
     return {
       dialog: true,
-      product: null,
+      product: {
+        pcode: "",
+        title_ar: "",
+        titel_en: "",
+        desc_ar: "",
+        desc_en: "",
+        message_ar: "",
+        message_en: "",
+      },
       prices: [
         {
           quantity: 1,
