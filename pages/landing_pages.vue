@@ -317,141 +317,145 @@
               </v-stepper-step>
               <v-stepper-content step="2">
                 <v-card elevation="0" class="ma-2">
-                  <v-card elevation="1">
-                    <v-card-text>
-                      <h4 class="mb-3 black--text">Product Code</h4>
-                      <v-text-field
-                        dense
-                        hide-details=""
-                        rounded
-                        outlined
-                        label="Product"
-                        placeholder="Please enter product name here"
-                        v-model="landing_info.pcode"
-                      ></v-text-field>
-                    </v-card-text>
-                  </v-card>
-                  <v-card
-                    elevation="1"
-                    class="mt-3"
-                    v-if="landing_info.is_collection"
-                  >
-                    <v-card-text>
-                      <h4 class="mb-1 black--text">Product Colletion Items</h4>
-                      <v-text-field
-                        outlined
-                        dense
-                        rounded
-                        hide-details=""
-                        placeholder="Items here.."
-                        append-icon="mdi-plus"
-                        @click:append="addToCollection"
-                        rows="3"
-                        v-model="collection_code"
-                      ></v-text-field>
-                      <v-card elevation="0">
-                        <v-card-text>
-                          <v-chip
-                            v-for="item in landing_info.collection_items"
-                            :key="item"
-                            class="ma-2"
-                            close
-                            color="primary"
-                            outlined
-                            @click:close="removeFromCollection(item)"
-                          >
-                            {{ item }}
-                          </v-chip>
-                        </v-card-text>
-                      </v-card>
-                    </v-card-text>
-                  </v-card>
-                  <v-card elevation="1" class="my-3">
-                    <v-card-text>
-                      <h4 class="mb-2 black--text">Product Info</h4>
-                      <v-row
-                        v-for="(price, index) in landing_info.prices"
-                        :key="index"
-                      >
-                        <v-col cols="12" md="10" sm="10" xs="10">
-                          <v-row>
-                            <v-col cols="12" md="4" sm="4" xs="4">
-                              <v-text-field
-                                dense
-                                rounded
-                                outlined
-                                hide-details=""
-                                placeholder="No"
-                                label="Quantity"
-                                v-model="landing_info.prices[index].quantity"
-                              ></v-text-field>
-                            </v-col>
-                            <v-col cols="12" md="4" sm="4" xs="4">
-                              <v-text-field
-                                dense
-                                rounded
-                                outlined
-                                hide-details=""
-                                placeholder="price"
-                                label="Price"
-                                v-model="landing_info.prices[index].price"
-                              ></v-text-field>
-                            </v-col>
-                            <v-col cols="12" md="4" sm="4" xs="4">
-                              <v-text-field
-                                dense
-                                rounded
-                                outlined
-                                hide-details=""
-                                placeholder="Old price"
-                                label="Old Price"
-                                v-model="landing_info.prices[index].old_price"
-                              ></v-text-field>
-                            </v-col>
-                          </v-row>
-                        </v-col>
-                        <v-col cols="12" md="2" sm="2" xs="2">
-                          <v-btn
-                            small
-                            color="primary"
-                            v-if="index == 0"
-                            fab
-                            @click="addMorePrices"
-                          >
-                            <v-icon color="white">mdi-plus</v-icon>
-                          </v-btn>
-                          <v-btn
-                            small
-                            color="error"
-                            v-else
-                            fab
-                            @click="removeMorePrices(index)"
-                          >
-                            <v-icon color="white">mdi-minus</v-icon>
-                          </v-btn>
-                        </v-col>
-                      </v-row>
-                    </v-card-text>
-                  </v-card>
-                  <v-card elevation="1" class="my-3">
-                    <v-card-text>
-                      <h4 class="black--text">Sale Type</h4>
-                      <v-row>
-                        <v-col cols="12">
-                          <v-checkbox
-                            v-model="landing_info.sale_type"
-                            label="Buy 1 Get 1 Free"
-                            color="success"
-                            hide-details
-                          ></v-checkbox>
-                        </v-col>
-                      </v-row>
-                    </v-card-text>
-                  </v-card>
-                  <v-btn color="primary" @click="e1 = 3" small>
-                    Continue
-                  </v-btn>
-                  <v-btn @click="e1 = 1" small> Back </v-btn>
+                  <v-form @submit.prevent="step2">
+                    <v-card elevation="1">
+                      <v-card-text>
+                        <h4 class="mb-3 black--text">Product Code</h4>
+                        <v-text-field
+                          dense
+                          hide-details=""
+                          rounded
+                          outlined
+                          label="Product"
+                          placeholder="Please enter product name here"
+                          v-model="landing_info.pcode"
+                        ></v-text-field>
+                      </v-card-text>
+                    </v-card>
+                    <v-card
+                      elevation="1"
+                      class="mt-3"
+                      v-if="landing_info.is_collection"
+                    >
+                      <v-card-text>
+                        <h4 class="mb-1 black--text">
+                          Product Colletion Items
+                        </h4>
+                        <v-text-field
+                          outlined
+                          dense
+                          rounded
+                          hide-details=""
+                          placeholder="Items here.."
+                          append-icon="mdi-plus"
+                          @click:append="addToCollection"
+                          rows="3"
+                          v-model="collection_code"
+                        ></v-text-field>
+                        <v-card elevation="0">
+                          <v-card-text>
+                            <v-chip
+                              v-for="item in landing_info.collection_items"
+                              :key="item"
+                              class="ma-2"
+                              close
+                              color="primary"
+                              outlined
+                              @click:close="removeFromCollection(item)"
+                            >
+                              {{ item }}
+                            </v-chip>
+                          </v-card-text>
+                        </v-card>
+                      </v-card-text>
+                    </v-card>
+                    <v-card elevation="1" class="my-3">
+                      <v-card-text>
+                        <h4 class="mb-2 black--text">Product Info</h4>
+                        <v-row
+                          v-for="(price, index) in landing_info.prices"
+                          :key="index"
+                        >
+                          <v-col cols="12" md="10" sm="10" xs="10">
+                            <v-row>
+                              <v-col cols="12" md="4" sm="4" xs="4">
+                                <v-text-field
+                                  dense
+                                  rounded
+                                  outlined
+                                  hide-details=""
+                                  placeholder="No"
+                                  label="Quantity"
+                                  v-model="landing_info.prices[index].quantity"
+                                ></v-text-field>
+                              </v-col>
+                              <v-col cols="12" md="4" sm="4" xs="4">
+                                <v-text-field
+                                  dense
+                                  rounded
+                                  outlined
+                                  hide-details=""
+                                  placeholder="price"
+                                  label="Price"
+                                  v-model="landing_info.prices[index].price"
+                                ></v-text-field>
+                              </v-col>
+                              <v-col cols="12" md="4" sm="4" xs="4">
+                                <v-text-field
+                                  dense
+                                  rounded
+                                  outlined
+                                  hide-details=""
+                                  placeholder="Old price"
+                                  label="Old Price"
+                                  v-model="landing_info.prices[index].old_price"
+                                ></v-text-field>
+                              </v-col>
+                            </v-row>
+                          </v-col>
+                          <v-col cols="12" md="2" sm="2" xs="2">
+                            <v-btn
+                              small
+                              color="primary"
+                              v-if="index == 0"
+                              fab
+                              @click="addMorePrices"
+                            >
+                              <v-icon color="white">mdi-plus</v-icon>
+                            </v-btn>
+                            <v-btn
+                              small
+                              color="error"
+                              v-else
+                              fab
+                              @click="removeMorePrices(index)"
+                            >
+                              <v-icon color="white">mdi-minus</v-icon>
+                            </v-btn>
+                          </v-col>
+                        </v-row>
+                      </v-card-text>
+                    </v-card>
+                    <v-card elevation="1" class="my-3">
+                      <v-card-text>
+                        <h4 class="black--text">Sale Type</h4>
+                        <v-row>
+                          <v-col cols="12">
+                            <v-checkbox
+                              v-model="landing_info.sale_type"
+                              label="Buy 1 Get 1 Free"
+                              color="success"
+                              hide-details
+                            ></v-checkbox>
+                          </v-col>
+                        </v-row>
+                      </v-card-text>
+                    </v-card>
+                    <v-btn color="primary" type="submit" small>
+                      Continue
+                    </v-btn>
+                    <v-btn @click="e1 = 1" small> Back </v-btn>
+                  </v-form>
                 </v-card>
               </v-stepper-content>
               <v-stepper-step :complete="e1 > 3" step="3">
@@ -460,156 +464,158 @@
               </v-stepper-step>
               <v-stepper-content step="3">
                 <v-card class="ma-2" elevation="0">
-                  <v-row class="mt-3">
-                    <v-col
-                      cols="12"
-                      md="6"
-                      sm="6"
-                      xs="12"
-                      v-if="
-                        landing_info.page_language == 0 ||
-                        landing_info.page_language == 1
-                      "
-                    >
-                      <v-card elevation="1">
-                        <v-card-text>
-                          <h4 class="mb-1 black--text">Product Title (AR)</h4>
-                          <v-text-field
-                            rounded
-                            outlined
-                            dense
-                            hide-details=""
-                            placeholder="Product name in Arabic"
-                            v-model="landing_info.title_ar"
-                          ></v-text-field>
-                        </v-card-text>
-                      </v-card>
-                    </v-col>
-                    <v-col
-                      cols="12"
-                      md="6"
-                      sm="6"
-                      xs="12"
-                      v-if="
-                        landing_info.page_language == 0 ||
-                        landing_info.page_language == 2
-                      "
-                    >
-                      <v-card elevation="1">
-                        <v-card-text>
-                          <h4 class="mb-1 black--text">Product Title (EN)</h4>
-                          <v-text-field
-                            rounded
-                            outlined
-                            dense
-                            hide-details=""
-                            placeholder="Product name in English"
-                            v-model="landing_info.title_en"
-                          ></v-text-field>
-                        </v-card-text>
-                      </v-card>
-                    </v-col>
-                  </v-row>
-                  <v-row>
-                    <v-col cols="12">
-                      <v-card
-                        elevation="1"
+                  <v-form @submit.prevent="step3">
+                    <v-row class="mt-3">
+                      <v-col
+                        cols="12"
+                        md="6"
+                        sm="6"
+                        xs="12"
                         v-if="
                           landing_info.page_language == 0 ||
                           landing_info.page_language == 1
                         "
                       >
-                        <v-card-text>
-                          <h4 class="mb-1 black--text">Product Note(AR)</h4>
-                          <v-textarea
-                            outlined
-                            dense
-                            hide-details=""
-                            placeholder="Note here.."
-                            rows="3"
-                            v-model="landing_info.desc_ar"
-                          ></v-textarea>
-                        </v-card-text>
-                      </v-card>
-                    </v-col>
-                  </v-row>
-                  <v-row>
-                    <v-col cols="12">
-                      <v-card
-                        elevation="1"
+                        <v-card elevation="1">
+                          <v-card-text>
+                            <h4 class="mb-1 black--text">Product Title (AR)</h4>
+                            <v-text-field
+                              rounded
+                              outlined
+                              dense
+                              hide-details=""
+                              placeholder="Product name in Arabic"
+                              v-model="landing_info.title_ar"
+                            ></v-text-field>
+                          </v-card-text>
+                        </v-card>
+                      </v-col>
+                      <v-col
+                        cols="12"
+                        md="6"
+                        sm="6"
+                        xs="12"
                         v-if="
                           landing_info.page_language == 0 ||
                           landing_info.page_language == 2
                         "
                       >
-                        <v-card-text>
-                          <h4 class="mb-1 black--text">Product Note(EN)</h4>
-                          <v-textarea
-                            outlined
-                            dense
-                            hide-details=""
-                            placeholder="Note here.."
-                            rows="3"
-                            v-model="landing_info.desc_en"
-                          ></v-textarea>
-                        </v-card-text>
-                      </v-card>
-                    </v-col>
-                  </v-row>
-                  <v-row>
-                    <v-col cols="12">
-                      <v-card
-                        elevation="1"
-                        v-if="
-                          landing_info.page_language == 0 ||
-                          landing_info.page_language == 1
-                        "
-                      >
-                        <v-card-text>
-                          <h4 class="mb-1 black--text">Message (AR)</h4>
-                          <v-textarea
-                            outlined
-                            dense
-                            hide-details=""
-                            placeholder="Message here.."
-                            rows="3"
-                            v-model="landing_info.message_ar"
-                          ></v-textarea>
-                        </v-card-text>
-                      </v-card>
-                    </v-col>
-                  </v-row>
-                  <v-row>
-                    <v-col cols="12">
-                      <v-card
-                        elevation="1"
-                        v-if="
-                          landing_info.page_language == 0 ||
-                          landing_info.page_language == 2
-                        "
-                      >
-                        <v-card-text>
-                          <h4 class="mb-1 black--text">Message (EN)</h4>
-                          <v-textarea
-                            outlined
-                            dense
-                            hide-details=""
-                            placeholder="Message here.."
-                            rows="3"
-                            v-model="landing_info.message_en"
-                          ></v-textarea>
-                        </v-card-text>
-                      </v-card>
-                    </v-col>
-                  </v-row>
-                  <v-row class="mt-3">
-                    <v-col cols="12">
-                      <v-btn color="primary" @click="e1 = 4" small>
-                        Continue
-                      </v-btn>
-                      <v-btn small @click="e1 = 2"> Back </v-btn>
-                    </v-col>
-                  </v-row>
+                        <v-card elevation="1">
+                          <v-card-text>
+                            <h4 class="mb-1 black--text">Product Title (EN)</h4>
+                            <v-text-field
+                              rounded
+                              outlined
+                              dense
+                              hide-details=""
+                              placeholder="Product name in English"
+                              v-model="landing_info.title_en"
+                            ></v-text-field>
+                          </v-card-text>
+                        </v-card>
+                      </v-col>
+                    </v-row>
+                    <v-row>
+                      <v-col cols="12">
+                        <v-card
+                          elevation="1"
+                          v-if="
+                            landing_info.page_language == 0 ||
+                            landing_info.page_language == 1
+                          "
+                        >
+                          <v-card-text>
+                            <h4 class="mb-1 black--text">Product Note(AR)</h4>
+                            <v-textarea
+                              outlined
+                              dense
+                              hide-details=""
+                              placeholder="Note here.."
+                              rows="3"
+                              v-model="landing_info.desc_ar"
+                            ></v-textarea>
+                          </v-card-text>
+                        </v-card>
+                      </v-col>
+                    </v-row>
+                    <v-row>
+                      <v-col cols="12">
+                        <v-card
+                          elevation="1"
+                          v-if="
+                            landing_info.page_language == 0 ||
+                            landing_info.page_language == 2
+                          "
+                        >
+                          <v-card-text>
+                            <h4 class="mb-1 black--text">Product Note(EN)</h4>
+                            <v-textarea
+                              outlined
+                              dense
+                              hide-details=""
+                              placeholder="Note here.."
+                              rows="3"
+                              v-model="landing_info.desc_en"
+                            ></v-textarea>
+                          </v-card-text>
+                        </v-card>
+                      </v-col>
+                    </v-row>
+                    <v-row>
+                      <v-col cols="12">
+                        <v-card
+                          elevation="1"
+                          v-if="
+                            landing_info.page_language == 0 ||
+                            landing_info.page_language == 1
+                          "
+                        >
+                          <v-card-text>
+                            <h4 class="mb-1 black--text">Message (AR)</h4>
+                            <v-textarea
+                              outlined
+                              dense
+                              hide-details=""
+                              placeholder="Message here.."
+                              rows="3"
+                              v-model="landing_info.message_ar"
+                            ></v-textarea>
+                          </v-card-text>
+                        </v-card>
+                      </v-col>
+                    </v-row>
+                    <v-row>
+                      <v-col cols="12">
+                        <v-card
+                          elevation="1"
+                          v-if="
+                            landing_info.page_language == 0 ||
+                            landing_info.page_language == 2
+                          "
+                        >
+                          <v-card-text>
+                            <h4 class="mb-1 black--text">Message (EN)</h4>
+                            <v-textarea
+                              outlined
+                              dense
+                              hide-details=""
+                              placeholder="Message here.."
+                              rows="3"
+                              v-model="landing_info.message_en"
+                            ></v-textarea>
+                          </v-card-text>
+                        </v-card>
+                      </v-col>
+                    </v-row>
+                    <v-row class="mt-3">
+                      <v-col cols="12">
+                        <v-btn color="primary" type="submit" small>
+                          Continue
+                        </v-btn>
+                        <v-btn small @click="e1 = 2"> Back </v-btn>
+                      </v-col>
+                    </v-row>
+                  </v-form>
                 </v-card>
               </v-stepper-content>
               <v-stepper-step step="4">
