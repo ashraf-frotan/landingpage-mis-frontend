@@ -800,6 +800,12 @@ export default {
     step1() {
       this.e1 = 2;
     },
+    step2() {
+      this.e1 = 3;
+    },
+    step3() {
+      this.e1 = 4;
+    },
     openShowDialog() {
       if (this.selected.length == 1) {
         this.show(this.selected[0].page_link);
