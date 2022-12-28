@@ -623,54 +623,56 @@
                 <small>Long, slider, slider1 and slider2</small>
               </v-stepper-step>
               <v-stepper-content step="4">
-                <v-row class="mx-2 mb-8">
-                  <v-col cols="12">
-                    <v-card class="my-3">
-                      <v-card-text>
-                        <h4 class="mb-1 black--text">Images</h4>
-                        <v-row>
-                          <v-col cols="12" md="6">
-                            <v-file-input
-                              label="Slider Images"
-                              placeholder="Please select slider images"
-                              rounded
-                              outlined
-                              multiple
-                              dense
-                              hide-details=""
-                              accept="image/*"
-                              @change="uploadFile1"
-                            >
-                            </v-file-input>
-                          </v-col>
-                          <v-col cols="12" md="6">
-                            <v-file-input
-                              label="Long Images"
-                              rounded
-                              outlined
-                              multiple
-                              dense
-                              hide-details=""
-                              placeholder="Please select long images"
-                              accept="image/*"
-                              @change="uploadFile2"
-                            >
-                            </v-file-input>
-                          </v-col>
-                        </v-row>
-                      </v-card-text>
-                    </v-card>
-                    <v-btn
-                      color="primary"
-                      type="submit"
-                      small
-                      @click="add_dialog = false"
-                    >
-                      Save
-                    </v-btn>
-                    <v-btn small @click="e1 = 3"> Back </v-btn>
-                  </v-col>
-                </v-row>
+                <v-form @submit.prevent="step4">
+                  <v-row class="mx-2 mb-8">
+                    <v-col cols="12">
+                      <v-card class="my-3">
+                        <v-card-text>
+                          <h4 class="mb-1 black--text">Images</h4>
+                          <v-row>
+                            <v-col cols="12" md="6">
+                              <v-file-input
+                                label="Slider Images"
+                                placeholder="Please select slider images"
+                                rounded
+                                outlined
+                                multiple
+                                dense
+                                hide-details=""
+                                accept="image/*"
+                                @change="uploadFile1"
+                              >
+                              </v-file-input>
+                            </v-col>
+                            <v-col cols="12" md="6">
+                              <v-file-input
+                                label="Long Images"
+                                rounded
+                                outlined
+                                multiple
+                                dense
+                                hide-details=""
+                                placeholder="Please select long images"
+                                accept="image/*"
+                                @change="uploadFile2"
+                              >
+                              </v-file-input>
+                            </v-col>
+                          </v-row>
+                        </v-card-text>
+                      </v-card>
+                      <v-btn
+                        color="primary"
+                        type="submit"
+                        small
+                        @click="add_dialog = false"
+                      >
+                        Save
+                      </v-btn>
+                      <v-btn small @click="e1 = 3"> Back </v-btn>
+                    </v-col>
+                  </v-row>
+                </v-form>
               </v-stepper-content>
             </v-stepper>
           </v-form>
@@ -810,6 +812,9 @@ export default {
       this.e1 = 3;
     },
     step3() {
+      this.e1 = 4;
+    },
+    step4() {
       this.e1 = 4;
     },
     openShowDialog() {
