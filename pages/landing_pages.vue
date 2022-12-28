@@ -8,7 +8,12 @@
           url: 'landing_pages',
         }"
       />
-      <ActionsCard @openAddDialog="openAddDialog" />
+      <ActionsCard
+        @openAddDialog="openAddDialog"
+        @openShowDialog="openShowDialog"
+        @deleteRecord="destroy"
+        :view="true"
+      />
       <v-card>
         <v-card-text>
           <v-data-table
@@ -80,13 +85,11 @@
             </v-btn>
             <v-toolbar-title>Create New Landing Page</v-toolbar-title>
             <v-spacer></v-spacer>
-            <v-toolbar-items>
-              <v-btn dark text @click="add_dialog = false"> Save </v-btn>
-            </v-toolbar-items>
+            <v-toolbar-items> </v-toolbar-items>
           </v-toolbar>
         </v-card>
         <v-card>
-          <v-form @submit.prevent="store">
+          <v-form @submit.prevent="store" ref="add_form">
             <v-stepper v-model="e1" vertical>
               <v-stepper-step :complete="e1 > 1" step="1">
                 Genral Information
@@ -95,213 +98,217 @@
               <v-stepper-content step="1">
                 <v-card class="ma-2 mb-4" elevation="0">
                   <!-- START COUNTRY SECTION -->
-                  <v-card>
-                    <v-card-text>
-                      <v-row
-                        ><v-col cols="12"
-                          ><h4 class="ma-0 black--text">Country</h4></v-col
-                        ></v-row
-                      >
-                      <v-row>
-                        <v-col cols="12" class="d-flex">
-                          <v-card
-                            elevation="1"
-                            class="px-5 py-3 ml-2 country-card"
-                            width="100"
-                            link
-                            v-for="country in countries"
-                            :key="country.id"
-                            @click="getCompanies(country.id)"
-                          >
-                            <v-row>
-                              <v-col>
-                                <div class="d-flex justify-center mb-3">
-                                  <v-img
-                                    :src="country.flag"
-                                    width="40"
-                                    alt=""
-                                  />
-                                </div>
-                                <p
-                                  class="ma-0 text-center"
-                                  style="font-size: 10px"
-                                >
-                                  {{ country.name }}
-                                </p>
-                              </v-col>
-                            </v-row>
-                          </v-card>
-                        </v-col>
-                      </v-row>
-                    </v-card-text>
-                  </v-card>
-                  <!-- END COUNTRY SECTION -->
-                  <!-- START COMPANY SECTION -->
-                  <v-card
-                    class="mt-4"
-                    min-height="125px"
-                    v-if="country_id != null"
-                  >
-                    <v-card-text>
-                      <v-row
-                        ><v-col cols="12"
-                          ><h4 class="ma-0 black--text">Company</h4></v-col
-                        ></v-row
-                      >
-                      <v-row justify="center">
-                        <v-col cols="12" class="d-flex">
-                          <v-card
-                            elevation="1"
-                            class="d-flex ml-2 pa-3"
-                            link
-                            v-for="company in companies"
-                            :key="company.id"
-                            @click="getTemplates(company.id)"
-                          >
-                            <v-row align="center" class="py-2 px-4">
-                              <v-img :src="company.logo" width="30" alt="" />
-                              <span class="ml-2">{{ company.name }}</span>
-                            </v-row>
-                          </v-card>
-                        </v-col>
-                      </v-row>
-                    </v-card-text>
-                  </v-card>
-                  <!-- END TEMPLATE SECTION -->
-                  <!-- START TEMPLATE SECTION -->
-                  <v-card class="mt-3" v-if="company_id != null">
-                    <v-card-text>
-                      <v-row
-                        ><v-col cols="12"
-                          ><h4 class="ma-0 black--text">Template</h4></v-col
-                        ></v-row
-                      >
-                      <v-row>
-                        <v-col cols="12" class="d-flex">
-                          <v-card
-                            elevation="1"
-                            class="ml-2"
-                            width="200"
-                            link
-                            v-for="template in templates"
-                            :key="template.id"
-                            @click="selectTemplate(template.id, template.type)"
-                          >
-                            <v-img :src="template.image" width="200" alt="" />
-                            <p class="text-center my-3">
-                              {{ template.name }}
-                            </p>
-                          </v-card>
-                        </v-col>
-                      </v-row>
-                    </v-card-text>
-                  </v-card>
-                  <!-- END TEMPLATE SECTION -->
-                  <v-row class="mb-4">
-                    <v-col cols="12" md="6" sm="6" xs="12">
-                      <v-card elevation="1" class="mt-3">
-                        <v-card-text>
-                          <v-row align="center">
-                            <v-col cols="12" md="3" sm="12" xs="12">
-                              <h4 class="ma-0 black--text">Language</h4>
-                            </v-col>
-                            <v-col
-                              cols="12"
-                              md="9"
-                              sm="12"
-                              xs="12"
-                              class="
-                                d-flex
-                                flex-wrap
-                                justify-center justify-md-end
+                  <v-form ref="step-1" @submit.prevent="step1">
+                    <v-card>
+                      <v-card-text>
+                        <v-row
+                          ><v-col cols="12"
+                            ><h4 class="ma-0 black--text">Country</h4></v-col
+                          ></v-row
+                        >
+                        <v-row>
+                          <v-col cols="12" class="d-flex">
+                            <v-card
+                              elevation="1"
+                              class="px-5 py-3 ml-2 country-card"
+                              width="100"
+                              link
+                              v-for="country in countries"
+                              :key="country.id"
+                              @click="getCompanies(country.id)"
+                            >
+                              <v-row>
+                                <v-col>
+                                  <div class="d-flex justify-center mb-3">
+                                    <v-img
+                                      :src="country.flag"
+                                      width="40"
+                                      alt=""
+                                    />
+                                  </div>
+                                  <p
+                                    class="ma-0 text-center"
+                                    style="font-size: 10px"
+                                  >
+                                    {{ country.name }}
+                                  </p>
+                                </v-col>
+                              </v-row>
+                            </v-card>
+                          </v-col>
+                        </v-row>
+                      </v-card-text>
+                    </v-card>
+                    <!-- END COUNTRY SECTION -->
+                    <!-- START COMPANY SECTION -->
+                    <v-card
+                      class="mt-4"
+                      min-height="125px"
+                      v-if="country_id != null"
+                    >
+                      <v-card-text>
+                        <v-row
+                          ><v-col cols="12"
+                            ><h4 class="ma-0 black--text">Company</h4></v-col
+                          ></v-row
+                        >
+                        <v-row justify="center">
+                          <v-col cols="12" class="d-flex">
+                            <v-card
+                              elevation="1"
+                              class="d-flex ml-2 pa-3"
+                              link
+                              v-for="company in companies"
+                              :key="company.id"
+                              @click="getTemplates(company.id)"
+                            >
+                              <v-row align="center" class="py-2 px-4">
+                                <v-img :src="company.logo" width="30" alt="" />
+                                <span class="ml-2">{{ company.name }}</span>
+                              </v-row>
+                            </v-card>
+                          </v-col>
+                        </v-row>
+                      </v-card-text>
+                    </v-card>
+                    <!-- END TEMPLATE SECTION -->
+                    <!-- START TEMPLATE SECTION -->
+                    <v-card class="mt-3" v-if="company_id != null">
+                      <v-card-text>
+                        <v-row
+                          ><v-col cols="12"
+                            ><h4 class="ma-0 black--text">Template</h4></v-col
+                          ></v-row
+                        >
+                        <v-row>
+                          <v-col cols="12" class="d-flex">
+                            <v-card
+                              elevation="1"
+                              class="ml-2"
+                              width="200"
+                              link
+                              v-for="template in templates"
+                              :key="template.id"
+                              @click="
+                                selectTemplate(template.id, template.type)
                               "
                             >
-                              <v-btn
-                                color="primary"
-                                outlined
-                                class="text-capitalize mt-2 mt-md-0 mt-sm-0"
-                                @click="landing_info.page_language = 0"
+                              <v-img :src="template.image" width="200" alt="" />
+                              <p class="text-center my-3">
+                                {{ template.name }}
+                              </p>
+                            </v-card>
+                          </v-col>
+                        </v-row>
+                      </v-card-text>
+                    </v-card>
+                    <!-- END TEMPLATE SECTION -->
+                    <v-row class="mb-4">
+                      <v-col cols="12" md="6" sm="6" xs="12">
+                        <v-card elevation="1" class="mt-3">
+                          <v-card-text>
+                            <v-row align="center">
+                              <v-col cols="12" md="3" sm="12" xs="12">
+                                <h4 class="ma-0 black--text">Language</h4>
+                              </v-col>
+                              <v-col
+                                cols="12"
+                                md="9"
+                                sm="12"
+                                xs="12"
+                                class="
+                                  d-flex
+                                  flex-wrap
+                                  justify-center justify-md-end
+                                "
                               >
-                                <img
-                                  src="~/assets/images/both-lang.png"
-                                  width="25"
-                                  class="mr-2"
-                                  alt=""
-                                />
-                                Both
-                              </v-btn>
-                              <v-btn
-                                color="primary"
-                                outlined
-                                class="text-capitalize mx-1"
-                                @click="landing_info.page_language = 1"
+                                <v-btn
+                                  color="primary"
+                                  outlined
+                                  class="text-capitalize mt-2 mt-md-0 mt-sm-0"
+                                  @click="landing_info.page_language = 0"
+                                >
+                                  <img
+                                    src="~/assets/images/both-lang.png"
+                                    width="25"
+                                    class="mr-2"
+                                    alt=""
+                                  />
+                                  Both
+                                </v-btn>
+                                <v-btn
+                                  color="primary"
+                                  outlined
+                                  class="text-capitalize mx-1"
+                                  @click="landing_info.page_language = 1"
+                                >
+                                  <img
+                                    src="~/assets/images/uae.png"
+                                    width="25"
+                                    class="mr-2"
+                                    alt=""
+                                  />
+                                  Arabic
+                                </v-btn>
+                                <v-btn
+                                  outlined
+                                  color="primary"
+                                  class="text-capitalize"
+                                  @click="landing_info.page_language = 2"
+                                >
+                                  <img
+                                    src="~/assets/images/us.png"
+                                    width="25"
+                                    class="mr-2"
+                                    alt=""
+                                  />
+                                  English
+                                </v-btn>
+                              </v-col>
+                            </v-row>
+                          </v-card-text>
+                        </v-card>
+                      </v-col>
+                      <v-col cols="12" md="6" sm="6" xs="12">
+                        <v-card class="mt-3" elevation="1">
+                          <v-card-text>
+                            <v-row align="center">
+                              <v-col cols="12" md="3" sm="12" xs="12">
+                                <h4 class="ma-0 black--text">Product Type</h4>
+                              </v-col>
+                              <v-col
+                                cols="12"
+                                md="9"
+                                sm="12"
+                                xs="12"
+                                class="d-flex justify-end"
                               >
-                                <img
-                                  src="~/assets/images/uae.png"
-                                  width="25"
-                                  class="mr-2"
-                                  alt=""
-                                />
-                                Arabic
-                              </v-btn>
-                              <v-btn
-                                outlined
-                                color="primary"
-                                class="text-capitalize"
-                                @click="landing_info.page_language = 2"
-                              >
-                                <img
-                                  src="~/assets/images/us.png"
-                                  width="25"
-                                  class="mr-2"
-                                  alt=""
-                                />
-                                English
-                              </v-btn>
-                            </v-col>
-                          </v-row>
-                        </v-card-text>
-                      </v-card>
-                    </v-col>
-                    <v-col cols="12" md="6" sm="6" xs="12">
-                      <v-card class="mt-3" elevation="1">
-                        <v-card-text>
-                          <v-row align="center">
-                            <v-col cols="12" md="3" sm="12" xs="12">
-                              <h4 class="ma-0 black--text">Product Type</h4>
-                            </v-col>
-                            <v-col
-                              cols="12"
-                              md="9"
-                              sm="12"
-                              xs="12"
-                              class="d-flex justify-end"
-                            >
-                              <v-btn
-                                color="primary"
-                                outlined
-                                class="text-capitalize mr-1"
-                                @click="collectionType($event, false)"
-                              >
-                                Piece
-                              </v-btn>
-                              <v-btn
-                                color="primary"
-                                outlined
-                                class="text-capitalize"
-                                @click="collectionType($event, true)"
-                              >
-                                Collection
-                              </v-btn>
-                            </v-col>
-                          </v-row>
-                        </v-card-text>
-                      </v-card>
-                    </v-col>
-                  </v-row>
-                  <v-btn color="primary" @click="e1 = 2" small>
-                    Continue
-                  </v-btn>
+                                <v-btn
+                                  color="primary"
+                                  outlined
+                                  class="text-capitalize mr-1"
+                                  @click="collectionType($event, false)"
+                                >
+                                  Piece
+                                </v-btn>
+                                <v-btn
+                                  color="primary"
+                                  outlined
+                                  class="text-capitalize"
+                                  @click="collectionType($event, true)"
+                                >
+                                  Collection
+                                </v-btn>
+                              </v-col>
+                            </v-row>
+                          </v-card-text>
+                        </v-card>
+                      </v-col>
+                    </v-row>
+                    <v-btn color="primary" type="submit" small>
+                      Continue
+                    </v-btn>
+                  </v-form>
                 </v-card>
               </v-stepper-content>
               <v-stepper-step :complete="e1 > 2" step="2">
@@ -665,7 +672,10 @@
       </v-card>
     </v-dialog>
     <!-- end dialog -->
+
+    <!-- Start Show Dialog Component -->
     <Dialog :slug="slug" v-if="dialog" @closeShowDialog="dialog = false" />
+    <!-- End Show Dialog Component -->
   </v-row>
 </template>
 <script>
@@ -750,6 +760,58 @@ export default {
       this.slug = slug;
       this.dialog = true;
     },
+    destroy() {
+      if (this.selected.length > 0) {
+        let arr_delete = this.selected.map((e) => e.id);
+        this.$swal({
+          icon: "info",
+          title: "Are you sure to delete?",
+          confirmButtonText: "Yes",
+          showCancelButton: true,
+          confirmButtonColor: "#1976d2",
+          cancelButtonColor: "red",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.$axios
+              .delete("product/1", { params: arr_delete })
+              .then((response) => {
+                this.index();
+                this.$toastr.s({
+                  title: "Success!",
+                  msg: "Record deleted successfully.",
+                  timeout: 3000,
+                  progressbar: true,
+                });
+              })
+              .catch((error) => {
+                console.log(error);
+              });
+          }
+        });
+      } else {
+        this.$toastr.i({
+          title: "Info!",
+          msg: "Please select a record.",
+          timeout: 3000,
+          progressbar: true,
+        });
+      }
+    },
+    step1() {
+      this.e1 = 2;
+    },
+    openShowDialog() {
+      if (this.selected.length == 1) {
+        this.show(this.selected[0].page_link);
+      } else {
+        this.$toastr.i({
+          title: "Info!",
+          msg: "Please select one record.",
+          timeout: 3000,
+          progressbar: true,
+        });
+      }
+    },
     store() {
       let data = new FormData();
       data.append("landing_info", JSON.stringify(this.landing_info));
@@ -772,7 +834,15 @@ export default {
           },
         })
         .then((response) => {
-          console.log(response);
+          this.index();
+          this.$toastr.s({
+            title: "Success!",
+            msg: "Record inserted successfully!",
+            timeout: 3000,
+            progressbar: true,
+          });
+          this.e1 = 1;
+          this.$refs.add_form.reset();
         })
         .catch((error) => {
           console.log(error);

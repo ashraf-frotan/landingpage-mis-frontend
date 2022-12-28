@@ -21,6 +21,14 @@
             <v-btn
               small
               class="primary text-capitalize mr-1 font-weight-bold"
+              v-if="view"
+              @click="$emit('openShowDialog')"
+            >
+              <v-icon small>mdi-eye</v-icon> View</v-btn
+            >
+            <v-btn
+              small
+              class="primary text-capitalize mr-1 font-weight-bold"
               @click="$emit('openAddDialog')"
             >
               <v-icon small>mdi-plus</v-icon> Create</v-btn
@@ -63,6 +71,7 @@
 <script>
 export default {
   name: "ActionsCard",
+  props: ["view"],
   data() {
     return {
       search: "",
