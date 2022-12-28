@@ -608,6 +608,11 @@ export default {
       },
     };
   },
+  head(){
+    return {
+      title: this.product.title_en
+    }
+  },
   methods: {
     getCities($event) {
       let emirate = this.emirates.find((e) => e.name === $event);
