@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div id="loading">
+    <div id="loading" v-if="loading">
 
     </div>
     <Logo />
@@ -593,6 +593,7 @@ export default {
   layout: "landing",
   data() {
     return {
+      loading:true,
       dialog: false,
       sheet: false,
       cities: [],
@@ -662,6 +663,9 @@ export default {
     this.show();
     this.emirates = city_data;
   },
+  mounted(){
+      this.loading=false;
+  }
 };
 </script>
 
