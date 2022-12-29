@@ -388,6 +388,7 @@
                                   placeholder="No"
                                   label="Quantity"
                                   v-model="landing_info.prices[index].quantity"
+                                  :rules="requireRule"
                                 ></v-text-field>
                               </v-col>
                               <v-col cols="12" md="4" sm="4" xs="4">
@@ -399,6 +400,7 @@
                                   placeholder="price"
                                   label="Price"
                                   v-model="landing_info.prices[index].price"
+                                  :rules="requireRule"
                                 ></v-text-field>
                               </v-col>
                               <v-col cols="12" md="4" sm="4" xs="4">
@@ -410,6 +412,7 @@
                                   placeholder="Old price"
                                   label="Old Price"
                                   v-model="landing_info.prices[index].old_price"
+                                  :rules="requireRule"
                                 ></v-text-field>
                               </v-col>
                             </v-row>
