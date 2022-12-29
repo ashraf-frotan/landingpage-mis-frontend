@@ -771,6 +771,9 @@ export default {
         v => v.length >= 3 || 'Pcode must be more than 3 characters',
         v => v.length <= 4 || 'Pcode must be less than 5 characters'
       ],
+      requireRule: [
+        v => !!v || 'Pcode is required',
+      ]
     };
   },
   methods: {
