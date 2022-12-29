@@ -1,5 +1,8 @@
 <template>
   <div>
+    <div id="loading">
+
+    </div>
     <Logo />
     <Slider :s_images="s_images" />
     <template>
