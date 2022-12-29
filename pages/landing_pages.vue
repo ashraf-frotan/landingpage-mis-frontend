@@ -317,7 +317,7 @@
               </v-stepper-step>
               <v-stepper-content step="2">
                 <v-card elevation="0" class="ma-2">
-                  <v-form @submit.prevent="step2">
+                  <v-form @submit.prevent="step2" ref="form2" lazy-validation>
                     <v-card elevation="1">
                       <v-card-text>
                         <h4 class="mb-3 black--text">Product Code</h4>
@@ -853,7 +853,9 @@ export default {
       this.e1 = 2;
     },
     step2() {
-      this.e1 = 3;
+      if(this.$refs.form2.validate()){
+        this.e1 = 3;
+      }
     },
     step3() {
       if(this.$refs.form3.validate()){
