@@ -13,6 +13,7 @@
         @openShowDialog="openShowDialog"
         @deleteRecord="destroy"
         @changeStatus="changeStatus"
+        @searchContent="searchContent"
         :view="true"
         :change_status="true"
       />
@@ -26,6 +27,7 @@
             show-select
             v-model="selected"
             item-key="id"
+            :search="single_search"
           >
             <template v-slot:item.id="{ item }">
               <div
@@ -710,6 +712,7 @@ export default {
       loader: false,
       dialog: false,
       single_select: false,
+      single_search: "",
       selected: [],
       headers: [
         { text: "ID", value: "id" },
@@ -858,6 +861,9 @@ export default {
           progressbar: true,
         });
       }
+    },
+    searchContent(search) {
+      this.single_search = search;
     },
     step1() {
       this.e1 = 2;
