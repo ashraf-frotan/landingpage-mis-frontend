@@ -346,12 +346,12 @@
                           outlined
                           dense
                           rounded
-                          hide-details=""
                           placeholder="Items here.."
                           append-icon="mdi-plus"
                           @click:append="addToCollection"
                           rows="3"
                           v-model="collection_code"
+                          :rules="pcodeRules"
                         ></v-text-field>
                         <v-card elevation="0">
                           <v-card-text>
@@ -929,14 +929,7 @@ export default {
           (el) => el == this.collection_code
         )
       ) {
-        if (this.collection_code.length < 3) {
-          this.$toastr.i({
-            title: "Info!",
-            msg: "Please enter a valid pcode.",
-            timeout: 3000,
-            progressbar: true,
-          });
-        } else {
+        if (!(this.collection_code.length < 3 || this.collection_code.length > 4)) {
           this.landing_info.collection_items.push(this.collection_code);
           this.collection_code = "";
         }
