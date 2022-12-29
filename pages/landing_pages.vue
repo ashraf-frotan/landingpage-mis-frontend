@@ -624,7 +624,7 @@
                 <small>Long, slider, slider1 and slider2</small>
               </v-stepper-step>
               <v-stepper-content step="4">
-                <v-form @submit.prevent="step4">
+                <v-form @submit.prevent="step4" ref="form4" lazy-validation>
                   <v-row class="mx-2 mb-8">
                     <v-col cols="12">
                       <v-card class="my-3">
@@ -672,7 +672,6 @@
                         color="primary"
                         type="submit"
                         small
-                        @click="add_dialog = false"
                       >
                         Save
                       </v-btn>
@@ -862,7 +861,9 @@ export default {
       }
     },
     step4() {
-      this.e1 = 4;
+      if(this.$refs.form4.validate()){
+        
+      }
     },
     openShowDialog() {
       if (this.selected.length == 1) {
