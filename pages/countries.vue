@@ -164,12 +164,35 @@
         </v-form>
       </v-card>
     </v-dialog>
+    <!-- Start Loader  -->
+    <v-dialog
+      v-model="loader"
+      hide-overlay
+      persistent
+      width="300"
+    >
+      <v-card
+        color="primary"
+        dark
+      >
+        <v-card-text>
+          Please stand by
+          <v-progress-linear
+            indeterminate
+            color="white"
+            class="mb-0"
+          ></v-progress-linear>
+        </v-card-text>
+      </v-card>
+    </v-dialog>
+    <!-- End Loader  -->
   </v-row>
 </template>
 <script>
 export default {
   data() {
     return {
+      loader:true,
       single_search: "",
       search: {
         id: "",
@@ -206,11 +229,12 @@ export default {
     };
   },
   methods: {
-    index() {
-      this.$axios
+    async index() {
+      await this.$axios
         .get("country")
         .then((response) => {
           this.countries = response.data;
+          this.loader=false;
         })
         .catch((e) => {
           console.log(e);
