@@ -767,6 +767,39 @@ export default {
     hsla(0, 0%, 100%, 0)
   );
 }
+
+#loading {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    right: 0;
+    background-color: #f7f7fa;
+    background-image: linear-gradient(90deg, #f7f7fa, #e2e5f1, #f7f7fa);
+    background-size: 200px 100%;
+    background-repeat: no-repeat;
+    -webkit-animation: loadingAnimation 1.5s infinite;
+    animation: loadingAnimation 1.5s infinite;
+    z-index: 9999999;
+}
+
+@-webkit-keyframes loadingAnimation {
+    0% {
+        background-position: -200px 0;
+    }
+    100% {
+        background-position: calc(200px + 100%) 0;
+    }
+}
+
+@keyframes loadingAnimation {
+    0% {
+        background-position: -200px 0;
+    }
+    100% {
+        background-position: calc(200px + 100%) 0;
+    }
+}
 </style>
 <style>
 .v-rating .v-icon {
