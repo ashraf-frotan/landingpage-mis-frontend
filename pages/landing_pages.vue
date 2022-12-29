@@ -323,12 +323,13 @@
                         <h4 class="mb-3 black--text">Product Code</h4>
                         <v-text-field
                           dense
-                          hide-details=""
                           rounded
                           outlined
                           label="Product"
                           placeholder="Please enter product name here"
                           v-model="landing_info.pcode"
+                          :rules="pcodeRules"
+                          required
                         ></v-text-field>
                       </v-card-text>
                     </v-card>
@@ -764,6 +765,12 @@ export default {
       s_images: "",
       l_images: "",
       collection_code: "",
+      // Rules
+      pcodeRules: [
+        v => !!v || 'Pcode is required',
+        v => v.length >= 3 || 'Pcode must be more than 3 characters',
+        v => v.length <= 4 || 'Pcode must be less than 5 characters'
+      ],
     };
   },
   methods: {
