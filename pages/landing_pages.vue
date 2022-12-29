@@ -642,6 +642,7 @@
                                 counter
                                 accept="image/*"
                                 @change="uploadFile1"
+                                :rules="requireRule"
                               >
                               </v-file-input>
                             </v-col>
@@ -656,6 +657,7 @@
                                 placeholder="Please select long images"
                                 accept="image/*"
                                 @change="uploadFile2"
+                                :rules="requireRule"
                               >
                               </v-file-input>
                             </v-col>
