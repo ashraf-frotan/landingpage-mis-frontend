@@ -862,6 +862,7 @@ export default {
     },
     step4() {
       if(this.$refs.form4.validate()){
+        this.e1=1;
         this.store();
       }
     },
@@ -900,6 +901,10 @@ export default {
           },
         })
         .then((response) => {
+          this.$refs.form1.reset();
+          this.$refs.form2.reset();
+          this.$refs.form3.reset();
+          this.$refs.form4.reset();
           this.index();
           this.$toastr.s({
             title: "Success!",
