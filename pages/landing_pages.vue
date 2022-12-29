@@ -930,7 +930,7 @@ export default {
         )
       ) {
         if (!(this.collection_code.length < 3 || this.collection_code.length > 4)) {
-          this.landing_info.collection_items.push(this.collection_code);
+          this.landing_info.collection_items.push(this.collection_code.toUpperCase());
           this.collection_code = "";
         }
       } else {
