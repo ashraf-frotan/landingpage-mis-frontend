@@ -272,16 +272,8 @@
     </v-dialog>
     <!-- END FILTER DIALOG -->
     <!-- Start Loader  -->
-    <v-dialog
-      v-model="loader"
-      hide-overlay
-      persistent
-      width="300"
-    >
-      <v-card
-        color="primary"
-        dark
-      >
+    <v-dialog v-model="loader" hide-overlay persistent width="300">
+      <v-card color="primary" dark>
         <v-card-text>
           Please stand by
           <v-progress-linear
@@ -299,7 +291,7 @@
 export default {
   data() {
     return {
-      loader: true,
+      loader: false,
       templates: [],
       headers: [
         { text: "ID", value: "id" },
@@ -351,11 +343,12 @@ export default {
   },
   methods: {
     async index() {
+      this.loader = true;
       await this.$axios
         .get("template")
         .then((response) => {
           this.templates = response.data;
-          this.loader=false;
+          this.loader = false;
         })
         .catch((error) => {
           console.log(error);

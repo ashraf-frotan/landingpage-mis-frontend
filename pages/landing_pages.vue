@@ -12,7 +12,9 @@
         @openAddDialog="openAddDialog"
         @openShowDialog="openShowDialog"
         @deleteRecord="destroy"
+        @changeStatus="changeStatus"
         :view="true"
+        :change_status="true"
       />
       <v-card>
         <v-card-text>
@@ -36,7 +38,7 @@
             </template>
             <template v-slot:item.page_status="{ item }">
               <span v-if="item.page_status == 0"> Registered </span>
-              <span v-else-if="item.page_status == 1"> Publish </span>
+              <span v-else-if="item.page_status == 1"> Published </span>
               <span v-else> Unpublished </span>
             </template>
             <template v-slot:item.template_id="{ item }">
@@ -668,13 +670,7 @@
                           </v-row>
                         </v-card-text>
                       </v-card>
-                      <v-btn
-                        color="primary"
-                        type="submit"
-                        small
-                      >
-                        Save
-                      </v-btn>
+                      <v-btn color="primary" type="submit" small> Save </v-btn>
                       <v-btn small @click="e1 = 3"> Back </v-btn>
                     </v-col>
                   </v-row>
@@ -690,18 +686,10 @@
     <!-- Start Show Dialog Component -->
     <Dialog :slug="slug" v-if="dialog" @closeShowDialog="dialog = false" />
     <!-- End Show Dialog Component -->
-    
+
     <!-- Start Loader  -->
-    <v-dialog
-      v-model="loader"
-      hide-overlay
-      persistent
-      width="300"
-    >
-      <v-card
-        color="primary"
-        dark
-      >
+    <v-dialog v-model="loader" hide-overlay persistent width="300">
+      <v-card color="primary" dark>
         <v-card-text>
           Please stand by
           <v-progress-linear
@@ -719,7 +707,7 @@
 export default {
   data() {
     return {
-      loader:true,
+      loader: false,
       dialog: false,
       single_select: false,
       selected: [],
@@ -772,26 +760,25 @@ export default {
       collection_code: "",
       // Rules
       pcodeRules: [
-        v => !!v || 'Pcode is required',
-        v => v.length >= 3 || 'Pcode must be more than 3 characters',
-        v => v.length <= 4 || 'Pcode must be less than 5 characters'
+        (v) => !!v || "Pcode is required",
+        (v) => v.length >= 3 || "Pcode must be more than 3 characters",
+        (v) => v.length <= 4 || "Pcode must be less than 5 characters",
       ],
-      requireRule: [
-        v => !!v || 'This field is required',
-      ],
+      requireRule: [(v) => !!v || "This field is required"],
       commonRules: [
-        v => !!v || 'This field is required',
-        v => v.length >= 3 || 'This field must be more than 3 characters',
-      ]
+        (v) => !!v || "This field is required",
+        (v) => v.length >= 3 || "This field must be more than 3 characters",
+      ],
     };
   },
   methods: {
     async index() {
+      this.loader = true;
       await this.$axios
         .get("product")
         .then((response) => {
           this.products = response.data;
-          this.loader=false;
+          this.loader = false;
         })
         .catch((error) => {
           console.log(error);
@@ -849,22 +836,45 @@ export default {
         });
       }
     },
+    changeStatus(status) {
+      if (this.selected.length > 0) {
+        let data = {
+          status: status,
+          selected: this.selected,
+        };
+        this.$axios
+          .post("change_product_status", data)
+          .then((response) => {
+            this.index();
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      } else {
+        this.$toastr.i({
+          title: "Info!",
+          msg: "Please select a record.",
+          timeout: 3000,
+          progressbar: true,
+        });
+      }
+    },
     step1() {
       this.e1 = 2;
     },
     step2() {
-      if(this.$refs.form2.validate()){
+      if (this.$refs.form2.validate()) {
         this.e1 = 3;
       }
     },
     step3() {
-      if(this.$refs.form3.validate()){
+      if (this.$refs.form3.validate()) {
         this.e1 = 4;
       }
     },
     step4() {
-      if(this.$refs.form4.validate()){
-        this.e1=1;
+      if (this.$refs.form4.validate()) {
+        this.e1 = 1;
         this.store();
       }
     },
@@ -881,7 +891,7 @@ export default {
       }
     },
     store() {
-      this.add_dialog=false;
+      this.add_dialog = false;
       let data = new FormData();
       data.append("landing_info", JSON.stringify(this.landing_info));
       data.append("prices", this.prices);
@@ -953,8 +963,12 @@ export default {
           (el) => el == this.collection_code
         )
       ) {
-        if (!(this.collection_code.length < 3 || this.collection_code.length > 4)) {
-          this.landing_info.collection_items.push(this.collection_code.toUpperCase());
+        if (
+          !(this.collection_code.length < 3 || this.collection_code.length > 4)
+        ) {
+          this.landing_info.collection_items.push(
+            this.collection_code.toUpperCase()
+          );
           this.collection_code = "";
         }
       } else {

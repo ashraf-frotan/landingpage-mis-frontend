@@ -1,8 +1,6 @@
 <template>
   <div>
-    <div id="loading" v-if="loading">
-
-    </div>
+    <div id="loading" v-if="loading"></div>
     <Logo />
     <Slider :s_images="s_images" />
     <template>
@@ -593,7 +591,7 @@ export default {
   layout: "landing",
   data() {
     return {
-      loading:true,
+      loading: true,
       dialog: false,
       sheet: false,
       cities: [],
@@ -612,10 +610,10 @@ export default {
       },
     };
   },
-  head(){
+  head() {
     return {
-      title: this.product.title_en
-    }
+      title: this.product.title_en,
+    };
   },
   methods: {
     getCities($event) {
@@ -663,9 +661,9 @@ export default {
     this.show();
     this.emirates = city_data;
   },
-  mounted(){
-      this.loading=false;
-  }
+  mounted() {
+    this.loading = false;
+  },
 };
 </script>
 
@@ -776,36 +774,36 @@ export default {
 }
 
 #loading {
-    width: 100%;
-    height: 100%;
-    position: fixed;
-    top: 0;
-    right: 0;
-    background-color: #f7f7fa;
-    background-image: linear-gradient(90deg, #f7f7fa, #e2e5f1, #f7f7fa);
-    background-size: 200px 100%;
-    background-repeat: no-repeat;
-    -webkit-animation: loadingAnimation 1.5s infinite;
-    animation: loadingAnimation 1.5s infinite;
-    z-index: 9999999;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  right: 0;
+  background-color: #f7f7fa;
+  background-image: linear-gradient(90deg, #f7f7fa, #e2e5f1, #f7f7fa);
+  background-size: 200px 100%;
+  background-repeat: no-repeat;
+  -webkit-animation: loadingAnimation 1.5s infinite;
+  animation: loadingAnimation 1.5s infinite;
+  z-index: 9999999;
 }
 
 @-webkit-keyframes loadingAnimation {
-    0% {
-        background-position: -200px 0;
-    }
-    100% {
-        background-position: calc(200px + 100%) 0;
-    }
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: calc(200px + 100%) 0;
+  }
 }
 
 @keyframes loadingAnimation {
-    0% {
-        background-position: -200px 0;
-    }
-    100% {
-        background-position: calc(200px + 100%) 0;
-    }
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: calc(200px + 100%) 0;
+  }
 }
 </style>
 <style>

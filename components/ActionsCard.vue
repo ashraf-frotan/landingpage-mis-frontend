@@ -43,7 +43,7 @@
             <v-btn
               small
               class="error text-capitalize mr-1"
-              @click="deleteRecord"
+              @click="$emit('deleteRecord')"
             >
               <v-icon small>mdi-delete</v-icon> Delete</v-btn
             >
@@ -61,6 +61,31 @@
             >
               <v-icon small>mdi-refresh</v-icon> Reset</v-btn
             >
+            <v-menu offset-y>
+              <template v-slot:activator="{ on, attrs }" v-if="change_status">
+                <v-btn
+                  color="primary"
+                  v-bind="attrs"
+                  v-on="on"
+                  small
+                  dark
+                  class="ml-1 text-capitalize"
+                >
+                  Select Status
+                </v-btn>
+              </template>
+              <v-list>
+                <v-list-item
+                  link
+                  dense
+                  v-for="s in statuses"
+                  :key="s.status"
+                  @click="$emit('changeStatus', s.status)"
+                >
+                  <v-list-item-title>{{ s.text }}</v-list-item-title>
+                </v-list-item>
+              </v-list>
+            </v-menu>
           </div>
         </v-col>
       </v-row>
@@ -71,17 +96,18 @@
 <script>
 export default {
   name: "ActionsCard",
-  props: ["view"],
+  props: ["view", "change_status"],
   data() {
     return {
       search: "",
+      statuses: [
+        { status: 0, text: "Register" },
+        { status: 1, text: "Publish" },
+        { status: 2, text: "Unpublish" },
+      ],
     };
   },
-  methods: {
-    deleteRecord() {
-      this.$emit("deleteRecord");
-    },
-  },
+  methods: {},
   watch: {
     search() {
       this.$emit("searchContent", this.search);
