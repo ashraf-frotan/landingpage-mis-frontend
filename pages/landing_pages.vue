@@ -465,7 +465,7 @@
               </v-stepper-step>
               <v-stepper-content step="3">
                 <v-card class="ma-2" elevation="0">
-                  <v-form @submit.prevent="step3">
+                  <v-form @submit.prevent="step3" ref="form3" lazy-validation>
                     <v-row class="mt-3">
                       <v-col
                         cols="12"
@@ -857,7 +857,9 @@ export default {
       this.e1 = 3;
     },
     step3() {
-      this.e1 = 4;
+      if(this.$refs.form3.validate()){
+        this.e1 = 4;
+      }
     },
     step4() {
       this.e1 = 4;
