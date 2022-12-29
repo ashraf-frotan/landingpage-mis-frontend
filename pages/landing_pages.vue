@@ -639,7 +639,7 @@
                                 outlined
                                 multiple
                                 dense
-                                hide-details=""
+                                counter
                                 accept="image/*"
                                 @change="uploadFile1"
                               >
@@ -652,7 +652,7 @@
                                 outlined
                                 multiple
                                 dense
-                                hide-details=""
+                                counter
                                 placeholder="Please select long images"
                                 accept="image/*"
                                 @change="uploadFile2"
