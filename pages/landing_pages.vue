@@ -684,12 +684,34 @@
     <!-- Start Show Dialog Component -->
     <Dialog :slug="slug" v-if="dialog" @closeShowDialog="dialog = false" />
     <!-- End Show Dialog Component -->
+
+    <v-dialog
+      v-model="loader"
+      hide-overlay
+      persistent
+      width="300"
+    >
+      <v-card
+        color="primary"
+        dark
+      >
+        <v-card-text>
+          Please stand by
+          <v-progress-linear
+            indeterminate
+            color="white"
+            class="mb-0"
+          ></v-progress-linear>
+        </v-card-text>
+      </v-card>
+    </v-dialog>
   </v-row>
 </template>
 <script>
 export default {
   data() {
     return {
+      loader:true,
       dialog: false,
       single_select: false,
       selected: [],
@@ -743,11 +765,12 @@ export default {
     };
   },
   methods: {
-    index() {
-      this.$axios
+    async index() {
+      await this.$axios
         .get("product")
         .then((response) => {
           this.products = response.data;
+          this.loader=false;
         })
         .catch((error) => {
           console.log(error);
