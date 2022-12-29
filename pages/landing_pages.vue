@@ -89,7 +89,7 @@
           </v-toolbar>
         </v-card>
         <v-card>
-          <v-form @submit.prevent="store" ref="add_form">
+          <v-form ref="add_form">
             <v-stepper v-model="e1" vertical>
               <v-stepper-step :complete="e1 > 1" step="1">
                 Genral Information
@@ -862,7 +862,7 @@ export default {
     },
     step4() {
       if(this.$refs.form4.validate()){
-        
+        this.store();
       }
     },
     openShowDialog() {
@@ -878,6 +878,7 @@ export default {
       }
     },
     store() {
+      this.add_dialog=false;
       let data = new FormData();
       data.append("landing_info", JSON.stringify(this.landing_info));
       data.append("prices", this.prices);
