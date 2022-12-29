@@ -384,7 +384,6 @@
                                   dense
                                   rounded
                                   outlined
-                                  hide-details=""
                                   placeholder="No"
                                   label="Quantity"
                                   v-model="landing_info.prices[index].quantity"
@@ -396,7 +395,6 @@
                                   dense
                                   rounded
                                   outlined
-                                  hide-details=""
                                   placeholder="price"
                                   label="Price"
                                   v-model="landing_info.prices[index].price"
@@ -408,7 +406,6 @@
                                   dense
                                   rounded
                                   outlined
-                                  hide-details=""
                                   placeholder="Old price"
                                   label="Old Price"
                                   v-model="landing_info.prices[index].old_price"
@@ -775,7 +772,7 @@ export default {
         v => v.length <= 4 || 'Pcode must be less than 5 characters'
       ],
       requireRule: [
-        v => !!v || 'Pcode is required',
+        v => !!v || 'This field is required',
       ]
     };
   },
