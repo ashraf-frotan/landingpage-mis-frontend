@@ -484,9 +484,9 @@
                               rounded
                               outlined
                               dense
-                              hide-details=""
                               placeholder="Product name in Arabic"
                               v-model="landing_info.title_ar"
+                              :rules="commonRules"
                             ></v-text-field>
                           </v-card-text>
                         </v-card>
@@ -508,7 +508,7 @@
                               rounded
                               outlined
                               dense
-                              hide-details=""
+                              :rules="commonRules"
                               placeholder="Product name in English"
                               v-model="landing_info.title_en"
                             ></v-text-field>
@@ -530,7 +530,7 @@
                             <v-textarea
                               outlined
                               dense
-                              hide-details=""
+                              :rules="commonRules"
                               placeholder="Note here.."
                               rows="3"
                               v-model="landing_info.desc_ar"
@@ -553,7 +553,7 @@
                             <v-textarea
                               outlined
                               dense
-                              hide-details=""
+                              :rules="commonRules"
                               placeholder="Note here.."
                               rows="3"
                               v-model="landing_info.desc_en"
@@ -576,7 +576,7 @@
                             <v-textarea
                               outlined
                               dense
-                              hide-details=""
+                              :rules="commonRules"
                               placeholder="Message here.."
                               rows="3"
                               v-model="landing_info.message_ar"
@@ -599,7 +599,7 @@
                             <v-textarea
                               outlined
                               dense
-                              hide-details=""
+                              :rules="commonRules"
                               placeholder="Message here.."
                               rows="3"
                               v-model="landing_info.message_en"
@@ -773,6 +773,10 @@ export default {
       ],
       requireRule: [
         v => !!v || 'This field is required',
+      ],
+      commonRules: [
+        v => !!v || 'This field is required',
+        v => v.length >= 3 || 'This field must be more than 3 characters',
       ]
     };
   },
