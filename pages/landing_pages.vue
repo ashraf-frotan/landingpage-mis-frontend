@@ -639,7 +639,9 @@
                                 outlined
                                 multiple
                                 dense
+                                show-size
                                 counter
+                                small-chips
                                 accept="image/*"
                                 @change="uploadFile1"
                                 :rules="requireRule"
@@ -654,6 +656,8 @@
                                 multiple
                                 dense
                                 counter
+                                show-size
+                                small-chips
                                 placeholder="Please select long images"
                                 accept="image/*"
                                 @change="uploadFile2"
