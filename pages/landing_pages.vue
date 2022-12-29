@@ -684,7 +684,8 @@
     <!-- Start Show Dialog Component -->
     <Dialog :slug="slug" v-if="dialog" @closeShowDialog="dialog = false" />
     <!-- End Show Dialog Component -->
-
+    
+    <!-- Start Loader  -->
     <v-dialog
       v-model="loader"
       hide-overlay
@@ -705,6 +706,7 @@
         </v-card-text>
       </v-card>
     </v-dialog>
+    <!-- End Loader  -->
   </v-row>
 </template>
 <script>
