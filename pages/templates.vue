@@ -289,6 +289,11 @@
 </template>
 <script>
 export default {
+  head() {
+    return {
+      title: "Template",
+    };
+  },
   data() {
     return {
       loader: false,
