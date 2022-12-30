@@ -9,7 +9,7 @@
         }"
       />
       <ActionsCard
-        @openAddDialog="openAddDialog"
+        @openAddDialog="add_dialog = true"
         @openShowDialog="openShowDialog"
         @deleteRecord="destroy"
         @changeStatus="changeStatus"
@@ -76,7 +76,12 @@
     </v-col>
 
     <!-- Start Show Dialog Component -->
-    <ShowDialog :slug="slug" v-if="dialog" @closeShowDialog="dialog = false" />
+    <ShowDialog
+      :slug="slug"
+      v-if="show_dialog"
+      @closeShowDialog="show_dialog = false"
+    />
+    <AddDialog v-if="add_dialog" />
     <!-- End Show Dialog Component -->
 
     <!-- Start Loader  -->
@@ -100,7 +105,8 @@ export default {
   data() {
     return {
       loader: false,
-      dialog: false,
+      show_dialog: false,
+      add_dialog: false,
       single_select: false,
       single_search: "",
       selected: [],
@@ -134,7 +140,7 @@ export default {
     },
     show(slug) {
       this.slug = slug;
-      this.dialog = true;
+      this.show_dialog = true;
     },
     destroy() {
       if (this.selected.length > 0) {

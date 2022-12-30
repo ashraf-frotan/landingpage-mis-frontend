@@ -279,8 +279,10 @@
                       <v-card elevation="0">
                         <v-card-text>
                           <v-chip
-                            v-for="item in landing_info.collection_items"
-                            :key="item"
+                            v-for="(
+                              item, index
+                            ) in landing_info.collection_items"
+                            :key="index"
                             class="ma-2"
                             close
                             color="primary"
@@ -613,7 +615,8 @@ export default {
       country_id: null,
       company_id: null,
       data: {},
-      add_dialog: false,
+      e1: 1,
+      add_dialog: true,
       landing_info: {
         page_type: 0,
         template_id: null,
@@ -792,6 +795,9 @@ export default {
       this.countries = this.data.countries;
       this.add_dialog = true;
     },
+  },
+  created() {
+    this.getInfo();
   },
 };
 </script>
