@@ -12,7 +12,7 @@
           <v-btn icon dark @click="closeEditDialog">
             <v-icon>mdi-close</v-icon>
           </v-btn>
-          <v-toolbar-title>Create New Landing Page</v-toolbar-title>
+          <v-toolbar-title>Edit Landing Page</v-toolbar-title>
           <v-spacer></v-spacer>
           <v-toolbar-items> </v-toolbar-items>
         </v-toolbar>
