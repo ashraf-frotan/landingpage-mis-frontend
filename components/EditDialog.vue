@@ -1,7 +1,7 @@
 <template>
   <!-- start dialog -->
   <v-dialog
-    v-model="add_dialog"
+    v-model="edit_dialog"
     fullscreen
     hide-overlay
     transition="dialog-bottom-transition"
@@ -9,7 +9,7 @@
     <v-card>
       <v-card>
         <v-toolbar dark color="primary">
-          <v-btn icon dark @click="closeAddDialog">
+          <v-btn icon dark @click="closeEditDialog">
             <v-icon>mdi-close</v-icon>
           </v-btn>
           <v-toolbar-title>Create New Landing Page</v-toolbar-title>
@@ -642,7 +642,7 @@ export default {
   data() {
     return {
       valid: false,
-      add_dialog: false,
+      edit_dialog: false,
       countries: [],
       companies: [],
       templates: [],
@@ -729,8 +729,8 @@ export default {
           },
         })
         .then((response) => {
-          this.$emit("closeAddDialog");
-          this.closeAddDialog();
+          this.$emit("closeEditDialog");
+          this.closeEditDialog();
           this.$toastr.s({
             title: "Success!",
             msg: "Record inserted successfully!",
@@ -817,8 +817,10 @@ export default {
       }
     },
     removeFromCollection(pcode) {
+      console.log(pcode);
       this.landing_info.collection_items =
         this.landing_info.collection_items.filter((el) => el != pcode);
+      console.log(this.landing_info.collection_items);
     },
     selectTemplate(id, type) {
       this.landing_info.template_id = id;
@@ -834,15 +836,35 @@ export default {
     removeMorePrices(index) {
       this.landing_info.selling_prices.splice(index, 1);
     },
-    openAddDialog() {
-      this.add_dialog = true;
+    openEditDialog(slug) {
+      this.$axios
+        .get(`product/${slug}`)
+        .then((response) => {
+          this.landing_info = response.data;
+          this.landing_info.collection_items = response.data.sub_products.map(
+            (e) => e.pcode
+          );
+          // console.log(response.data);
+          // this.prices = this.product.selling_prices;
+          // this.sub_products = this.product.sub_products;
+          // this.template = this.product.template;
+          // this.company = this.template.company;
+          // this.country = this.company.country;
+          // let images = this.product.product_images;
+          // this.s_images = images.filter((e) => e.type == 0);
+          // this.l_images = images.filter((e) => e.type == 1);
+          this.edit_dialog = true;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
-    closeAddDialog() {
+    closeEditDialog() {
       this.$refs.form1.reset();
       this.$refs.form2.reset();
       this.$refs.form3.reset();
       this.$refs.form4.reset();
-      this.add_dialog = false;
+      this.edit_dialog = false;
       this.e1 = 1;
     },
   },

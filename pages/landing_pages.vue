@@ -12,6 +12,7 @@
         @openShowDialog="openShowDialog"
         @deleteRecord="destroy"
         @openAddDialog="openAddDialog"
+        @openEditDialog="openEditDialog"
         @changeStatus="changeStatus"
         @searchContent="searchContent"
         :view="true"
@@ -76,12 +77,9 @@
     </v-col>
 
     <!-- Start Show Dialog Component -->
-    <ShowDialog
-      :slug="slug"
-      v-if="show_dialog"
-      @closeShowDialog="show_dialog = false"
-    />
+    <ShowDialog ref="show_dialog" />
     <AddDialog @closeAddDialog="index" ref="add_dialog" />
+    <EditDialog @closeAddDialog="index" ref="edit_dialog" />
 
     <!-- Start Loader  -->
     <v-dialog v-model="loader" persistent width="300">
@@ -104,7 +102,6 @@ export default {
   data() {
     return {
       loader: false,
-      show_dialog: false,
       single_select: false,
       single_search: "",
       selected: [],
@@ -137,8 +134,7 @@ export default {
         });
     },
     show(slug) {
-      this.slug = slug;
-      this.show_dialog = true;
+      this.$refs.show_dialog.openShowDialog(slug);
     },
     destroy() {
       if (this.selected.length > 0) {
@@ -206,7 +202,7 @@ export default {
 
     openShowDialog() {
       if (this.selected.length == 1) {
-        this.show(this.selected[0].page_link);
+        this.$refs.show_dialog.openShowDialog(this.selected[0].page_link);
       } else {
         this.$toastr.i({
           title: "Info!",
@@ -218,6 +214,18 @@ export default {
     },
     openAddDialog() {
       this.$refs.add_dialog.openAddDialog();
+    },
+    openEditDialog() {
+      if (this.selected.length == 1) {
+        this.$refs.edit_dialog.openEditDialog(this.selected[0].page_link);
+      } else {
+        this.$toastr.i({
+          title: "Info!",
+          msg: "Please select one record.",
+          timeout: 3000,
+          progressbar: true,
+        });
+      }
     },
     closeAddDialog() {
       this.index();

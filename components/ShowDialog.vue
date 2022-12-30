@@ -1,14 +1,14 @@
 <template>
   <v-row>
     <v-dialog
-      v-model="dialog"
+      v-model="show_dialog"
       fullscreen
       transition="dialog-bottom-transition"
       style="margin: 0; padding: 0"
     >
       <v-card>
         <v-toolbar dark color="primary" elevation="0">
-          <v-btn icon dark @click="$emit('closeShowDialog')">
+          <v-btn icon dark @click="show_dialog = false">
             <v-icon>mdi-close</v-icon>
           </v-btn>
           <v-toolbar-title>Product Information</v-toolbar-title>
@@ -17,7 +17,7 @@
             <v-btn
               dark
               text
-              @click="$emit('closeShowDialog')"
+              @click="show_dialog = false"
               class="text-capitalize"
             >
               Close
@@ -90,7 +90,10 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr v-for="price in prices" :key="price.quantity">
+                          <tr
+                            v-for="price in selling_prices"
+                            :key="price.quantity"
+                          >
                             <td class="text-left">{{ price.quantity }}</td>
                             <td class="text-left">{{ price.price }}</td>
                             <td class="text-left">{{ price.old_price }}</td>
@@ -206,10 +209,9 @@
 </template>
 <script>
 export default {
-  props: ["slug"],
   data() {
     return {
-      dialog: true,
+      show_dialog: false,
       product: {
         pcode: "",
         title_ar: "",
@@ -219,7 +221,7 @@ export default {
         message_ar: "",
         message_en: "",
       },
-      prices: [],
+      selling_prices: [],
       sub_products: [],
       template: { name: "", image: "" },
       company: { name: "", logo: "" },
@@ -229,12 +231,12 @@ export default {
     };
   },
   methods: {
-    show() {
+    openShowDialog(slug) {
       this.$axios
-        .get(`product/${this.slug}`)
+        .get(`product/${slug}`)
         .then((response) => {
           this.product = response.data;
-          this.prices = this.product.selling_prices;
+          this.selling_prices = this.product.selling_prices;
           this.sub_products = this.product.sub_products;
           this.template = this.product.template;
           this.company = this.template.company;
@@ -242,14 +244,12 @@ export default {
           let images = this.product.product_images;
           this.s_images = images.filter((e) => e.type == 0);
           this.l_images = images.filter((e) => e.type == 1);
+          this.show_dialog = true;
         })
         .catch((error) => {
           console.log(error);
         });
     },
-  },
-  created() {
-    this.show();
   },
 };
 </script>
