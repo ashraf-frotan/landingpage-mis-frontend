@@ -182,6 +182,11 @@
 </template>
 <script>
 export default {
+  head() {
+    return {
+      title: "Country",
+    };
+  },
   data() {
     return {
       loader: false,
