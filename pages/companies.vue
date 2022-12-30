@@ -399,8 +399,6 @@ export default {
       this.company.logo = file;
     },
     closeDialog() {
-      // this.$refs.add_form.resetValidation();
-      // this.$refs.edit_form.resetValidation();
       this.$refs.add_form.reset();
       this.$refs.edit_form.reset();
       this.edit_dialog = false;
