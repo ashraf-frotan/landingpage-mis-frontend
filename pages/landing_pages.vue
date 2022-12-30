@@ -81,8 +81,7 @@
       v-if="show_dialog"
       @closeShowDialog="show_dialog = false"
     />
-    <AddDialog v-if="add_dialog" />
-    <!-- End Show Dialog Component -->
+    <AddDialog :add_dialog="add_dialog" @closeAddDialog="closeAddDialog" />
 
     <!-- Start Loader  -->
     <v-dialog v-model="loader" persistent width="300">
@@ -217,6 +216,9 @@ export default {
           progressbar: true,
         });
       }
+    },
+    closeAddDialog() {
+      this.index();
     },
   },
   watch: {

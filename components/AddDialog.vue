@@ -607,6 +607,7 @@
 
 <script>
 export default {
+  props: ["add_dialog"],
   data() {
     return {
       countries: [],
@@ -616,7 +617,6 @@ export default {
       company_id: null,
       data: {},
       e1: 1,
-      add_dialog: true,
       landing_info: {
         page_type: 0,
         template_id: null,
@@ -668,8 +668,7 @@ export default {
           console.log(error);
         });
     },
-    store() {
-      this.add_dialog = false;
+    async store() {
       let data = new FormData();
       data.append("landing_info", JSON.stringify(this.landing_info));
       data.append("prices", this.prices);
@@ -684,26 +683,25 @@ export default {
         data.append("l_images[" + i + "]", file);
       }
 
-      this.$axios
+      await this.$axios
         .post("product", data, {
           header: {
             "Content-Type": "multipart/form-data",
           },
         })
         .then((response) => {
+          this.$emit("closeAddDialog");
+
           this.$refs.form1.reset();
           this.$refs.form2.reset();
           this.$refs.form3.reset();
           this.$refs.form4.reset();
-          this.index();
           this.$toastr.s({
             title: "Success!",
             msg: "Record inserted successfully!",
             timeout: 3000,
             progressbar: true,
           });
-          this.e1 = 1;
-          this.$refs.add_form.reset();
         })
         .catch((error) => {
           console.log(error);
@@ -722,10 +720,11 @@ export default {
         this.e1 = 4;
       }
     },
-    step4() {
+    async step4() {
       if (this.$refs.form4.validate()) {
+        this.add_dialog = false;
+        await this.store();
         this.e1 = 1;
-        this.store();
       }
     },
     getCompanies(id) {
@@ -790,10 +789,6 @@ export default {
     },
     removeMorePrices(index) {
       this.landing_info.prices.splice(index, 1);
-    },
-    openAddDialog() {
-      this.countries = this.data.countries;
-      this.add_dialog = true;
     },
   },
   created() {
