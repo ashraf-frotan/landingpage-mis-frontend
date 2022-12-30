@@ -228,6 +228,11 @@
 
 <script>
 export default {
+  head() {
+    return {
+      title: "Companies",
+    };
+  },
   data() {
     return {
       loader: false,
