@@ -9,9 +9,9 @@
         }"
       />
       <ActionsCard
-        @openAddDialog="add_dialog = true"
         @openShowDialog="openShowDialog"
         @deleteRecord="destroy"
+        @openAddDialog="openAddDialog"
         @changeStatus="changeStatus"
         @searchContent="searchContent"
         :view="true"
@@ -81,7 +81,7 @@
       v-if="show_dialog"
       @closeShowDialog="show_dialog = false"
     />
-    <AddDialog :add_dialog="add_dialog" @closeAddDialog="closeAddDialog" />
+    <AddDialog @closeAddDialog="index" ref="add_dialog" />
 
     <!-- Start Loader  -->
     <v-dialog v-model="loader" persistent width="300">
@@ -105,7 +105,6 @@ export default {
     return {
       loader: false,
       show_dialog: false,
-      add_dialog: false,
       single_select: false,
       single_search: "",
       selected: [],
@@ -216,6 +215,9 @@ export default {
           progressbar: true,
         });
       }
+    },
+    openAddDialog() {
+      this.$refs.add_dialog.openAddDialog();
     },
     closeAddDialog() {
       this.index();
