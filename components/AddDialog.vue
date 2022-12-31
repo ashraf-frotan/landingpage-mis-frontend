@@ -156,6 +156,7 @@
                               outlined
                               class="text-capitalize mt-2 mt-md-0 mt-sm-0"
                               @click="landing_info.page_language = 0"
+                              :class="landing_info.page_language==0 ? 'select' :''"
                             >
                               <img
                                 src="~/assets/images/both-lang.png"
@@ -169,6 +170,7 @@
                               outlined
                               class="text-capitalize mx-1"
                               @click="landing_info.page_language = 1"
+                              :class="landing_info.page_language==1 ? 'select' :''"
                             >
                               <img
                                 src="~/assets/images/uae.png"
@@ -182,6 +184,7 @@
                               outlined
                               class="text-capitalize"
                               @click="landing_info.page_language = 2"
+                              :class="landing_info.page_language==2 ? 'select' :''"
                             >
                               <img
                                 src="~/assets/images/us.png"
