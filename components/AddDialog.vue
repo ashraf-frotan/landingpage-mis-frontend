@@ -863,6 +863,9 @@ export default {
       this.$refs.form3.reset();
       this.$refs.form4.reset();
       this.add_dialog = false;
+      this.country_id=null;
+      this.company_id=null;
+      this.template_id=null;
       this.e1 = 1;
     },
   },
