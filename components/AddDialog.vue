@@ -154,7 +154,7 @@
                           >
                             <v-btn
                               outlined
-                              class="text-capitalize mt-2 mt-md-0 mt-sm-0"
+                              class="text-capitalize "
                               @click="landing_info.page_language = 0"
                               :class="landing_info.page_language==0 ? 'select' :''"
                             >
@@ -182,7 +182,7 @@
                             </v-btn>
                             <v-btn
                               outlined
-                              class="text-capitalize"
+                              class="text-capitalize mt-1 mt-md-0"
                               @click="landing_info.page_language = 2"
                               :class="landing_info.page_language==2 ? 'select' :''"
                             >
