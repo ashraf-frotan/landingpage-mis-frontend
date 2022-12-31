@@ -707,6 +707,7 @@ export default {
         .then((response) => {
           this.data = response.data;
           this.countries = this.data.countries;
+          this.country_id=this.countries[0].id;
         })
         .catch((error) => {
           console.log(error);
