@@ -214,15 +214,13 @@
                             class="d-flex justify-end"
                           >
                             <v-btn
-                              color="primary"
-                              outlined
+                            outlined
                               class="text-capitalize mr-1"
                               @click="collectionType($event, false)"
                             >
                               Piece
                             </v-btn>
                             <v-btn
-                              color="primary"
                               outlined
                               class="text-capitalize"
                               @click="collectionType($event, true)"
