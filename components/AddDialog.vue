@@ -44,6 +44,7 @@
                         <v-card
                           elevation="1"
                           class="px-5 py-3 ml-2 country-card"
+                          :class="country_id==country.id ? 'select' : ''"
                           width="100"
                           link
                           v-for="country in countries"
@@ -853,4 +854,11 @@ export default {
 </script>
 
 <style>
+.country-card.select{
+  border:1px solid blue  !important;
+}
+
+.country-card{
+  border: 1px  solid blue;
+}
 </style>
