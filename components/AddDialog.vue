@@ -121,6 +121,7 @@
                           v-for="template in templates"
                           :key="template.id"
                           @click="selectTemplate(template.id, template.type)"
+                          :class="template_id==template.id ? 'select' :''"
                         >
                           <v-img :src="template.image" width="200" alt="" />
                           <p class="text-center my-3">
@@ -650,6 +651,7 @@ export default {
       templates: [],
       country_id: null,
       company_id: null,
+      template_id:null,
       data: {},
       e1: 1,
       landing_info: {
@@ -825,6 +827,7 @@ export default {
     selectTemplate(id, type) {
       this.landing_info.template_id = id;
       this.landing_info.page_type = type;
+      this.template_id=id;
     },
     addMorePrices() {
       this.landing_info.selling_prices.push({
