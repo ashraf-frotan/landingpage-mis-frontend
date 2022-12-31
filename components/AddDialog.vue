@@ -216,14 +216,16 @@
                             <v-btn
                             outlined
                               class="text-capitalize mr-1"
-                              @click="collectionType($event, false)"
+                              @click="landing_info.is_collection=false"
+                              :class="!landing_info.is_collection ? 'select' :''"
                             >
                               Piece
                             </v-btn>
                             <v-btn
                               outlined
                               class="text-capitalize"
-                              @click="collectionType($event, true)"
+                              @click="landing_info.is_collection=true"
+                              :class="landing_info.is_collection ? 'select' :''"
                             >
                               Collection
                             </v-btn>
@@ -775,9 +777,6 @@ export default {
         return el.id == id;
       });
     },
-    collectionType($event, type) {
-      this.landing_info.is_collection = type;
-    },
     uploadFile1(file) {
       this.s_images = file;
     },
@@ -857,7 +856,7 @@ export default {
 
 <style>
 .select{
-  border:1px solid #1976d2  !important;
+  border:1.5px solid #1976d2  !important;
 }
 
 .country-card{
