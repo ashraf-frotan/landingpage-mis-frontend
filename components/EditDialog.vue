@@ -721,10 +721,9 @@ export default {
         });
     },
     async update() {
+      console.log(this.landing_info);
       let data = new FormData();
       data.append("landing_info", JSON.stringify(this.landing_info));
-      data.append("s_images", this.s_images);
-      console.log(this.landing_info);
       console.log(this.s_images);
       console.log(this.l_images);
       for (let i = 0; i < this.s_images.length; i++) {
@@ -736,26 +735,26 @@ export default {
         let file = this.l_images[i];
         data.append("l_images[" + i + "]", file);
       }
-
-      // await this.$axios
-      //   .post(`product/${this.landing_info.id}`, data, {
-      //     header: {
-      //       "Content-Type": "multipart/form-data",
-      //     },
-      //   })
-      //   .then((response) => {
-      //     this.$emit("closeEditDialog");
-      //     this.closeEditDialog();
-      //     this.$toastr.s({
-      //       title: "Success!",
-      //       msg: "Record inserted successfully!",
-      //       timeout: 3000,
-      //       progressbar: true,
-      //     });
-      //   })
-      //   .catch((error) => {
-      //     console.log(error);
-      //   });
+      data.append("_method", "put");
+      await this.$axios
+        .put(`product/${this.landing_info.id}`, data, {
+          header: {
+            "Content-Type": "multipart/form-data",
+          },
+        })
+        .then((response) => {
+          this.$emit("closeEditDialog");
+          this.closeEditDialog();
+          this.$toastr.s({
+            title: "Success!",
+            msg: "Record updated successfully!",
+            timeout: 3000,
+            progressbar: true,
+          });
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
     step1() {
       let msg = "";
