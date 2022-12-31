@@ -49,6 +49,7 @@
                           v-for="country in countries"
                           :key="country.id"
                           @click="getCompanies(country.id)"
+                          :class="country_id == country.id ? 'select' : ''"
                         >
                           <v-row>
                             <v-col>
@@ -90,6 +91,7 @@
                           v-for="company in companies"
                           :key="company.id"
                           @click="getTemplates(company.id)"
+                          :class="company_id == company.id ? 'select' : ''"
                         >
                           <v-row align="center" class="py-2 px-4">
                             <v-img :src="company.logo" width="30" alt="" />
@@ -119,6 +121,7 @@
                           v-for="template in templates"
                           :key="template.id"
                           @click="selectTemplate(template.id, template.type)"
+                          :class="template_id == template.id ? 'select' : ''"
                         >
                           <v-img :src="template.image" width="200" alt="" />
                           <p class="text-center my-3">
@@ -150,10 +153,12 @@
                             "
                           >
                             <v-btn
-                              color="primary"
                               outlined
                               class="text-capitalize mt-2 mt-md-0 mt-sm-0"
                               @click="landing_info.page_language = 0"
+                              :class="
+                                landing_info.page_language == 0 ? 'select' : ''
+                              "
                             >
                               <img
                                 src="~/assets/images/both-lang.png"
@@ -164,10 +169,12 @@
                               Both
                             </v-btn>
                             <v-btn
-                              color="primary"
                               outlined
                               class="text-capitalize mx-1"
                               @click="landing_info.page_language = 1"
+                              :class="
+                                landing_info.page_language == 1 ? 'select' : ''
+                              "
                             >
                               <img
                                 src="~/assets/images/uae.png"
@@ -179,9 +186,11 @@
                             </v-btn>
                             <v-btn
                               outlined
-                              color="primary"
                               class="text-capitalize"
                               @click="landing_info.page_language = 2"
+                              :class="
+                                landing_info.page_language == 2 ? 'select' : ''
+                              "
                             >
                               <img
                                 src="~/assets/images/us.png"
@@ -211,18 +220,22 @@
                             class="d-flex justify-end"
                           >
                             <v-btn
-                              color="primary"
                               outlined
                               class="text-capitalize mr-1"
-                              @click="collectionType($event, false)"
+                              @click="landing_info.is_collection = false"
+                              :class="
+                                !landing_info.is_collection ? 'select' : ''
+                              "
                             >
                               Piece
                             </v-btn>
                             <v-btn
-                              color="primary"
                               outlined
                               class="text-capitalize"
-                              @click="collectionType($event, true)"
+                              @click="landing_info.is_collection = true"
+                              :class="
+                                landing_info.is_collection ? 'select' : ''
+                              "
                             >
                               Collection
                             </v-btn>
@@ -599,7 +612,6 @@
                             accept="image/*"
                             @change="uploadFile1"
                             hide-details="auto"
-                            :rules="requireRule"
                           >
                           </v-file-input>
                         </v-col>
@@ -616,7 +628,6 @@
                             placeholder="Please select long images"
                             accept="image/*"
                             @change="uploadFile2"
-                            :rules="requireRule"
                             hide-details="auto"
                           >
                           </v-file-input>
@@ -624,7 +635,7 @@
                       </v-row>
                     </v-card-text>
                   </v-card>
-                  <v-btn color="primary" type="submit" small> Save </v-btn>
+                  <v-btn color="primary" type="submit" small> Update </v-btn>
                   <v-btn small @click="e1 = 3"> Back </v-btn>
                 </v-col>
               </v-row>
@@ -648,6 +659,7 @@ export default {
       templates: [],
       country_id: null,
       company_id: null,
+      template_id: null,
       data: {},
       e1: 1,
       landing_info: {
@@ -708,10 +720,13 @@ export default {
           console.log(error);
         });
     },
-    async store() {
+    async update() {
       let data = new FormData();
       data.append("landing_info", JSON.stringify(this.landing_info));
       data.append("s_images", this.s_images);
+      console.log(this.landing_info);
+      console.log(this.s_images);
+      console.log(this.l_images);
       for (let i = 0; i < this.s_images.length; i++) {
         let file = this.s_images[i];
         data.append("s_images[" + i + "]", file);
@@ -722,28 +737,45 @@ export default {
         data.append("l_images[" + i + "]", file);
       }
 
-      await this.$axios
-        .post("product", data, {
-          header: {
-            "Content-Type": "multipart/form-data",
-          },
-        })
-        .then((response) => {
-          this.$emit("closeEditDialog");
-          this.closeEditDialog();
-          this.$toastr.s({
-            title: "Success!",
-            msg: "Record inserted successfully!",
-            timeout: 3000,
-            progressbar: true,
-          });
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      // await this.$axios
+      //   .post(`product/${this.landing_info.id}`, data, {
+      //     header: {
+      //       "Content-Type": "multipart/form-data",
+      //     },
+      //   })
+      //   .then((response) => {
+      //     this.$emit("closeEditDialog");
+      //     this.closeEditDialog();
+      //     this.$toastr.s({
+      //       title: "Success!",
+      //       msg: "Record inserted successfully!",
+      //       timeout: 3000,
+      //       progressbar: true,
+      //     });
+      //   })
+      //   .catch((error) => {
+      //     console.log(error);
+      //   });
     },
     step1() {
-      this.e1 = 2;
+      let msg = "";
+      if (this.country_id == null) {
+        msg = "Please select country";
+      } else if (this.company_id == null) {
+        msg = "Please select company";
+      } else if (this.template_id == null) {
+        msg = "Please select template";
+      }
+      if (msg.length > 0) {
+        this.$toastr.e({
+          title: "Error!",
+          msg: msg,
+          timeout: 3000,
+          progressbar: true,
+        });
+      } else {
+        this.e1 = 2;
+      }
     },
     step2() {
       if (this.$refs.form2.validate()) {
@@ -757,11 +789,12 @@ export default {
     },
     async step4() {
       if (this.$refs.form4.validate()) {
-        await this.store();
+        await this.update();
       }
     },
     getCompanies(id) {
       this.country_id = id;
+      this.company_id = null;
       this.companies = this.data.companies.filter((el) => {
         return el.country_id == id;
       });
@@ -769,12 +802,10 @@ export default {
     },
     getTemplates(id) {
       this.company_id = id;
+      this.template_id = null;
       this.templates = this.data.templates.filter((el) => {
         return el.id == id;
       });
-    },
-    collectionType($event, type) {
-      this.landing_info.is_collection = type;
     },
     uploadFile1(file) {
       this.s_images = file;
@@ -817,7 +848,6 @@ export default {
       }
     },
     removeFromCollection(pcode) {
-      console.log(pcode);
       this.landing_info.collection_items =
         this.landing_info.collection_items.filter((el) => el != pcode);
       console.log(this.landing_info.collection_items);
@@ -825,6 +855,7 @@ export default {
     selectTemplate(id, type) {
       this.landing_info.template_id = id;
       this.landing_info.page_type = type;
+      this.template_id = id;
     },
     addMorePrices() {
       this.landing_info.selling_prices.push({
@@ -837,22 +868,19 @@ export default {
       this.landing_info.selling_prices.splice(index, 1);
     },
     openEditDialog(slug) {
+      this.getInfo();
       this.$axios
         .get(`product/${slug}`)
         .then((response) => {
           this.landing_info = response.data;
+          this.country_id = this.landing_info.template.company.country_id;
+          this.getCompanies(this.country_id);
+          this.company_id = this.landing_info.template.company_id;
+          this.getTemplates(this.company_id);
+          this.template_id = this.landing_info.template_id;
           this.landing_info.collection_items = response.data.sub_products.map(
             (e) => e.pcode
           );
-          // console.log(response.data);
-          // this.prices = this.product.selling_prices;
-          // this.sub_products = this.product.sub_products;
-          // this.template = this.product.template;
-          // this.company = this.template.company;
-          // this.country = this.company.country;
-          // let images = this.product.product_images;
-          // this.s_images = images.filter((e) => e.type == 0);
-          // this.l_images = images.filter((e) => e.type == 1);
           this.edit_dialog = true;
         })
         .catch((error) => {
@@ -865,14 +893,22 @@ export default {
       this.$refs.form3.reset();
       this.$refs.form4.reset();
       this.edit_dialog = false;
+      this.country_id = null;
+      this.company_id = null;
+      this.template_id = null;
       this.e1 = 1;
     },
-  },
-  created() {
-    this.getInfo();
   },
 };
 </script>
 
 <style>
+.select {
+  border: 1.5px solid #1976d2 !important;
+  color: #1976d2 !important;
+}
+
+.country-card {
+  border: 1px solid #1976d2;
+}
 </style>

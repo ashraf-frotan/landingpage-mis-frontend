@@ -44,7 +44,7 @@
                         <v-card
                           elevation="1"
                           class="px-5 py-3 ml-2 country-card"
-                          :class="country_id==country.id ? 'select' : ''"
+                          :class="country_id == country.id ? 'select' : ''"
                           width="100"
                           link
                           v-for="country in countries"
@@ -90,7 +90,7 @@
                           link
                           v-for="company in companies"
                           :key="company.id"
-                          :class="company_id==company.id ? 'select' : ''"
+                          :class="company_id == company.id ? 'select' : ''"
                           @click="getTemplates(company.id)"
                         >
                           <v-row align="center" class="py-2 px-4">
@@ -121,7 +121,7 @@
                           v-for="template in templates"
                           :key="template.id"
                           @click="selectTemplate(template.id, template.type)"
-                          :class="template_id==template.id ? 'select' :''"
+                          :class="template_id == template.id ? 'select' : ''"
                         >
                           <v-img :src="template.image" width="200" alt="" />
                           <p class="text-center my-3">
@@ -154,9 +154,11 @@
                           >
                             <v-btn
                               outlined
-                              class="text-capitalize "
+                              class="text-capitalize"
                               @click="landing_info.page_language = 0"
-                              :class="landing_info.page_language==0 ? 'select' :''"
+                              :class="
+                                landing_info.page_language == 0 ? 'select' : ''
+                              "
                             >
                               <img
                                 src="~/assets/images/both-lang.png"
@@ -170,7 +172,9 @@
                               outlined
                               class="text-capitalize mx-1"
                               @click="landing_info.page_language = 1"
-                              :class="landing_info.page_language==1 ? 'select' :''"
+                              :class="
+                                landing_info.page_language == 1 ? 'select' : ''
+                              "
                             >
                               <img
                                 src="~/assets/images/uae.png"
@@ -184,7 +188,9 @@
                               outlined
                               class="text-capitalize mt-1 mt-md-0"
                               @click="landing_info.page_language = 2"
-                              :class="landing_info.page_language==2 ? 'select' :''"
+                              :class="
+                                landing_info.page_language == 2 ? 'select' : ''
+                              "
                             >
                               <img
                                 src="~/assets/images/us.png"
@@ -214,18 +220,22 @@
                             class="d-flex justify-end"
                           >
                             <v-btn
-                            outlined
+                              outlined
                               class="text-capitalize mr-1"
-                              @click="landing_info.is_collection=false"
-                              :class="!landing_info.is_collection ? 'select' :''"
+                              @click="landing_info.is_collection = false"
+                              :class="
+                                !landing_info.is_collection ? 'select' : ''
+                              "
                             >
                               Piece
                             </v-btn>
                             <v-btn
                               outlined
                               class="text-capitalize"
-                              @click="landing_info.is_collection=true"
-                              :class="landing_info.is_collection ? 'select' :''"
+                              @click="landing_info.is_collection = true"
+                              :class="
+                                landing_info.is_collection ? 'select' : ''
+                              "
                             >
                               Collection
                             </v-btn>
@@ -651,7 +661,7 @@ export default {
       templates: [],
       country_id: null,
       company_id: null,
-      template_id:null,
+      template_id: null,
       data: {},
       e1: 1,
       landing_info: {
@@ -747,24 +757,23 @@ export default {
         });
     },
     step1() {
-      let msg="";
-      if(this.country_id==null){
-          msg='Please select country';
-      } else if(this.company_id==null){
-       
-          msg='Please select company';
-      }else if(this.template_id==null){
-          msg='Please select template';
+      let msg = "";
+      if (this.country_id == null) {
+        msg = "Please select country";
+      } else if (this.company_id == null) {
+        msg = "Please select company";
+      } else if (this.template_id == null) {
+        msg = "Please select template";
       }
-      if(msg.length>0){
+      if (msg.length > 0) {
         this.$toastr.e({
-          title:'Error!',
-          msg:msg,
-          timeout:3000,
-          progressbar:true
+          title: "Error!",
+          msg: msg,
+          timeout: 3000,
+          progressbar: true,
         });
-      } else{
-        this.e1=2;
+      } else {
+        this.e1 = 2;
       }
     },
     step2() {
@@ -784,6 +793,8 @@ export default {
     },
     getCompanies(id) {
       this.country_id = id;
+      this.company_id = null;
+      this.template_id = null;
       this.companies = this.data.companies.filter((el) => {
         return el.country_id == id;
       });
@@ -842,7 +853,7 @@ export default {
     selectTemplate(id, type) {
       this.landing_info.template_id = id;
       this.landing_info.page_type = type;
-      this.template_id=id;
+      this.template_id = id;
     },
     addMorePrices() {
       this.landing_info.selling_prices.push({
@@ -863,9 +874,9 @@ export default {
       this.$refs.form3.reset();
       this.$refs.form4.reset();
       this.add_dialog = false;
-      this.country_id=null;
-      this.company_id=null;
-      this.template_id=null;
+      this.country_id = null;
+      this.company_id = null;
+      this.template_id = null;
       this.e1 = 1;
     },
   },
@@ -876,12 +887,12 @@ export default {
 </script>
 
 <style>
-.select{
-  border:1.5px solid #1976d2  !important;
+.select {
+  border: 1.5px solid #1976d2 !important;
   color: #1976d2 !important;
 }
 
-.country-card{
-  border: 1px  solid #1976d2;
+.country-card {
+  border: 1px solid #1976d2;
 }
 </style>
