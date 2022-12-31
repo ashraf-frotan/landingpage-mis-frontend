@@ -855,10 +855,10 @@ export default {
 
 <style>
 .country-card.select{
-  border:1px solid blue  !important;
+  border:1px solid #1976d2  !important;
 }
 
 .country-card{
-  border: 1px  solid blue;
+  border: 1px  solid #1976d2;
 }
 </style>
