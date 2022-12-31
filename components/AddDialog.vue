@@ -90,6 +90,7 @@
                           link
                           v-for="company in companies"
                           :key="company.id"
+                          :class="company_id==company.id ? 'select' : ''"
                           @click="getTemplates(company.id)"
                         >
                           <v-row align="center" class="py-2 px-4">
@@ -854,7 +855,7 @@ export default {
 </script>
 
 <style>
-.country-card.select{
+.select{
   border:1px solid #1976d2  !important;
 }
 
