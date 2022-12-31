@@ -857,6 +857,7 @@ export default {
 <style>
 .select{
   border:1.5px solid #1976d2  !important;
+  color: #1976d2 !important;
 }
 
 .country-card{
