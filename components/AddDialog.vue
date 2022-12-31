@@ -747,16 +747,24 @@ export default {
         });
     },
     step1() {
+      let msg="";
       if(this.country_id==null){
+          msg='Please select country';
+      } else if(this.company_id==null){
+       
+          msg='Please select company';
+      }else if(this.template_id==null){
+          msg='Please select template';
+      }
+      if(msg.length>0){
         this.$toastr.e({
           title:'Error!',
-          msg:'Please select country',
+          msg:msg,
           timeout:3000,
-          progressbar:true,
+          progressbar:true
         });
-      }else{
-
-        this.e1 = 2;
+      } else{
+        this.e1=2;
       }
     },
     step2() {
