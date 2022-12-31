@@ -747,7 +747,17 @@ export default {
         });
     },
     step1() {
-      this.e1 = 2;
+      if(this.country_id==null){
+        this.$toastr.e({
+          title:'Error!',
+          msg:'Please select country',
+          timeout:3000,
+          progressbar:true,
+        });
+      }else{
+
+        this.e1 = 2;
+      }
     },
     step2() {
       if (this.$refs.form2.validate()) {
