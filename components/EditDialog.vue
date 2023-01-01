@@ -275,6 +275,7 @@
                       hide-details="auto"
                       required
                     ></v-text-field>
+                    <v-btn @click="check">check</v-btn>
                   </v-card-text>
                 </v-card>
                 <v-card
@@ -709,6 +710,9 @@ export default {
     };
   },
   methods: {
+    check() {
+      console.log(this.landing_info.pcode);
+    },
     getInfo() {
       this.$axios
         .get("get_info")
@@ -721,11 +725,8 @@ export default {
         });
     },
     async update() {
-      console.log(this.landing_info);
       let data = new FormData();
       data.append("landing_info", JSON.stringify(this.landing_info));
-      console.log(this.s_images);
-      console.log(this.l_images);
       for (let i = 0; i < this.s_images.length; i++) {
         let file = this.s_images[i];
         data.append("s_images[" + i + "]", file);
@@ -737,14 +738,13 @@ export default {
       }
       data.append("_method", "put");
       await this.$axios
-        .put(`product/${this.landing_info.id}`, data, {
+        .post(`product/${this.landing_info.id}`, data, {
           header: {
             "Content-Type": "multipart/form-data",
           },
         })
         .then((response) => {
           this.$emit("closeEditDialog");
-          this.closeEditDialog();
           this.$toastr.s({
             title: "Success!",
             msg: "Record updated successfully!",
@@ -755,6 +755,7 @@ export default {
         .catch((error) => {
           console.log(error);
         });
+      // this.closeEditDialog();
     },
     step1() {
       let msg = "";
@@ -872,6 +873,7 @@ export default {
         .get(`product/${slug}`)
         .then((response) => {
           this.landing_info = response.data;
+          console.log(this.landing_info);
           this.country_id = this.landing_info.template.company.country_id;
           this.getCompanies(this.country_id);
           this.company_id = this.landing_info.template.company_id;
@@ -886,11 +888,11 @@ export default {
           console.log(error);
         });
     },
-    closeEditDialog() {
-      this.$refs.form1.reset();
-      this.$refs.form2.reset();
-      this.$refs.form3.reset();
-      this.$refs.form4.reset();
+    async closeEditDialog() {
+      await this.$refs.form1.reset();
+      await this.$refs.form2.reset();
+      await this.$refs.form3.reset();
+      await this.$refs.form4.reset();
       this.edit_dialog = false;
       this.country_id = null;
       this.company_id = null;
