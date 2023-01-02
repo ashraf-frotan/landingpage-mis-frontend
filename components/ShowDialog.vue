@@ -180,7 +180,10 @@
                       v-for="image in s_images"
                       :key="image.id"
                     >
-                      <v-img :src="`${baseUrl}assets/images/products/${product.pcode}${image.name}`" width="160" />
+                      <v-img
+                        :src="`${baseUrl}assets/images/products/${product.pcode}${image.name}`"
+                        width="160"
+                      />
                     </div>
                   </div>
                 </v-col>
@@ -195,7 +198,12 @@
                       v-for="image in l_images"
                       :key="image.id"
                     >
-                      <v-img :src="`${baseUrl}assets/images/products/${product.pcode}${image.name}`" width="160" />
+                      <NuxtLink
+                        :to="`${baseUrl}assets/images/products/${product.pcode}${image.name}`"
+                        ><v-img
+                          :src="`${baseUrl}assets/images/products/${product.pcode}${image.name}`"
+                          width="160"
+                      /></NuxtLink>
                     </div>
                   </div>
                 </v-col>
@@ -228,7 +236,7 @@ export default {
       country: { name: "", flag: "" },
       s_images: [],
       l_images: [],
-      baseUrl:process.env.baseUrl
+      baseUrl: process.env.baseUrl,
     };
   },
   methods: {

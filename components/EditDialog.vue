@@ -275,7 +275,6 @@
                       hide-details="auto"
                       required
                     ></v-text-field>
-                    <v-btn @click="check">check</v-btn>
                   </v-card-text>
                 </v-card>
                 <v-card
@@ -710,9 +709,6 @@ export default {
     };
   },
   methods: {
-    check() {
-      console.log(this.landing_info.pcode);
-    },
     getInfo() {
       this.$axios
         .get("get_info")
