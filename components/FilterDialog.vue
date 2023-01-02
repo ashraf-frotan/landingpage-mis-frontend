@@ -2,82 +2,84 @@
   <div>
     <v-dialog v-model="filter_dialog" max-width="700">
       <v-card>
-        <v-card-title> Filter Products </v-card-title>
-        <v-card-text>
-          <v-row>
-            <v-col cols="12" md="4" sm="4" xs="4"
-              ><v-select
-                dense
-                :items="countries"
-                item-text="name"
-                item-value="id"
-                @change="getCompanies($event)"
-                placeholder="Select Country"
-              ></v-select>
-            </v-col>
-            <v-col cols="12" md="4" sm="4" xs="4">
-              <v-select
-                dense
-                :items="companies"
-                item-text="name"
-                item-value="id"
-                @change="getTemplates($event)"
-                placeholder="Select Company"
-              ></v-select>
-            </v-col>
-            <v-col cols="12" md="4" sm="4" xs="4">
-              <v-select
-                dense
-                :items="templates"
-                item-text="name"
-                item-value="id"
-                placeholder="Select Template"
-              ></v-select>
-            </v-col>
-          </v-row>
-          <v-row>
-            <v-col cols="12" md="6" sm="6">
-              <v-select
-                dense
-                :items="sale_types"
-                item-text="text"
-                item-value="type"
-                placeholder="Select Sale Type"
-              ></v-select>
-            </v-col>
-            <v-col cols="12" md="6" sm="6">
-              <v-select
-                dense
-                :items="product_types"
-                item-text="text"
-                item-value="type"
-                placeholder="Select Product Type"
-              ></v-select>
-            </v-col>
-          </v-row>
-          <v-row>
-            <v-col cols="12" md="6" sm="6">
-              <v-text-field
-                v-model="landing_info.pcode"
-                dense
-                placeholder="Insert Pcode"
-              ></v-text-field>
-            </v-col>
-            <v-col cols="12" md="6" sm="6">
-              <v-text-field
-                v-model="landing_info.title"
-                dense
-                placeholder="Insert Product Title"
-              ></v-text-field>
-            </v-col>
-          </v-row>
-        </v-card-text>
-        <v-card-actions class="d-flex justify-end">
-          <v-btn small class="text-capitalize" @click="closeFilterDialog">
-            Cancel
-          </v-btn>
-          <v-btn small class="text-capitalize primary"> Filter </v-btn>
-        </v-card-actions>
+        <v-form @submit="filter" ref="filter_form">
+          <v-card-title> Filter Products </v-card-title>
+          <v-card-text>
+            <v-row>
+              <v-col cols="12" md="4" sm="4" xs="4"
+                ><v-select
+                  dense
+                  :items="countries"
+                  item-text="name"
+                  item-value="id"
+                  @change="getCompanies($event)"
+                  placeholder="Select Country"
+                ></v-select>
+              </v-col>
+              <v-col cols="12" md="4" sm="4" xs="4">
+                <v-select
+                  dense
+                  :items="companies"
+                  item-text="name"
+                  item-value="id"
+                  @change="getTemplates($event)"
+                  placeholder="Select Company"
+                ></v-select>
+              </v-col>
+              <v-col cols="12" md="4" sm="4" xs="4">
+                <v-select
+                  dense
+                  :items="templates"
+                  item-text="name"
+                  item-value="id"
+                  placeholder="Select Template"
+                ></v-select>
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col cols="12" md="6" sm="6">
+                <v-select
+                  dense
+                  :items="sale_types"
+                  item-text="text"
+                  item-value="type"
+                  placeholder="Select Sale Type"
+                ></v-select>
+              </v-col>
+              <v-col cols="12" md="6" sm="6">
+                <v-select
+                  dense
+                  :items="product_types"
+                  item-text="text"
+                  item-value="type"
+                  placeholder="Select Product Type"
+                ></v-select>
+              </v-col>
+            </v-row>
+            <v-row>
+              <v-col cols="12" md="6" sm="6">
+                <v-text-field
+                  v-model="landing_info.pcode"
+                  dense
+                  placeholder="Insert Pcode"
+                ></v-text-field>
+              </v-col>
+              <v-col cols="12" md="6" sm="6">
+                <v-text-field
+                  v-model="landing_info.title"
+                  dense
+                  placeholder="Insert Product Title"
+                ></v-text-field>
+              </v-col>
+            </v-row>
+          </v-card-text>
+          <v-card-actions class="d-flex justify-end">
+            <v-btn small class="text-capitalize" @click="closeFilterDialog">
+              Cancel
+            </v-btn>
+            <v-btn small class="text-capitalize primary"> Filter </v-btn>
+          </v-card-actions>
+        </v-form>
       </v-card>
     </v-dialog>
   </div>
@@ -141,7 +143,12 @@ export default {
       this.filter_dialog = true;
     },
     closeFilterDialog() {
+      this.$refs.filter_form.reset();
       this.filter_dialog = false;
+    },
+    filter() {
+      this.$refs.filter_form.reset();
+      console.log("ddddd");
     },
   },
   created() {
