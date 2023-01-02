@@ -647,6 +647,7 @@ export default {
               text: `(${prices[i].quantity} + ${prices[i].quantity}) free  piece ${prices[i].price} dirhams`,
             });
           }
+          this.loading = false;
         })
         .catch((error) => {
           console.log(error);
@@ -660,10 +661,7 @@ export default {
   async created() {
     this.show();
     this.emirates = city_data;
-  },
-  mounted() {
-    this.loading = false;
-  },
+  }
 };
 </script>
 
