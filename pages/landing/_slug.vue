@@ -100,7 +100,7 @@
           <a href="#reviews" class="text-decoration-none"><p>Reviews</p></a>
         </v-col>
       </v-row>
-      <LongImage :l_images="l_images" />
+      <LongImage :l_images="l_images" :pcode="product.pcode" />
       <v-row id="reviews">
         <v-col cols="12">
           <div style="font-size: 20px" class="black--text font-weight-medium">

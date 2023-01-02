@@ -9,6 +9,6 @@
 </template>
 <script>
 export default {
-  props: ["l_images"],
+  props: ["l_images","pcode"],
 };
 </script>
