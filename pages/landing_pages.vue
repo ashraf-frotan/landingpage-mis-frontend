@@ -80,6 +80,7 @@
     <ShowDialog ref="show_dialog" />
     <AddDialog @closeAddDialog="index" ref="add_dialog" />
     <EditDialog @closeAddDialog="index" ref="edit_dialog" />
+    <FilterDialog />
 
     <!-- Start Loader  -->
     <v-dialog v-model="loader" persistent width="300">
