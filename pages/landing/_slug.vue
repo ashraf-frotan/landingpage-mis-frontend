@@ -2,7 +2,7 @@
   <div>
     <div id="loading" v-if="loading"></div>
     <Logo />
-    <Slider :s_images="s_images" />
+    <Slider :s_images="s_images" :pcode="product.pcode" />
     <template>
       <v-row class="white--text theme" align="center">
         <v-col cols="6" class="py-2">
