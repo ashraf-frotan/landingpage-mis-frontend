@@ -73,8 +73,10 @@
           </v-row>
         </v-card-text>
         <v-card-actions class="d-flex justify-end">
-          <v-btn small class="text-capitalize"> Cancel </v-btn>
-          <v-btn small class="text-capitalize"> Filter </v-btn>
+          <v-btn small class="text-capitalize" @click="closeFilterDialog">
+            Cancel
+          </v-btn>
+          <v-btn small class="text-capitalize primary"> Filter </v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -85,7 +87,7 @@
 export default {
   data() {
     return {
-      filter_dialog: true,
+      filter_dialog: false,
       data: {},
       countries: [],
       companies: [],
@@ -134,6 +136,12 @@ export default {
       this.templates = this.data.templates.filter((el) => {
         return el.id == id;
       });
+    },
+    openFilterDialog() {
+      this.filter_dialog = true;
+    },
+    closeFilterDialog() {
+      this.filter_dialog = false;
     },
   },
   created() {

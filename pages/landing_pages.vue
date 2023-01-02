@@ -15,6 +15,7 @@
         @openEditDialog="openEditDialog"
         @changeStatus="changeStatus"
         @searchContent="searchContent"
+        @openFilterDialog="openFilterDialog"
         :view="true"
         :change_status="true"
       />
@@ -80,7 +81,7 @@
     <ShowDialog ref="show_dialog" />
     <AddDialog @closeAddDialog="index" ref="add_dialog" />
     <EditDialog @closeAddDialog="index" ref="edit_dialog" />
-    <FilterDialog />
+    <FilterDialog ref="filter_dialog" />
 
     <!-- Start Loader  -->
     <v-dialog v-model="loader" persistent width="300">
@@ -227,6 +228,9 @@ export default {
           progressbar: true,
         });
       }
+    },
+    openFilterDialog() {
+      this.$refs.filter_dialog.openFilterDialog();
     },
     closeAddDialog() {
       this.index();
