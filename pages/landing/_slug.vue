@@ -508,7 +508,7 @@
               </div>
             </v-col>
             <v-col cols="4">
-              <v-img :src="d_image" width="120" alt="" />
+              <v-img :src="`${baseUrl}assets/images/products/${product.pcode}${d_image}`" width="120" alt="" />
             </v-col>
           </v-row>
           <v-row>
@@ -608,6 +608,7 @@ export default {
         phone: "",
         email: "",
       },
+      baseUrl:process.env.baseUrl
     };
   },
   head() {
