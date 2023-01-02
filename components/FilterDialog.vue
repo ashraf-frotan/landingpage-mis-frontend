@@ -32,6 +32,40 @@
               ></v-select>
             </v-col>
           </v-row>
+          <v-row>
+            <v-col cols="12" md="6" sm="6">
+              <v-select
+                dense
+                :items="sale_types"
+                item-text="text"
+                item-value="type"
+              ></v-select>
+            </v-col>
+            <v-col cols="12" md="6" sm="6">
+              <v-select
+                dense
+                :items="product_types"
+                item-text="text"
+                item-value="type"
+              ></v-select>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col cols="12" md="6" sm="6">
+              <v-text-field
+                v-model="landing_info.pcode"
+                dense
+                outlined
+              ></v-text-field>
+            </v-col>
+            <v-col cols="12" md="6" sm="6">
+              <v-text-field
+                v-model="landing_info.title"
+                dense
+                outlined
+              ></v-text-field>
+            </v-col>
+          </v-row>
         </v-card-text>
         <v-card-actions class="d-flex justify-end">
           <v-btn small class="text-capitalize"> Cancel </v-btn>
@@ -51,14 +85,22 @@ export default {
       countries: [],
       companies: [],
       templates: [],
+      sale_types: [
+        { type: 0, text: "Simple" },
+        { type: 1, text: "Buy 1 get 1 free" },
+      ],
+      product_types: [
+        { type: 0, text: "Piece" },
+        { type: 1, text: "Collection" },
+      ],
       landing_info: {
         country_id: "",
         company_id: "",
         template_id: "",
         pcode: "",
         title: "",
-        sale_type: "",
-        page_type: "",
+        sale_type: null,
+        is_collection: null,
       },
     };
   },
