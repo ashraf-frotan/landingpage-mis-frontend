@@ -12,6 +12,7 @@
                 item-text="name"
                 item-value="id"
                 @change="getCompanies($event)"
+                placeholder="Select Country"
               ></v-select>
             </v-col>
             <v-col cols="12" md="4" sm="4" xs="4">
@@ -21,6 +22,7 @@
                 item-text="name"
                 item-value="id"
                 @change="getTemplates($event)"
+                placeholder="Select Company"
               ></v-select>
             </v-col>
             <v-col cols="12" md="4" sm="4" xs="4">
@@ -29,6 +31,7 @@
                 :items="templates"
                 item-text="name"
                 item-value="id"
+                placeholder="Select Template"
               ></v-select>
             </v-col>
           </v-row>
@@ -39,6 +42,7 @@
                 :items="sale_types"
                 item-text="text"
                 item-value="type"
+                placeholder="Select Sale Type"
               ></v-select>
             </v-col>
             <v-col cols="12" md="6" sm="6">
@@ -47,6 +51,7 @@
                 :items="product_types"
                 item-text="text"
                 item-value="type"
+                placeholder="Select Product Type"
               ></v-select>
             </v-col>
           </v-row>
@@ -55,14 +60,14 @@
               <v-text-field
                 v-model="landing_info.pcode"
                 dense
-                outlined
+                placeholder="Insert Pcode"
               ></v-text-field>
             </v-col>
             <v-col cols="12" md="6" sm="6">
               <v-text-field
                 v-model="landing_info.title"
                 dense
-                outlined
+                placeholder="Insert Product Title"
               ></v-text-field>
             </v-col>
           </v-row>
