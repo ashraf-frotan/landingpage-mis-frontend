@@ -6,7 +6,7 @@
     height="100%"
     :interval="6000"
   >
-    <v-carousel-item v-for="(slide, i) in s_images" :key="i">
+    <v-carousel-item v-for="(slide, i) in s_images" :key="i" eager>
       <v-img :src="`${baseUrl}assets/images/products/${pcode}${slide.name}`"></v-img>
     </v-carousel-item>
   </v-carousel>
