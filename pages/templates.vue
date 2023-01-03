@@ -12,7 +12,7 @@
         @openAddDialog="openAddDialog"
         @deleteRecord="destroy"
         @openEditDialog="edit"
-        @resetDatatable="resetDatatable"
+        @resetDatatable="index"
         @openFilterDialog="openFilterDialog"
       />
       <v-card>
@@ -486,9 +486,6 @@ export default {
     openFilterDialog() {
       this.getCompanies();
       this.filter_dialog = true;
-    },
-    resetDatatable() {
-      this.index();
     },
     openAddDialog() {
       this.getCompanies();

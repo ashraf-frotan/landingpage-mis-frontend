@@ -12,7 +12,7 @@
         @searchContent="singleSearch($event)"
         @openAddDialog="openAddDialog()"
         @openEditDialog="edit()"
-        @resetDatatable="resetDatatable()"
+        @resetDatatable="index"
         @deleteRecord="destroy()"
         @openFilterDialog="openFilterDialog()"
       />
@@ -408,9 +408,6 @@ export default {
       this.$refs.edit_form.reset();
       this.edit_dialog = false;
       this.add_dialog = false;
-    },
-    resetDatatable() {
-      this.index();
     },
     submitSearch() {
       console.log(this.company);
