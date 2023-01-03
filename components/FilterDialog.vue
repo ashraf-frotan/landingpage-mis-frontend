@@ -12,6 +12,7 @@
                   :items="countries"
                   item-text="name"
                   item-value="id"
+                  v-model="landing_info.country_id"
                   @change="getCompanies($event)"
                   placeholder="Select Country"
                 ></v-select>
@@ -22,6 +23,7 @@
                   :items="companies"
                   item-text="name"
                   item-value="id"
+                  v-model="landing_info.company_id"
                   @change="getTemplates($event)"
                   placeholder="Select Company"
                 ></v-select>
@@ -33,6 +35,7 @@
                   item-text="name"
                   item-value="id"
                   placeholder="Select Template"
+                  v-model="landing_info.template_id"
                 ></v-select>
               </v-col>
             </v-row>
@@ -44,6 +47,7 @@
                   item-text="text"
                   item-value="type"
                   placeholder="Select Sale Type"
+                  v-model="sale_type_select"
                 ></v-select>
               </v-col>
               <v-col cols="12" md="6" sm="6">
@@ -53,6 +57,7 @@
                   item-text="text"
                   item-value="type"
                   placeholder="Select Product Type"
+                  v-model="product_type_select"
                 ></v-select>
               </v-col>
             </v-row>
@@ -91,14 +96,18 @@ export default {
     return {
       filter_dialog: false,
       data: {},
-      countries: [],
-      companies: [],
-      templates: [],
+      countries: [{id:'',name:'Select country'}],
+      companies: [{id:'',name:'Select company'}],
+      templates: [{id:'',name:'Select template'}],
+      sale_type_select:{ type: "", text: "Sale type" },
       sale_types: [
+        { type: "", text: "Sale type" },
         { type: 0, text: "Simple" },
         { type: 1, text: "Buy 1 get 1 free" },
       ],
+      product_type_select:{ type: "", text: "Product type" },
       product_types: [
+        { type: "", text: "Product type" },
         { type: 0, text: "Piece" },
         { type: 1, text: "Collection" },
       ],
@@ -119,25 +128,28 @@ export default {
         .get("get_info")
         .then((response) => {
           this.data = response.data;
-          this.countries = this.data.countries;
+          this.countries.push(...this.data.countries);
         })
         .catch((error) => {
           console.log(error);
         });
     },
     getCompanies(id) {
+      this.companies=[{id:'',name:'Select company'}];
       this.landing_info.country_id = id;
-      console.log(id);
-      this.companies = this.data.companies.filter((el) => {
+      let filtered_companies = this.data.companies.filter((el) => {
         return el.country_id == id;
       });
+      this.companies.push(...filtered_companies);
       this.templates = [];
     },
     getTemplates(id) {
+      this.templates=[{id:'',name:'Select company'}];
       this.landing_info.company_id = id;
-      this.templates = this.data.templates.filter((el) => {
+      let filtered_templates = this.data.templates.filter((el) => {
         return el.id == id;
       });
+      this.templates.push(...filtered_templates)
     },
     openFilterDialog() {
       this.filter_dialog = true;
