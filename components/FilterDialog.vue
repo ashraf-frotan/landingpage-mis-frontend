@@ -82,7 +82,9 @@
             <v-btn small class="text-capitalize" @click="closeFilterDialog">
               Cancel
             </v-btn>
-            <v-btn small class="text-capitalize primary" @click="filter"> Filter </v-btn>
+            <v-btn small class="text-capitalize primary" @click="filter">
+              Filter
+            </v-btn>
           </v-card-actions>
         </v-form>
       </v-card>
@@ -96,9 +98,9 @@ export default {
     return {
       filter_dialog: false,
       data: {},
-      countries: [{id:'',name:'Select country'}],
-      companies: [{id:'',name:'Select company'}],
-      templates: [{id:'',name:'Select template'}],
+      countries: [{ id: "", name: "Select country" }],
+      companies: [{ id: "", name: "Select company" }],
+      templates: [{ id: "", name: "Select template" }],
       sale_types: [
         { sale_type: "", text: "Sale type" },
         { sale_type: 0, text: "Simple" },
@@ -116,7 +118,7 @@ export default {
         pcode: "",
         title: "",
         sale_type: "",
-        is_collection:"",
+        is_collection: "",
       },
     };
   },
@@ -133,7 +135,7 @@ export default {
         });
     },
     getCompanies(id) {
-      this.companies=[{id:'',name:'Select company'}];
+      this.companies = [{ id: "", name: "Select company" }];
       this.landing_info.country_id = id;
       let filtered_companies = this.data.companies.filter((el) => {
         return el.country_id == id;
@@ -142,12 +144,12 @@ export default {
       this.templates = [];
     },
     getTemplates(id) {
-      this.templates=[{id:'',name:'Select company'}];
+      this.templates = [{ id: "", name: "Select company" }];
       this.landing_info.company_id = id;
       let filtered_templates = this.data.templates.filter((el) => {
         return el.id == id;
       });
-      this.templates.push(...filtered_templates)
+      this.templates.push(...filtered_templates);
     },
     openFilterDialog() {
       this.filter_dialog = true;
@@ -157,9 +159,9 @@ export default {
       this.filter_dialog = false;
     },
     filter() {
-      let data=this.landing_info;
-      this.$emit('closeFilterDialog',data);
-      this.filter_dialog=false;
+      let data = this.landing_info;
+      this.$emit("closeFilterDialog", data);
+      this.filter_dialog = false;
       this.$refs.filter_form.reset();
     },
   },
