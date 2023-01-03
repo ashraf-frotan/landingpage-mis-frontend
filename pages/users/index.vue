@@ -1,12 +1,19 @@
 <template>
-    <div>
-        <TitleCard :title_info="{
-          title: 'Users',
-          icon: 'mdi-account-multiple',
-          url: 'users',
-        }" />
-        <ActionsCard/>     
-    </div>
+    <v-row>
+        <v-col cols="12" >
+            <TitleCard :title_info="{
+                title: 'Users',
+                icon: 'mdi-account-multiple',
+                url: 'users',
+                }" />
+            <ActionsCard />  
+            <v-card>
+                <v-card-text>
+                    <v-data-table :headers="headers" :items="users"></v-data-table>
+                </v-card-text>
+            </v-card>  
+        </v-col> 
+    </v-row>
 </template>
 <script>
 export default {
@@ -16,8 +23,8 @@ export default {
             headers:[
                 {value:'id',text:'ID'},
                 {value:'name',text:'Name'},
-                {value:'email',text:'email'},
-                {value:'Profile',text:'profile'},
+                {value:'email',text:'Email'},
+                {value:'image',text:'Profile'},
             ]
 
         }
