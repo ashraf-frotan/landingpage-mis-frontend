@@ -104,6 +104,11 @@ export default {
           to: "landing_pages",
         },
         {
+          icon:"mdi-account-multiple",
+          title:"Users",
+          to:"users",
+        },
+        {
           icon: "mdi-logout",
           title: "Logout",
           to: "logout",
