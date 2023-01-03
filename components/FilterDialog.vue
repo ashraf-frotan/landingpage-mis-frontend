@@ -82,7 +82,7 @@
             <v-btn small class="text-capitalize" @click="closeFilterDialog">
               Cancel
             </v-btn>
-            <v-btn small class="text-capitalize primary"> Filter </v-btn>
+            <v-btn small class="text-capitalize primary" @click="filter"> Filter </v-btn>
           </v-card-actions>
         </v-form>
       </v-card>
