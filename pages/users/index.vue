@@ -10,5 +10,17 @@ export default {
 
         }
     },
+    methods:{
+        index(){
+            this.$axios.get('user').then(response=>{
+                console.log(response);
+            }).catch(error=>{
+                console.log(error);
+            });
+        }
+    },
+    created(){
+        this.index();
+    }
 }
 </script>
