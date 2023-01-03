@@ -9,7 +9,11 @@
             <ActionsCard />  
             <v-card>
                 <v-card-text>
-                    <v-data-table :headers="headers" :items="users"></v-data-table>
+                    <v-data-table :headers="headers" :items="users">
+                        <template v-slot:item.image="{item}">
+                            <v-img :src="item.image" width="60" />
+                        </template>
+                    </v-data-table>
                 </v-card-text>
             </v-card>  
         </v-col> 
