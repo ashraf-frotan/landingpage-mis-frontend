@@ -157,9 +157,10 @@ export default {
       this.filter_dialog = false;
     },
     filter() {
-      console.log(this.landing_info);
-      // this.$emit('closeFilterDialog',this.landing_info);
-      // this.$refs.filter_form.reset();
+      let data=this.landing_info;
+      this.$emit('closeFilterDialog',data);
+      this.filter_dialog=false;
+      this.$refs.filter_form.reset();
     },
   },
   created() {
