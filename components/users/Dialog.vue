@@ -1,9 +1,10 @@
 <template>
-  <v-dialog v-model="add_dialog" max-width="750">
+  <v-dialog v-model="dialog" max-width="750">
     <v-card>
-      <v-form @submit.prevent="store">
+      <v-form @submit.prevent="submit" ref="form">
         <v-card-title>
-          <v-icon>mdi-account-plus</v-icon> &nbsp; Create New User
+          <span v-if="dialog_type == 'add'"> Create New User</span>
+          <span v-else> Edit User</span>
         </v-card-title>
         <v-card-text>
           <v-row>
@@ -82,10 +83,13 @@
           </v-row>
         </v-card-text>
         <v-card-actions class="d-flex justify-end">
-          <v-btn class="text-capitalize" small>Cancel</v-btn>
-          <v-btn class="text-capitalize primary" type="submit" small
-            >Save</v-btn
+          <v-btn class="text-capitalize" small @click="dialog = false"
+            >Cancel</v-btn
           >
+          <v-btn class="text-capitalize primary" type="submit" small>
+            <span v-if="dialog_type == 'add'">Save</span>
+            <span v-else>Update</span>
+          </v-btn>
         </v-card-actions>
       </v-form>
     </v-card>
@@ -94,9 +98,11 @@
 
 <script>
 export default {
+  props: ["data"],
   data() {
     return {
-      add_dialog: true,
+      dialog: false,
+      dialog_type: "add",
       show_password: false,
       show_confirmation_passowrd: false,
       user: {
@@ -109,7 +115,7 @@ export default {
     };
   },
   methods: {
-    async store() {
+    async submit() {
       let data = new FormData();
       data.append("name", this.user.name);
       data.append("email", this.user.email);
@@ -118,20 +124,53 @@ export default {
       if (this.user.image != null) {
         data.append("image", this.user.image);
       }
-      await this.$axios
-        .post("user", data, {
-          header: { "Content-Type": "mulipart/form-data" },
-        })
-        .then((response) => {
-          this.add_dialog = false;
-          this.$emit("closeAddDialog");
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      if (this.dialog_type == "add") {
+        await this.$axios
+          .post("user", data, {
+            header: { "Content-Type": "mulipart/form-data" },
+          })
+          .then((response) => {
+            this.dialog = false;
+            this.$refs.form.reset();
+            this.$emit("closeAddDialog");
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      } else {
+        data.append("_method", "put");
+        await this.$axios
+          .post(`user/${this.user.id}`, data, {
+            header: { "Content-Type": "mulipart/form-data" },
+          })
+          .then((response) => {
+            this.dialog = false;
+            this.$refs.form.reset();
+            this.$emit("closeAddDialog");
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
     },
     fileUpload(file) {
       this.user.image = file;
+    },
+    openDialog(user) {
+      if (user != null) {
+        this.user = user;
+        this.dialog_type = "edit";
+      } else {
+        this.user = {
+          name: "",
+          email: "",
+          password: "",
+          confirmation_password: "",
+          image: null,
+        };
+        this.dialog_type = "add";
+      }
+      this.dialog = true;
     },
   },
 };
