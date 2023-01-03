@@ -16,6 +16,7 @@
         @changeStatus="changeStatus"
         @searchContent="searchContent"
         @openFilterDialog="openFilterDialog"
+        @resetDatatable="index"
         :view="true"
         :change_status="true"
       />
