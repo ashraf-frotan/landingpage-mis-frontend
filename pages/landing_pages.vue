@@ -233,7 +233,12 @@ export default {
       this.$refs.filter_dialog.openFilterDialog();
     },
     closeFilterDialog(data){
-      console.log('wwww',data);
+      this.$axios.get('filter_landing_page',{params:data}).then(response=>{
+        this.products=response.data;
+        console.log(response.data);
+      }).catch(error=>{
+        console.log(error);
+      });
     },
     closeAddDialog() {
       this.index();
