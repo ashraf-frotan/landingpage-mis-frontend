@@ -109,7 +109,7 @@ export default {
     };
   },
   methods: {
-    store() {
+    async store() {
       let data = new FormData();
       data.append("name", this.user.name);
       data.append("email", this.user.email);
@@ -118,12 +118,13 @@ export default {
       if (this.user.image != null) {
         data.append("image", this.user.image);
       }
-      this.$axios
+      await this.$axios
         .post("user", data, {
           header: { "Content-Type": "mulipart/form-data" },
         })
         .then((response) => {
-          console.log("server", response);
+          this.add_dialog = false;
+          this.$emit("closeAddDialog");
         })
         .catch((error) => {
           console.log(error);

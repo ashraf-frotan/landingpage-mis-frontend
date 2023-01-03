@@ -19,7 +19,7 @@
         </v-card-text>
       </v-card>
     </v-col>
-    <AddDialog />
+    <AddDialog @closeAddDialog="index" />
   </v-row>
 </template>
 <script>
