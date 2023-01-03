@@ -81,7 +81,7 @@
     <ShowDialog ref="show_dialog" />
     <AddDialog @closeAddDialog="index" ref="add_dialog" />
     <EditDialog @closeAddDialog="index" ref="edit_dialog" />
-    <FilterDialog ref="filter_dialog" />
+    <FilterDialog @closeFilterDialog="closeFilterDialog" ref="filter_dialog" />
 
     <!-- Start Loader  -->
     <v-dialog v-model="loader" persistent width="300">
@@ -231,6 +231,9 @@ export default {
     },
     openFilterDialog() {
       this.$refs.filter_dialog.openFilterDialog();
+    },
+    closeFilterDialog(data){
+      console.log('wwww',data);
     },
     closeAddDialog() {
       this.index();

@@ -45,9 +45,9 @@
                   dense
                   :items="sale_types"
                   item-text="text"
-                  item-value="type"
+                  item-value="sale_type"
                   placeholder="Select Sale Type"
-                  v-model="sale_type_select"
+                  v-model="landing_info.sale_type"
                 ></v-select>
               </v-col>
               <v-col cols="12" md="6" sm="6">
@@ -55,9 +55,9 @@
                   dense
                   :items="product_types"
                   item-text="text"
-                  item-value="type"
+                  item-value="is_collection"
                   placeholder="Select Product Type"
-                  v-model="product_type_select"
+                  v-model="landing_info.is_collection"
                 ></v-select>
               </v-col>
             </v-row>
@@ -99,17 +99,15 @@ export default {
       countries: [{id:'',name:'Select country'}],
       companies: [{id:'',name:'Select company'}],
       templates: [{id:'',name:'Select template'}],
-      sale_type_select:{ type: "", text: "Sale type" },
       sale_types: [
-        { type: "", text: "Sale type" },
-        { type: 0, text: "Simple" },
-        { type: 1, text: "Buy 1 get 1 free" },
+        { sale_type: "", text: "Sale type" },
+        { sale_type: 0, text: "Simple" },
+        { sale_type: 1, text: "Buy 1 get 1 free" },
       ],
-      product_type_select:{ type: "", text: "Product type" },
       product_types: [
-        { type: "", text: "Product type" },
-        { type: 0, text: "Piece" },
-        { type: 1, text: "Collection" },
+        { is_collection: "", text: "Product type" },
+        { is_collection: 0, text: "Piece" },
+        { is_collection: 1, text: "Collection" },
       ],
       landing_info: {
         country_id: "",
@@ -117,8 +115,8 @@ export default {
         template_id: "",
         pcode: "",
         title: "",
-        sale_type: null,
-        is_collection: null,
+        sale_type: "",
+        is_collection:"",
       },
     };
   },
@@ -159,8 +157,9 @@ export default {
       this.filter_dialog = false;
     },
     filter() {
-      this.$refs.filter_form.reset();
-      console.log("ddddd");
+      console.log(this.landing_info);
+      // this.$emit('closeFilterDialog',this.landing_info);
+      // this.$refs.filter_form.reset();
     },
   },
   created() {
