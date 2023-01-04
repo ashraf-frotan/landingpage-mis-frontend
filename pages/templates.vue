@@ -33,8 +33,13 @@
               {{ item.company.name }}
             </template>
             <template v-slot:item.image="{ item }"
-              ><v-img :src="item.image" width="60" rounded></v-img
-            ></template>
+              >
+                <a :href="item.image" target="_black">
+                  <v-img :src="item.image" width="60" rounded></v-img
+            >
+                </a>
+              
+              </template>
           </v-data-table>
         </v-card-text>
       </v-card>
