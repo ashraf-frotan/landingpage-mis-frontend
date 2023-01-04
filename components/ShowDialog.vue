@@ -118,7 +118,10 @@
                             </div>
                             <v-divider></v-divider>
                             <div class="d-flex justify-center my-3">
-                              <v-img :src="country.flag" width="50" />
+                              <v-img
+                                :src="`${baseUrl}assets/images/flag/${country.flag}`"
+                                width="50"
+                              />
                             </div>
                             <p class="ma-0 text-center" style="font-size: 10px">
                               {{ country.name }}
@@ -138,7 +141,10 @@
                             </div>
                             <v-divider></v-divider>
                             <div class="d-flex justify-center my-3">
-                              <v-img :src="company.logo" width="50" />
+                              <v-img
+                                :src="`${baseUrl}assets/images/logo/${company.logo}`"
+                                width="50"
+                              />
                             </div>
                             <p class="ma-0 text-center" style="font-size: 10px">
                               {{ company.name }}
@@ -158,7 +164,10 @@
                             </div>
                             <v-divider></v-divider>
                             <div class="d-flex justify-center my-3">
-                              <v-img :src="template.image" width="50" />
+                              <v-img
+                                :src="`${baseUrl}assets/images/template/${template.image}`"
+                                width="50"
+                              />
                             </div>
                             <p class="ma-0 text-center" style="font-size: 10px">
                               {{ template.name }}
@@ -181,7 +190,13 @@
                       :key="image.id"
                     >
                       <v-img
+                        style="cursor: pointer"
                         :src="`${baseUrl}assets/images/products/${product.pcode}${image.name}`"
+                        @click="
+                          showImage(
+                            `${baseUrl}assets/images/products/${product.pcode}${image.name}`
+                          )
+                        "
                         width="160"
                       />
                     </div>
@@ -198,12 +213,16 @@
                       v-for="image in l_images"
                       :key="image.id"
                     >
-                      <a
-                        :href="`${baseUrl}assets/images/products/${product.pcode}${image.name}`"
-                        ><v-img
-                          :src="`${baseUrl}assets/images/products/${product.pcode}${image.name}`"
-                          width="160"
-                      /></a>
+                      <v-img
+                        style="cursor: pointer"
+                        :src="`${baseUrl}assets/images/products/${product.pcode}${image.name}`"
+                        @click="
+                          showImage(
+                            `${baseUrl}assets/images/products/${product.pcode}${image.name}`
+                          )
+                        "
+                        width="160"
+                      />
                     </div>
                   </div>
                 </v-col>
@@ -213,6 +232,7 @@
         </div>
       </v-card>
     </v-dialog>
+    <ShowImage ref="show_image" />
   </v-row>
 </template>
 <script>
@@ -258,6 +278,9 @@ export default {
         .catch((error) => {
           console.log(error);
         });
+    },
+    showImage(url) {
+      this.$refs.show_image.openDialog(url);
     },
   },
 };

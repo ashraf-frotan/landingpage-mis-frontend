@@ -115,6 +115,11 @@ export default {
   components: {
     Dialog,
   },
+  head() {
+    return {
+      title: "Users",
+    };
+  },
   data() {
     return {
       baseUrl: process.env.baseUrl,
