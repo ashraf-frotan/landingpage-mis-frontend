@@ -22,7 +22,9 @@
             :single-select="single_select"
           >
             <template v-slot:item.image="{ item }">
-              <v-img :src="item.image" width="60" />
+              <a :href="item.image" target="_blank">
+                <v-img :src="item.image" width="60" />
+              </a>
             </template>
             <template v-slot:top>
               <v-switch color="primary" v-model="single_select" dense>
