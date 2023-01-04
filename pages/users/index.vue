@@ -101,7 +101,7 @@ export default {
         }).then((result) => {
           if (result.isConfirmed) {
             this.$axios.delete('user/1',{params:arr_delete}).then(response=>{
-              this.users.filter(user => {return  !arr_delete.includes(user.id)});
+            this.users=this.users.filter(user => {return  !arr_delete.includes(user.id)});
             this.$toastr.i({
               title: "Info!",
               msg: "Deleted successfully.",
