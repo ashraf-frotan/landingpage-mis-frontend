@@ -131,7 +131,8 @@ export default {
   },
   methods: {
     async submit() {
-      let data = new FormData();
+      if(this.$refs.form.validate()){
+        let data = new FormData();
       data.append("name", this.user.name);
       data.append("email", this.user.email);
       data.append("password", this.user.password);
@@ -173,6 +174,7 @@ export default {
         .catch((error) => {
           console.log(error);
         });
+      }
     },
     fileUpload(file) {
       this.user.image = file;
