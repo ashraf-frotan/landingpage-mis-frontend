@@ -1,7 +1,7 @@
 <template>
   <v-dialog v-model="dialog" max-width="750">
     <v-card>
-      <v-form @submit.prevent="submit" ref="form">
+      <v-form @submit.prevent="submit" ref="form" v-model="valid" lazy-validation>
         <v-card-title>
           <span v-if="dialog_type == 'add'"> Create New User</span>
           <span v-else> Edit User</span>
@@ -17,6 +17,7 @@
                 outlined
                 hide-details="auto"
                 v-model="user.name"
+                :rules="nameRules"
               ></v-text-field>
             </v-col>
             <v-col cols="12" md="6" sm="6">
@@ -29,6 +30,7 @@
                 outlined
                 hide-details="auto"
                 v-model="user.email"
+                :rules="emailRules"
               ></v-text-field>
             </v-col>
           </v-row>
@@ -45,6 +47,7 @@
                 outlined
                 hide-details="auto"
                 v-model="user.password"
+                :rules="passwordRules"
               ></v-text-field>
             </v-col>
             <v-col cols="12" md="6" sm="6">
@@ -62,7 +65,8 @@
                 rounded
                 outlined
                 hide-details="auto"
-                v-model="user.confirmation_password"
+                v-model="user.password_confirmation"
+                :rules="confirmPasswordRules.concat(passwordConfirmationRule)"
               ></v-text-field>
             </v-col>
           </v-row>
@@ -101,6 +105,7 @@ export default {
   props: ["data"],
   data() {
     return {
+      valid: true,
       dialog: false,
       dialog_type: "add",
       show_password: false,
@@ -109,12 +114,12 @@ export default {
         name: "",
         email: "",
         password: "",
-        confirmation_password: "",
+        password_confirmation: "",
         image: null,
       },
       nameRules: [
         v => !!v || "Name is required",
-        v => (v && v.length <= 3) || "Name must be less than 3 characters"
+        v => (v && v.length >= 3) || "Name must be more than 3 characters"
       ],
       emailRules: [
         v => !!v || "E-mail is required",
@@ -130,7 +135,7 @@ export default {
       data.append("name", this.user.name);
       data.append("email", this.user.email);
       data.append("password", this.user.password);
-      data.append("password_confirmation", this.user.confirmation_password);
+      data.append("password_confirmation", this.user.password_confirmation);
       if (this.user.image != null) {
         data.append("image", this.user.image);
       }
@@ -181,7 +186,7 @@ export default {
           name: "",
           email: "",
           password: "",
-          confirmation_password: "",
+          password_confirmation: "",
           image: null,
         };
         this.dialog_type = "add";
@@ -189,6 +194,12 @@ export default {
       this.dialog = true;
     },
   },
+  computed:{
+    passwordConfirmationRule() {
+      return () =>
+        this.user.password === this.user.password_confirmation || "Password must match";
+    }
+  }
 };
 </script>
 
