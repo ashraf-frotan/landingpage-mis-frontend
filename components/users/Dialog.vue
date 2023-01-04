@@ -124,34 +124,40 @@ export default {
       if (this.user.image != null) {
         data.append("image", this.user.image);
       }
+      let url="";
       if (this.dialog_type == "add") {
-        await this.$axios
-          .post("user", data, {
-            header: { "Content-Type": "mulipart/form-data" },
-          })
-          .then((response) => {
-            this.dialog = false;
-            this.$refs.form.reset();
-            this.$emit("closeAddDialog");
-          })
-          .catch((error) => {
-            console.log(error);
-          });
+        url="user";
       } else {
+        url=`user/${this.user.id}`;
         data.append("_method", "put");
-        await this.$axios
-          .post(`user/${this.user.id}`, data, {
-            header: { "Content-Type": "mulipart/form-data" },
-          })
-          .then((response) => {
-            this.dialog = false;
-            this.$refs.form.reset();
-            this.$emit("closeAddDialog");
-          })
-          .catch((error) => {
-            console.log(error);
-          });
       }
+      await this.$axios
+        .post(url, data, {
+          header: { "Content-Type": "mulipart/form-data" },
+        })
+        .then((response) => {
+          if(url=="user"){
+            this.$toastr.s({
+              title:'Success!',
+              msg:'User inserted successfully!',
+              timeout:3000,
+              progressbar:true
+            });
+          }else{
+            this.$toastr.s({
+              title:'Success!',
+              msg:'User Update successfully!',
+              timeout:3000,
+              progressbar:true
+            });
+          }
+          this.dialog = false;
+          this.$refs.form.reset();
+          this.$emit("closeAddDialog");
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
     fileUpload(file) {
       this.user.image = file;
