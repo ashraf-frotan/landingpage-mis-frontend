@@ -32,6 +32,9 @@
                 v-model="user.email"
                 :rules="emailRules"
               ></v-text-field>
+              <span v-if="email_error!=''" class="error--text">
+                {{this.email_error}}
+              </span>
             </v-col>
           </v-row>
           <v-row>
@@ -110,6 +113,7 @@ export default {
       dialog_type: "add",
       show_password: false,
       show_confirmation_passowrd: false,
+      email_error:'',
       user: {
         name: "",
         email: "",
@@ -155,6 +159,7 @@ export default {
           header: { "Content-Type": "mulipart/form-data" },
         })
         .then((response) => {
+          console.log('resss',response);
           if(url=="user"){
             this.$toastr.s({
               title:'Success!',
@@ -171,11 +176,12 @@ export default {
             });
           }
           this.dialog = false;
+          this.email_error="";
           this.$refs.form.reset();
           this.$emit("closeAddDialog");
         })
         .catch((error) => {
-          console.log(error);
+          this.email_error=error.response.data.errors.email[0];
         });
       }
     },
@@ -200,6 +206,7 @@ export default {
     },
     closeDialog(){
       this.dialog=false;
+      this.email_error="";
       this.$refs.form.resetValidation();
     }
   },
