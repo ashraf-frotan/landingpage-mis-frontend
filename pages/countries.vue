@@ -31,7 +31,9 @@
               ></v-switch>
             </template>
             <template v-slot:item.flag="{ item }">
+             <a :href="item.flag" target="_blank">
               <v-img :src="item.flag" width="25" />
+             </a>
             </template>
           </v-data-table>
         </v-card-text>
