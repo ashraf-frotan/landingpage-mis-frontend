@@ -31,9 +31,15 @@
               ></v-switch>
             </template>
             <template v-slot:item.flag="{ item }">
-             <a :href="item.flag" target="_blank">
-              <v-img :src="item.flag" width="25" />
-             </a>
+              <a
+                :href="`${baseUrl}assets/images/flag/${item.flag}`"
+                target="_blank"
+              >
+                <v-img
+                  :src="`${baseUrl}assets/images/flag/${item.flag}`"
+                  width="25"
+                />
+              </a>
             </template>
           </v-data-table>
         </v-card-text>
@@ -47,7 +53,7 @@
           <div v-else>Edit Country</div>
         </v-card-title>
         <v-form
-          @submit.prevent="store"
+          @submit.prevent="submit"
           ref="form"
           v-model.lazy="valid"
           lazy-validation
@@ -115,7 +121,7 @@
         <v-card-title>
           <div>Search</div>
         </v-card-title>
-        <v-form @submit.prevent="submitSearch">
+        <v-form @submit.prevent="submitFilter">
           <v-card-text class="px-9">
             <v-divider></v-divider>
             <v-text-field
@@ -191,6 +197,7 @@ export default {
   },
   data() {
     return {
+      baseUrl: process.env.baseUrl,
       loader: false,
       single_search: "",
       search: {
@@ -240,7 +247,7 @@ export default {
           console.log(e);
         });
     },
-    async store() {
+    async submit() {
       if (this.$refs.form.validate()) {
         let data = new FormData();
         data.append("name", this.country.name);
@@ -255,6 +262,7 @@ export default {
               },
             })
             .then((response) => {
+              this.$refs.form.reset();
               this.countries.push(response.data);
             })
             .catch((e) => {
@@ -269,6 +277,7 @@ export default {
               },
             })
             .then((response) => {
+              this.$refs.form.reset();
               this.index();
             })
             .catch((e) => {
@@ -320,10 +329,12 @@ export default {
                   timeout: 2000,
                   progressbar: true,
                 });
-                this.index();
+                this.countries = this.countries.filter((country) => {
+                  return !arr_delete.includes(country.id);
+                });
               })
               .catch((e) => {
-                console.log("error");
+                console.log(e);
               });
           }
         });
@@ -342,7 +353,7 @@ export default {
     uploadFile(file) {
       this.country.flag = file;
     },
-    submitSearch() {
+    submitFilter() {
       this.$axios
         .get("filter_country", { params: this.country })
         .then((response) => {
@@ -361,6 +372,7 @@ export default {
     closeDialog() {
       this.dialog = false;
       this.country = {};
+      this.$refs.form.reset();
     },
   },
   created() {

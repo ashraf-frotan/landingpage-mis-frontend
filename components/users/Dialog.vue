@@ -1,7 +1,12 @@
 <template>
   <v-dialog v-model="dialog" max-width="750">
     <v-card>
-      <v-form @submit.prevent="submit" ref="form" v-model="valid" lazy-validation>
+      <v-form
+        @submit.prevent="submit"
+        ref="form"
+        v-model="valid"
+        lazy-validation
+      >
         <v-card-title>
           <span v-if="dialog_type == 'add'"> Create New User</span>
           <span v-else> Edit User</span>
@@ -32,8 +37,8 @@
                 v-model="user.email"
                 :rules="emailRules"
               ></v-text-field>
-              <span v-if="email_error!=''" class="error--text">
-                {{this.email_error}}
+              <span v-if="email_error != ''" class="error--text">
+                {{ this.email_error }}
               </span>
             </v-col>
           </v-row>
@@ -113,7 +118,7 @@ export default {
       dialog_type: "add",
       show_password: false,
       show_confirmation_passowrd: false,
-      email_error:'',
+      email_error: "",
       user: {
         name: "",
         email: "",
@@ -122,67 +127,67 @@ export default {
         image: null,
       },
       nameRules: [
-        v => !!v || "Name is required",
-        v => (v && v.length >= 3) || "Name must be more than 3 characters"
+        (v) => !!v || "Name is required",
+        (v) => (v && v.length >= 3) || "Name must be more than 3 characters",
       ],
       emailRules: [
-        v => !!v || "E-mail is required",
-        v => /.+@.+/.test(v) || "E-mail must be valid"
+        (v) => !!v || "E-mail is required",
+        (v) => /.+@.+/.test(v) || "E-mail must be valid",
       ],
       passwordRules: [
-        v => !!v || "Password is required",
-        v => (v && v.length >= 6) || "Password must be more than 6 characters"
+        (v) => !!v || "Password is required",
+        (v) =>
+          (v && v.length >= 6) || "Password must be more than 6 characters",
       ],
-      confirmPasswordRules: [v => !!v || "Password is required"]
+      confirmPasswordRules: [(v) => !!v || "Password is required"],
     };
   },
   methods: {
     async submit() {
-      if(this.$refs.form.validate()){
+      if (this.$refs.form.validate()) {
         let data = new FormData();
-      data.append("name", this.user.name);
-      data.append("email", this.user.email);
-      data.append("password", this.user.password);
-      data.append("password_confirmation", this.user.password_confirmation);
-      if (this.user.image != null) {
-        data.append("image", this.user.image);
-      }
-      let url="";
-      if (this.dialog_type == "add") {
-        url="user";
-      } else {
-        url=`user/${this.user.id}`;
-        data.append("_method", "put");
-      }
-      await this.$axios
-        .post(url, data, {
-          header: { "Content-Type": "mulipart/form-data" },
-        })
-        .then((response) => {
-          console.log('resss',response);
-          if(url=="user"){
-            this.$toastr.s({
-              title:'Success!',
-              msg:'User inserted successfully!',
-              timeout:3000,
-              progressbar:true
-            });
-          }else{
-            this.$toastr.s({
-              title:'Success!',
-              msg:'User Update successfully!',
-              timeout:3000,
-              progressbar:true
-            });
-          }
-          this.dialog = false;
-          this.email_error="";
-          this.$refs.form.reset();
-          this.$emit("closeAddDialog");
-        })
-        .catch((error) => {
-          this.email_error=error.response.data.errors.email[0];
-        });
+        data.append("name", this.user.name);
+        data.append("email", this.user.email);
+        data.append("password", this.user.password);
+        data.append("password_confirmation", this.user.password_confirmation);
+        if (this.user.image != null) {
+          data.append("image", this.user.image);
+        }
+        let url = "";
+        if (this.dialog_type == "add") {
+          url = "user";
+        } else {
+          url = `user/${this.user.id}`;
+          data.append("_method", "put");
+        }
+        await this.$axios
+          .post(url, data, {
+            header: { "Content-Type": "mulipart/form-data" },
+          })
+          .then((response) => {
+            if (url == "user") {
+              this.$toastr.s({
+                title: "Success!",
+                msg: "User inserted successfully!",
+                timeout: 3000,
+                progressbar: true,
+              });
+            } else {
+              this.$toastr.s({
+                title: "Success!",
+                msg: "User Update successfully!",
+                timeout: 3000,
+                progressbar: true,
+              });
+            }
+            this.dialog = false;
+            this.email_error = "";
+            this.$refs.form.reset();
+            this.$emit("closeAddDialog");
+          })
+          .catch((error) => {
+            this.email_error = error.response.data.errors.email[0];
+          });
       }
     },
     fileUpload(file) {
@@ -204,18 +209,19 @@ export default {
       }
       this.dialog = true;
     },
-    closeDialog(){
-      this.email_error="";
+    closeDialog() {
+      this.email_error = "";
       this.$refs.form.resetValidation();
-      this.dialog=false;
-    }
+      this.dialog = false;
+    },
   },
-  computed:{
+  computed: {
     passwordConfirmationRule() {
       return () =>
-        this.user.password === this.user.password_confirmation || "Password must match";
-    }
-  }
+        this.user.password === this.user.password_confirmation ||
+        "Password must match";
+    },
+  },
 };
 </script>
 

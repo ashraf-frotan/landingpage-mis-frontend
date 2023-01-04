@@ -35,8 +35,15 @@
               ></v-switch>
             </template>
             <template v-slot:item.logo="{ item }">
-              <a :href="item.logo" target="_blank">
-                <v-img width="60" class="rounded" :src="item.logo" />
+              <a
+                :href="`${baseUrl}assets/images/logo/${item.logo}`"
+                target="_blank"
+              >
+                <v-img
+                  width="60"
+                  class="rounded"
+                  :src="`${baseUrl}assets/images/logo/${item.logo}`"
+                />
               </a>
             </template>
             <template v-slot:item.country_id="{ item }">
@@ -204,7 +211,7 @@
             color="primary"
             class="text-capitalize"
             small
-            @click="submitSearch()"
+            @click="submitFilter()"
             >Filter</v-btn
           >
         </v-card-actions>
@@ -237,6 +244,7 @@ export default {
   },
   data() {
     return {
+      baseUrl: process.env.baseUrl,
       loader: false,
       add_dialog: false,
       edit_dialog: false,
@@ -411,8 +419,7 @@ export default {
       this.edit_dialog = false;
       this.add_dialog = false;
     },
-    submitSearch() {
-      console.log(this.company);
+    submitFilter() {
       this.$axios
         .get("filter_company", { params: this.company })
         .then((response) => {

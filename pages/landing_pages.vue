@@ -234,10 +234,12 @@ export default {
       this.$refs.filter_dialog.openFilterDialog();
     },
     closeFilterDialog(data) {
+      this.loader = true;
       this.$axios
         .get("filter_landing_page", { params: data })
         .then((response) => {
           this.products = response.data;
+          this.loader = false;
         })
         .catch((error) => {
           console.log(error);

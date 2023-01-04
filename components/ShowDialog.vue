@@ -198,12 +198,12 @@
                       v-for="image in l_images"
                       :key="image.id"
                     >
-                      <NuxtLink
-                        :to="`${baseUrl}assets/images/products/${product.pcode}${image.name}`"
+                      <a
+                        :href="`${baseUrl}assets/images/products/${product.pcode}${image.name}`"
                         ><v-img
                           :src="`${baseUrl}assets/images/products/${product.pcode}${image.name}`"
                           width="160"
-                      /></NuxtLink>
+                      /></a>
                     </div>
                   </div>
                 </v-col>

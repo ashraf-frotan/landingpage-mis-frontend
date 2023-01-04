@@ -32,14 +32,18 @@
             <template v-slot:item.company_id="{ item }">
               {{ item.company.name }}
             </template>
-            <template v-slot:item.image="{ item }"
+            <template v-slot:item.image="{ item }">
+              <a
+                :href="`${baseUrl}assets/images/template/${item.image}`"
+                target="_black"
               >
-                <a :href="item.image" target="_black">
-                  <v-img :src="item.image" width="60" rounded></v-img
-            >
-                </a>
-              
-              </template>
+                <v-img
+                  :src="`${baseUrl}assets/images/template/${item.image}`"
+                  width="60"
+                  rounded
+                ></v-img>
+              </a>
+            </template>
           </v-data-table>
         </v-card-text>
       </v-card>
@@ -301,6 +305,7 @@ export default {
   },
   data() {
     return {
+      baseUrl: process.env.baseUrl,
       loader: false,
       templates: [],
       headers: [
