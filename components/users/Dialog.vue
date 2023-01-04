@@ -87,7 +87,7 @@
           </v-row>
         </v-card-text>
         <v-card-actions class="d-flex justify-end">
-          <v-btn class="text-capitalize" small @click="dialog = false"
+          <v-btn class="text-capitalize" small @click="closeDialog"
             >Cancel</v-btn
           >
           <v-btn class="text-capitalize primary" type="submit" small>
@@ -195,6 +195,10 @@ export default {
       }
       this.dialog = true;
     },
+    closeDialog(){
+      this.dialog=false;
+      this.$refs.form.resetValidation();
+    }
   },
   computed:{
     passwordConfirmationRule() {
