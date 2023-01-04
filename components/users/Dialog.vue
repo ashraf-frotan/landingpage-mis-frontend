@@ -112,6 +112,16 @@ export default {
         confirmation_password: "",
         image: null,
       },
+      nameRules: [
+        v => !!v || "Name is required",
+        v => (v && v.length <= 3) || "Name must be less than 3 characters"
+      ],
+      emailRules: [
+        v => !!v || "E-mail is required",
+        v => /.+@.+/.test(v) || "E-mail must be valid"
+      ],
+      passwordRules: [v => !!v || "Password is required"],
+      confirmPasswordRules: [v => !!v || "Password is required"]
     };
   },
   methods: {
