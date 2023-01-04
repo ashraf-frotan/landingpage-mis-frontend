@@ -125,7 +125,10 @@ export default {
         v => !!v || "E-mail is required",
         v => /.+@.+/.test(v) || "E-mail must be valid"
       ],
-      passwordRules: [v => !!v || "Password is required"],
+      passwordRules: [
+        v => !!v || "Password is required",
+        v => (v && v.length >= 6) || "Password must be more than 6 characters"
+      ],
       confirmPasswordRules: [v => !!v || "Password is required"]
     };
   },
