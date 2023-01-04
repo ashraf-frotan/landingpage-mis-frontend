@@ -120,7 +120,7 @@ export default {
       data.append("name", this.user.name);
       data.append("email", this.user.email);
       data.append("password", this.user.password);
-      data.append("confirm_password", this.user.confirmation_password);
+      data.append("password_confirmation", this.user.confirmation_password);
       if (this.user.image != null) {
         data.append("image", this.user.image);
       }
