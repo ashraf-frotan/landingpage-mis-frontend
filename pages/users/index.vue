@@ -11,6 +11,7 @@
       <ActionsCard
         @openAddDialog="openDialog('add')"
         @openEditDialog="openDialog('edit')"
+        @deleteRecord="destroy"
       />
       <v-card>
         <v-card-text>
@@ -87,6 +88,41 @@ export default {
         }
       }
     },
+    destroy(){
+      if (this.selected.length >= 1) {
+        let arr_delete=this.selected.map(e=>e.id);
+        this.$swal({
+          icon: "info",
+          title: "Are you sure to delete?",
+          confirmButtonText: "Yes",
+          showCancelButton: true,
+          confirmButtonColor: "#1976d2",
+          cancelButtonColor: "red",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this.$axios.delete('user/1',{params:arr_delete}).then(response=>{
+            console.log(response);
+            this.$toastr.i({
+              title: "Info!",
+              msg: "Deleted successfully.",
+              timeout: 3000,
+              progressbar: true,
+            });
+        }).catch(error=>{ 
+          console.log(error);
+        });  
+          }
+        });
+        
+      } else {
+        this.$toastr.i({
+          title: "Info!",
+          msg: "Please select at least one record",
+          timeout: 3000,
+          progressbar: true,
+        });
+      }
+    }
   },
   created() {
     this.index();
