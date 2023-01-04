@@ -35,7 +35,9 @@
               ></v-switch>
             </template>
             <template v-slot:item.logo="{ item }">
-              <v-img width="60" class="rounded" :src="item.logo" />
+              <a :href="item.logo" target="_blank">
+                <v-img width="60" class="rounded" :src="item.logo" />
+              </a>
             </template>
             <template v-slot:item.country_id="{ item }">
               <span>{{ item.country.name }}</span>
