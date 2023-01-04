@@ -205,9 +205,9 @@ export default {
       this.dialog = true;
     },
     closeDialog(){
-      this.dialog=false;
       this.email_error="";
       this.$refs.form.resetValidation();
+      this.dialog=false;
     }
   },
   computed:{
