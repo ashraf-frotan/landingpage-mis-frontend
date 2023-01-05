@@ -54,7 +54,11 @@
                           <v-row>
                             <v-col>
                               <div class="d-flex justify-center mb-3">
-                                <v-img :src="country.flag" width="40" alt="" />
+                                <v-img
+                                  :src="`${baseUrl}assets/images/flag/${country.flag}`"
+                                  width="40"
+                                  alt=""
+                                />
                               </div>
                               <p
                                 class="ma-0 text-center"
@@ -94,7 +98,11 @@
                           @click="getTemplates(company.id)"
                         >
                           <v-row align="center" class="py-2 px-4">
-                            <v-img :src="company.logo" width="30" alt="" />
+                            <v-img
+                              :src="`${baseUrl}assets/images/logo/${company.logo}`"
+                              width="30"
+                              alt=""
+                            />
                             <span class="ml-2">{{ company.name }}</span>
                           </v-row>
                         </v-card>
@@ -123,7 +131,11 @@
                           @click="selectTemplate(template.id, template.type)"
                           :class="template_id == template.id ? 'select' : ''"
                         >
-                          <v-img :src="template.image" width="200" alt="" />
+                          <v-img
+                            :src="`${baseUrl}assets/images/template/${template.image}`"
+                            width="200"
+                            alt=""
+                          />
                           <p class="text-center my-3">
                             {{ template.name }}
                           </p>
@@ -656,6 +668,7 @@ export default {
     return {
       valid: false,
       add_dialog: false,
+      baseUrl: process.env.baseUrl,
       countries: [],
       companies: [],
       templates: [],

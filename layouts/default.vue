@@ -49,7 +49,7 @@
           </v-btn>
         </template>
         <v-list>
-          <v-list-item link>
+          <v-list-item link @click="$router.push({ path: '/users/profile' })">
             <v-icon>mdi-account</v-icon> &nbsp;
             <v-list-item-title>Profile</v-list-item-title>
           </v-list-item>
@@ -65,7 +65,6 @@
         <Nuxt />
       </v-container>
     </v-main>
-    
   </v-app>
 </template>
 
@@ -104,9 +103,9 @@ export default {
           to: "landing_pages",
         },
         {
-          icon:"mdi-account-multiple",
-          title:"Users",
-          to:"users",
+          icon: "mdi-account-multiple",
+          title: "Users",
+          to: "users",
         },
         {
           icon: "mdi-logout",

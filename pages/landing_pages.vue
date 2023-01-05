@@ -23,6 +23,7 @@
       <v-card>
         <v-card-text>
           <v-data-table
+            checkbox-color="primary"
             :items="products"
             :headers="headers"
             :single-select="single_select"
