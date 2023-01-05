@@ -54,7 +54,7 @@
                   rounded
                   class="mt-6 text-capitalize"
                 >
-                  Sign In</v-btn
+                  <v-icon small>mdi-lock-open</v-icon> &nbsp; Sign In</v-btn
                 >
               </v-form>
             </v-col>
