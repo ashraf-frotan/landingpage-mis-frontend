@@ -53,7 +53,7 @@
             <v-icon>mdi-account</v-icon> &nbsp;
             <v-list-item-title>Profile</v-list-item-title>
           </v-list-item>
-          <v-list-item link>
+          <v-list-item link @click="logout">
             <v-icon>mdi-logout</v-icon>
             <v-list-item-title>Logout</v-list-item-title>
           </v-list-item>
@@ -116,6 +116,11 @@ export default {
       miniVariant: false,
       right: true,
     };
+  },
+  methods: {
+    logout() {
+      this.$router.push({ path: "/login" });
+    },
   },
   created() {},
 };
