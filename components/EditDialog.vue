@@ -740,6 +740,7 @@ export default {
           },
         })
         .then((response) => {
+          this.closeEditDialog();
           this.$emit("closeEditDialog");
           this.$toastr.s({
             title: "Success!",
