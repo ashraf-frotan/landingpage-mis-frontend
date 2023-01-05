@@ -588,7 +588,7 @@ export default {
     LongImage,
     Logo,
   },
-  layout: "landing",
+  layout: "empty",
   data() {
     return {
       loading: true,
