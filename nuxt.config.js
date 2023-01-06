@@ -62,6 +62,16 @@ export default {
     baseURL: process.env.baseURL+'api/',
   },
 
+  auth: {
+    strategies: {
+      laravelSanctum: {
+        provider: 'laravel/sanctum',
+        url: '<laravel url>'
+      },
+    }
+  }
+
+
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
