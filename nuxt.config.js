@@ -66,7 +66,7 @@ export default {
     strategies: {
       laravelSanctum: {
         provider: 'laravel/sanctum',
-        url: '<laravel url>'
+        url: process.env.baseURL
       },
     }
   }
