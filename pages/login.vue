@@ -13,7 +13,7 @@
           </v-row>
           <v-row>
             <v-col cols="12">
-              <v-form>
+              <v-form @submit.prevent="login">
                 <v-text-field
                   outlined
                   rounded
@@ -72,5 +72,16 @@ export default {
       show_password: false,
     };
   },
+
+  methods:{
+    login(){
+      this.$auth.loginWith('laravelSanctum', {
+        data: {
+          email: 'ashraffrotan36@gmail.com',
+          password: '123'
+        }
+      })
+    }
+  }
 };
 </script>

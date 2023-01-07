@@ -60,17 +60,40 @@ export default {
   axios: {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
     baseURL: process.env.baseURL+'api/',
+    credentials: true,
   },
 
   auth: {
     strategies: {
       laravelSanctum: {
         provider: 'laravel/sanctum',
-        url: process.env.baseURL
+        url: 'http://localhost:8000',
+        endpoints:{
+            login:{
+              url:'/api/login'
+            },
+            logout:{
+              url:'/api/logout'
+            },
+            user:{
+              url:'/api/user'
+            }
+        },
+        user:{
+          property: false
+        }
       },
+    },
+    redirect:{
+      login:'/login',
+      logout:'/login',
+      home:'/'
     }
-  }
+  },
 
+  router: {
+    middleware: ['auth']
+  },
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
