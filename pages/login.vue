@@ -21,6 +21,7 @@
                   placeholder="Enter email here"
                   type="email"
                   prepend-inner-icon="mdi-account"
+                  v-model="email"
                 ></v-text-field>
                 <v-text-field
                   outlined
@@ -31,6 +32,7 @@
                   :append-icon="show_password ? 'mdi-eye' : 'mdi-eye-off'"
                   @click:append="show_password = !show_password"
                   :type="show_password ? 'text' : 'password'"
+                  v-model="password"
                 ></v-text-field>
                 <v-row>
                   <v-col cols="6"
@@ -70,18 +72,20 @@ export default {
   data() {
     return {
       show_password: false,
+      email: "",
+      password: "",
     };
   },
 
-  methods:{
-    login(){
-      this.$auth.loginWith('laravelSanctum', {
+  methods: {
+    login() {
+      this.$auth.loginWith("laravelSanctum", {
         data: {
-          email: 'ashraffrotan36@gmail.com',
-          password: '123'
-        }
-      })
-    }
-  }
+          email: this.email,
+          password: this.password,
+        },
+      });
+    },
+  },
 };
 </script>
