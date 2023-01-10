@@ -56,8 +56,8 @@
                   rounded
                   class="mt-6 text-capitalize"
                 >
-                  <v-icon small>mdi-lock-open</v-icon> &nbsp; Sign In</v-btn
-                >
+                  <v-icon small>mdi-lock-open</v-icon> &nbsp; Sign In
+                </v-btn>
               </v-form>
             </v-col>
           </v-row>
@@ -78,13 +78,20 @@ export default {
   },
 
   methods: {
-    login() {
-      this.$auth.loginWith("laravelSanctum", {
-        data: {
-          email: this.email,
-          password: this.password,
-        },
-      });
+    async login() {
+      await this.$auth
+        .loginWith("laravelSanctum", {
+          data: {
+            email: this.email,
+            password: this.password,
+          },
+        })
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          console.log("invalid username or password.");
+        });
     },
   },
 };

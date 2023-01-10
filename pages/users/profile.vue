@@ -5,17 +5,17 @@
         <v-card-title> User Profile </v-card-title>
         <v-card-text>
           <v-row>
-            <v-col cols="12" md="5" sm="5">
+            <v-col cols="12" md="4" sm="4">
               <v-card>
                 <v-img
-                  :src="require('~/assets/images/profile.jpg')"
-                  width="100%"
+                  :src="`${baseUrl}assets/images/profiles/${$auth.user.image}`"
+                  width="300"
                   class="grey darken-4"
                 ></v-img>
-                <v-card-title class="text-caption black--text">
-                  <div>Name: Ashraf Frotan</div>
-                  <div>Email: ashraffrotan36@gmail.com</div>
-                </v-card-title>
+                <v-card-text class="text-caption black--text">
+                  <div>Name: {{ $auth.user.name }}</div>
+                  <div>Email: {{ $auth.user.email }}</div>
+                </v-card-text>
               </v-card>
             </v-col>
           </v-row>
@@ -25,5 +25,11 @@
   </v-row>
 </template>
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      baseUrl: process.env.baseUrl,
+    };
+  },
+};
 </script>

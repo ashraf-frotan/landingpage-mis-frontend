@@ -46,7 +46,11 @@
         <template v-slot:activator="{ on, attrs }">
           <v-btn icon class="mr-2" v-bind="attrs" v-on="on" elevation="2">
             <v-avatar>
-              <img src="~/assets/images/profile.jpg" alt="" />
+              <v-img
+                v-if="$auth.loggedIn"
+                :src="`${baseUrl}assets/images/profiles/${$auth.user.image}`"
+                alt=""
+              />
             </v-avatar>
           </v-btn>
         </template>
@@ -75,6 +79,7 @@ export default {
   name: "DefaultLayout",
   data() {
     return {
+      baseUrl: process.env.baseUrl,
       clipped: false,
       drawer: true,
       fixed: false,
@@ -115,11 +120,10 @@ export default {
     };
   },
   methods: {
-    logout() {
-      this.$router.push({ path: "/login" });
+    async logout() {
+      await this.$auth.logout();
     },
   },
-  created() {},
 };
 </script>
 
