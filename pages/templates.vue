@@ -67,6 +67,15 @@
               dense
               rounded
               outlined
+              label="Directory"
+              placeholder="Enter directory name here"
+              v-model="template.directory"
+              :rules="nameRules"
+            ></v-text-field>
+            <v-text-field
+              dense
+              rounded
+              outlined
               label="Phone"
               placeholder="Enter phone here"
               v-model="template.phone"
@@ -92,18 +101,6 @@
               label="Company"
               placeholder="Please select company"
               :rules="[(v) => !!v || 'Image is required']"
-            ></v-select>
-            <v-select
-              :items="types"
-              v-model="template.type"
-              item-text="name"
-              item-value="id"
-              rounded
-              dense
-              outlined
-              label="Page type"
-              placeholder="Please select page type"
-              :rules="[(v) => !!v || 'page type is required']"
             ></v-select>
             <v-file-input
               label="Image"
@@ -147,6 +144,15 @@
               dense
               rounded
               outlined
+              label="Directory"
+              placeholder="Enter directory name here"
+              v-model="template.directory"
+              :rules="nameRules"
+            ></v-text-field>
+            <v-text-field
+              dense
+              rounded
+              outlined
               label="Phone"
               placeholder="Enter phone here"
               v-model="template.phone"
@@ -172,18 +178,6 @@
               label="Company"
               placeholder="Please select company"
               :rules="[(v) => !!v || 'company is required']"
-            ></v-select>
-            <v-select
-              :items="types"
-              v-model="template.type"
-              item-text="name"
-              item-value="id"
-              rounded
-              dense
-              outlined
-              label="Page type"
-              placeholder="Please select page type"
-              :rules="[(v) => !!v || 'page type is required']"
             ></v-select>
             <v-file-input
               label="Image"
@@ -257,16 +251,6 @@
               label="Company"
               placeholder="Please select company"
             ></v-select>
-            <v-select
-              :items="types"
-              item-text="name"
-              item-value="id"
-              rounded
-              dense
-              outlined
-              label="Page type"
-              placeholder="Please select page type"
-            ></v-select>
           </v-card-text>
           <v-card-actions class="d-flex justify-end">
             <v-btn small class="text-capitalize" @click="filter_dialog = false"
@@ -313,16 +297,12 @@ export default {
         { text: "Name", value: "name" },
         { text: "Phone", value: "phone" },
         { text: "Email", value: "email" },
+        { text: "Directory", value: "directory" },
         { text: "Image", value: "image" },
         { text: "Company", value: "company_id" },
       ],
       single_select: false,
       selected: [],
-      types: [
-        { id: 0, name: "Long" },
-        { id: 1, name: "Short" },
-        { id: 2, name: "Whatsapp" },
-      ],
       single_search: "",
       add_dialog: false,
       edit_dialog: false,
@@ -333,8 +313,8 @@ export default {
         phone: "",
         email: "",
         company_id: null,
-        type: null,
         image: "",
+        directory: "",
       },
       companies: [],
       nameRules: [
@@ -373,10 +353,10 @@ export default {
       if (this.$refs.add_form.validate()) {
         let data = new FormData();
         data.append("name", this.template.name);
+        data.append("directory", this.template.directory);
         data.append("phone", this.template.phone);
         data.append("email", this.template.email);
         data.append("company_id", this.template.company_id);
-        data.append("type", this.template.type);
         data.append("image", this.template.image);
         this.$axios
           .post("template", data, {
@@ -417,10 +397,10 @@ export default {
       if (this.$refs.edit_form.validate()) {
         let data = new FormData();
         data.append("name", this.template.name);
+        data.append("directory", this.template.directory);
         data.append("phone", this.template.phone);
         data.append("email", this.template.email);
         data.append("company_id", this.template.company_id);
-        data.append("type", this.template.type);
         data.append("image", this.template.image);
         data.append("_method", "put");
         this.$axios
@@ -433,6 +413,7 @@ export default {
             this.index();
             this.edit_dialog = false;
             this.template = {};
+            this.selected = [];
             this.$toastr.s({
               title: "Success!",
               msg: "Record updated successfully.",
