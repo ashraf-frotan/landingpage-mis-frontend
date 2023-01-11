@@ -56,8 +56,9 @@
             </template>
             <template v-slot:item.page_link="{ item }">
               <NuxtLink
-                :to="'landing/' + item.page_link"
+                :to="`landing/${item.template.directory}/${item.page_link}`"
                 class="text-decoration-none"
+                target="_blank"
                 >open</NuxtLink
               >
             </template>
