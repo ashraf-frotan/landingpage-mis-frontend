@@ -74,6 +74,15 @@
               v-model="company.name"
               :rules="nameRules"
             ></v-text-field>
+            <v-text-field
+              label="Domain"
+              placeholder="Enter domain name here"
+              rounded
+              outlined
+              dense
+              v-model="company.domain"
+              :rules="nameRules"
+            ></v-text-field>
             <v-select
               :items="countries"
               item-text="name"
@@ -102,7 +111,7 @@
             </v-file-input>
           </v-card-text>
           <v-card-actions class="d-flex justify-end">
-            <v-btn class="text-capitalize" small @click="closeDialog"
+            <v-btn class="text-capitalize" small @click="closeAddDialog"
               >Cancel</v-btn
             >
             <v-btn color="primary" class="text-capitalize" small type="submit"
@@ -135,6 +144,15 @@
               v-model="company.name"
               :rules="nameRules"
             ></v-text-field>
+            <v-text-field
+              label="Domain"
+              placeholder="Enter domain name here"
+              rounded
+              outlined
+              dense
+              v-model="company.domain"
+              :rules="nameRules"
+            ></v-text-field>
             <v-select
               :items="countries"
               item-text="name"
@@ -158,7 +176,7 @@
             </v-file-input>
           </v-card-text>
           <v-card-actions class="d-flex justify-end">
-            <v-btn class="text-capitalize" small @click="closeDialog"
+            <v-btn class="text-capitalize" small @click="closeEditDialog"
               >Cancel</v-btn
             >
             <v-btn color="primary" class="text-capitalize" small type="submit"
@@ -255,11 +273,12 @@ export default {
       single_search: "",
       countries: [],
       companies: [],
-      company: { name: "", country_id: null, logo: "" },
+      company: { name: "", domain: "", country_id: null, logo: "" },
       edit_company: { name: "", country_id: null, logo: "" },
       headers: [
         { text: "ID", value: "id" },
         { text: "Name", value: "name" },
+        { text: "Domain", value: "domain" },
         { text: "Logo", value: "logo" },
         { text: "Country", value: "country_id" },
       ],
@@ -291,6 +310,7 @@ export default {
       if (this.$refs.add_form.validate()) {
         let data = new FormData();
         data.append("name", this.company.name);
+        data.append("domain", this.company.domain);
         data.append("logo", this.company.logo);
         data.append("country_id", this.company.country_id);
         this.$axios
@@ -301,8 +321,7 @@ export default {
           })
           .then((response) => {
             this.companies.push(response.data);
-            this.add_dialog = false;
-            this.closeDialog();
+            this.closeAddDialog();
             this.$toastr.s({
               title: "Success!",
               msg: "Record inserted successfully.",
@@ -319,6 +338,7 @@ export default {
       this.$refs.edit_form.validate();
       let data = new FormData();
       data.append("name", this.company.name);
+      data.append("domain", this.company.domain);
       data.append("country_id", this.company.country_id);
       data.append("logo", this.company.logo);
       data.append("_method", "put");
@@ -330,7 +350,8 @@ export default {
         })
         .then((response) => {
           this.index();
-          this.closeDialog();
+          this.selected = [];
+          this.closeEditDialog();
           this.$toastr.s({
             title: "Success!",
             msg: "Record updated successfully.",
@@ -413,11 +434,13 @@ export default {
     uploadFile(file) {
       this.company.logo = file;
     },
-    closeDialog() {
+    closeAddDialog() {
       this.$refs.add_form.reset();
+      this.add_dialog = false;
+    },
+    closeEditDialog() {
       this.$refs.edit_form.reset();
       this.edit_dialog = false;
-      this.add_dialog = false;
     },
     submitFilter() {
       this.$axios
