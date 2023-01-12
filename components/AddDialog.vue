@@ -816,7 +816,7 @@ export default {
     getTemplates(id) {
       this.company_id = id;
       this.templates = this.data.templates.filter((el) => {
-        return el.id == id;
+        return el.company_id == id;
       });
     },
     uploadFile1(file) {
